@@ -11,6 +11,17 @@ const app = express();
 // define a port
 const PORT = process.env.PORT || 8080;
 
+const MONGODB_URI = 'mongodb+srv://zouantcha:MongoDbTest123@zouantcha-comtestdb.tbi8m.mongodb.net/<dbname>?retryWrites=true&w=majority';
+
+mongoose.connect(MONGODB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+})
+
+mongoose.connection.on('connected', () => {
+    console.log('Mongoose is connected!!')
+})
+
 // HTTP request logger
 // Logs every http request
 app.use(morgan('tiny'));
