@@ -22,6 +22,23 @@ mongoose.connection.on('connected', () => {
     console.log('Mongoose is connected!!')
 })
 
+// Schema 
+const Schema = mongoose.Schema;
+const BlogPostSchema = new Schema({
+    title: String,
+    body: String,
+    date: {
+        type: String,
+        default: Date.now()
+    }
+});
+
+//Model 
+const BlogPost = mongoose.model('BlogPost', BlogPostSchema);
+
+//Saving data to Mongoose db 
+
+
 // HTTP request logger
 // Logs every http request
 app.use(morgan('tiny'));
