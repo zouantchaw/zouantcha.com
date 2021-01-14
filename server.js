@@ -37,6 +37,21 @@ const BlogPostSchema = new Schema({
 const BlogPost = mongoose.model('BlogPost', BlogPostSchema);
 
 //Saving data to Mongoose db 
+const data = {
+    title: "Welcome to my youtube channel",
+    body: "I help people do things that I don't know what to do"
+}
+
+const newBlogPost = new BlogPost(data); // instance of the model
+
+// newBlogPost.save((error) => {
+//     if (error) {
+//         console.log('Ooops, something happened');
+//     } else {
+//         console.log('Data has been saved');
+//     }
+// });
+// .save();
 
 
 // HTTP request logger
@@ -45,11 +60,15 @@ app.use(morgan('tiny'));
 
 // Server Routes
 app.get('/api', (req, res) => {
-    const data = {
-        username: 'testtest',
-        age: 23
-    };
-    res.json(data)
+
+    BlogPost.find({  })
+        .then((data) => {
+            console.log('Data', data);
+            res.json(data);
+        })
+        .catch((error) => {
+            console.log('error', error)
+        });
 })
 
 app.get('/api/name', (req, res) => {
