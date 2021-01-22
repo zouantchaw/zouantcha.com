@@ -11,9 +11,9 @@ const app = express();
 // define a port
 const PORT = process.env.PORT || 8080;
 
-const MONGODB_URI = 'mongodb+srv://zouantcha:MongoDbTest123@zouantcha-comtestdb.tbi8m.mongodb.net/<dbname>?retryWrites=true&w=majority';
+// const MONGODB_URI = 'mongodb+srv://zouantcha:MongoDbTest123@zouantcha-comtestdb.tbi8m.mongodb.net/<dbname>?retryWrites=true&w=majority';
 
-mongoose.connect(MONGODB_URI, {
+mongoose.connect('mongodb:http://localhost:8080', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 })
