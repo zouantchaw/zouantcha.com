@@ -13,7 +13,7 @@ const PORT = process.env.PORT || 8080;
 
 // const MONGODB_URI = 'mongodb+srv://zouantcha:MongoDbTest123@zouantcha-comtestdb.tbi8m.mongodb.net/<dbname>?retryWrites=true&w=majority';
 
-mongoose.connect('mongodb:http://localhost:8080', {
+mongoose.connect('mongodb://localhost/test_mern', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 })
@@ -22,19 +22,6 @@ mongoose.connection.on('connected', () => {
     console.log('Mongoose is connected!!')
 })
 
-// Schema 
-const Schema = mongoose.Schema;
-const BlogPostSchema = new Schema({
-    title: String,
-    body: String,
-    date: {
-        type: String,
-        default: Date.now()
-    }
-});
-
-//Model 
-const BlogPost = mongoose.model('BlogPost', BlogPostSchema);
 
 //Saving data to Mongoose db 
 const data = {
@@ -44,13 +31,13 @@ const data = {
 
 const newBlogPost = new BlogPost(data); // instance of the model
 
-// newBlogPost.save((error) => {
-//     if (error) {
-//         console.log('Ooops, something happened');
-//     } else {
-//         console.log('Data has been saved');
-//     }
-// });
+newBlogPost.save((error) => {
+    if (error) {
+        console.log('Ooops, something happened');
+    } else {
+        console.log('Data has been saved');
+    }
+});
 // .save();
 
 
