@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 
 class App extends React.Component {
 
@@ -18,7 +19,24 @@ class App extends React.Component {
   };
 
   submit = (event) => {
+    event.preventDefault();
 
+    const payload = {
+      title: this.state.title,
+      body: this.state.body
+    };
+
+    axios({
+      url: 'http://localhost:8080/api/save',
+      method: 'POST',
+      data: payload
+    })
+    .then(() => {
+      console.log('Data has been sent to the server');
+    })
+    .catch(() => {
+      console.log('Internal server error')
+    })
   }
 
   render () {
