@@ -5,7 +5,7 @@ const router = express.Router();
 const BlogPost = require('../models/blogPost');
 
 // Server Routes
-router.get('/api', (req, res) => {
+router.get('/', (req, res) => {
 
     BlogPost.find({  })
         .then((data) => {
@@ -17,7 +17,7 @@ router.get('/api', (req, res) => {
         });
 })
 
-router.get('/api/name', (req, res) => {
+router.get('/name', (req, res) => {
     const data = {
         username: 'wielfried',
         age: 40

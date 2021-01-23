@@ -29,7 +29,7 @@ mongoose.connection.on('connected', () => {
 // HTTP request logger
 // Logs every http request
 app.use(morgan('tiny'));
-app.use('/', routes);
+app.use('/api', routes);
 
 
 app.listen(PORT, console.log(`Server is starting at ${PORT}`));
