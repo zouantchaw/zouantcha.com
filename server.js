@@ -6,8 +6,6 @@ const morgan = require('morgan');
 // built in node module that comes with node.js
 const path = require('path')
 
-const cors = require('cors');
-
 // initialize express app 
 const app = express();
 
@@ -28,7 +26,6 @@ mongoose.connection.on('connected', () => {
 })
 
 
-app.use(cors())
 // HTTP request logger
 // Logs every http request
 app.use(morgan('tiny'));
