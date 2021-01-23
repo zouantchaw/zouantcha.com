@@ -5,8 +5,25 @@ class App extends React.Component {
 
   state = {
     title: '',
-    body: ''
+    body: '',
+    posts: []
   }
+
+  componentDidMount = () => {
+    this.getBlogPost();
+  }
+
+  getBlogPost = () => {
+    axios.get('/api')
+    .then((resp) => {
+      const data = resp.data;
+      this.setState({ posts: data })
+      console.log('Data has been recieved');
+    })
+    .catch(() => {
+      alert('Error retrieving data')
+    })
+  };
 
   handleChange = ({ target }) => {
     const { name, value } = target;
@@ -42,6 +59,18 @@ class App extends React.Component {
     });
   };
 
+  displayBlogPost = (posts) => {
+
+    if (!posts.length) return null;
+
+    return posts.map((post, index) => (
+      <div key={index}>
+      <h3>{post.title}</h3>
+      <p>{post.body}</p>
+    </div>
+    )) 
+  }
+
   render () {
 
     console.log('State:', this.state)
@@ -72,6 +101,10 @@ class App extends React.Component {
 
           <button>Submit</button>
         </form>
+
+        <div className="blog">
+          {this.displayBlogPost(this.state.posts)}
+        </div>
       </div>
     )
   }
