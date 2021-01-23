@@ -28,15 +28,13 @@ router.post('/save', (req, res) => {
     newBlogPost.save((error) => {
         if (error) {
             res.status(500).json({ msg: "Sorry, internal server errors" });
-        } else {
-            // BlogPost
-            res.json({
-                msg: 'Your data has been saved!!'
-            });
-        }
-    })
-
- 
+            return;
+        } 
+        // BlogPost
+        return res.json({
+            msg: 'Your data has been saved!!'
+        }); 
+    });
 });
 
 router.get('/name', (req, res) => {
