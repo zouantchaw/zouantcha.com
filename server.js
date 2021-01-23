@@ -23,7 +23,12 @@ mongoose.connect('mongodb://localhost/test_mern', {
 
 mongoose.connection.on('connected', () => {
     console.log('Mongoose is connected!!')
-})
+});
+
+// Making all the requests that are coming in as json or as urlencoded 
+// and make them available on the request.body
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }))
 
 
 // HTTP request logger
