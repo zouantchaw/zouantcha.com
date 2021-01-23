@@ -28,11 +28,19 @@ class App extends React.Component {
     })
     .then(() => {
       console.log('Data has been sent to the server');
+      this.resetUserInputs();
     })
     .catch(() => {
       console.log('Internal server error')
     })
   }
+
+  resetUserInputs = () => {
+    this.setState({
+      title: '',
+      body: ''
+    });
+  };
 
   render () {
 
