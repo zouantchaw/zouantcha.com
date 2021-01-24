@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
-import { Button } from '@material-ui/core';
+
+import './App.css'
 
 
 class App extends React.Component {
@@ -102,7 +103,7 @@ class App extends React.Component {
             </textarea>
           </div>
 
-          <Button color="secondary">Submit</Button>
+          <button>Submit</button>
         </form>
 
         <div className="blog">
