@@ -1,8 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 
-import './App.css'
-
+import './App.css';
 
 class App extends React.Component {
 
@@ -80,7 +79,7 @@ class App extends React.Component {
     console.log('State:', this.state)
     //JSX
     return(
-      <div>
+      <div className="app">
         <h2>Welcome to my app</h2>
         <form onSubmit={this.submit}>
           <div className="form-input">
