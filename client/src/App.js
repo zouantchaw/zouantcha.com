@@ -67,7 +67,7 @@ class App extends React.Component {
     if (!posts.length) return null;
 
     return posts.map((post, index) => (
-      <div key={index}>
+      <div key={index} className="blog-post_display">
       <h3>{post.title}</h3>
       <p>{post.body}</p>
     </div>
