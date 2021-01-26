@@ -16,7 +16,7 @@ const routes = require('./routes/api')
 
 // const MONGODB_URI = 'mongodb+srv://zouantcha:MongoDbTest123@zouantcha-comtestdb.tbi8m.mongodb.net/<dbname>?retryWrites=true&w=majority';
 
-mongoose.connect('mongodb://localhost/test_mern', {
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/test_mern', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 })
@@ -36,5 +36,8 @@ app.use(express.urlencoded({ extended: false }))
 app.use(morgan('tiny'));
 app.use('/api', routes);
 
+if (process.env.NODE_ENV === 'production'){
+    app.use(express.static('client/build'));
+};
 
 app.listen(PORT, console.log(`Server is starting at ${PORT}`));
