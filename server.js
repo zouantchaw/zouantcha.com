@@ -14,7 +14,8 @@ const PORT = process.env.PORT || 8080;
 
 const routes = require('./routes/api')
 
-// const MONGODB_URI = 'mongodb+srv://zouantcha:MongoDbTest123@zouantcha-comtestdb.tbi8m.mongodb.net/<dbname>?retryWrites=true&w=majority';
+const MONGODB_URI = 'mongodb+srv://zouantcha:MongoDbTest123@zouantcha-comtestdb.tbi8m.mongodb.net/<dbname>?retryWrites=true&w=majority';
+
 
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/test_mern', {
     useNewUrlParser: true,
