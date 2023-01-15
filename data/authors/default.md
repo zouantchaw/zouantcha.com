@@ -1,16 +1,14 @@
 ---
-name: Tails Azimuth
-avatar: /static/images/avatar.png
-occupation: Professor of Atmospheric Science
-company: Stanford University
-email: address@yoursite.com
-twitter: https://twitter.com/Twitter
-linkedin: https://www.linkedin.com
-github: https://github.com
+name: Wiel Zouantcha
+avatar: /static/images/wz_avatar.JPG
+occupation: Blockchain Developer
+company: ethos
+email: zouantchaw74@gmail.com
+twitter: https://twitter.com/love_thegame_
+linkedin: https://www.linkedin.com/in/wielfried-zouantcha-6b4722136/
+github: https://github.com/zouantchaw
 ---
 
-Tails Azimuth is a professor of atmospheric sciences at the Stanford AI Lab. His research interests includes complexity modelling of tailwinds, headwinds and crosswinds.
+Wiel Zouantcha is a programmer with a Blockchain and Frontend focus.
 
-He leads the clean energy group which develops 3D air pollution-climate models, writes differential equation solvers, and manufactures titanium plated air ballons. In his free time he bakes raspberry pi.
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed neque elit, tristique placerat feugiat ac, facilisis vitae arcu. Proin eget egestas augue. Praesent ut sem nec arcu pellentesque aliquet. Duis dapibus diam vel metus tempus vulputate.
+He currently works at ethos, writing nft smart contracts for brands on different blockchains like Ethereum and Flow.
