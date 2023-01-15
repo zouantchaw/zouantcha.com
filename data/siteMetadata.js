@@ -1,8 +1,8 @@
 const siteMetadata = {
   title: 'Wiel Zouantcha',
   author: 'Wiel Zouantcha',
-  headerTitle: 'Wiel Zouantcha',
-  description: 'A blog created with Next.js and Tailwind.css',
+  headerTitle: `Wiel Zouantcha's Blog`,
+  description: `Welcome! This space is for sharing my thoughts and ideas about work, books, and personal projects.`,
   language: 'en-us',
   theme: 'system', // system, dark or light
   siteUrl: 'https://tailwind-nextjs-starter-blog.vercel.app',
