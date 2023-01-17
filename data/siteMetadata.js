@@ -5,7 +5,7 @@ const siteMetadata = {
   description: `Welcome! This space is for sharing my thoughts and ideas about work, books, and personal projects.`,
   language: 'en-us',
   theme: 'system', // system, dark or light
-  siteUrl: 'https://tailwind-nextjs-starter-blog.vercel.app',
+  siteUrl: 'https://www.zouantcha.com/',
   siteRepo: 'https://github.com/zouantchaw/zouantcha.com',
   siteLogo: '/static/images/wz_avatar.JPG',
   image: '/static/images/wz_avatar.JPG',
