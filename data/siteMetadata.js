@@ -7,8 +7,10 @@ const siteMetadata = {
   theme: 'system', // system, dark or light
   siteUrl: 'https://www.zouantcha.com/',
   siteRepo: 'https://github.com/zouantchaw/zouantcha.com',
-  siteLogo: '/static/images/wz_avatar.JPG',
-  image: '/static/images/wz_avatar.JPG',
+  siteLogo:
+    'storage.fleek.host/747f5956-4ecd-4d25-83a1-592c6778375d-bucket/books_read_2022_covers/wz_avatar.JPG',
+  image:
+    'storage.fleek.host/747f5956-4ecd-4d25-83a1-592c6778375d-bucket/books_read_2022_covers/wz_avatar.JPG',
   socialBanner: '/static/images/twitter-card.png',
   email: 'zouantchaw74@gmail.com',
   github: 'https://github.com/zouantchaw',
