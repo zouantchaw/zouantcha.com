@@ -1,6 +1,6 @@
 const siteMetadata = {
-  title: 'Wiel Zouantcha',
-  author: 'Wiel Zouantcha',
+  title: 'Wielfried Zouantcha',
+  author: 'Wielfried Zouantcha',
   headerTitle: `Wiel Zouantcha's Blog`,
   description: `Welcome! This space is for sharing my thoughts and ideas about work, books, and personal projects.`,
   language: 'en-us',
@@ -8,10 +8,10 @@ const siteMetadata = {
   siteUrl: 'https://www.zouantcha.com/',
   siteRepo: 'https://github.com/zouantchaw/zouantcha.com',
   siteLogo:
-    'storage.fleek.host/747f5956-4ecd-4d25-83a1-592c6778375d-bucket/books_read_2022_covers/wz_avatar.JPG',
-  image:
-    'storage.fleek.host/747f5956-4ecd-4d25-83a1-592c6778375d-bucket/books_read_2022_covers/wz_avatar.JPG',
-  socialBanner: '/static/images/twitter-card.png',
+    'https://nftstorage.link/ipfs/bafybeic2dujivjbwc7zzhihp3ckgk4umvozozrxyyoyvas5odjubxr424q',
+  image: 'https://nftstorage.link/ipfs/bafybeic2dujivjbwc7zzhihp3ckgk4umvozozrxyyoyvas5odjubxr424q',
+  socialBanner:
+    'https://nftstorage.link/ipfs/bafybeic2dujivjbwc7zzhihp3ckgk4umvozozrxyyoyvas5odjubxr424q',
   email: 'zouantchaw74@gmail.com',
   github: 'https://github.com/zouantchaw',
   twitter: 'https://twitter.com/love_thegame_',
