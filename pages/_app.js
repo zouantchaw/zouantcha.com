@@ -11,7 +11,7 @@ import siteMetadata from '@/data/siteMetadata'
 import Analytics from '@/components/analytics'
 import LayoutWrapper from '@/components/LayoutWrapper'
 import { ClientReload } from '@/components/ClientReload'
-import Script from 'next/script';
+import Script from 'next/script'
 
 const isDevelopment = process.env.NODE_ENV === 'development'
 const isSocket = process.env.SOCKET
@@ -21,13 +21,13 @@ export default function App({ Component, pageProps }) {
     <ThemeProvider attribute="class" defaultTheme={siteMetadata.theme}>
       <Head>
         <meta content="width=device-width, initial-scale=1" name="viewport" />
-        <Script
-          defer
-          src="https://unpkg.com/@tinybirdco/flock.js"
-          data-host="https://api.us-east.tinybird.co"
-          data-token="p.eyJ1IjogImI0MDAxMWMyLWQ4NWYtNDFjZS1iYzYyLWI1ZjlkOWM5YWM1NSIsICJpZCI6ICIwYmUxNTNlZi05MDg1LTQ4YTgtYjdhYS0xMDg2NjE1MDEzM2MifQ.tgNtqmSu2_wWEJy0DR3s5yY5NZ6-MgQzZCAf_JfDfYw"
-        />
       </Head>
+      <Script
+        defer
+        src="https://unpkg.com/@tinybirdco/flock.js"
+        data-host="https://api.us-east.tinybird.co"
+        data-token="p.eyJ1IjogImI0MDAxMWMyLWQ4NWYtNDFjZS1iYzYyLWI1ZjlkOWM5YWM1NSIsICJpZCI6ICIwYmUxNTNlZi05MDg1LTQ4YTgtYjdhYS0xMDg2NjE1MDEzM2MifQ.tgNtqmSu2_wWEJy0DR3s5yY5NZ6-MgQzZCAf_JfDfYw"
+      />
       {isDevelopment && isSocket && <ClientReload />}
       <Analytics />
       <LayoutWrapper>
