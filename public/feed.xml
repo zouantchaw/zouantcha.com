@@ -4,25 +4,25 @@
         <description><![CDATA[Wielfried Zouantcha]]></description>
         <link>https://zouantcha.com</link>
         <generator>RSS for Node</generator>
-        <lastBuildDate>Sun, 03 Mar 2024 15:47:07 GMT</lastBuildDate>
+        <lastBuildDate>Mon, 04 Mar 2024 17:36:16 GMT</lastBuildDate>
         <atom:link href="https://zouantcha.com/feed.xml" rel="self" type="application/rss+xml"/>
         <item>
-            <title><![CDATA[Markdown Examples]]></title>
-            <description><![CDATA[View examples of all possible Markdown options.]]></description>
-            <link>/posts/markdown</link>
-            <guid isPermaLink="true">/posts/markdown</guid>
-            <category><![CDATA[web development]]></category>
-            <dc:creator><![CDATA[You]]></dc:creator>
-            <pubDate>Fri, 19 Mar 2021 04:00:00 GMT</pubDate>
+            <title><![CDATA[Bitcoin Whitepaper]]></title>
+            <description><![CDATA[A peer-to-peer electronic cash system enabling direct online payments without financial intermediaries.]]></description>
+            <link>/blog/bitcoin-whitepaper</link>
+            <guid isPermaLink="true">/blog/bitcoin-whitepaper</guid>
+            <category><![CDATA[crypto]]></category>
+            <dc:creator><![CDATA[Wielfried Zouantcha]]></dc:creator>
+            <pubDate>Sat, 15 Oct 2022 04:00:00 GMT</pubDate>
         </item>
         <item>
-            <title><![CDATA[Next.js Pages]]></title>
-            <description><![CDATA[Learn more about Next.js pages.]]></description>
-            <link>/posts/pages</link>
-            <guid isPermaLink="true">/posts/pages</guid>
-            <category><![CDATA[web development]]></category>
-            <dc:creator><![CDATA[You]]></dc:creator>
-            <pubDate>Thu, 18 Mar 2021 04:00:00 GMT</pubDate>
+            <title><![CDATA[Books Read in 2022]]></title>
+            <description><![CDATA[A list of books I read in 2022.]]></description>
+            <link>/blog/books-read-2022</link>
+            <guid isPermaLink="true">/blog/books-read-2022</guid>
+            <category><![CDATA[books]]></category>
+            <dc:creator><![CDATA[Wielfried Zouantcha]]></dc:creator>
+            <pubDate>Sun, 15 Jan 2023 05:00:00 GMT</pubDate>
         </item>
     </channel>
 </rss>
