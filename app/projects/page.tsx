@@ -14,7 +14,7 @@ export default function Page() {
       </p>
 
       <div className="space-y-10">
-        <div>
+        {/* <div>
           <h2 className="font-semibold text-xl mb-2">bene</h2>
           <span className="text-gray-500 text-sm">
             A tool for managing and renting out party/event equipment.
@@ -32,7 +32,7 @@ export default function Page() {
           >
             code
           </Link>
-        </div>
+        </div> */}
 
         <div>
           <h2 className="font-semibold text-xl mb-2">mtlarchives</h2>
