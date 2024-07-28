@@ -25,7 +25,11 @@ export default function Document() {
         <meta name="twitter:description" content={meta.description} />
         <meta name="twitter:image" content={meta.image} />
       </Head>
-      <Script defer src="https://cdn.seline.so/seline.js" />
+      <Script
+        defer
+        src="https://cdn.seline.so/seline.js"
+        data-token="dfbe2e89cb93290"
+      />
       <body>
         <Main />
         <NextScript />
