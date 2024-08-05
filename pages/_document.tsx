@@ -24,7 +24,12 @@ export default function Document() {
         <meta name="twitter:title" content={meta.title} />
         <meta name="twitter:description" content={meta.description} />
         <meta name="twitter:image" content={meta.image} />
-        <script async src="https://cdn.seline.so/seline.js" data-token="dfbe2e89cb93290"></script>
+        <Script
+          src="https://cdn.seline.so/seline.js"
+          data-token="dfbe2e89cb93290"
+          strategy="afterInteractive"
+          async
+        />
       </Head>
       <body>
         <Main />
