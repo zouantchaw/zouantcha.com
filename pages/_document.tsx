@@ -6,8 +6,7 @@ export default function Document() {
     title: "Wielfried Zouantcha",
     description:
       "Welcome! This space is for sharing my thoughts and ideas about work, books, and personal projects.",
-    image:
-      "https://nftstorage.link/ipfs/bafybeic2dujivjbwc7zzhihp3ckgk4umvozozrxyyoyvas5odjubxr424q",
+    image: "/wz.jpg",
   };
 
   return (
