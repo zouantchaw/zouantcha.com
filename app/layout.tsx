@@ -11,8 +11,8 @@ import { baseUrl } from './sitemap'
 export const metadata: Metadata = {
   metadataBase: new URL(baseUrl),
   title: {
-    default: 'Wiel Zouantcha',
-    template: '%s | Wiel Zouantcha',
+    default: 'Wielfried Zouantcha',
+    template: '%s | Wielfried Zouantcha',
   },  
   description: 'Wielfried Zouantcha is a software engineer with a passion for building web and mobile applications.',
   openGraph: {
