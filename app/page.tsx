@@ -26,7 +26,7 @@ export default function Page() {
       <p className="mb-4">
         {`When I'm not working, I'm most likely `}
         <a
-          href="/blog/books-read-2022"
+          href="/blog/books-read-2024"
           className="text-neutral-900 dark:text-neutral-100 underline hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
         >
           reading
