@@ -9,22 +9,42 @@ export default function Page() {
   return (
     <section>
       <h1 className="font-semibold text-2xl mb-8 tracking-tighter">projects</h1>
-      <p className="mb-8 text-gray-700 leading-relaxed">
+      <p className="mb-8 text-neutral-700 dark:text-neutral-300 leading-relaxed">
         projects I'm currently hacking on.
       </p>
 
       <div className="space-y-10">
-        <div>
+        <div className="bg-neutral-50 dark:bg-neutral-900 p-6 rounded-lg shadow-sm border border-neutral-200 dark:border-neutral-800">
+          <h2 className="font-semibold text-xl mb-2">Ballerz Football Academy</h2>
+          <span className="text-neutral-500 dark:text-neutral-400 text-sm">
+            A platform for soccer training and player management
+          </span>
+          <p className="mt-2 text-neutral-700 dark:text-neutral-300 leading-relaxed">
+            I built a multi tenant app that features a landing page, an admin portal, and a player portal.
+            The admin portal allows the staff to manage players, sessions, bookings, availability, and payments.
+            The player portal allows the players to view their bookings, availability, and progress.
+            The app is built with Next.js, TypeScript, and Tailwind CSS, with Shadcn UI for the component library.
+            The app is hosted on Vercel and the database is hosted on Supabase.
+          </p>
+          <Link
+            href="https://ballerzfootballacademy.com"
+            className="text-blue-600 dark:text-blue-400 hover:underline mt-2 inline-block mr-4"
+          >
+            visit site
+          </Link>
+        </div>
+
+        <div className="bg-neutral-50 dark:bg-neutral-900 p-6 rounded-lg shadow-sm border border-neutral-200 dark:border-neutral-800">
           <h2 className="font-semibold text-xl mb-2">mtlarchives</h2>
-          <span className="text-gray-500 text-sm">
+          <span className="text-neutral-500 dark:text-neutral-400 text-sm">
             Bringing Montreal's history to the digital age.
           </span>
-          <p className="mt-2 text-gray-700 leading-relaxed">
-            Stumbled upon this goldmine of old Montreal pics on the city's Open
-            Data portal. Thought it'd be cool to share, so I whipped up an{" "}
+          <p className="mt-2 text-neutral-700 dark:text-neutral-300 leading-relaxed">
+            I stumbled on this goldmine of old Montreal pics on the city's Open
+            Data portal. I thought it'd be cool to share, so I whipped up an{" "}
             <a
               href="https://www.instagram.com/mtlarchives/"
-              className="text-blue-600 hover:underline"
+              className="text-blue-600 dark:text-blue-400 hover:underline"
             >
               Instagram
             </a>{" "}
@@ -32,7 +52,7 @@ export default function Page() {
             built a{" "}
             <a
               href="https://mtlarchives.com"
-              className="text-blue-600 hover:underline"
+              className="text-blue-600 dark:text-blue-400 hover:underline"
             >
               photo blog
             </a>{" "}
@@ -41,7 +61,7 @@ export default function Page() {
           </p>
           <Link
             href="https://github.com/zouantchaw/mtlarchives"
-            className="text-blue-600 hover:underline mt-2 inline-block"
+            className="text-blue-600 dark:text-blue-400 hover:underline mt-2 inline-block"
           >
             peek at the code
           </Link>
