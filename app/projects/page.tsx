@@ -17,14 +17,14 @@ export default function Page() {
         <div className="bg-neutral-50 dark:bg-neutral-900 p-6 rounded-lg shadow-sm border border-neutral-200 dark:border-neutral-800">
           <h2 className="font-semibold text-xl mb-2">Ballerz Football Academy</h2>
           <span className="text-neutral-500 dark:text-neutral-400 text-sm">
-            A platform for soccer training and player management
+            Soccer training and player management
           </span>
           <p className="mt-2 text-neutral-700 dark:text-neutral-300 leading-relaxed">
-            I built a multi tenant app that features a landing page, an admin portal, and a player portal.
-            The admin portal allows the staff to manage players, sessions, bookings, availability, and payments.
-            The player portal allows the players to view their bookings, availability, and progress.
-            The app is built with Next.js, TypeScript, and Tailwind CSS, with Shadcn UI for the component library.
-            The app is hosted on Vercel and the database is hosted on Supabase.
+            A multi-tenant platform featuring a landing page with dedicated admin and player portals. 
+            Staff can manage players, sessions, bookings, availability, and process payments through 
+            an admin interface. Players access their bookings, check trainer availability, 
+            and track training progress in their personalized portal. Built with Next.js, TypeScript, 
+            and Tailwind CSS using Shadcn UI components. Deployed on Vercel with Supabase as the database.
           </p>
           <Link
             href="https://ballerzfootballacademy.com"
