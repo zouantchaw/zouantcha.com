@@ -55,13 +55,7 @@ export default function Page() {
               href="https://github.com/zouantchaw/mtl-archives-search"
               className="text-blue-600 dark:text-blue-400 hover:underline"
             >
-              search api repo
-            </a>
-            <a
-              href="https://github.com/zouantchaw/mtlarchives"
-              className="text-blue-600 dark:text-blue-400 hover:underline"
-            >
-              frontend repo
+              code repo
             </a>
           </div>
         </div>
