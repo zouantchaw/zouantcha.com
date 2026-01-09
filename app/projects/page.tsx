@@ -14,6 +14,58 @@ export default function Page() {
       </p>
 
       <div className="space-y-10">
+        {/* mtlarchives */}
+        <div className="bg-neutral-50 dark:bg-neutral-900 p-6 rounded-lg shadow-sm border border-neutral-200 dark:border-neutral-800">
+          <h2 className="font-semibold text-xl mb-2">mtlarchives</h2>
+          <span className="text-neutral-500 dark:text-neutral-400 text-sm">
+            Semantic search for Montreal's historical photo archives
+          </span>
+          <p className="mt-2 text-neutral-700 dark:text-neutral-300 leading-relaxed">
+            Started as an{" "}
+            <a
+              href="https://www.instagram.com/mtlarchives/"
+              className="text-blue-600 dark:text-blue-400 hover:underline"
+            >
+              Instagram account
+            </a>{" "}
+            sharing old Montreal photos from the city's Open Data portal. Now grown to ~3k followers
+            and evolved into a full semantic search platform for ~15,000 historical images (1870s-1990s).
+          </p>
+          <p className="mt-3 text-neutral-700 dark:text-neutral-300 leading-relaxed">
+            Built a complete data pipeline and search API with sub-50ms response times globally:
+          </p>
+          <ul className="list-disc list-inside mt-2 text-neutral-700 dark:text-neutral-300 space-y-1 text-sm">
+            <li>Semantic search using BGE text embeddings on Cloudflare Vectorize</li>
+            <li>Visual similarity search with CLIP embeddings (in development)</li>
+            <li>ETL pipeline: metadata cleaning, date normalization, deduplication, geocoding</li>
+            <li>VLM auto-captioning and OCR for data enrichment</li>
+            <li>Next.js frontend with Mapbox integration for geospatial browsing</li>
+          </ul>
+          <p className="mt-3 text-neutral-600 dark:text-neutral-400 text-sm">
+            Stack: Cloudflare Workers, D1, Vectorize, R2, Workers AI, Next.js, TypeScript, Python
+          </p>
+          <div className="mt-3 flex gap-4">
+            <a
+              href="https://mtlarchives.com"
+              className="text-blue-600 dark:text-blue-400 hover:underline"
+            >
+              visit site
+            </a>
+            <a
+              href="https://github.com/zouantchaw/mtl-archives-search"
+              className="text-blue-600 dark:text-blue-400 hover:underline"
+            >
+              search api repo
+            </a>
+            <a
+              href="https://github.com/zouantchaw/mtlarchives"
+              className="text-blue-600 dark:text-blue-400 hover:underline"
+            >
+              frontend repo
+            </a>
+          </div>
+        </div>
+
         {/* Diane Party Rentals */}
         <div className="bg-neutral-50 dark:bg-neutral-900 p-6 rounded-lg shadow-sm border border-neutral-200 dark:border-neutral-800">
           <h2 className="font-semibold text-xl mb-2">Diane Party Rentals</h2>
@@ -29,6 +81,12 @@ export default function Page() {
           <p className="mt-2 text-sm text-green-600 dark:text-green-400">
             Impact: Reduced quote turnaround from 24h to &lt;2h
           </p>
+          <a
+            href="https://www.dianepartyrentals.com/"
+            className="text-blue-600 dark:text-blue-400 hover:underline mt-2 inline-block"
+          >
+            visit site
+          </a>
         </div>
 
         {/* Ballerz Football Academy */}
@@ -52,40 +110,6 @@ export default function Page() {
             className="text-blue-600 dark:text-blue-400 hover:underline mt-2 inline-block mr-4"
           >
             visit site
-          </Link>
-        </div>
-
-        {/* mtlarchives */}
-        <div className="bg-neutral-50 dark:bg-neutral-900 p-6 rounded-lg shadow-sm border border-neutral-200 dark:border-neutral-800">
-          <h2 className="font-semibold text-xl mb-2">mtlarchives</h2>
-          <span className="text-neutral-500 dark:text-neutral-400 text-sm">
-            Bringing Montreal's history to the digital age
-          </span>
-          <p className="mt-2 text-neutral-700 dark:text-neutral-300 leading-relaxed">
-            I stumbled on this goldmine of old Montreal pics on the city's Open
-            Data portal. I thought it'd be cool to share, so I whipped up an{" "}
-            <a
-              href="https://www.instagram.com/mtlarchives/"
-              className="text-blue-600 dark:text-blue-400 hover:underline"
-            >
-              Instagram
-            </a>{" "}
-            account. It's blowing up - almost 3k followers now! Got inspired and
-            built a{" "}
-            <a
-              href="https://mtlarchives.com"
-              className="text-blue-600 dark:text-blue-400 hover:underline"
-            >
-              photo blog
-            </a>{" "}
-            with Next.js. It's not breaking the internet yet, but we're getting
-            about 90 curious history buffs checking it out each month.
-          </p>
-          <Link
-            href="https://github.com/zouantchaw/mtlarchives"
-            className="text-blue-600 dark:text-blue-400 hover:underline mt-2 inline-block"
-          >
-            peek at the code
           </Link>
         </div>
       </div>
