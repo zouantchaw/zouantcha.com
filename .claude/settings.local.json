@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:app.seline.com)",
+      "WebFetch(domain:scholar.google.ca)"
+    ]
+  }
+}
