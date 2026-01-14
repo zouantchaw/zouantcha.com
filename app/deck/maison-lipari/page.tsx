@@ -1,5 +1,6 @@
 "use client"
 import { useState, useEffect, useCallback, TouchEvent } from "react"
+import Image from "next/image"
 import {
   ChevronLeft,
   ChevronRight,
@@ -19,6 +20,15 @@ import {
   Bookmark,
   Send,
 } from "lucide-react"
+
+// Product data for social previews
+const PRODUCT = {
+  name: "Breville | The Handy Mix Scraper",
+  shortName: "Handy Mix Scraper",
+  price: "$179.99 CAD",
+  description: "9-speed hand mixer with Beater IQ technology. Effortless mixing, perfect results.",
+  image: "/breville-handy-mix-scraper.jpeg",
+}
 
 // Password protection
 const DECK_PASSWORD = "lipari2026"
@@ -166,56 +176,79 @@ export default function SlideDeck() {
 
   return (
     <PasswordGate>
-      <div
-        className="min-h-[100dvh] bg-[#1B1B1B] flex flex-col select-none"
-        onTouchStart={onTouchStart}
-        onTouchMove={onTouchMove}
-        onTouchEnd={onTouchEnd}
-      >
-        {/* Slide Container */}
-        <div className="flex-1 flex items-center justify-center p-3 sm:p-4 md:p-8">
-          <div className="w-full max-w-[1400px] bg-[#F7F4EF] rounded-xl sm:rounded-2xl shadow-2xl overflow-hidden">
+      <div className="fixed inset-0 bg-[#1B1B1B] flex flex-col select-none overflow-hidden">
+        {/* Slide Container - takes remaining space above fixed nav */}
+        <div 
+          className="flex-1 flex items-center justify-center p-3 sm:p-4 md:p-8 overflow-hidden"
+          style={{ paddingBottom: 0 }}
+          onTouchStart={onTouchStart}
+          onTouchMove={onTouchMove}
+          onTouchEnd={onTouchEnd}
+        >
+          <div className="w-full h-full max-w-[1400px] max-h-[calc(100%-0.5rem)] bg-[#F7F4EF] rounded-xl sm:rounded-2xl shadow-2xl overflow-hidden flex flex-col">
             <div
-              className="min-h-[65dvh] sm:min-h-[70vh] md:min-h-0 md:aspect-video overflow-y-auto overflow-x-hidden transition-opacity duration-300"
-              style={{ opacity: isAnimating ? 0.7 : 1 }}
+              className="flex-1 overflow-y-auto overflow-x-hidden overscroll-contain transition-opacity duration-300"
+              style={{ 
+                opacity: isAnimating ? 0.7 : 1,
+                WebkitOverflowScrolling: 'touch'
+              }}
             >
               <CurrentSlideComponent />
             </div>
           </div>
         </div>
 
-        {/* Navigation Bar - Apple-style */}
-        <div className="flex-shrink-0 pb-[env(safe-area-inset-bottom)] bg-[#1B1B1B]">
-          <div className="flex items-center justify-between px-4 py-4 sm:py-5 max-w-[1400px] mx-auto">
+        {/* Navigation Bar - Fixed at bottom with glass effect */}
+        <div 
+          className="flex-shrink-0 bg-[#1B1B1B]/95 backdrop-blur-xl border-t border-white/5"
+          style={{ paddingBottom: 'env(safe-area-inset-bottom)' }}
+        >
+          {/* Progress bar - top of nav */}
+          <div className="h-[2px] bg-white/5">
+            <div
+              className="h-full bg-gradient-to-r from-[#C6A85A] to-[#D4B86A] transition-all duration-500 ease-out"
+              style={{ width: `${((currentSlide + 1) / slides.length) * 100}%` }}
+            />
+          </div>
+
+          <div className="flex items-center justify-between px-4 py-3 sm:py-4 max-w-[1400px] mx-auto">
             {/* Previous Button */}
             <button
               onClick={prevSlide}
               disabled={currentSlide === 0}
-              className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-white/10 backdrop-blur flex items-center justify-center disabled:opacity-20 active:scale-95 transition-all"
+              className="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center disabled:opacity-20 disabled:pointer-events-none active:scale-90 active:bg-white/20 transition-all duration-150"
               aria-label="Previous slide"
+              tabIndex={0}
             >
-              <ChevronLeft className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
+              <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
             </button>
 
             {/* Slide Indicators */}
-            <div className="flex items-center gap-2">
-              {/* Mobile: Counter */}
-              <span className="sm:hidden text-white/80 font-space text-sm font-medium">
-                {currentSlide + 1} <span className="text-white/40">/ {slides.length}</span>
-              </span>
+            <div className="flex items-center gap-3">
+              {/* Mobile: Pill counter */}
+              <div className="sm:hidden flex items-center gap-1.5 bg-white/10 backdrop-blur-sm rounded-full px-3 py-1.5">
+                <span className="text-white font-space text-sm font-semibold tabular-nums">
+                  {currentSlide + 1}
+                </span>
+                <span className="text-white/40 font-space text-xs">/</span>
+                <span className="text-white/50 font-space text-sm tabular-nums">
+                  {slides.length}
+                </span>
+              </div>
 
               {/* Desktop: Dots */}
-              <div className="hidden sm:flex gap-2">
+              <div className="hidden sm:flex gap-1.5">
                 {slides.map((_, idx) => (
                   <button
                     key={idx}
                     onClick={() => goToSlide(idx)}
-                    className={`h-2 rounded-full transition-all duration-300 ${
+                    className={`h-2 rounded-full transition-all duration-300 ease-out ${
                       idx === currentSlide
-                        ? "bg-[#C6A85A] w-8"
-                        : "bg-white/30 w-2 hover:bg-white/50"
+                        ? "bg-[#C6A85A] w-6"
+                        : "bg-white/20 w-2 hover:bg-white/40"
                     }`}
                     aria-label={`Go to slide ${idx + 1}`}
+                    tabIndex={0}
                   />
                 ))}
               </div>
@@ -225,19 +258,12 @@ export default function SlideDeck() {
             <button
               onClick={nextSlide}
               disabled={currentSlide === slides.length - 1}
-              className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-white/10 backdrop-blur flex items-center justify-center disabled:opacity-20 active:scale-95 transition-all"
+              className="w-11 h-11 sm:w-12 sm:h-12 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center disabled:opacity-20 disabled:pointer-events-none active:scale-90 active:bg-white/20 transition-all duration-150"
               aria-label="Next slide"
+              tabIndex={0}
             >
-              <ChevronRight className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
+              <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6 text-white" />
             </button>
-          </div>
-
-          {/* Progress bar */}
-          <div className="h-1 bg-white/10">
-            <div
-              className="h-full bg-[#C6A85A] transition-all duration-300 ease-out"
-              style={{ width: `${((currentSlide + 1) / slides.length) * 100}%` }}
-            />
           </div>
         </div>
       </div>
@@ -248,14 +274,14 @@ export default function SlideDeck() {
 // ============ SLIDE 1: Title ============
 function TitleSlide() {
   return (
-    <div className="h-full min-h-[65dvh] md:min-h-0 flex flex-col justify-center items-center p-6 sm:p-8 md:p-16 text-center">
-      <p className="text-[#C6A85A] font-sora text-xs sm:text-sm tracking-[0.2em] uppercase mb-4 md:mb-6">
+    <div className="min-h-full flex flex-col justify-center items-center p-5 sm:p-8 md:p-16 text-center">
+      <p className="text-[#C6A85A] font-sora text-xs sm:text-sm tracking-[0.2em] uppercase mb-3 md:mb-6">
         Independent Audit
       </p>
-      <h1 className="font-cormorant text-4xl sm:text-5xl md:text-7xl lg:text-8xl text-[#1B1B1B] mb-4 md:mb-6 leading-tight">
+      <h1 className="font-cormorant text-3xl sm:text-5xl md:text-7xl lg:text-8xl text-[#1B1B1B] mb-3 md:mb-6 leading-tight">
         Maison Lipari
       </h1>
-      <h2 className="font-cormorant text-xl sm:text-2xl md:text-3xl lg:text-4xl text-[#6B6460] italic mb-6 md:mb-10">
+      <h2 className="font-cormorant text-lg sm:text-2xl md:text-3xl lg:text-4xl text-[#6B6460] italic mb-5 md:mb-10">
         SEO & Social Sharing Audit
       </h2>
       <p className="font-sora text-sm sm:text-base md:text-lg text-[#1B1B1B] max-w-2xl leading-relaxed">
@@ -277,26 +303,26 @@ function ExecutiveSummarySlide() {
   ]
 
   return (
-    <div className="h-full min-h-[65dvh] md:min-h-0 p-6 sm:p-8 md:p-12 lg:p-16 flex flex-col">
-      <p className="text-[#C6A85A] font-sora text-xs tracking-[0.2em] uppercase mb-2">Overview</p>
-      <h2 className="font-cormorant text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-[#1B1B1B] mb-6 md:mb-10">
+    <div className="min-h-full p-5 sm:p-8 md:p-12 lg:p-16 flex flex-col">
+      <p className="text-[#C6A85A] font-sora text-xs tracking-[0.2em] uppercase mb-1.5">Overview</p>
+      <h2 className="font-cormorant text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-[#1B1B1B] mb-4 md:mb-8">
         Executive Summary
       </h2>
 
-      <div className="grid grid-cols-2 gap-3 sm:gap-4 md:gap-6 mb-6 md:mb-10">
+      <div className="grid grid-cols-2 gap-2.5 sm:gap-4 md:gap-6 mb-4 md:mb-8">
         {findings.map((item, idx) => (
-          <div key={idx} className="bg-white rounded-xl p-4 sm:p-5 md:p-6 border border-[#E8E4DD]">
-            <p className="font-space text-2xl sm:text-3xl md:text-4xl text-[#1B1B1B] mb-1">{item.value}</p>
-            <p className="font-sora text-xs sm:text-sm font-semibold text-[#1B1B1B] mb-1">{item.label}</p>
+          <div key={idx} className="bg-white rounded-xl p-3.5 sm:p-5 md:p-6 border border-[#E8E4DD]">
+            <p className="font-space text-xl sm:text-3xl md:text-4xl text-[#1B1B1B] mb-0.5">{item.value}</p>
+            <p className="font-sora text-[11px] sm:text-sm font-semibold text-[#1B1B1B] mb-0.5">{item.label}</p>
             <p className="font-sora text-[10px] sm:text-xs text-[#6B6460] leading-snug">{item.desc}</p>
           </div>
         ))}
       </div>
 
-      <div className="bg-[#B3483A]/10 border-l-4 border-[#B3483A] p-4 sm:p-5 md:p-6 rounded-r-xl mt-auto">
-        <p className="font-sora text-xs sm:text-sm text-[#1B1B1B] leading-relaxed">
+      <div className="bg-[#B3483A]/10 border-l-4 border-[#B3483A] p-3.5 sm:p-5 md:p-6 rounded-r-xl mt-auto">
+        <p className="font-sora text-[11px] sm:text-sm text-[#1B1B1B] leading-relaxed">
           <span className="font-semibold">The verdict:</span> Every product, collection, and blog page tells Google and
-          social platforms it's the homepage. Your $4,500 Christofle tray shares as "Canada's Home for Luxury Designer
+          social platforms it's the homepage. Your $179 Breville mixer shares as "Canada's Home for Luxury Designer
           Homeware."
         </p>
       </div>
@@ -322,38 +348,38 @@ function AuditScopeSlide() {
   ]
 
   return (
-    <div className="h-full min-h-[65dvh] md:min-h-0 p-6 sm:p-8 md:p-12 lg:p-16 flex flex-col">
-      <p className="text-[#C6A85A] font-sora text-xs tracking-[0.2em] uppercase mb-2">Methodology</p>
-      <h2 className="font-cormorant text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-[#1B1B1B] mb-6 md:mb-10">
+    <div className="min-h-full p-5 sm:p-8 md:p-12 lg:p-16 flex flex-col">
+      <p className="text-[#C6A85A] font-sora text-xs tracking-[0.2em] uppercase mb-1.5">Methodology</p>
+      <h2 className="font-cormorant text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-[#1B1B1B] mb-4 md:mb-8">
         Audit Scope
       </h2>
 
-      <div className="grid md:grid-cols-2 gap-6 md:gap-10 flex-1">
+      <div className="grid md:grid-cols-2 gap-4 md:gap-10 flex-1">
         <div>
-          <h3 className="font-sora text-xs font-semibold text-[#6B6460] uppercase tracking-wider mb-4">
+          <h3 className="font-sora text-[10px] sm:text-xs font-semibold text-[#6B6460] uppercase tracking-wider mb-3">
             Crawl Statistics
           </h3>
-          <div className="grid grid-cols-3 gap-2 sm:gap-3">
+          <div className="grid grid-cols-3 gap-2">
             {crawlStats.map((stat, idx) => (
-              <div key={idx} className="bg-white rounded-xl p-3 sm:p-4 text-center border border-[#E8E4DD]">
-                <p className="font-space text-lg sm:text-xl md:text-2xl text-[#1B1B1B]">{stat.value}</p>
-                <p className="font-sora text-[9px] sm:text-[10px] text-[#6B6460]">{stat.label}</p>
+              <div key={idx} className="bg-white rounded-xl p-2.5 sm:p-4 text-center border border-[#E8E4DD]">
+                <p className="font-space text-base sm:text-xl md:text-2xl text-[#1B1B1B]">{stat.value}</p>
+                <p className="font-sora text-[8px] sm:text-[10px] text-[#6B6460]">{stat.label}</p>
               </div>
             ))}
           </div>
         </div>
 
         <div>
-          <h3 className="font-sora text-xs font-semibold text-[#6B6460] uppercase tracking-wider mb-4">
+          <h3 className="font-sora text-[10px] sm:text-xs font-semibold text-[#6B6460] uppercase tracking-wider mb-3 mt-2 md:mt-0">
             Audit Categories
           </h3>
-          <div className="space-y-3">
+          <div className="space-y-2 sm:space-y-3">
             {categories.map((cat, idx) => (
-              <div key={idx} className="bg-white rounded-xl p-4 border border-[#E8E4DD]">
-                <p className="font-sora text-sm font-semibold text-[#1B1B1B] mb-2">{cat.name}</p>
-                <div className="flex flex-wrap gap-2">
+              <div key={idx} className="bg-white rounded-xl p-3 sm:p-4 border border-[#E8E4DD]">
+                <p className="font-sora text-xs sm:text-sm font-semibold text-[#1B1B1B] mb-1.5">{cat.name}</p>
+                <div className="flex flex-wrap gap-1.5">
                   {cat.items.map((item, i) => (
-                    <span key={i} className="px-2 py-1 bg-[#C6A85A]/10 text-[#6B6460] rounded-lg text-xs font-sora">
+                    <span key={i} className="px-2 py-0.5 bg-[#C6A85A]/10 text-[#6B6460] rounded-lg text-[10px] sm:text-xs font-sora">
                       {item}
                     </span>
                   ))}
@@ -388,29 +414,29 @@ function CriticalFindingsSlide() {
   ]
 
   return (
-    <div className="h-full min-h-[65dvh] md:min-h-0 p-6 sm:p-8 md:p-12 lg:p-16 flex flex-col">
-      <p className="text-[#B3483A] font-sora text-xs tracking-[0.2em] uppercase mb-2">Issues Found</p>
-      <h2 className="font-cormorant text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-[#1B1B1B] mb-6 md:mb-10">
+    <div className="min-h-full p-5 sm:p-8 md:p-12 lg:p-16 flex flex-col">
+      <p className="text-[#B3483A] font-sora text-xs tracking-[0.2em] uppercase mb-1.5">Issues Found</p>
+      <h2 className="font-cormorant text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-[#1B1B1B] mb-4 md:mb-8">
         Critical Findings
       </h2>
 
-      <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 flex-1">
+      <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-3 md:gap-6 flex-1">
         {findings.map((finding, idx) => (
-          <div key={idx} className="bg-white rounded-xl p-5 md:p-6 border border-[#E8E4DD] flex flex-col">
-            <div className="flex items-center gap-2 mb-4">
-              <AlertTriangle className="w-5 h-5 text-[#B3483A]" />
-              <span className={`px-2 py-0.5 rounded-full text-xs font-sora ${
+          <div key={idx} className="bg-white rounded-xl p-4 md:p-6 border border-[#E8E4DD] flex flex-col">
+            <div className="flex items-center gap-2 mb-3">
+              <AlertTriangle className="w-4 h-4 text-[#B3483A]" />
+              <span className={`px-2 py-0.5 rounded-full text-[10px] sm:text-xs font-sora ${
                 finding.severity === "Critical" ? "bg-[#B3483A]/15 text-[#B3483A]" : "bg-[#C6A85A]/15 text-[#C6A85A]"
               }`}>
                 {finding.severity}
               </span>
             </div>
-            <h3 className="font-sora text-sm sm:text-base font-semibold text-[#1B1B1B] mb-4">{finding.category}</h3>
-            <div className="space-y-2">
+            <h3 className="font-sora text-xs sm:text-base font-semibold text-[#1B1B1B] mb-2.5">{finding.category}</h3>
+            <div className="space-y-1.5">
               {finding.items.map((item, i) => (
-                <div key={i} className="flex items-start gap-2">
-                  <XCircle className="w-4 h-4 text-[#B3483A] flex-shrink-0 mt-0.5" />
-                  <p className="font-sora text-xs sm:text-sm text-[#6B6460]">{item}</p>
+                <div key={i} className="flex items-start gap-1.5">
+                  <XCircle className="w-3.5 h-3.5 text-[#B3483A] flex-shrink-0 mt-0.5" />
+                  <p className="font-sora text-[10px] sm:text-sm text-[#6B6460]">{item}</p>
                 </div>
               ))}
             </div>
@@ -427,7 +453,7 @@ function WhatGoogleSeesSlide() {
     {
       label: "What You Expect",
       type: "expected",
-      items: ["Christofle Mood Party Tray", "maisonlipari.ca/products/christofle-party-mood...", "Product indexed as unique page"],
+      items: ["Breville | The Handy Mix Scraper", "maisonlipari.ca/products/breville-handy-mix...", "Product indexed as unique page"],
     },
     {
       label: "What Google Sees",
@@ -437,31 +463,31 @@ function WhatGoogleSeesSlide() {
   ]
 
   return (
-    <div className="h-full min-h-[65dvh] md:min-h-0 p-6 sm:p-8 md:p-12 lg:p-16 flex flex-col">
-      <p className="text-[#C6A85A] font-sora text-xs tracking-[0.2em] uppercase mb-2">SEO Impact</p>
-      <h2 className="font-cormorant text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-[#1B1B1B] mb-6 md:mb-10">
+    <div className="min-h-full p-5 sm:p-8 md:p-12 lg:p-16 flex flex-col">
+      <p className="text-[#C6A85A] font-sora text-xs tracking-[0.2em] uppercase mb-1.5">SEO Impact</p>
+      <h2 className="font-cormorant text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-[#1B1B1B] mb-4 md:mb-8">
         What Google Sees
       </h2>
 
-      <div className="grid md:grid-cols-2 gap-4 sm:gap-6 mb-6 flex-1">
+      <div className="grid md:grid-cols-2 gap-3 sm:gap-6 mb-4 flex-1">
         {comparison.map((col, idx) => (
-          <div key={idx} className={`rounded-xl p-5 sm:p-6 ${
+          <div key={idx} className={`rounded-xl p-4 sm:p-6 ${
             col.type === "expected" ? "bg-[#4A7C59]/10 border border-[#4A7C59]/20" : "bg-[#B3483A]/10 border border-[#B3483A]/20"
           }`}>
-            <h3 className={`font-sora text-xs font-semibold uppercase tracking-wider mb-4 ${
+            <h3 className={`font-sora text-[10px] sm:text-xs font-semibold uppercase tracking-wider mb-3 ${
               col.type === "expected" ? "text-[#4A7C59]" : "text-[#B3483A]"
             }`}>
               {col.label}
             </h3>
-            <div className="space-y-3">
+            <div className="space-y-2 sm:space-y-3">
               {col.items.map((item, i) => (
-                <div key={i} className="flex items-start gap-3">
+                <div key={i} className="flex items-start gap-2 sm:gap-3">
                   {col.type === "expected" ? (
-                    <CheckCircle2 className="w-5 h-5 text-[#4A7C59] flex-shrink-0" />
+                    <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-[#4A7C59] flex-shrink-0" />
                   ) : (
-                    <XCircle className="w-5 h-5 text-[#B3483A] flex-shrink-0" />
+                    <XCircle className="w-4 h-4 sm:w-5 sm:h-5 text-[#B3483A] flex-shrink-0" />
                   )}
-                  <p className="font-sora text-sm text-[#1B1B1B]">{item}</p>
+                  <p className="font-sora text-[11px] sm:text-sm text-[#1B1B1B]">{item}</p>
                 </div>
               ))}
             </div>
@@ -469,8 +495,8 @@ function WhatGoogleSeesSlide() {
         ))}
       </div>
 
-      <div className="bg-[#1B1B1B] text-white rounded-xl p-5 sm:p-6">
-        <p className="font-sora text-sm">
+      <div className="bg-[#1B1B1B] text-white rounded-xl p-4 sm:p-6">
+        <p className="font-sora text-[11px] sm:text-sm">
           <span className="text-[#C6A85A] font-semibold">Consequence:</span> Your 4,300+ products are effectively hidden from organic search.
         </p>
       </div>
@@ -484,48 +510,51 @@ function WhatSocialSeesSlide() {
   const [showFixed, setShowFixed] = useState(false)
 
   const platforms = [
-    { id: "facebook", label: "Facebook", icon: "f" },
-    { id: "x", label: "X", icon: "𝕏" },
-    { id: "linkedin", label: "LinkedIn", icon: "in" },
-    { id: "imessage", label: "iMessage", icon: "💬" },
+    { id: "facebook", label: "FB", fullLabel: "Facebook", icon: "f" },
+    { id: "x", label: "X", fullLabel: "X", icon: "𝕏" },
+    { id: "linkedin", label: "LI", fullLabel: "LinkedIn", icon: "in" },
+    { id: "imessage", label: "iMsg", fullLabel: "iMessage", icon: "💬" },
   ]
 
   const currentIssues = [
-    "Title: 42 chars (should be 50-60)",
-    "Description: 42 chars (should be 110-160)",
-    "No product-specific content",
-    "Same preview for all products",
+    "Generic title, no product info",
+    "Static logo instead of product image",
+    "Same preview for all 4,300+ products",
   ]
 
   const fixedBenefits = [
     "Product name + price in title",
-    "Compelling description (110-160 chars)",
-    "Actual product image",
+    "Actual product image shown",
     "Direct link to product page",
   ]
 
   return (
-    <div className="h-full min-h-[65dvh] md:min-h-0 p-6 sm:p-8 md:p-10 flex flex-col">
-      {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-4 mb-4">
-        <div>
-          <p className="text-[#C6A85A] font-sora text-xs tracking-[0.2em] uppercase mb-1">Social Impact</p>
-          <h2 className="font-cormorant text-2xl sm:text-3xl md:text-4xl text-[#1B1B1B]">What Social Platforms See</h2>
+    <div className="min-h-full p-4 sm:p-6 md:p-10 flex flex-col">
+      {/* Header Row */}
+      <div className="flex items-start justify-between gap-3 mb-3">
+        <div className="min-w-0">
+          <p className="text-[#C6A85A] font-sora text-[10px] sm:text-xs tracking-[0.2em] uppercase mb-0.5">Social Impact</p>
+          <h2 className="font-cormorant text-xl sm:text-3xl md:text-4xl text-[#1B1B1B] leading-tight">What Social Sees</h2>
         </div>
-        <div className="flex rounded-full bg-[#E8E4DD] p-1 self-start">
+        {/* Toggle */}
+        <div className="flex rounded-full bg-[#E8E4DD] p-0.5 sm:p-1 flex-shrink-0">
           <button
             onClick={() => setShowFixed(false)}
-            className={`px-4 py-2 rounded-full font-sora text-xs font-medium transition-all ${
+            className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-full font-sora text-[11px] sm:text-xs font-medium transition-all ${
               !showFixed ? "bg-[#B3483A] text-white shadow-sm" : "text-[#6B6460]"
             }`}
+            aria-label="Show current state"
+            tabIndex={0}
           >
             Current
           </button>
           <button
             onClick={() => setShowFixed(true)}
-            className={`px-4 py-2 rounded-full font-sora text-xs font-medium transition-all ${
+            className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-full font-sora text-[11px] sm:text-xs font-medium transition-all ${
               showFixed ? "bg-[#4A7C59] text-white shadow-sm" : "text-[#6B6460]"
             }`}
+            aria-label="Show fixed state"
+            tabIndex={0}
           >
             Fixed
           </button>
@@ -533,60 +562,65 @@ function WhatSocialSeesSlide() {
       </div>
 
       {/* Platform Tabs */}
-      <div className="flex gap-2 mb-4 overflow-x-auto pb-2 -mx-2 px-2">
+      <div className="flex gap-1.5 sm:gap-2 mb-3 overflow-x-auto pb-1 scrollbar-hide">
         {platforms.map((platform) => (
           <button
             key={platform.id}
             onClick={() => setActivePlatform(platform.id)}
-            className={`flex items-center gap-2 px-4 py-2.5 rounded-full font-sora text-sm whitespace-nowrap transition-all ${
+            className={`flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 sm:py-2.5 rounded-full font-sora text-xs sm:text-sm whitespace-nowrap transition-all flex-shrink-0 ${
               activePlatform === platform.id
                 ? "bg-[#1B1B1B] text-white"
-                : "bg-white border border-[#E8E4DD] text-[#6B6460] hover:border-[#1B1B1B]"
+                : "bg-white border border-[#E8E4DD] text-[#6B6460] active:bg-gray-50"
             }`}
+            aria-label={`View ${platform.fullLabel} preview`}
+            tabIndex={0}
           >
             <span className={`${platform.id === "imessage" ? "" : "font-bold"}`}>{platform.icon}</span>
-            {platform.label}
+            <span className="hidden sm:inline">{platform.fullLabel}</span>
+            <span className="sm:hidden">{platform.label}</span>
           </button>
         ))}
       </div>
 
-      {/* Content Grid */}
-      <div className="flex-1 grid md:grid-cols-2 gap-4 min-h-0">
-        {/* Preview Card */}
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden flex flex-col">
+      {/* Main Content */}
+      <div className="flex-1 flex flex-col md:grid md:grid-cols-2 gap-3 md:gap-4 min-h-0">
+        {/* Preview Card - HERO on mobile */}
+        <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden flex flex-col flex-1 md:flex-none">
           {activePlatform === "facebook" && <FacebookPreview showFixed={showFixed} />}
           {activePlatform === "x" && <XPreview showFixed={showFixed} />}
           {activePlatform === "linkedin" && <LinkedInPreview showFixed={showFixed} />}
           {activePlatform === "imessage" && <IMessagePreview showFixed={showFixed} />}
         </div>
 
-        {/* Info Panel */}
-        <div className="flex flex-col gap-4 min-h-0">
-          <div className={`rounded-xl p-5 flex-1 ${
+        {/* Info Panel - Below preview on mobile */}
+        <div className="flex flex-col gap-2 sm:gap-3">
+          {/* Issues/Benefits */}
+          <div className={`rounded-xl p-3 sm:p-4 md:p-5 flex-1 ${
             showFixed ? "bg-[#4A7C59]/10 border border-[#4A7C59]/20" : "bg-[#B3483A]/10 border border-[#B3483A]/20"
           }`}>
-            <h3 className={`font-sora text-xs font-semibold uppercase tracking-wider mb-4 ${
+            <h3 className={`font-sora text-[10px] sm:text-xs font-semibold uppercase tracking-wider mb-2 sm:mb-3 ${
               showFixed ? "text-[#4A7C59]" : "text-[#B3483A]"
             }`}>
               {showFixed ? "After Fix" : "Current Issues"}
             </h3>
-            <ul className="space-y-3">
+            <ul className="space-y-2 sm:space-y-2.5">
               {(showFixed ? fixedBenefits : currentIssues).map((item, i) => (
-                <li key={i} className="flex items-start gap-3">
+                <li key={i} className="flex items-start gap-2">
                   {showFixed ? (
-                    <CheckCircle2 className="w-5 h-5 text-[#4A7C59] flex-shrink-0" />
+                    <CheckCircle2 className="w-4 h-4 sm:w-5 sm:h-5 text-[#4A7C59] flex-shrink-0" />
                   ) : (
-                    <XCircle className="w-5 h-5 text-[#B3483A] flex-shrink-0" />
+                    <XCircle className="w-4 h-4 sm:w-5 sm:h-5 text-[#B3483A] flex-shrink-0" />
                   )}
-                  <span className="font-sora text-sm text-[#1B1B1B]">{item}</span>
+                  <span className="font-sora text-xs sm:text-sm text-[#1B1B1B]">{item}</span>
                 </li>
               ))}
             </ul>
           </div>
 
-          <div className="bg-white rounded-xl p-5 border border-[#E8E4DD]">
-            <p className="font-space text-4xl text-[#C6A85A] font-bold">+40%</p>
-            <p className="font-sora text-sm text-[#6B6460] mt-1">Average CTR increase with optimized OG tags</p>
+          {/* Stat Card */}
+          <div className="bg-white rounded-xl p-3 sm:p-4 border border-[#E8E4DD] flex items-center gap-3 sm:block">
+            <p className="font-space text-3xl sm:text-4xl text-[#C6A85A] font-bold leading-none">+40%</p>
+            <p className="font-sora text-xs sm:text-sm text-[#6B6460] sm:mt-1">Average CTR increase with optimized OG tags</p>
           </div>
         </div>
       </div>
@@ -609,17 +643,18 @@ function FacebookPreview({ showFixed }: { showFixed: boolean }) {
         <MoreHorizontal className="w-5 h-5 text-gray-400" />
       </div>
       <p className="px-4 py-2 text-sm text-gray-900">
-        {showFixed ? "The Christofle Mood Party Tray. Iconic design meets masterful craftsmanship. ✨" : "Discover our curated collection of luxury homeware."}
+        {showFixed ? "Mix like a pro. The Breville Handy Mix Scraper is here. ✨" : "Discover our curated collection of luxury homeware."}
       </p>
-      <div className="flex-1 bg-gray-100 flex items-center justify-center min-h-[140px]">
+      <div className="flex-1 bg-[#f8f8f8] flex items-center justify-center min-h-[140px] relative overflow-hidden">
         {showFixed ? (
-          <div className="w-full h-full bg-gradient-to-br from-[#E8E4DD] to-[#D4CFC6] flex items-center justify-center">
-            <div className="text-center">
-              <div className="w-16 h-16 mx-auto mb-2 bg-[#C6A85A]/20 rounded-lg flex items-center justify-center">
-                <span className="text-2xl">🍽️</span>
-              </div>
-              <p className="text-xs text-[#6B6460]">Product Image</p>
-            </div>
+          <div className="w-full h-full flex items-center justify-center p-6">
+            <Image
+              src={PRODUCT.image}
+              alt={PRODUCT.name}
+              width={200}
+              height={200}
+              className="object-contain max-h-full w-auto"
+            />
           </div>
         ) : (
           <div className="w-full h-full bg-[#1B3A5C] flex items-center justify-center">
@@ -630,10 +665,10 @@ function FacebookPreview({ showFixed }: { showFixed: boolean }) {
       <div className="p-3 bg-gray-50 border-t border-gray-100">
         <p className="text-[10px] text-gray-500 uppercase">maisonlipari.ca</p>
         <p className="text-sm font-semibold text-gray-900 mt-0.5 line-clamp-1">
-          {showFixed ? "Christofle Mood Party Tray | $4,500 CAD" : "Canada's Home for Luxury Designer Homeware"}
+          {showFixed ? PRODUCT.name : "Canada's Home for Luxury Designer Homeware"}
         </p>
         <p className="text-xs text-gray-600 mt-0.5 line-clamp-1">
-          {showFixed ? "Iconic 24-piece stainless steel serving set in egg-shaped case." : "Canada's Home for Luxury Designer Homeware"}
+          {showFixed ? PRODUCT.description : "Canada's Home for Luxury Designer Homeware"}
         </p>
       </div>
       <div className="flex items-center justify-around py-2 border-t border-gray-100 text-gray-500">
@@ -658,13 +693,19 @@ function XPreview({ showFixed }: { showFixed: boolean }) {
             <span className="text-gray-500 text-sm">@maisonlipari · 2h</span>
           </div>
           <p className="text-sm text-gray-900 mt-1">
-            {showFixed ? "The Christofle Mood Party Tray. Iconic design meets masterful craftsmanship. ✨" : "Discover our curated collection of luxury homeware."}
+            {showFixed ? "Mix like a pro. The Breville Handy Mix Scraper is here. ✨" : "Discover our curated collection of luxury homeware."}
           </p>
           <div className="mt-3 rounded-xl border border-gray-200 overflow-hidden">
-            <div className="h-32 bg-gray-100 flex items-center justify-center">
+            <div className="h-32 bg-[#f8f8f8] flex items-center justify-center relative overflow-hidden">
               {showFixed ? (
-                <div className="w-full h-full bg-gradient-to-br from-[#E8E4DD] to-[#D4CFC6] flex items-center justify-center">
-                  <span className="text-2xl">🍽️</span>
+                <div className="w-full h-full flex items-center justify-center p-4">
+                  <Image
+                    src={PRODUCT.image}
+                    alt={PRODUCT.name}
+                    width={120}
+                    height={120}
+                    className="object-contain max-h-full w-auto"
+                  />
                 </div>
               ) : (
                 <div className="w-full h-full bg-[#1B3A5C] flex items-center justify-center">
@@ -675,7 +716,7 @@ function XPreview({ showFixed }: { showFixed: boolean }) {
             <div className="p-3 bg-white">
               <p className="text-xs text-gray-500">maisonlipari.ca</p>
               <p className="text-sm font-medium text-gray-900 line-clamp-1">
-                {showFixed ? "Christofle Mood Party Tray | $4,500 CAD" : "Canada's Home for Luxury Designer Homeware"}
+                {showFixed ? PRODUCT.name : "Canada's Home for Luxury Designer Homeware"}
               </p>
             </div>
           </div>
@@ -705,12 +746,18 @@ function LinkedInPreview({ showFixed }: { showFixed: boolean }) {
         </div>
       </div>
       <p className="px-4 pb-3 text-sm text-gray-900">
-        {showFixed ? "The Christofle Mood Party Tray represents the pinnacle of French craftsmanship. ✨" : "Discover our curated collection of luxury homeware."}
+        {showFixed ? "Mix like a pro. The Breville Handy Mix Scraper is here. ✨" : "Discover our curated collection of luxury homeware."}
       </p>
-      <div className="flex-1 bg-gray-100 flex items-center justify-center min-h-[120px]">
+      <div className="flex-1 bg-[#f8f8f8] flex items-center justify-center min-h-[120px] relative overflow-hidden">
         {showFixed ? (
-          <div className="w-full h-full bg-gradient-to-br from-[#E8E4DD] to-[#D4CFC6] flex items-center justify-center">
-            <span className="text-2xl">🍽️</span>
+          <div className="w-full h-full flex items-center justify-center p-5">
+            <Image
+              src={PRODUCT.image}
+              alt={PRODUCT.name}
+              width={180}
+              height={180}
+              className="object-contain max-h-full w-auto"
+            />
           </div>
         ) : (
           <div className="w-full h-full bg-[#1B3A5C] flex items-center justify-center">
@@ -720,7 +767,7 @@ function LinkedInPreview({ showFixed }: { showFixed: boolean }) {
       </div>
       <div className="p-3 border-t border-gray-100">
         <p className="text-sm font-semibold text-gray-900 line-clamp-1">
-          {showFixed ? "Christofle Mood Party Tray | $4,500 CAD" : "Canada's Home for Luxury Designer Homeware"}
+          {showFixed ? PRODUCT.name : "Canada's Home for Luxury Designer Homeware"}
         </p>
         <p className="text-xs text-gray-500">maisonlipari.ca</p>
       </div>
@@ -740,15 +787,21 @@ function IMessagePreview({ showFixed }: { showFixed: boolean }) {
       <div className="flex-1 flex flex-col justify-end gap-2">
         <div className="self-start max-w-[85%]">
           <div className="bg-[#E9E9EB] rounded-2xl rounded-bl-md px-4 py-2">
-            <p className="text-sm text-black">Have you seen this tray from Maison Lipari?</p>
+            <p className="text-sm text-black">Have you seen this mixer from Maison Lipari?</p>
           </div>
         </div>
         <div className="self-start max-w-[85%]">
           <div className="bg-white rounded-xl overflow-hidden border border-gray-200 shadow-sm">
-            <div className="h-24 bg-gray-100 flex items-center justify-center">
+            <div className="h-24 bg-[#f8f8f8] flex items-center justify-center relative overflow-hidden">
               {showFixed ? (
-                <div className="w-full h-full bg-gradient-to-br from-[#E8E4DD] to-[#D4CFC6] flex items-center justify-center">
-                  <span className="text-xl">🍽️</span>
+                <div className="w-full h-full flex items-center justify-center p-3">
+                  <Image
+                    src={PRODUCT.image}
+                    alt={PRODUCT.name}
+                    width={100}
+                    height={100}
+                    className="object-contain max-h-full w-auto"
+                  />
                 </div>
               ) : (
                 <div className="w-full h-full bg-[#1B3A5C] flex items-center justify-center">
@@ -759,7 +812,7 @@ function IMessagePreview({ showFixed }: { showFixed: boolean }) {
             <div className="p-2.5">
               <p className="text-[10px] text-gray-500 uppercase">maisonlipari.ca</p>
               <p className="text-sm font-medium text-black line-clamp-2">
-                {showFixed ? "Christofle Mood Party Tray | $4,500 CAD" : "Canada's Home for Luxury Designer Homeware"}
+                {showFixed ? PRODUCT.name : "Canada's Home for Luxury Designer Homeware"}
               </p>
             </div>
           </div>
@@ -767,6 +820,148 @@ function IMessagePreview({ showFixed }: { showFixed: boolean }) {
         <div className="self-end max-w-[85%]">
           <div className="bg-[#007AFF] rounded-2xl rounded-br-md px-4 py-2">
             <p className="text-sm text-white">{showFixed ? "Wow, that's stunning! 😍" : "What is this? Just shows their logo..."}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+// Compact Preview Components for Mobile (keeping for potential future use)
+function FacebookPreviewCompact({ showFixed }: { showFixed: boolean }) {
+  return (
+    <div className="flex flex-col h-full">
+      <div className="flex items-center gap-2 p-2.5 sm:p-3 border-b border-gray-100">
+        <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#1B3A5C] flex items-center justify-center flex-shrink-0">
+          <span className="font-serif text-white text-[10px] sm:text-xs font-bold">ML</span>
+        </div>
+        <div className="flex-1 min-w-0">
+          <p className="text-xs sm:text-sm font-semibold text-gray-900 truncate">Maison Lipari</p>
+          <p className="text-[10px] text-gray-500">2h · 🌐</p>
+        </div>
+      </div>
+      <div className="flex-1 bg-[#f8f8f8] flex items-center justify-center min-h-[80px] sm:min-h-[100px] overflow-hidden">
+        {showFixed ? (
+          <div className="w-full h-full flex items-center justify-center p-3">
+            <Image src={PRODUCT.image} alt={PRODUCT.name} width={80} height={80} className="object-contain max-h-full w-auto" />
+          </div>
+        ) : (
+          <div className="w-full h-full bg-[#1B3A5C] flex items-center justify-center">
+            <span className="font-serif text-white text-2xl sm:text-3xl font-bold">ML</span>
+          </div>
+        )}
+      </div>
+      <div className="p-2 sm:p-3 bg-gray-50 border-t border-gray-100">
+        <p className="text-[8px] sm:text-[10px] text-gray-500 uppercase">maisonlipari.ca</p>
+        <p className="text-[11px] sm:text-sm font-semibold text-gray-900 line-clamp-1">
+          {showFixed ? PRODUCT.shortName : "Canada's Home for Luxury..."}
+        </p>
+      </div>
+    </div>
+  )
+}
+
+function XPreviewCompact({ showFixed }: { showFixed: boolean }) {
+  return (
+    <div className="flex flex-col h-full p-2.5 sm:p-3">
+      <div className="flex gap-2">
+        <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#1B3A5C] flex items-center justify-center flex-shrink-0">
+          <span className="font-serif text-white text-[10px] sm:text-xs font-bold">ML</span>
+        </div>
+        <div className="flex-1 min-w-0">
+          <div className="flex items-center gap-1">
+            <span className="font-bold text-xs text-gray-900 truncate">Maison Lipari</span>
+            <span className="text-gray-500 text-[10px] sm:text-xs flex-shrink-0">· 2h</span>
+          </div>
+          <div className="mt-1.5 rounded-lg border border-gray-200 overflow-hidden">
+            <div className="h-16 sm:h-20 bg-[#f8f8f8] flex items-center justify-center overflow-hidden">
+              {showFixed ? (
+                <div className="w-full h-full flex items-center justify-center p-2">
+                  <Image src={PRODUCT.image} alt={PRODUCT.name} width={60} height={60} className="object-contain max-h-full w-auto" />
+                </div>
+              ) : (
+                <div className="w-full h-full bg-[#1B3A5C] flex items-center justify-center">
+                  <span className="font-serif text-white text-xl font-bold">ML</span>
+                </div>
+              )}
+            </div>
+            <div className="p-2 bg-white">
+              <p className="text-[10px] sm:text-xs font-medium text-gray-900 line-clamp-1">
+                {showFixed ? PRODUCT.shortName : "Canada's Home for Luxury..."}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function LinkedInPreviewCompact({ showFixed }: { showFixed: boolean }) {
+  return (
+    <div className="flex flex-col h-full">
+      <div className="flex items-center gap-2 p-2.5 sm:p-3">
+        <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-[#1B3A5C] flex items-center justify-center flex-shrink-0">
+          <span className="font-serif text-white text-xs sm:text-sm font-bold">ML</span>
+        </div>
+        <div className="flex-1 min-w-0">
+          <p className="text-xs sm:text-sm font-semibold text-gray-900 truncate">Maison Lipari</p>
+          <p className="text-[10px] text-gray-500">1,234 followers · 2h</p>
+        </div>
+      </div>
+      <div className="flex-1 bg-[#f8f8f8] flex items-center justify-center min-h-[70px] sm:min-h-[90px] overflow-hidden">
+        {showFixed ? (
+          <div className="w-full h-full flex items-center justify-center p-3">
+            <Image src={PRODUCT.image} alt={PRODUCT.name} width={70} height={70} className="object-contain max-h-full w-auto" />
+          </div>
+        ) : (
+          <div className="w-full h-full bg-[#1B3A5C] flex items-center justify-center">
+            <span className="font-serif text-white text-2xl sm:text-3xl font-bold">ML</span>
+          </div>
+        )}
+      </div>
+      <div className="p-2 sm:p-3 border-t border-gray-100">
+        <p className="text-[11px] sm:text-sm font-semibold text-gray-900 line-clamp-1">
+          {showFixed ? PRODUCT.shortName : "Canada's Home for Luxury..."}
+        </p>
+        <p className="text-[9px] sm:text-xs text-gray-500">maisonlipari.ca</p>
+      </div>
+    </div>
+  )
+}
+
+function IMessagePreviewCompact({ showFixed }: { showFixed: boolean }) {
+  return (
+    <div className="flex flex-col h-full bg-[#F2F2F7] p-2.5 sm:p-3">
+      <div className="flex-1 flex flex-col justify-end gap-1.5">
+        <div className="self-start max-w-[85%]">
+          <div className="bg-[#E9E9EB] rounded-2xl rounded-bl-md px-2.5 sm:px-3 py-1.5">
+            <p className="text-[11px] sm:text-xs text-black">Seen this from Maison Lipari?</p>
+          </div>
+        </div>
+        <div className="self-start max-w-[85%]">
+          <div className="bg-white rounded-lg overflow-hidden border border-gray-200 shadow-sm">
+            <div className="h-14 sm:h-16 bg-[#f8f8f8] flex items-center justify-center overflow-hidden">
+              {showFixed ? (
+                <div className="w-full h-full flex items-center justify-center p-2">
+                  <Image src={PRODUCT.image} alt={PRODUCT.name} width={50} height={50} className="object-contain max-h-full w-auto" />
+                </div>
+              ) : (
+                <div className="w-full h-full bg-[#1B3A5C] flex items-center justify-center">
+                  <span className="font-serif text-white text-lg font-bold">ML</span>
+                </div>
+              )}
+            </div>
+            <div className="p-1.5 sm:p-2">
+              <p className="text-[10px] sm:text-xs font-medium text-black line-clamp-1">
+                {showFixed ? PRODUCT.shortName : "Canada's Home for..."}
+              </p>
+            </div>
+          </div>
+        </div>
+        <div className="self-end max-w-[85%]">
+          <div className="bg-[#007AFF] rounded-2xl rounded-br-md px-2.5 sm:px-3 py-1.5">
+            <p className="text-[11px] sm:text-xs text-white">{showFixed ? "Stunning! 😍" : "Just shows logo..."}</p>
           </div>
         </div>
       </div>
@@ -784,15 +979,48 @@ function SSENSEBenchmarkSlide() {
   ]
 
   return (
-    <div className="h-full min-h-[65dvh] md:min-h-0 p-6 sm:p-8 md:p-12 lg:p-16 flex flex-col">
-      <p className="text-[#C6A85A] font-sora text-xs tracking-[0.2em] uppercase mb-2">Competitive Analysis</p>
-      <h2 className="font-cormorant text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-[#1B1B1B] mb-1">SSENSE Benchmark</h2>
-      <p className="font-sora text-sm text-[#6B6460] mb-6 md:mb-10">
+    <div className="min-h-full p-5 sm:p-8 md:p-12 lg:p-16 flex flex-col">
+      <p className="text-[#C6A85A] font-sora text-xs tracking-[0.2em] uppercase mb-1">Competitive Analysis</p>
+      <h2 className="font-cormorant text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-[#1B1B1B] mb-0.5">SSENSE Benchmark</h2>
+      <p className="font-sora text-xs sm:text-sm text-[#6B6460] mb-4 md:mb-6">
         Montreal-based luxury e-commerce with strong technical execution
       </p>
 
-      <div className="bg-white rounded-xl border border-[#E8E4DD] overflow-hidden flex-1 overflow-x-auto">
-        <table className="w-full min-w-[400px]">
+      {/* Mobile: Cards Layout */}
+      <div className="sm:hidden flex-1 space-y-3.5 overflow-y-auto">
+        {metrics.map((row, idx) => (
+          <div key={idx} className="bg-white rounded-xl p-4 border border-[#E8E4DD]">
+            <div className="flex items-center justify-between mb-3">
+              <h4 className="font-sora text-sm font-semibold text-[#1B1B1B]">{row.metric}</h4>
+              <span className={`px-2 py-0.5 rounded-full text-[10px] font-sora font-medium ${
+                row.status === "broken" ? "bg-[#B3483A]/15 text-[#B3483A]" : "bg-[#6B6460]/15 text-[#6B6460]"
+              }`}>
+                {row.status === "broken" ? "Fix needed" : "TBD"}
+              </span>
+            </div>
+            <div className="grid grid-cols-2 gap-3">
+              <div>
+                <p className="font-sora text-[10px] text-[#6B6460] uppercase tracking-wide mb-1">Maison Lipari</p>
+                <div className="flex items-center gap-1.5">
+                  <XCircle className="w-3.5 h-3.5 text-[#B3483A]" />
+                  <p className="font-sora text-xs text-[#B3483A]">{row.ml}</p>
+                </div>
+              </div>
+              <div>
+                <p className="font-sora text-[10px] text-[#6B6460] uppercase tracking-wide mb-1">SSENSE</p>
+                <div className="flex items-center gap-1.5">
+                  <CheckCircle2 className="w-3.5 h-3.5 text-[#4A7C59]" />
+                  <p className="font-sora text-xs text-[#4A7C59]">{row.ssense}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Desktop: Table Layout */}
+      <div className="hidden sm:block bg-white rounded-xl border border-[#E8E4DD] overflow-hidden flex-1">
+        <table className="w-full">
           <thead>
             <tr className="bg-[#1B1B1B] text-white">
               <th className="p-4 text-left font-sora text-xs font-semibold">Metric</th>
@@ -820,9 +1048,9 @@ function SSENSEBenchmarkSlide() {
         </table>
       </div>
 
-      <div className="bg-[#C6A85A]/10 border-l-4 border-[#C6A85A] p-5 rounded-r-xl mt-6">
-        <p className="font-sora text-sm text-[#1B1B1B]">
-          <span className="font-semibold">Insight:</span> SSENSE has flawless meta tag implementation. The fix for Maison Lipari is a single theme patch.
+      <div className="bg-[#C6A85A]/10 border-l-4 border-[#C6A85A] p-4 sm:p-5 rounded-r-xl mt-4">
+        <p className="font-sora text-xs sm:text-sm text-[#1B1B1B]">
+          <span className="font-semibold">Insight:</span> SSENSE has flawless meta tag implementation. The fix is a single theme patch.
         </p>
       </div>
     </div>
@@ -836,30 +1064,30 @@ function TheFixSlide() {
     { tag: "OG:URL", current: "Hardcoded to homepage", fix: "{{ canonical_url }}" },
     { tag: "OG:Title", current: "Static site tagline", fix: "{{ page_title }}" },
     { tag: "OG:Image", current: "Static logo", fix: "Product/collection image" },
-    { tag: "Twitter Cards", current: "Missing", fix: "Add twitter:card meta tags" },
+    { tag: "Twitter Cards", current: "Missing", fix: "Add twitter:card meta" },
   ]
 
   return (
-    <div className="h-full min-h-[65dvh] md:min-h-0 p-6 sm:p-8 md:p-12 lg:p-16 flex flex-col">
-      <p className="text-[#4A7C59] font-sora text-xs tracking-[0.2em] uppercase mb-2">Solution</p>
-      <h2 className="font-cormorant text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-[#1B1B1B] mb-1">The Fix</h2>
-      <p className="font-sora text-sm text-[#6B6460] mb-6">
-        Theme-level Liquid patch in <code className="bg-[#E8E4DD] px-1.5 py-0.5 rounded text-xs font-mono">theme.liquid</code>
+    <div className="min-h-full p-5 sm:p-8 md:p-12 lg:p-16 flex flex-col">
+      <p className="text-[#4A7C59] font-sora text-xs tracking-[0.2em] uppercase mb-1">Solution</p>
+      <h2 className="font-cormorant text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-[#1B1B1B] mb-0.5">The Fix</h2>
+      <p className="font-sora text-[11px] sm:text-sm text-[#6B6460] mb-4">
+        Theme-level Liquid patch in <code className="bg-[#E8E4DD] px-1 py-0.5 rounded text-[10px] sm:text-xs font-mono">theme.liquid</code>
       </p>
 
-      <div className="space-y-3 flex-1 overflow-y-auto">
+      <div className="space-y-2 sm:space-y-3 flex-1">
         {changes.map((change, idx) => (
-          <div key={idx} className="bg-white rounded-xl p-4 border border-[#E8E4DD]">
-            <div className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-6">
-              <span className="px-3 py-1 bg-[#1B1B1B] text-white rounded-lg font-mono text-xs self-start">{change.tag}</span>
-              <div className="flex-1 grid sm:grid-cols-2 gap-2">
-                <div className="flex items-start gap-2">
-                  <XCircle className="w-4 h-4 text-[#B3483A] flex-shrink-0 mt-0.5" />
-                  <p className="font-sora text-sm text-[#6B6460]">{change.current}</p>
+          <div key={idx} className="bg-white rounded-xl p-3 sm:p-4 border border-[#E8E4DD]">
+            <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-6">
+              <span className="px-2 sm:px-3 py-0.5 sm:py-1 bg-[#1B1B1B] text-white rounded-lg font-mono text-[10px] sm:text-xs self-start">{change.tag}</span>
+              <div className="flex-1 grid sm:grid-cols-2 gap-1.5 sm:gap-2">
+                <div className="flex items-start gap-1.5">
+                  <XCircle className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#B3483A] flex-shrink-0 mt-0.5" />
+                  <p className="font-sora text-[11px] sm:text-sm text-[#6B6460]">{change.current}</p>
                 </div>
-                <div className="flex items-start gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-[#4A7C59] flex-shrink-0 mt-0.5" />
-                  <p className="font-mono text-sm text-[#4A7C59]">{change.fix}</p>
+                <div className="flex items-start gap-1.5">
+                  <CheckCircle2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#4A7C59] flex-shrink-0 mt-0.5" />
+                  <p className="font-mono text-[11px] sm:text-sm text-[#4A7C59]">{change.fix}</p>
                 </div>
               </div>
             </div>
@@ -867,9 +1095,9 @@ function TheFixSlide() {
         ))}
       </div>
 
-      <div className="bg-[#4A7C59]/10 border border-[#4A7C59]/20 rounded-xl p-5 mt-4">
-        <p className="font-sora text-sm text-[#1B1B1B]">
-          <span className="font-semibold text-[#4A7C59]">Coverage:</span> Applies to all 4,300+ products, 469 collections, 90 pages, 76 blogs — EN and FR
+      <div className="bg-[#4A7C59]/10 border border-[#4A7C59]/20 rounded-xl p-3.5 sm:p-5 mt-3">
+        <p className="font-sora text-[11px] sm:text-sm text-[#1B1B1B]">
+          <span className="font-semibold text-[#4A7C59]">Coverage:</span> All 4,300+ products, 469 collections, 90 pages — EN and FR
         </p>
       </div>
     </div>
@@ -880,28 +1108,28 @@ function TheFixSlide() {
 function AdditionalFixesSlide() {
   const fixes = [
     { title: "Repair Booking Flow", effort: "Low", impact: "High", description: "/products/appointments returns 404. Redirect to valid booking endpoint.", icon: Wrench },
-    { title: "Remove Test Page", effort: "Low", impact: "Medium", description: "/pages/test is live and indexed. Unpublish or noindex.", icon: Target },
-    { title: "Sitemap Cleanup", effort: "Low", impact: "Medium", description: "Remove stale/test pages from sitemap.xml", icon: Zap },
+    { title: "Remove Test Page", effort: "Low", impact: "Med", description: "/pages/test is live and indexed. Unpublish or noindex.", icon: Target },
+    { title: "Sitemap Cleanup", effort: "Low", impact: "Med", description: "Remove stale/test pages from sitemap.xml", icon: Zap },
   ]
 
   return (
-    <div className="h-full min-h-[65dvh] md:min-h-0 p-6 sm:p-8 md:p-12 lg:p-16 flex flex-col">
-      <p className="text-[#C6A85A] font-sora text-xs tracking-[0.2em] uppercase mb-2">Quick Wins</p>
-      <h2 className="font-cormorant text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-[#1B1B1B] mb-6 md:mb-10">
+    <div className="min-h-full p-5 sm:p-8 md:p-12 lg:p-16 flex flex-col">
+      <p className="text-[#C6A85A] font-sora text-xs tracking-[0.2em] uppercase mb-1.5">Quick Wins</p>
+      <h2 className="font-cormorant text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-[#1B1B1B] mb-4 md:mb-8">
         Additional Fixes
       </h2>
 
-      <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 flex-1">
+      <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-3 md:gap-6 flex-1">
         {fixes.map((fix, idx) => (
-          <div key={idx} className="bg-white rounded-xl p-5 md:p-6 border border-[#E8E4DD] flex flex-col">
-            <div className="w-12 h-12 rounded-full bg-[#C6A85A]/15 flex items-center justify-center mb-4">
-              <fix.icon className="w-6 h-6 text-[#C6A85A]" />
+          <div key={idx} className="bg-white rounded-xl p-4 md:p-6 border border-[#E8E4DD] flex flex-col">
+            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#C6A85A]/15 flex items-center justify-center mb-3">
+              <fix.icon className="w-5 h-5 sm:w-6 sm:h-6 text-[#C6A85A]" />
             </div>
-            <h3 className="font-sora text-base font-semibold text-[#1B1B1B] mb-2">{fix.title}</h3>
-            <p className="font-sora text-sm text-[#6B6460] flex-1">{fix.description}</p>
-            <div className="flex gap-2 mt-4">
-              <span className="px-2.5 py-1 bg-[#4A7C59]/15 text-[#4A7C59] rounded-full text-xs font-sora">{fix.effort} effort</span>
-              <span className="px-2.5 py-1 bg-[#C6A85A]/15 text-[#C6A85A] rounded-full text-xs font-sora">{fix.impact} impact</span>
+            <h3 className="font-sora text-sm sm:text-base font-semibold text-[#1B1B1B] mb-1.5">{fix.title}</h3>
+            <p className="font-sora text-[11px] sm:text-sm text-[#6B6460] flex-1 leading-snug">{fix.description}</p>
+            <div className="flex gap-1.5 mt-3">
+              <span className="px-2 py-0.5 bg-[#4A7C59]/15 text-[#4A7C59] rounded-full text-[10px] sm:text-xs font-sora">{fix.effort}</span>
+              <span className="px-2 py-0.5 bg-[#C6A85A]/15 text-[#C6A85A] rounded-full text-[10px] sm:text-xs font-sora">{fix.impact}</span>
             </div>
           </div>
         ))}
@@ -913,41 +1141,41 @@ function AdditionalFixesSlide() {
 // ============ SLIDE 10: Revenue Impact ============
 function RevenueImpactSlide() {
   const projections = [
-    { scenario: "Conservative", details: "50K sessions, +0.1% CVR, $150 AOV", monthly: "$7,500" },
-    { scenario: "Moderate", details: "100K sessions, +0.2% CVR, $250 AOV", monthly: "$50,000" },
-    { scenario: "Optimistic", details: "200K sessions, +0.4% CVR, $400 AOV", monthly: "$320,000" },
+    { scenario: "Conservative", details: "50K sessions, +0.1% CVR", monthly: "$7.5K" },
+    { scenario: "Moderate", details: "100K sessions, +0.2% CVR", monthly: "$50K" },
+    { scenario: "Optimistic", details: "200K sessions, +0.4% CVR", monthly: "$320K" },
   ]
 
   return (
-    <div className="h-full min-h-[65dvh] md:min-h-0 p-6 sm:p-8 md:p-12 lg:p-16 flex flex-col">
-      <p className="text-[#C6A85A] font-sora text-xs tracking-[0.2em] uppercase mb-2">Financial Model</p>
-      <h2 className="font-cormorant text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-[#1B1B1B] mb-1">Revenue Impact</h2>
-      <p className="font-sora text-sm text-[#6B6460] mb-6">
-        Estimates use placeholder ranges — replace with actual GA4/Shopify data
+    <div className="min-h-full p-5 sm:p-8 md:p-12 lg:p-16 flex flex-col">
+      <p className="text-[#C6A85A] font-sora text-xs tracking-[0.2em] uppercase mb-1">Financial Model</p>
+      <h2 className="font-cormorant text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-[#1B1B1B] mb-0.5">Revenue Impact</h2>
+      <p className="font-sora text-[11px] sm:text-sm text-[#6B6460] mb-4">
+        Replace estimates with actual GA4/Shopify data
       </p>
 
-      <div className="bg-[#1B1B1B] text-white rounded-xl p-5 mb-6">
-        <p className="font-mono text-sm">
-          <span className="text-[#C6A85A]">Incremental Revenue</span> = Sessions × Delta CVR × AOV
+      <div className="bg-[#1B1B1B] text-white rounded-xl p-3.5 sm:p-5 mb-4">
+        <p className="font-mono text-[11px] sm:text-sm">
+          <span className="text-[#C6A85A]">Revenue</span> = Sessions × Delta CVR × AOV
         </p>
       </div>
 
-      <div className="grid sm:grid-cols-3 gap-4 mb-6">
+      <div className="grid grid-cols-3 gap-2 sm:gap-4 mb-4">
         {projections.map((proj, idx) => (
-          <div key={idx} className={`rounded-xl p-5 border ${
+          <div key={idx} className={`rounded-xl p-3 sm:p-5 border ${
             idx === 1 ? "bg-[#C6A85A]/15 border-[#C6A85A]" : "bg-white border-[#E8E4DD]"
           }`}>
-            <p className="font-sora text-xs font-semibold text-[#6B6460] uppercase mb-2">{proj.scenario}</p>
-            <p className="font-space text-2xl sm:text-3xl text-[#1B1B1B] mb-2">{proj.monthly}</p>
-            <p className="font-sora text-xs text-[#6B6460]">{proj.details}</p>
+            <p className="font-sora text-[9px] sm:text-xs font-semibold text-[#6B6460] uppercase mb-1">{proj.scenario}</p>
+            <p className="font-space text-lg sm:text-2xl md:text-3xl text-[#1B1B1B] mb-1">{proj.monthly}</p>
+            <p className="font-sora text-[9px] sm:text-xs text-[#6B6460] leading-tight">{proj.details}</p>
           </div>
         ))}
       </div>
 
-      <div className="bg-[#8A8F6A]/10 border-l-4 border-[#8A8F6A] p-5 rounded-r-xl mt-auto">
-        <p className="font-sora text-sm text-[#1B1B1B]">
-          <span className="font-semibold">VIP Appointments:</span> Fixing booking flow captures lost VIP leads — estimated{" "}
-          <span className="font-space text-[#4A7C59]">$3,600 - $143,000 CAD/month</span>
+      <div className="bg-[#8A8F6A]/10 border-l-4 border-[#8A8F6A] p-3.5 sm:p-5 rounded-r-xl mt-auto">
+        <p className="font-sora text-[11px] sm:text-sm text-[#1B1B1B]">
+          <span className="font-semibold">VIP Appointments:</span> Fixing booking captures lost leads —{" "}
+          <span className="font-space text-[#4A7C59]">$3.6K - $143K/month</span>
         </p>
       </div>
     </div>
@@ -959,48 +1187,48 @@ function EngagementOptionsSlide() {
   const options = [
     {
       name: "Week 1 Fix",
-      price: "$2,500 - $4,000",
+      price: "$2.5K - $4K",
       timeline: "5-7 business days",
-      scope: ["Deploy canonical/OG/Twitter tag patch", "Repair booking flow redirect", "Sitemap cleanup", "QA across all page types"],
+      scope: ["Deploy canonical/OG/Twitter patch", "Repair booking redirect", "Sitemap cleanup"],
     },
     {
-      name: "90-Day Growth Retainer",
-      price: "$3,000 - $5,000/mo",
+      name: "90-Day Retainer",
+      price: "$3K - $5K/mo",
       timeline: "Ongoing",
-      scope: ["Week 1 fixes included", "CRO experiments (3-5 tests/month)", "GA4/GTM tracking setup", "Weekly KPI reviews"],
+      scope: ["Week 1 fixes included", "CRO experiments (3-5/mo)", "GA4/GTM tracking setup"],
       featured: true,
     },
   ]
 
   return (
-    <div className="h-full min-h-[65dvh] md:min-h-0 p-6 sm:p-8 md:p-12 lg:p-16 flex flex-col">
-      <p className="text-[#C6A85A] font-sora text-xs tracking-[0.2em] uppercase mb-2">Proposal</p>
-      <h2 className="font-cormorant text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-[#1B1B1B] mb-6 md:mb-10">
+    <div className="min-h-full p-5 sm:p-8 md:p-12 lg:p-16 flex flex-col">
+      <p className="text-[#C6A85A] font-sora text-xs tracking-[0.2em] uppercase mb-1.5">Proposal</p>
+      <h2 className="font-cormorant text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-[#1B1B1B] mb-4 md:mb-8">
         Engagement Options
       </h2>
 
-      <div className="grid md:grid-cols-2 gap-4 md:gap-6 flex-1">
+      <div className="grid md:grid-cols-2 gap-3 md:gap-6 flex-1">
         {options.map((option, idx) => (
-          <div key={idx} className={`rounded-xl p-6 sm:p-8 flex flex-col ${
+          <div key={idx} className={`rounded-xl p-4 sm:p-6 md:p-8 flex flex-col ${
             option.featured ? "bg-[#1B1B1B] text-white" : "bg-white border border-[#E8E4DD]"
           }`}>
             {option.featured && (
-              <span className="px-3 py-1 bg-[#C6A85A] text-[#1B1B1B] rounded-full text-xs font-sora font-semibold self-start mb-4">
+              <span className="px-2.5 py-0.5 bg-[#C6A85A] text-[#1B1B1B] rounded-full text-[10px] sm:text-xs font-sora font-semibold self-start mb-3">
                 Recommended
               </span>
             )}
-            <h3 className={`font-cormorant text-xl sm:text-2xl mb-2 ${option.featured ? "text-white" : "text-[#1B1B1B]"}`}>
+            <h3 className={`font-cormorant text-lg sm:text-xl md:text-2xl mb-1 ${option.featured ? "text-white" : "text-[#1B1B1B]"}`}>
               {option.name}
             </h3>
-            <p className="font-space text-2xl sm:text-3xl mb-1 text-[#C6A85A]">{option.price}</p>
-            <p className={`font-sora text-xs mb-6 ${option.featured ? "text-white/60" : "text-[#6B6460]"}`}>
+            <p className="font-space text-xl sm:text-2xl md:text-3xl mb-0.5 text-[#C6A85A]">{option.price}</p>
+            <p className={`font-sora text-[10px] sm:text-xs mb-4 ${option.featured ? "text-white/60" : "text-[#6B6460]"}`}>
               {option.timeline}
             </p>
-            <div className="space-y-3 flex-1">
+            <div className="space-y-2 sm:space-y-3 flex-1">
               {option.scope.map((item, i) => (
-                <div key={i} className="flex items-start gap-3">
-                  <CheckCircle2 className={`w-5 h-5 flex-shrink-0 ${option.featured ? "text-[#C6A85A]" : "text-[#4A7C59]"}`} />
-                  <p className={`font-sora text-sm ${option.featured ? "text-white/80" : "text-[#1B1B1B]"}`}>{item}</p>
+                <div key={i} className="flex items-start gap-2">
+                  <CheckCircle2 className={`w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0 ${option.featured ? "text-[#C6A85A]" : "text-[#4A7C59]"}`} />
+                  <p className={`font-sora text-[11px] sm:text-sm ${option.featured ? "text-white/80" : "text-[#1B1B1B]"}`}>{item}</p>
                 </div>
               ))}
             </div>
@@ -1014,30 +1242,30 @@ function EngagementOptionsSlide() {
 // ============ SLIDE 12: Next Steps ============
 function NextStepsSlide() {
   const steps = [
-    "Review this audit together (15-30 min call)",
+    "Review this audit (15-30 min call)",
     "Confirm scope and timeline",
-    "I deploy the fix; you see results in 2-3 weeks",
+    "Deploy fix; see results in 2-3 weeks",
   ]
 
   return (
-    <div className="h-full min-h-[65dvh] md:min-h-0 flex flex-col justify-center items-center p-6 sm:p-8 md:p-16 text-center">
-      <p className="text-[#C6A85A] font-sora text-xs sm:text-sm tracking-[0.2em] uppercase mb-4 md:mb-6">Let's Begin</p>
-      <h2 className="font-cormorant text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-[#1B1B1B] mb-8 md:mb-12">Next Steps</h2>
+    <div className="min-h-full flex flex-col justify-center items-center p-5 sm:p-8 md:p-16 text-center">
+      <p className="text-[#C6A85A] font-sora text-xs tracking-[0.2em] uppercase mb-3 md:mb-6">Let's Begin</p>
+      <h2 className="font-cormorant text-2xl sm:text-4xl md:text-5xl lg:text-6xl text-[#1B1B1B] mb-6 md:mb-10">Next Steps</h2>
 
-      <div className="flex flex-col gap-4 md:gap-6 max-w-xl w-full mb-8 md:mb-12">
+      <div className="flex flex-col gap-3 md:gap-5 max-w-xl w-full mb-6 md:mb-10">
         {steps.map((step, idx) => (
-          <div key={idx} className="flex items-center gap-4 md:gap-6 text-left">
-            <div className="w-12 h-12 rounded-full bg-[#C6A85A] flex items-center justify-center flex-shrink-0">
-              <span className="font-space text-xl text-white">{idx + 1}</span>
+          <div key={idx} className="flex items-center gap-3 md:gap-5 text-left">
+            <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#C6A85A] flex items-center justify-center flex-shrink-0">
+              <span className="font-space text-lg sm:text-xl text-white">{idx + 1}</span>
             </div>
-            <p className="font-sora text-sm sm:text-base text-[#1B1B1B]">{step}</p>
+            <p className="font-sora text-[13px] sm:text-base text-[#1B1B1B]">{step}</p>
           </div>
         ))}
       </div>
 
       <div className="text-center">
-        <p className="font-cormorant text-xl sm:text-2xl text-[#1B1B1B] mb-2">Ready when you are.</p>
-        <p className="font-sora text-sm text-[#6B6460]">wiel@zouantcha.com</p>
+        <p className="font-cormorant text-lg sm:text-2xl text-[#1B1B1B] mb-1">Ready when you are.</p>
+        <p className="font-sora text-xs sm:text-sm text-[#6B6460]">wiel@zouantcha.com</p>
       </div>
     </div>
   )
