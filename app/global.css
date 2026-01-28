@@ -139,10 +139,65 @@ input[type='email'] {
 }
 
 table {
+  display: table;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.prose table {
   display: block;
-  max-width: fit-content;
   overflow-x: auto;
-  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+  @apply my-4 text-sm;
+}
+
+.prose th {
+  @apply text-left font-medium px-3 py-2 border-b border-neutral-300 dark:border-neutral-700 text-neutral-900 dark:text-neutral-100;
+}
+
+.prose td {
+  @apply px-3 py-2 border-b border-neutral-200 dark:border-neutral-800 text-neutral-700 dark:text-neutral-300;
+}
+
+.prose thead tr {
+  @apply bg-neutral-100 dark:bg-neutral-900;
+}
+
+.prose tbody tr:hover {
+  @apply bg-neutral-50 dark:bg-neutral-900/50;
+}
+
+/* Image comparison grid */
+.img-compare {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+  margin: 1.5rem 0;
+}
+
+@media (min-width: 640px) {
+  .img-compare {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.img-compare img {
+  width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+  object-fit: cover;
+}
+
+.img-compare figcaption {
+  font-size: 0.8rem;
+  color: #737373;
+  margin-top: 0.25rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  .img-compare figcaption {
+    color: #a3a3a3;
+  }
 }
 
 .title {
