@@ -7,38 +7,48 @@ export default function Page() {
         Hi, I'm Wiel
       </h1>
       <p className="mb-4">
-        {`I'm a software developer with 5+ years of experience building scalable systems. I currently `}
+        {`I'm a software engineer with 5+ years building data-heavy applications end-to-end. Recently I shipped a `}
         <a
-          href="/work"
+          href="https://port-observatory-mtl.vercel.app/"
           className="text-neutral-900 dark:text-neutral-100 underline hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
         >
-          work
+          real-time maritime data platform
         </a>
-        {` as a senior full stack engineer at `}
+        {` for the Port of Montreal and a `}
+        <a
+          href="https://www.mtlarchives.com/"
+          className="text-neutral-900 dark:text-neutral-100 underline hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+        >
+          search engine
+        </a>
+        {` over 14,822 historical photos from the Montreal city archives.`}
+      </p>
+      <p className="mb-4">
+        {`I spent 3.5 years at `}
         <a
           href="https://www.heyethos.com/"
           className="text-neutral-900 dark:text-neutral-100 underline hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
         >
-          ethos
+          Ethos
         </a>
-        {`, where I lead frontend development and have been an early adopter of AI coding tools since 2024.`}
+        {` taking their product from a single-tenant MVP to a multi-tenant SaaS serving 50+ merchants. Now I do customer engineering at Oloodi and independent `}
+        <a
+          href="/work"
+          className="text-neutral-900 dark:text-neutral-100 underline hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+        >
+          consulting
+        </a>
+        {`, helping businesses replace manual workflows with custom software.`}
       </p>
       <p className="mb-4">
-        {`I also do independent consulting, helping businesses replace manual workflows with custom software. When I'm not coding, I'm most likely `}
+        {`When I'm not coding, I'm most likely `}
         <a
           href="/blog/books-read-2025"
           className="text-neutral-900 dark:text-neutral-100 underline hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
         >
           reading
         </a>
-        {`, training, spending time with family and friends, or hacking on a side `}
-        <a
-          href="/projects"
-          className="text-neutral-900 dark:text-neutral-100 underline hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-        >
-          project
-        </a>
-        {`.`}
+        {`, training, or spending time with family and friends.`}
       </p>
       <div className="my-8">
         <BlogPosts />
