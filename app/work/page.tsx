@@ -17,10 +17,10 @@ export default function Page() {
           Oloodi Technologies
         </h2>
         <span className="text-neutral-500 dark:text-neutral-400 text-sm">
-          Customer Engineer (Contract) · November 2025 - Present
+          Customer Engineer (Contract) · January 2026 - Present
         </span>
         <p className="mt-2 text-neutral-700 dark:text-neutral-300 leading-relaxed">
-          Run product demos for clients during sprint updates, presenting what the engineering team shipped and how it works. Act as the bridge between engineering and clients, turning technical details into walkthroughs that make sense to non-technical stakeholders.
+          Work on KROW Workforce, a hospitality staffing platform with a web dashboard and mobile apps built for a live customer environment. Translate sprint output, architecture tradeoffs, and product changes into clear recommendations for founder and stakeholder reviews.
         </p>
       </div>
 
@@ -76,25 +76,12 @@ export default function Page() {
         </ul>
       </div>
 
-      {/* StackLabs */}
-      <div className="bg-neutral-50 dark:bg-neutral-900 p-6 rounded-lg shadow-sm mb-6 border border-neutral-200 dark:border-neutral-800">
-        <h2 className="font-semibold text-xl mb-4 text-blue-600 dark:text-blue-400">
-          StackLabs
-        </h2>
-        <span className="text-neutral-500 dark:text-neutral-400 text-sm">
-          Frontend Engineer (Contract) · January 2020 - October 2020
-        </span>
-        <p className="mt-2 text-neutral-700 dark:text-neutral-300 leading-relaxed">
-          Shipped frontend work for agency clients in React and JavaScript (ES6+), working with backend teams to wire up REST APIs.
-        </p>
-      </div>
-
       {/* Skills */}
       <div className="mt-8">
         <h2 className="font-semibold text-xl mb-4 tracking-tighter">skills</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-neutral-700 dark:text-neutral-300">
           <div>
-            <span className="font-medium">Languages:</span> TypeScript, JavaScript, Python, SQL
+            <span className="font-medium">Languages:</span> TypeScript, JavaScript, Python, Ruby, SQL, HTML, CSS
           </div>
           <div>
             <span className="font-medium">Frontend:</span> React, Next.js, Vue.js, Tailwind CSS, MapLibre GL
@@ -109,7 +96,7 @@ export default function Page() {
             <span className="font-medium">Cloud:</span> Cloudflare (Workers, D1, R2, Vectorize), Azure, Vercel, Docker, GitHub Actions
           </div>
           <div>
-            <span className="font-medium">Practices:</span> Agile, System Architecture, API Integration, Data Pipeline Design
+            <span className="font-medium">Practices:</span> authentication, authorization, access control, integrations, testing, code reviews, observability, deploy gates, health checks
           </div>
         </div>
       </div>

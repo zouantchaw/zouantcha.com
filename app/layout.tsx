@@ -15,11 +15,11 @@ export const metadata: Metadata = {
     template: "%s | Wielfried Zouantcha",
   },
   description:
-    "Wielfried Zouantcha is a full stack developer, optimist, and family man, currently working at ethos to build the future of customer loyalty.",
+    "Wielfried Zouantcha is a full stack developer, optimist, and family man. Customer engineering at Oloodi and independent consulting.",
   openGraph: {
     title: "Wielfried Zouantcha",
     description:
-      "Full stack developer, optimist, and family man. Building the future of customer loyalty at ethos. Passionate about reading, training, and side projects.",
+      "Full stack developer, optimist, and family man. Customer engineering at Oloodi and independent consulting.",
     url: baseUrl,
     siteName: "Wielfried Zouantcha",
     locale: "en_US",
