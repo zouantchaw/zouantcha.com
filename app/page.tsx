@@ -7,38 +7,45 @@ export default function Page() {
         Hi, I'm Wiel
       </h1>
       <p className="mb-4">
-        {`I'm a software engineer with 5+ years building data-heavy applications end-to-end. Recently I shipped a `}
+        {`I'm a software engineer with 5+ years of experience. I started at `}
         <a
-          href="https://port-observatory-mtl.vercel.app/"
+          href="https://saasalerts.com/"
           className="text-neutral-900 dark:text-neutral-100 underline hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
         >
-          real-time maritime data platform
+          SaaS Alerts
         </a>
-        {` for the Port of Montreal and a `}
-        <a
-          href="https://www.mtlarchives.com/"
-          className="text-neutral-900 dark:text-neutral-100 underline hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-        >
-          search engine
-        </a>
-        {` over 14,822 historical photos from the Montreal city archives.`}
-      </p>
-      <p className="mb-4">
-        {`I spent 3.5 years at `}
+        {` building security integrations that pulled data from IT tools and flagged threats. Then I spent 3.5 years at `}
         <a
           href="https://www.heyethos.com/"
           className="text-neutral-900 dark:text-neutral-100 underline hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
         >
           Ethos
         </a>
-        {` taking their product from a single-tenant MVP to a multi-tenant SaaS serving 50+ merchants. Now I do customer engineering at Oloodi and independent `}
+        {`, where I helped take the product from a single-tenant MVP to a multi-tenant SaaS serving 50+ merchants. Now I'm at `}
+        <a
+          href="https://oloodi.com/"
+          className="text-neutral-900 dark:text-neutral-100 underline hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+        >
+          Oloodi
+        </a>
+        {` doing customer engineering for KROW Workforce, a hospitality staffing platform.`}
+      </p>
+      <p className="mb-4">
+        {`On the side, I `}
         <a
           href="/work"
           className="text-neutral-900 dark:text-neutral-100 underline hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
         >
-          consulting
+          consult
         </a>
-        {`, helping businesses replace manual workflows with custom software.`}
+        {` for small businesses and build `}
+        <a
+          href="/projects"
+          className="text-neutral-900 dark:text-neutral-100 underline hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+        >
+          projects
+        </a>
+        {` that interest me.`}
       </p>
       <p className="mb-4">
         {`When I'm not coding, I'm most likely `}
