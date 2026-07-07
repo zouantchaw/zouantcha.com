@@ -7,8 +7,14 @@ export const metadata = {
 
 export default function Page() {
   return (
-    <section>
-      <h1 className="font-semibold text-2xl mb-8 tracking-tighter">blog</h1>
+    <section className="space-y-6">
+      <div className="space-y-3">
+        <h1 className="text-2xl font-semibold">Writing</h1>
+        <p className="leading-7 text-neutral-700 dark:text-neutral-300">
+          Notes on software, projects, reading, and things I want to understand
+          better.
+        </p>
+      </div>
       <BlogPosts />
     </section>
   )

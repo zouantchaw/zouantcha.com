@@ -29,9 +29,6 @@ importers:
       geist:
         specifier: 1.2.2
         version: 1.2.2(next@15.0.0-canary.48(react-dom@19.0.0-rc-58af67a8f8-20240628(react@19.0.0-rc-58af67a8f8-20240628))(react@19.0.0-rc-58af67a8f8-20240628))
-      lucide-react:
-        specifier: 0.454.0
-        version: 0.454.0(react@19.0.0-rc-58af67a8f8-20240628)
       next:
         specifier: 15.0.0-canary.48
         version: 15.0.0-canary.48(react-dom@19.0.0-rc-58af67a8f8-20240628(react@19.0.0-rc-58af67a8f8-20240628))(react@19.0.0-rc-58af67a8f8-20240628)
@@ -646,11 +643,6 @@ packages:
 
   longest-streak@3.1.0:
     resolution: {integrity: sha512-9Ri+o0JYgehTaVBBDoMqIl8GXtbWg711O3srftcHhZ0dqnETqLaoIK0x17fUw9rFSlK/0NlsKe0Ahhyl5pXE2g==}
-
-  lucide-react@0.454.0:
-    resolution: {integrity: sha512-hw7zMDwykCLnEzgncEEjHeA6+45aeEzRYuKHuyRSOPkhko+J3ySGjGIzu+mmMfDFG1vazHepMaYFYHbTFAZAAQ==}
-    peerDependencies:
-      react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0-rc
 
   markdown-extensions@2.0.0:
     resolution: {integrity: sha512-o5vL7aDWatOTX8LzaS1WMoaoxIiLRQJuIKKe2wAw6IeULDHaqbiqiggmx+pKvZDb1Sj+pE46Sn1T7lCqfFtg1Q==}
@@ -1564,10 +1556,6 @@ snapshots:
       lightningcss-win32-x64-msvc: 1.31.1
 
   longest-streak@3.1.0: {}
-
-  lucide-react@0.454.0(react@19.0.0-rc-58af67a8f8-20240628):
-    dependencies:
-      react: 19.0.0-rc-58af67a8f8-20240628
 
   markdown-extensions@2.0.0: {}
 

@@ -3,103 +3,108 @@ export const metadata = {
   description: 'My work history.',
 }
 
+const roles = [
+  {
+    company: 'Oloodi Technologies',
+    role: 'Customer Engineer (Contract)',
+    period: 'January 2026 - Present',
+    body: 'Working on KROW Workforce, a hospitality staffing platform with a web dashboard and mobile apps built for a live customer environment.',
+    bullets: [
+      'Translate sprint output, architecture tradeoffs, and product changes into founder and stakeholder recommendations.',
+      'Bridge customer needs, engineering execution, and product quality in a small-team environment.',
+    ],
+  },
+  {
+    company: 'Ethos',
+    role: 'Senior Full Stack Engineer',
+    period: 'May 2022 - November 2025',
+    body: 'Helped take the product from a single-tenant MVP to a multi-tenant SaaS serving 50+ merchant accounts.',
+    bullets: [
+      'Built identity management and access-control layers across Next.js, Node.js, and Azure.',
+      'Built internal Jade and Ruby API layers that gave frontend teams a cleaner interface over complex backend operations.',
+      'Wrote Shopify POS integrations with sub-100ms latency for real-time retail sync.',
+      'Set frontend standards and drove architectural decisions across the Luna codebase in a five-person team.',
+    ],
+  },
+  {
+    company: 'Independent Consulting',
+    role: 'Engineering Consultant',
+    period: 'January 2023 - Present',
+    body: 'Partner with small-business owners to gather requirements, architect practical systems, and ship production software.',
+    bullets: [
+      'Diane Party Rentals: custom ERP for quoting, inventory locking, and Stripe payments. Quote turnaround dropped from 24h to under 2h.',
+      'Ballerz Football Academy: scheduling and payout platform for trainer availability, player bookings, and 100+ monthly sessions.',
+    ],
+  },
+  {
+    company: 'SaaS Alerts',
+    role: 'Software Engineer, Integrations and Security',
+    period: 'October 2020 - December 2021',
+    body: 'Built integrations and security-event processing for MSP tools.',
+    bullets: [
+      'Built log ingestion connectors for IT Glue, Datto RMM, ConnectWise, and Kaseya.',
+      'Normalized event data into a unified security schema for downstream alerting.',
+      'Used Microsoft Graph API and Kibana logs to build detection logic for silent MFA changes and unauthorized file sharing.',
+    ],
+  },
+]
+
+const skills = [
+  'TypeScript',
+  'React',
+  'Next.js',
+  'Node.js',
+  'PostgreSQL',
+  'Python',
+  'Ruby',
+  'Cloudflare Workers',
+  'D1',
+  'R2',
+  'Vectorize',
+  'Azure',
+  'Vercel',
+  'Docker',
+]
+
 export default function Page() {
   return (
-    <section>
-      <h1 className="font-semibold text-2xl mb-8 tracking-tighter">work</h1>
-      <p className="mb-4 text-neutral-700 dark:text-neutral-300 leading-relaxed">
-        5+ years building data-heavy applications end-to-end: ETL pipelines, model inference, production frontends.
-      </p>
-
-      {/* Oloodi */}
-      <div className="bg-neutral-50 dark:bg-neutral-900 p-6 rounded-lg shadow-sm mb-6 border border-neutral-200 dark:border-neutral-800">
-        <h2 className="font-semibold text-xl mb-4 text-blue-600 dark:text-blue-400">
-          Oloodi Technologies
-        </h2>
-        <span className="text-neutral-500 dark:text-neutral-400 text-sm">
-          Customer Engineer (Contract) · January 2026 - Present
-        </span>
-        <p className="mt-2 text-neutral-700 dark:text-neutral-300 leading-relaxed">
-          Work on KROW Workforce, a hospitality staffing platform with a web dashboard and mobile apps built for a live customer environment. Translate sprint output, architecture tradeoffs, and product changes into clear recommendations for founder and stakeholder reviews.
+    <section className="space-y-10">
+      <div className="space-y-3">
+        <h1 className="text-2xl font-semibold">Work</h1>
+        <p className="leading-7 text-neutral-700 dark:text-neutral-300">
+          5+ years building data-heavy applications end to end: integrations,
+          backend systems, production frontends, ETL pipelines, and applied ML
+          workflows.
         </p>
       </div>
 
-      {/* Ethos */}
-      <div className="bg-neutral-50 dark:bg-neutral-900 p-6 rounded-lg shadow-sm mb-6 border border-neutral-200 dark:border-neutral-800">
-        <h2 className="font-semibold text-xl mb-4 text-blue-600 dark:text-blue-400">
-          Ethos
-        </h2>
-        <div className="space-y-6">
-          <div>
-            <span className="text-neutral-500 dark:text-neutral-400 text-sm">
-              Senior Full Stack Engineer · May 2022 - November 2025
-            </span>
-            <ul className="list-disc list-inside mt-2 text-neutral-700 dark:text-neutral-300 space-y-1">
-              <li>Took the product from a single-tenant MVP to a multi-tenant SaaS on Next.js, Node.js, and Azure. Built the identity management and access control layer serving 50+ merchant accounts.</li>
-              <li>Built internal API layers (Jade and Ruby SDKs) that give the frontend a clean interface over complex backend operations. &lt;1% transaction failure rate in production.</li>
-              <li>Wrote deep Shopify POS integrations with &lt;100ms latency for real-time sync between physical retail locations and cloud infrastructure.</li>
-              <li>Set frontend coding standards and drove architectural decisions across the Luna codebase in a 5-person team.</li>
+      <div className="space-y-9">
+        {roles.map((role) => (
+          <section key={`${role.company}-${role.period}`} className="space-y-3">
+            <div>
+              <h2 className="text-lg font-medium">{role.company}</h2>
+              <p className="text-sm text-neutral-500 dark:text-neutral-400">
+                {role.role} - {role.period}
+              </p>
+            </div>
+            <p className="leading-7 text-neutral-700 dark:text-neutral-300">
+              {role.body}
+            </p>
+            <ul className="list-disc space-y-2 pl-5 leading-7 text-neutral-700 dark:text-neutral-300">
+              {role.bullets.map((bullet) => (
+                <li key={bullet}>{bullet}</li>
+              ))}
             </ul>
-          </div>
-        </div>
+          </section>
+        ))}
       </div>
 
-      {/* Independent Consulting */}
-      <div className="bg-neutral-50 dark:bg-neutral-900 p-6 rounded-lg shadow-sm mb-6 border border-neutral-200 dark:border-neutral-800">
-        <h2 className="font-semibold text-xl mb-4 text-blue-600 dark:text-blue-400">
-          Independent Consulting
-        </h2>
-        <span className="text-neutral-500 dark:text-neutral-400 text-sm">
-          Engineering Consultant · January 2023 - Present
-        </span>
-        <p className="mt-2 text-neutral-700 dark:text-neutral-300 leading-relaxed">
-          Partner directly with business owners to gather requirements, architect solutions, and ship production systems.
+      <section className="space-y-3">
+        <h2 className="text-lg font-medium">Skills</h2>
+        <p className="leading-7 text-neutral-700 dark:text-neutral-300">
+          {skills.join(', ')}.
         </p>
-        <ul className="list-disc list-inside mt-2 text-neutral-700 dark:text-neutral-300 space-y-1">
-          <li><strong>Diane Party Rentals:</strong> Replaced paper-based workflows with a custom ERP: automated quoting, real-time inventory locking, Stripe payments. Cut quote turnaround from 24h to under 2h.</li>
-          <li><strong>Ballerz Football Academy:</strong> Built a scheduling and payout platform (Next.js, Cal.com) for session booking and trainer payouts across 100+ monthly sessions.</li>
-        </ul>
-      </div>
-
-      {/* SaaS Alerts */}
-      <div className="bg-neutral-50 dark:bg-neutral-900 p-6 rounded-lg shadow-sm mb-6 border border-neutral-200 dark:border-neutral-800">
-        <h2 className="font-semibold text-xl mb-4 text-blue-600 dark:text-blue-400">
-          SaaS Alerts
-        </h2>
-        <span className="text-neutral-500 dark:text-neutral-400 text-sm">
-          Software Engineer (Integrations & Security) · October 2020 - December 2021
-        </span>
-        <ul className="list-disc list-inside mt-2 text-neutral-700 dark:text-neutral-300 space-y-1">
-          <li>Built log ingestion connectors for major MSP platforms (IT Glue, Datto RMM, ConnectWise, Kaseya), normalizing event data into a unified security schema.</li>
-          <li>Wrote RESTful endpoints for security event processing that cut manual analyst review time and improved mean-time-to-detection for critical alerts.</li>
-          <li>Dug into Microsoft Graph API and Kibana logs to build detection logic for silent MFA modifications and unauthorized file sharing.</li>
-        </ul>
-      </div>
-
-      {/* Skills */}
-      <div className="mt-8">
-        <h2 className="font-semibold text-xl mb-4 tracking-tighter">skills</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-neutral-700 dark:text-neutral-300">
-          <div>
-            <span className="font-medium">Languages:</span> TypeScript, JavaScript, Python, Ruby, SQL, HTML, CSS
-          </div>
-          <div>
-            <span className="font-medium">Frontend:</span> React, Next.js, Vue.js, Tailwind CSS, MapLibre GL
-          </div>
-          <div>
-            <span className="font-medium">Backend:</span> Node.js, Express, PostgreSQL, Prisma, Cloudflare Workers, D1
-          </div>
-          <div>
-            <span className="font-medium">Data & Models:</span> Vector Search (CLIP, BGE), DETR, LLaVA, ETL Pipelines, OCR
-          </div>
-          <div>
-            <span className="font-medium">Cloud:</span> Cloudflare (Workers, D1, R2, Vectorize), Azure, Vercel, Docker, GitHub Actions
-          </div>
-          <div>
-            <span className="font-medium">Practices:</span> authentication, authorization, access control, integrations, testing, code reviews, observability, deploy gates, health checks
-          </div>
-        </div>
-      </div>
+      </section>
     </section>
   )
 }

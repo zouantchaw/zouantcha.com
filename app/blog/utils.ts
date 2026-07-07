@@ -36,6 +36,9 @@ function readMDXFile(filePath) {
 }
 
 function getMDXData(dir) {
+  if (!fs.existsSync(dir)) {
+    return []
+  }
   let mdxFiles = getMDXFiles(dir)
   return mdxFiles.map((file) => {
     let { metadata, content } = readMDXFile(path.join(dir, file))
@@ -51,6 +54,14 @@ function getMDXData(dir) {
 
 export function getBlogPosts() {
   return getMDXData(path.join(process.cwd(), 'app', 'blog', 'posts'))
+}
+
+export function getBlogPostsByLocale(locale: 'en' | 'fr') {
+  if (locale === 'fr') {
+    return getMDXData(path.join(process.cwd(), 'app', 'blog', 'posts-fr'))
+  }
+
+  return getBlogPosts()
 }
 
 export function formatDate(date: string, includeRelative = false) {

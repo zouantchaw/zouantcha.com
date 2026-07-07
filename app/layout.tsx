@@ -2,7 +2,6 @@ import "./global.css";
 import type { Metadata } from "next";
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
-import { Navbar } from "./components/nav";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import Footer from "./components/footer";
@@ -15,15 +14,21 @@ export const metadata: Metadata = {
     template: "%s | Wielfried Zouantcha",
   },
   description:
-    "Wielfried Zouantcha is a full stack developer, optimist, and family man. Customer engineering at Oloodi and independent consulting.",
+    "Wielfried Zouantcha is an engineer based in Washington DC working on customer engineering and full-stack development for KROW Workforce.",
   openGraph: {
     title: "Wielfried Zouantcha",
     description:
-      "Full stack developer, optimist, and family man. Customer engineering at Oloodi and independent consulting.",
+      "Engineer based in Washington DC working on customer engineering and full-stack development for KROW Workforce.",
     url: baseUrl,
     siteName: "Wielfried Zouantcha",
     locale: "en_US",
     type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Wielfried Zouantcha",
+    description:
+      "Engineer based in Washington DC working on customer engineering and full-stack development for KROW Workforce.",
   },
   robots: {
     index: true,
@@ -61,9 +66,8 @@ export default function RootLayout({
           data-token="dfbe2e89cb93290"
         ></script>
       </head>
-      <body className="antialiased max-w-xl mx-4 mt-8 lg:mx-auto">
-        <main className="flex-auto min-w-0 mt-6 flex flex-col px-2 md:px-0">
-          <Navbar />
+      <body className="mx-auto min-h-screen max-w-2xl px-6 py-12 antialiased sm:py-16 md:py-20">
+        <main className="flex min-w-0 flex-col gap-12">
           {children}
           <Footer />
           <Analytics />
