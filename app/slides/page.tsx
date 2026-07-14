@@ -10,6 +10,11 @@ const linkClass =
 
 const slides = [
   {
+    title: "PortMind: Past Seven Days",
+    description: "A metrics-led update on PortMind's latest data, review, and evaluation work.",
+    href: "/slides/portmind-past-seven-days.html",
+  },
+  {
     title: "PortMind ML Project Brief",
     description: "A project brief for the PortMind machine-learning work.",
     href: "/slides/portmind-ml-project-brief.html",

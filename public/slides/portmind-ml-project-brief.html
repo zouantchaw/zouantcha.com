@@ -144,70 +144,6 @@
     letter-spacing: .04em;
   }
 
-  .week-layout {
-    display: grid;
-    grid-template-columns: minmax(0, 1.1fr) minmax(260px, .9fr);
-    gap: 2rem;
-    max-width: 1040px;
-    align-items: start;
-  }
-  .week-layout .points { max-width: none; }
-  .week-video {
-    border: 1px solid var(--hairline);
-    background: #111;
-    padding: .55rem;
-  }
-  .week-video video {
-    display: block;
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    background: #111;
-  }
-  .week-video figcaption {
-    color: #cfcfcf;
-    font-size: .76rem;
-    line-height: 1.4;
-    padding: .7rem .2rem .15rem;
-  }
-  .loop-diagram {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    max-width: 1040px;
-    border-top: 1px solid var(--ink);
-    border-bottom: 1px solid var(--ink);
-    margin-top: 2rem;
-  }
-  .loop-step {
-    position: relative;
-    min-height: 7rem;
-    padding: 1rem 1.2rem 1rem 0;
-    border-right: 1px solid var(--hairline);
-    margin-right: 1.2rem;
-  }
-  .loop-step:last-child { border-right: 0; margin-right: 0; }
-  .loop-step:not(:last-child)::after {
-    content: "→";
-    position: absolute;
-    right: .35rem;
-    top: 2.35rem;
-    color: var(--muted);
-    font-size: 1.1rem;
-  }
-  .loop-step .step-number {
-    color: var(--muted);
-    font-size: .72rem;
-    letter-spacing: .15em;
-    text-transform: uppercase;
-  }
-  .loop-step strong {
-    display: block;
-    font-family: var(--serif);
-    font-size: 1.35rem;
-    font-weight: 400;
-    margin: .45rem 0 .35rem;
-  }
-  .loop-step span:last-child { color: var(--muted); font-size: .78rem; line-height: 1.4; }
-
   .footnote { margin-top: 2rem; font-size: .85rem; color: var(--muted); max-width: 60ch; }
 
   nav.controls {
@@ -269,12 +205,6 @@
     ul.points li { font-size: 1rem; }
     .metrics { grid-template-columns: 1fr 1fr; }
     .capture-grid { grid-template-columns: 1fr 1fr; }
-    .week-layout { grid-template-columns: 1fr; gap: 1.25rem; }
-    .loop-diagram { grid-template-columns: 1fr 1fr; }
-    .loop-step:nth-child(2) { border-right: 0; margin-right: 0; }
-    .loop-step:nth-child(2)::after { display: none; }
-    .loop-step:nth-child(3), .loop-step:nth-child(4) { border-top: 1px solid var(--hairline); }
-    .loop-step:nth-child(4) { border-right: 0; margin-right: 0; }
     .ladder { flex-direction: column; }
     .ladder .rung { border-right: none; border-bottom: 1px solid var(--hairline); margin-right: 0; }
     .ladder .rung:last-child { border-bottom: none; }
@@ -299,7 +229,7 @@
 </style>
 </head>
 <body>
-<div id="progress" role="progressbar" aria-label="Deck progress" aria-valuemin="1" aria-valuemax="16" aria-valuenow="1"></div>
+<div id="progress" role="progressbar" aria-label="Deck progress" aria-valuemin="1" aria-valuemax="15" aria-valuenow="1"></div>
 <span class="wordmark" aria-hidden="true">PortMind</span>
 
 <main aria-live="polite">
@@ -347,34 +277,7 @@
     <p class="footnote">From the January-June 2026 inventory snapshot; collection continues.</p>
   </section>
 
-  <section class="slide" aria-label="Slide 6: Past seven days">
-    <p class="kicker">Past 7 Days &middot; July 2026</p>
-    <h2>The factory became more trustworthy before it became bigger.</h2>
-    <div class="week-layout">
-      <ul class="points">
-        <li><strong>Independent review is live.</strong> The Cloudflare reviewer portal now supports private invitations, blind tasks, onboarding, resumable sessions, and controlled export.</li>
-        <li><strong>Model comparison got stricter.</strong> Grok 4.5 was added to the reliability bench, alongside stronger uncertainty and provenance checks.</li>
-        <li><strong>Evaluation got safer.</strong> Held-out data stays locked, and promotion now fails closed when evidence, seeds, or artifact identity are incomplete.</li>
-        <li><strong>The human loop is being tested in reality.</strong> One external reviewer has started the 24-task packet; progress is recorded without exposing identity in the dataset.</li>
-      </ul>
-      <figure class="week-video">
-        <video controls preload="metadata" playsinline>
-          <source src="/media/portmind-reviewer-onboarding-v2.mp4" type="video/mp4">
-          Your browser does not support the video element.
-        </video>
-        <figcaption>Reviewer onboarding: a short guide to the evidence-first labeling task.</figcaption>
-      </figure>
-    </div>
-    <div class="loop-diagram" aria-label="PortMind improvement loop: collect, review, measure, improve">
-      <div class="loop-step"><span class="step-number">01</span><strong>Collect</strong><span>Keep the operating memory growing.</span></div>
-      <div class="loop-step"><span class="step-number">02</span><strong>Review</strong><span>Spend human attention on hard cases.</span></div>
-      <div class="loop-step"><span class="step-number">03</span><strong>Measure</strong><span>Compare models against trusted evidence.</span></div>
-      <div class="loop-step"><span class="step-number">04</span><strong>Improve</strong><span>Feed failures back into the next queue.</span></div>
-    </div>
-    <p class="footnote">The next gate is not more scale. It is an independently adjudicated benchmark that tells us what the models actually understand.</p>
-  </section>
-
-  <section class="slide" aria-label="Slide 7: The capture layer">
+  <section class="slide" aria-label="Slide 6: The capture layer">
     <p class="kicker">The Capture Layer</p>
     <h2>What the system actually sees.</h2>
     <div class="capture-grid">
@@ -406,13 +309,13 @@
     <p class="footnote">Sample frames from the Port of Montreal collection, across sites, seasons, and conditions.</p>
   </section>
 
-  <section class="slide" aria-label="Slide 8: Why it is hard to copy">
+  <section class="slide" aria-label="Slide 7: Why it is hard to copy">
     <p class="kicker">Why It Is Hard to Copy</p>
     <h2>Not the feeds. The accumulated structure around them.</h2>
     <p class="lede">Anyone can point a scraper at a public camera. The defensible asset is what compounds: accumulated history, organized records, verified labels, a catalogue of hard cases and known mistakes, human review trails, and a repeatable improvement routine. Each cycle makes the next one cheaper and the dataset harder to replicate.</p>
   </section>
 
-  <section class="slide" aria-label="Slide 9: The capability ladder">
+  <section class="slide" aria-label="Slide 8: The capability ladder">
     <p class="kicker">The Capability Ladder</p>
     <h2>Each rung earns the next.</h2>
     <div class="ladder">
@@ -445,13 +348,13 @@
     <p class="footnote">* Later rungs are future directions, not current capabilities or claims.</p>
   </section>
 
-  <section class="slide" aria-label="Slide 10: Recognition status">
+  <section class="slide" aria-label="Slide 9: Recognition status">
     <p class="kicker">Recognition &middot; Status</p>
     <h2>Recognition is the first model target, not a finished product.</h2>
     <p class="lede">The work today is to make the labels and test sets strong enough that a model score means something. Small experiments can prove the training pipeline, but the product claim only starts once the model works on held-back examples from real conditions.</p>
   </section>
 
-  <section class="slide" aria-label="Slide 11: Research path">
+  <section class="slide" aria-label="Slide 10: Research path">
     <p class="kicker">Research Path</p>
     <h2>The research direction is practical: learn from the unlabeled stream, then spend human review where it matters most.</h2>
     <ul class="points">
@@ -462,7 +365,7 @@
     </ul>
   </section>
 
-  <section class="slide" aria-label="Slide 12: Labeling lesson">
+  <section class="slide" aria-label="Slide 11: Labeling lesson">
     <p class="kicker">Labeling &middot; What We Learned</p>
     <h2>General-purpose model labels are useful, but not reliable enough to blindly scale.</h2>
     <ul class="points">
@@ -473,7 +376,7 @@
     </ul>
   </section>
 
-  <section class="slide" aria-label="Slide 13: Automation layer">
+  <section class="slide" aria-label="Slide 12: Automation layer">
     <p class="kicker">Automation Layer</p>
     <h2>Software makes the review loop scalable.</h2>
     <ul class="points">
@@ -485,13 +388,13 @@
     </ul>
   </section>
 
-  <section class="slide" aria-label="Slide 14: Why this compounds">
+  <section class="slide" aria-label="Slide 13: Why this compounds">
     <p class="kicker">Why This Compounds</p>
     <h2>Time in market is the multiplier.</h2>
     <p class="lede">History cannot be backfilled. Every day of collection, labeling, review, and scoring widens the gap between this dataset and any future attempt to recreate it. The loop is simple: collect, label, verify, test, train, and requeue the mistakes. It is designed to run continuously and improve with scale.</p>
   </section>
 
-  <section class="slide" aria-label="Slide 15: Near-term focus">
+  <section class="slide" aria-label="Slide 14: Near-term focus">
     <p class="kicker">Near-Term Focus</p>
     <h2>Finish the labeling foundation, then train against reality.</h2>
     <ul class="points">
@@ -502,7 +405,7 @@
     </ul>
   </section>
 
-  <section class="slide" aria-label="Slide 16: Closing">
+  <section class="slide" aria-label="Slide 15: Closing">
     <p class="kicker">Closing</p>
     <h1>Learn the port.<br>Everything else follows.</h1>
     <p class="lede">PortMind is a long-horizon bet that a structured, accumulated record of public infrastructure activity becomes the foundation for recognition, forecasting, simulation, and eventually reinforcement-learning research.</p>
