@@ -87,60 +87,58 @@
 
 <main aria-live="polite">
   <section class="slide active" aria-label="Slide 1: Past seven days">
-    <p class="kicker">Weekly Build Note &middot; July 7-14, 2026</p>
-    <h1>The factory became more trustworthy before it became bigger.</h1>
-    <p class="lede">A measured update on what changed in PortMind this week: stronger review, safer evaluation, better provenance, and a live path for independent human evidence.</p>
+    <p class="kicker">Investor Update &middot; July 7-14, 2026</p>
+    <h1>PortMind built the review system around the data.</h1>
+    <p class="lede">This week we focused on making the data more useful and more trustworthy before spending more money on models or scaling collection.</p>
   </section>
 
   <section class="slide" aria-label="Slide 2: The numbers">
     <p class="kicker">The Numbers</p>
-    <h2>Seven days of turning experiments into evidence.</h2>
+    <h2>Visible progress, without pretending the model is finished.</h2>
     <div class="metrics" aria-label="PortMind weekly metrics">
       <div class="metric"><strong>28</strong><span>PortMind commits during the week</span></div>
       <div class="metric"><strong>12</strong><span>GitHub issues completed and closed</span></div>
-      <div class="metric"><strong>2</strong><span>general-purpose model labelers on the reliability bench</span></div>
+      <div class="metric"><strong>2</strong><span>general-purpose models being compared as labelers</span></div>
       <div class="metric"><strong>24</strong><span>blind tasks in the external reviewer packet</span></div>
       <div class="metric"><strong>8 / 24</strong><span>review tasks completed at the latest status check</span></div>
       <div class="metric"><strong>33%</strong><span>of the external packet completed so far</span></div>
     </div>
-    <p class="footnote">The reviewer packet remains active. Completion is measured by saved labels, not by onboarding completion.</p>
+    <p class="footnote">These are delivery and process numbers, not model accuracy results. The reviewer packet remains active.</p>
   </section>
 
   <section class="slide" aria-label="Slide 3: What shipped">
     <p class="kicker">What Shipped</p>
-    <h2>The operating loop now has real infrastructure around it.</h2>
+    <h2>People can now help improve the dataset from anywhere.</h2>
     <ul class="points">
-      <li><strong>External review is live.</strong> The Cloudflare reviewer portal supports private invitations, blind tasks, onboarding, resumable sessions, and controlled export.</li>
-      <li><strong>Reviewer guidance is real.</strong> A versioned onboarding video explains the evidence-first labeling rules before a reviewer touches the packet.</li>
-      <li><strong>Grok 4.5 is in the comparison set.</strong> A second model labeler can now be measured against the same human reference rows.</li>
-      <li><strong>Detector evidence is available.</strong> Crops and detector pointers help find difficult objects without being promoted to semantic truth.</li>
+      <li><strong>A reviewer website is live.</strong> An invited reviewer can open a private link, learn the rules, label images, and come back later.</li>
+      <li><strong>The work is organized.</strong> Every review is tied to a specific task, image, decision, and reviewer session.</li>
+      <li><strong>We added a second model to compare.</strong> This helps us see whether a labeling problem belongs to one model or to the task itself.</li>
+      <li><strong>Difficult images are easier to inspect.</strong> Zooms and detector suggestions help people find small or blurry trucks, but a person still makes the final call.</li>
     </ul>
   </section>
 
-  <section class="slide" aria-label="Slide 4: Evaluation safeguards">
-    <p class="kicker">Evaluation Safeguards</p>
-    <h2>More measurement discipline, fewer unearned claims.</h2>
-    <div class="diagram-wrap" aria-label="PortMind evidence loop">
+  <section class="slide" aria-label="Slide 4: Why this matters">
+    <p class="kicker">Why This Matters</p>
+    <h2>The value is in the record we build over time.</h2>
+    <div class="diagram-wrap" aria-label="PortMind data value loop">
       <pre class="mermaid">flowchart LR
-  A[Collect] --> B[Split by time]
-  B --> C[Lock held-out test]
-  C --> D[Human review]
-  D --> E[Compare models]
-  E --> F[Audit provenance]
-  F --> G[Promote or report only]
-  G --> D</pre>
+  A[Keep collecting] --> B[Organize the history]
+  B --> C[Ask people to check hard cases]
+  C --> D[Build a more useful dataset]
+  D --> E[Train better tools later]
+  E --> A</pre>
     </div>
-    <p class="footnote">The loop now fails closed when artifacts, seeds, split identity, or paired evidence are incomplete. Held-out mistakes cannot silently become training data.</p>
+    <p class="footnote">This week we improved the machinery for this loop. We did not produce a new model-accuracy result yet. The immediate value is a growing, reviewable record of how a port operates.</p>
   </section>
 
   <section class="slide" aria-label="Slide 5: Reviewer onboarding">
-    <p class="kicker">Human Evidence</p>
-    <h2>The human review path is now usable outside the local machine.</h2>
+    <p class="kicker">Human Review</p>
+    <h2>The first outside reviewer has started using the system.</h2>
     <div class="video-layout">
       <ul class="points">
-        <li><strong>Blind by design.</strong> Reviewers see the image evidence and task instructions, not prior labels, answer keys, or model scores.</li>
-        <li><strong>Resumable by design.</strong> A reviewer can stop and return to the same browser session while the invitation remains active.</li>
-        <li><strong>Still a qualification step.</strong> A completed packet must be imported, scored, and checked before it can support a gold-label decision.</li>
+        <li><strong>Simple for the reviewer.</strong> They open a private link, watch a short guide, and label the images.</li>
+        <li><strong>Useful for PortMind.</strong> The system saves the decision and the evidence needed to understand it later.</li>
+        <li><strong>Not a finished benchmark yet.</strong> The first packet still needs to be completed and checked before we use it to make a larger claim.</li>
       </ul>
       <figure class="video">
         <video controls preload="metadata" playsinline>
@@ -153,15 +151,15 @@
   </section>
 
   <section class="slide" aria-label="Slide 6: Next gate">
-    <p class="kicker">Next Gate</p>
-    <h2>Finish the independent evidence before scaling the models.</h2>
+    <p class="kicker">Next Step</p>
+    <h2>Finish the proof before we scale the operation.</h2>
     <ul class="points">
-      <li><strong>Complete the active reviewer packet.</strong> The latest readout is 8 of 24 saved labels.</li>
-      <li><strong>Qualify a second independent reviewer.</strong> Agreement must be measured blind on the difficult container-truck cases.</li>
-      <li><strong>Build benchmark v2.</strong> Use fresh operational examples and keep the held-out test set isolated.</li>
-      <li><strong>Then train again.</strong> The next model run should answer a clear question against a benchmark we trust.</li>
+      <li><strong>Finish the current review.</strong> The latest readout is 8 of 24 saved labels.</li>
+      <li><strong>Add another independent reviewer.</strong> We need more than one person to check the hardest images.</li>
+      <li><strong>Create a trusted test set.</strong> This will tell us where the models work and where they fail.</li>
+      <li><strong>Then scale model training.</strong> We will spend more on models after we know the data can support a fair test.</li>
     </ul>
-    <p class="footnote">PortMind is not trying to win by labeling everything blindly. It is building a repeatable way to know which labels deserve belief.</p>
+    <p class="footnote">The near-term goal is straightforward: turn a large stream of port data into a reliable asset that future software and models can use.</p>
   </section>
 </main>
 
