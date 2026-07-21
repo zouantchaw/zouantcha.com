@@ -10,8 +10,8 @@ const linkClass =
 
 const slides = [
   {
-    title: "PortMind: Past Seven Days",
-    description: "A metrics-led update on PortMind's latest data, review, and evaluation work.",
+    title: "PortMind Weekly Update · July 14–21, 2026",
+    description: "Roadmap, reviewer-app screenshots, and the next PortMind conversations.",
     href: "/slides/portmind-past-seven-days.html",
   },
   {
