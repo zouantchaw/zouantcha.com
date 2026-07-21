@@ -3,13 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PortMind - Past Seven Days</title>
+<title>PortMind - Weekly Update</title>
 <style>
   :root {
     --ink: #0a0a0a;
     --paper: #fafafa;
     --muted: #6e6e6e;
     --hairline: #e2e2e2;
+    --accent: #efd05c;
     --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
     --sans: "Helvetica Neue", Helvetica, "Segoe UI", sans-serif;
   }
@@ -34,38 +35,59 @@
   }
   .slide.active { display: flex; animation: fadeUp .55s cubic-bezier(.22,.61,.36,1); }
   @keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
-  .kicker { font-size: 12px; letter-spacing: .22em; text-transform: uppercase; color: var(--muted); margin-bottom: 2rem; }
+  .kicker { font-size: 12px; letter-spacing: .22em; text-transform: uppercase; color: var(--muted); margin-bottom: 1.8rem; }
   h1, h2 { font-family: var(--serif); font-weight: 400; letter-spacing: 0; }
   h1 { font-size: 4.6rem; line-height: 1.08; max-width: 18ch; }
-  h2 { font-size: 3rem; line-height: 1.12; margin-bottom: 2.2rem; max-width: 25ch; }
-  p.lede { font-size: 1.25rem; line-height: 1.6; color: var(--muted); max-width: 58ch; margin-top: 1.6rem; }
-  .footnote { margin-top: 2rem; font-size: .85rem; color: var(--muted); max-width: 64ch; }
+  h2 { font-size: 3rem; line-height: 1.12; margin-bottom: 1.8rem; max-width: 25ch; }
+  p.lede { font-size: 1.22rem; line-height: 1.6; color: var(--muted); max-width: 58ch; margin-top: 1.5rem; }
+  .footnote { margin-top: 1.4rem; font-size: .78rem; line-height: 1.45; color: var(--muted); max-width: 78ch; }
+  .footnote a { color: inherit; }
   ul.points { list-style: none; max-width: 70ch; }
-  ul.points li { padding: .85rem 0; border-top: 1px solid var(--hairline); font-size: 1.1rem; line-height: 1.55; }
+  ul.points li { padding: .72rem 0; border-top: 1px solid var(--hairline); font-size: 1.02rem; line-height: 1.5; }
   ul.points li:last-child { border-bottom: 1px solid var(--hairline); }
   ul.points strong { font-weight: 600; }
-  .metrics { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; max-width: 980px; background: var(--hairline); border: 1px solid var(--hairline); }
-  .metric { background: var(--paper); padding: 1.35rem; min-height: 9rem; display: flex; flex-direction: column; justify-content: space-between; }
-  .metric strong { font-family: var(--serif); font-weight: 400; font-size: 2.5rem; line-height: 1; }
-  .metric span { color: var(--muted); font-size: .85rem; line-height: 1.4; }
-  .flow-diagram { max-width: 1060px; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); align-items: stretch; gap: .6rem; margin-top: .8rem; }
-  .flow-node { border: 1px solid var(--ink); padding: 1rem; min-height: 8rem; display: flex; flex-direction: column; justify-content: space-between; background: #fff; }
-  .flow-node em { font-size: .72rem; color: var(--muted); font-style: normal; letter-spacing: .12em; text-transform: uppercase; }
-  .flow-node strong { font-family: var(--serif); font-size: 1.35rem; font-weight: 400; }
-  .flow-node small { color: var(--muted); line-height: 1.35; font-size: .8rem; }
-  .flow-arrow { display: flex; align-items: center; justify-content: center; color: var(--muted); font-size: 1.5rem; }
-  .comparison { max-width: 1060px; border-collapse: collapse; border-top: 1px solid var(--ink); border-bottom: 1px solid var(--ink); width: 100%; }
-  .comparison th, .comparison td { text-align: left; padding: .85rem .7rem; border-top: 1px solid var(--hairline); vertical-align: top; }
-  .comparison th { color: var(--muted); font-size: .74rem; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; border-top: 0; }
-  .comparison td { font-size: .95rem; line-height: 1.35; }
-  .comparison td strong { font-size: 1.15rem; font-weight: 600; }
-  .comparison .reference { background: #f0f0f0; }
-  .reviewer-link { display: inline-block; color: var(--ink); font-size: 1rem; margin-top: 1.4rem; padding-bottom: .25rem; border-bottom: 1px solid var(--ink); text-decoration: none; }
-  .reviewer-link:hover { color: var(--muted); border-color: var(--muted); }
-  .video-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(260px, .72fr); gap: 2rem; max-width: 1040px; align-items: start; }
-  figure.video { margin: 0; padding: .55rem; background: #111; border: 1px solid var(--hairline); }
-  figure.video video { display: block; width: 100%; aspect-ratio: 16 / 9; background: #111; }
-  figure.video figcaption { color: #cfcfcf; font-size: .76rem; line-height: 1.4; padding: .7rem .2rem .15rem; }
+  .snapshot-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; max-width: 1040px; background: var(--hairline); border: 1px solid var(--hairline); }
+  .snapshot-card { background: var(--paper); min-height: 12rem; padding: 1.4rem; display: flex; flex-direction: column; justify-content: space-between; }
+  .snapshot-card .index { font-size: .72rem; letter-spacing: .16em; color: var(--muted); }
+  .snapshot-card strong { font-family: var(--serif); font-size: 1.65rem; font-weight: 400; line-height: 1.08; max-width: 12ch; }
+  .snapshot-card span { color: var(--muted); font-size: .86rem; line-height: 1.42; max-width: 28ch; }
+  .roadmap-layout { display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(220px, .7fr); gap: 2.5rem; max-width: 1120px; align-items: start; }
+  .flow-diagram { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); align-items: stretch; gap: .55rem; margin-top: .3rem; }
+  .flow-node { border: 1px solid var(--ink); padding: .95rem; min-height: 10.5rem; display: flex; flex-direction: column; justify-content: space-between; background: #fff; }
+  .flow-node em { font-size: .68rem; color: var(--muted); font-style: normal; letter-spacing: .12em; text-transform: uppercase; }
+  .flow-node strong { font-family: var(--serif); font-size: 1.28rem; font-weight: 400; }
+  .flow-node small { color: var(--muted); line-height: 1.35; font-size: .78rem; }
+  .value-ladder { border-left: 2px solid var(--accent); padding-left: 1.15rem; }
+  .value-ladder h3 { font-size: .72rem; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); margin-bottom: .8rem; font-weight: 500; }
+  .value-ladder p { border-top: 1px solid var(--hairline); padding: .7rem 0; font-size: .92rem; line-height: 1.38; }
+  .value-ladder p:last-child { border-bottom: 1px solid var(--hairline); }
+  .value-ladder strong { display: block; font-weight: 600; }
+  .app-gallery { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; max-width: 1120px; }
+  figure.app-shot { margin: 0; }
+  figure.app-shot img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; object-position: center; border: 1px solid var(--ink); background: #111; }
+  figure.app-shot figcaption { padding-top: .65rem; font-size: .8rem; line-height: 1.35; color: var(--muted); }
+  figure.app-shot figcaption strong { display: block; color: var(--ink); font-weight: 600; margin-bottom: .14rem; }
+  .review-loop { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(240px, .75fr); gap: 2rem; max-width: 1080px; align-items: start; }
+  .loop-list { counter-reset: loop; list-style: none; border-top: 1px solid var(--ink); }
+  .loop-list li { counter-increment: loop; display: grid; grid-template-columns: 2.2rem 1fr; gap: .65rem; padding: .8rem 0; border-bottom: 1px solid var(--hairline); font-size: 1rem; line-height: 1.42; }
+  .loop-list li::before { content: counter(loop, decimal-leading-zero); color: var(--muted); font-size: .74rem; letter-spacing: .1em; padding-top: .14rem; }
+  .loop-list strong { display: block; font-weight: 600; }
+  .loop-callout { background: #fff; border: 1px solid var(--ink); padding: 1.25rem; }
+  .loop-callout p { font-family: var(--serif); font-size: 1.5rem; line-height: 1.18; }
+  .loop-callout small { display: block; color: var(--muted); font-size: .8rem; line-height: 1.4; margin-top: 1rem; }
+  .conversations { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(210px, .75fr); gap: 2rem; max-width: 940px; align-items: center; }
+  .conversation { border-top: 1px solid var(--ink); padding: 1rem 0 1.1rem; }
+  .conversation + .conversation { border-top-color: var(--hairline); }
+  .conversation .when { font-size: .72rem; text-transform: uppercase; letter-spacing: .15em; color: var(--muted); }
+  .conversation h3 { font-family: var(--serif); font-size: 1.75rem; font-weight: 400; margin: .4rem 0 .3rem; }
+  .conversation p { color: var(--muted); font-size: .96rem; line-height: 1.45; max-width: 44ch; }
+  .contact-card { display: grid; grid-template-columns: 112px 1fr; gap: 1rem; align-items: center; }
+  .contact-card img { display: block; width: 112px; height: 112px; object-fit: cover; filter: grayscale(1); border: 1px solid var(--ink); }
+  .contact-card strong { display: block; font-family: var(--serif); font-size: 1.45rem; font-weight: 400; }
+  .contact-card span { display: block; color: var(--muted); font-size: .78rem; line-height: 1.38; margin-top: .35rem; }
+  .closing { display: grid; grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr); gap: 3rem; max-width: 1020px; align-items: end; }
+  .closing-note { border-left: 2px solid var(--accent); padding-left: 1.25rem; }
+  .closing-note p { font-family: var(--serif); font-size: 1.65rem; line-height: 1.2; }
   nav.controls { position: fixed; bottom: 0; left: 0; right: 0; display: flex; align-items: center; justify-content: space-between; padding: 1.1rem 10vw 1.4rem; z-index: 10; }
   .nav-group { display: flex; align-items: center; gap: .6rem; }
   button { font-family: var(--sans); font-size: .85rem; background: none; border: 1px solid var(--ink); color: var(--ink); border-radius: 999px; padding: .5rem 1.1rem; cursor: pointer; transition: background .18s, color .18s; }
@@ -75,18 +97,23 @@
   #slide-counter { font-variant-numeric: tabular-nums; font-size: .85rem; color: var(--muted); min-width: 4.5ch; text-align: center; }
   #progress { position: fixed; top: 0; left: 0; height: 2px; background: var(--ink); width: 0; transition: width .35s ease; z-index: 11; }
   .wordmark { position: fixed; top: 1.4rem; left: 10vw; font-size: 12px; letter-spacing: .22em; text-transform: uppercase; color: var(--muted); z-index: 10; }
-  @media (max-width: 720px) {
+  @media (max-width: 900px) {
     .slide { padding: 5vh 7vw 16vh; }
-    h1 { font-size: 2.9rem; }
+    h1 { font-size: 3.4rem; }
+    h2 { font-size: 2.35rem; }
+    .roadmap-layout, .review-loop, .conversations, .closing { grid-template-columns: 1fr; gap: 1.25rem; }
+    .flow-diagram { grid-template-columns: repeat(5, minmax(100px, 1fr)); overflow-x: auto; padding-bottom: .25rem; }
+    .app-gallery { gap: .7rem; }
+  }
+  @media (max-width: 620px) {
+    h1 { font-size: 2.8rem; }
     h2 { font-size: 2rem; }
     p.lede { font-size: 1.05rem; }
-    ul.points li { font-size: 1rem; }
-    .metrics { grid-template-columns: 1fr 1fr; }
-    .video-layout { grid-template-columns: 1fr; gap: 1.25rem; }
-    .flow-diagram { grid-template-columns: 1fr; gap: .45rem; }
-    .flow-arrow { transform: rotate(90deg); min-height: 1.1rem; }
-    .comparison { font-size: .85rem; }
-    .comparison th, .comparison td { padding: .65rem .4rem; }
+    .snapshot-grid, .app-gallery { grid-template-columns: 1fr; }
+    .snapshot-card { min-height: 8rem; }
+    .flow-diagram { grid-template-columns: 1fr; overflow: visible; }
+    .flow-node { min-height: 7rem; }
+    .app-gallery { max-height: 52vh; overflow-y: auto; }
   }
   @media print {
     @page { size: letter landscape; margin: 0; }
@@ -98,100 +125,103 @@
 </style>
 </head>
 <body>
-<div id="progress" role="progressbar" aria-label="Deck progress" aria-valuemin="1" aria-valuemax="6" aria-valuenow="1"></div>
+<div id="progress" role="progressbar" aria-label="Deck progress" aria-valuemin="1" aria-valuemax="7" aria-valuenow="1"></div>
 <span class="wordmark" aria-hidden="true">PortMind</span>
 
 <main aria-live="polite">
   <section class="slide active" aria-label="Slide 1: Past seven days">
-    <p class="kicker">Investor Update &middot; July 7-14, 2026</p>
-    <h1>PortMind built the review system around the data.</h1>
-    <p class="lede">This week we focused on making the data more useful and more trustworthy before spending more money on models or scaling collection.</p>
+    <p class="kicker">Weekly Update &middot; July 14-21, 2026</p>
+    <h1>PortMind is moving from collection to proof.</h1>
+    <p class="lede">A quiet week by design: the human review loop became a product surface, and the roadmap is now clear enough to guide the next conversations.</p>
   </section>
 
-  <section class="slide" aria-label="Slide 2: The numbers">
-    <p class="kicker">The Numbers</p>
-    <h2>Visible progress, without pretending the model is finished.</h2>
-    <div class="metrics" aria-label="PortMind weekly metrics">
-      <div class="metric"><strong>28</strong><span>PortMind commits during the week</span></div>
-      <div class="metric"><strong>12</strong><span>GitHub issues completed and closed</span></div>
-      <div class="metric"><strong>2</strong><span>general-purpose models being compared as labelers</span></div>
-      <div class="metric"><strong>24</strong><span>blind tasks in the external reviewer packet</span></div>
-      <div class="metric"><strong>8 / 24</strong><span>review tasks completed at the latest status check</span></div>
-      <div class="metric"><strong>33%</strong><span>of the external packet completed so far</span></div>
+  <section class="slide" aria-label="Slide 2: What moved this week">
+    <p class="kicker">What Moved</p>
+    <h2>Three pieces are becoming one operating rhythm.</h2>
+    <div class="snapshot-grid" aria-label="Weekly PortMind progress">
+      <div class="snapshot-card"><span class="index">01 &middot; PRODUCT</span><strong>Reviewer workspace</strong><span>The profile, rules, evidence view, decision controls, and save loop are now visible as a usable product.</span></div>
+      <div class="snapshot-card"><span class="index">02 &middot; PROOF</span><strong>Benchmark path</strong><span>Human review is the bridge from raw port imagery to a trusted, repeatable evaluation set.</span></div>
+      <div class="snapshot-card"><span class="index">03 &middot; NEXT</span><strong>Two conversations</strong><span>Counsel today; Simon Savard at the Port of Montreal tomorrow.</span></div>
     </div>
-    <p class="footnote">These are delivery and process numbers, not model accuracy results. The reviewer packet remains active.</p>
+    <p class="footnote">The focus this week is sequencing: make the review loop credible, then use it to earn the right to scale research and applications.</p>
   </section>
 
-  <section class="slide" aria-label="Slide 3: What shipped">
-    <p class="kicker">What Shipped</p>
-    <h2>People can now help improve the dataset from anywhere.</h2>
-    <ul class="points">
-      <li><strong>A reviewer website is live.</strong> An invited reviewer can open a private link, learn the rules, label images, and come back later.</li>
-      <li><strong>The work is organized.</strong> Every review is tied to a specific task, image, decision, and reviewer session.</li>
-      <li><strong>We added a second model to compare.</strong> This helps us see whether a labeling problem belongs to one model or to the task itself.</li>
-      <li><strong>Difficult images are easier to inspect.</strong> Zooms and detector suggestions help people find small or blurry trucks, but a person still makes the final call.</li>
-    </ul>
-    <div class="flow-diagram" aria-label="PortMind review flow">
-      <div class="flow-node"><em>01</em><strong>Collect</strong><small>Keep the port history.</small></div>
-      <div class="flow-arrow" aria-hidden="true">&rarr;</div>
-      <div class="flow-node"><em>02</em><strong>Compare</strong><small>Put models beside people.</small></div>
-      <div class="flow-arrow" aria-hidden="true">&rarr;</div>
-      <div class="flow-node"><em>03</em><strong>Improve</strong><small>Promote only checked labels.</small></div>
+  <section class="slide" aria-label="Slide 3: PortMind roadmap">
+    <p class="kicker">Roadmap</p>
+    <h2>Build the trust layer first; let applications compound on top.</h2>
+    <div class="roadmap-layout">
+      <div class="flow-diagram" aria-label="Five-stage PortMind roadmap">
+        <div class="flow-node"><em>01 &middot; Capture</em><strong>Port signals</strong><small>Multi-port, time-stamped imagery and events.</small></div>
+        <div class="flow-node"><em>02 &middot; Review</em><strong>Human QA</strong><small>Reviewer workspace, taxonomy, and label quality.</small></div>
+        <div class="flow-node"><em>03 &middot; Benchmark</em><strong>Model proof</strong><small>Repeatable port-specific evaluations, public and private.</small></div>
+        <div class="flow-node"><em>04 &middot; Research</em><strong>Deep research</strong><small>Failure analysis, iteration, and institutional credibility.</small></div>
+        <div class="flow-node"><em>05 &middot; Apply</em><strong>Port tools</strong><small>Monitoring, anomaly detection, and forecasts.</small></div>
+      </div>
+      <aside class="value-ladder" aria-label="Value creation">
+        <h3>Value created along the way</h3>
+        <p><strong>Open benchmarks</strong>Trust, visibility, and research distribution.</p>
+        <p><strong>Private evaluations</strong>Near-term value for model and port teams.</p>
+        <p><strong>Annotation workflow</strong>A repeatable data-factory capability.</p>
+        <p><strong>Application layer</strong>Higher-value products once the evidence is strong.</p>
+      </aside>
     </div>
   </section>
 
-  <section class="slide" aria-label="Slide 4: Early evaluation results">
-    <p class="kicker">Early Evaluation</p>
-    <h2>The first comparison shows where automation still needs people.</h2>
-    <p class="lede">Both model labelers were checked against the same 72-row human-reviewed reference set.</p>
-    <table class="comparison" aria-label="Labeler comparison against human reference">
-      <thead><tr><th>Labeler</th><th>Truck agreement</th><th>Container-truck agreement</th><th>What this means</th></tr></thead>
-      <tbody>
-        <tr class="reference"><td><strong>Human reference</strong><br><span>72 rows</span></td><td>Reference</td><td>Reference</td><td>People created the labels used for comparison.</td></tr>
-        <tr><td><strong>Codex</strong><br><span>72 rows</span></td><td><strong>59.7%</strong></td><td><strong>50.7%</strong></td><td>Useful for first-pass suggestions, but misses hard cases.</td></tr>
-        <tr><td><strong>Grok 4.5</strong><br><span>72 rows</span></td><td><strong>77.6%</strong></td><td><strong>67.2%</strong></td><td>Stronger second signal, but still not safe to use without review.</td></tr>
-      </tbody>
-    </table>
-    <p class="footnote">Agreement is measured against the human reference, not against model consensus. These are early reliability results, not a production accuracy claim. Source: PortMind labeler reliability reports for issues 129 and 138. The external reviewer packet is separate and remains in progress.</p>
-  </section>
-
-  <section class="slide" aria-label="Slide 5: Reviewer onboarding">
+  <section class="slide" aria-label="Slide 4: Human review product">
     <p class="kicker">Human Review</p>
-    <h2>The review system is ready for the next set of people.</h2>
-    <div class="video-layout">
-      <ul class="points">
-        <li><strong>Simple for the reviewer.</strong> They open a private link, watch a short guide, and label the images.</li>
-        <li><strong>Useful for PortMind.</strong> The system saves the decision and the evidence needed to understand it later.</li>
-        <li><strong>Not a finished benchmark yet.</strong> The first packet still needs to be completed and checked before we use it to make a larger claim.</li>
-      </ul>
-      <figure class="video">
-        <video controls preload="metadata" playsinline>
-          <source src="/media/portmind-reviewer-onboarding-v2.mp4" type="video/mp4">
-          Your browser does not support the video element.
-        </video>
-        <figcaption>Reviewer onboarding v2: the evidence-first labeling guide.</figcaption>
-      </figure>
+    <h2>The reviewer app is the product surface for trustworthy labels.</h2>
+    <div class="app-gallery" aria-label="PortMind reviewer application screenshots">
+      <figure class="app-shot"><img src="/media/portmind-reviewer-profile.png" alt="PortMind Reviewer profile setup screen"><figcaption><strong>Profile</strong>Invite a reviewer and establish the independent review context.</figcaption></figure>
+      <figure class="app-shot"><img src="/media/portmind-reviewer-task.png" alt="PortMind Reviewer scene decision screen"><figcaption><strong>Scene decision</strong>Evidence, task rules, confidence, and an auditable decision in one view.</figcaption></figure>
+      <figure class="app-shot"><img src="/media/portmind-reviewer-grid.png" alt="PortMind Reviewer inspection grid view"><figcaption><strong>Inspection grid</strong>Give the reviewer a better way to inspect difficult port imagery.</figcaption></figure>
     </div>
-    <a class="reviewer-link" href="https://portmind-reviewer.wiel.workers.dev/" target="_blank" rel="noopener noreferrer">Open the PortMind reviewer portal &rarr;</a>
+    <p class="footnote">Screenshots from the PortMind reviewer workspace. This is the app itself, not the onboarding video shown in the previous update.</p>
   </section>
 
-  <section class="slide" aria-label="Slide 6: Next gate">
-    <p class="kicker">Next Step</p>
-    <h2>Finish the proof before we scale the operation.</h2>
-    <ul class="points">
-      <li><strong>Finish the current review.</strong> The latest readout is 8 of 24 saved labels.</li>
-      <li><strong>Add another independent reviewer.</strong> We need more than one person to check the hardest images.</li>
-      <li><strong>Create a trusted test set.</strong> This will tell us where the models work and where they fail.</li>
-      <li><strong>Then scale model training.</strong> We will spend more on models after we know the data can support a fair test.</li>
-    </ul>
-    <p class="footnote">The near-term goal is straightforward: turn a large stream of port data into a reliable asset that future software and models can use.</p>
+  <section class="slide" aria-label="Slide 5: Review loop">
+    <p class="kicker">The Review Loop</p>
+    <h2>Every label should become evidence we can reuse.</h2>
+    <div class="review-loop">
+      <ol class="loop-list">
+        <li><div><strong>Invite</strong>Give a reviewer a scoped, private entry point.</div></li>
+        <li><div><strong>Orient</strong>Teach the scene decisions and the evidence standard.</div></li>
+        <li><div><strong>Inspect</strong>Let the reviewer switch between the original and inspection grid.</div></li>
+        <li><div><strong>Decide</strong>Capture the label, confidence, image quality, and a short note.</div></li>
+        <li><div><strong>Promote</strong>Use checked decisions to build the benchmark and find failure modes.</div></li>
+      </ol>
+      <aside class="loop-callout"><p>“The repeatable data factory is the first product.”</p><small>Applications become more valuable as the review and benchmark loop gets stronger.</small></aside>
+    </div>
+  </section>
+
+  <section class="slide" aria-label="Slide 6: Next conversations">
+    <p class="kicker">Next Conversations</p>
+    <h2>Use the next two calls to sharpen the path.</h2>
+    <div class="conversations">
+      <div>
+        <div class="conversation"><span class="when">Today &middot; Counsel</span><h3>Operating structure</h3><p>Align on the project structure and the next workstream so PortMind can move deliberately.</p></div>
+        <div class="conversation"><span class="when">Tomorrow &middot; Port of Montreal</span><h3>Simon Savard</h3><p>Explore where PortMind's review and benchmark workflow could create value for port teams.</p></div>
+      </div>
+      <aside class="contact-card">
+        <img src="/media/simon-savard.jpg" alt="Simon Savard">
+        <div><strong>Simon Savard</strong><span>Analyst, Business Intelligence and Innovation<br>Port of Montreal</span></div>
+      </aside>
+    </div>
+    <p class="footnote">Role reference: <a href="https://www.port-montreal.com/en/the-port-of-montreal/innovation-hub" target="_blank" rel="noopener noreferrer">Port of Montreal Innovation Hub</a>. Portrait: <a href="https://www.startupfest.com/speaker/2262/simon-savard" target="_blank" rel="noopener noreferrer">Startupfest public speaker profile</a>.</p>
+  </section>
+
+  <section class="slide" aria-label="Slide 7: Next seven days">
+    <p class="kicker">Next Seven Days</p>
+    <div class="closing">
+      <div><h2>Turn the roadmap into a measurable sequence.</h2><ul class="points"><li><strong>Finish the reviewer onboarding flow.</strong> Make the first human-review packet easy to complete and check.</li><li><strong>Package the first trusted benchmark.</strong> Keep the claim narrow, useful, and repeatable.</li><li><strong>Hold both conversations.</strong> Leave with clear next actions, not vague interest.</li><li><strong>Set the research loop.</strong> Use failures to decide what to collect, review, and test next.</li></ul></div>
+      <aside class="closing-note"><p>PortMind's near-term job is simple: make port data trustworthy enough that other products can rely on it.</p></aside>
+    </div>
   </section>
 </main>
 
 <nav class="controls" aria-label="Slide navigation">
   <div class="nav-group">
     <button id="prev" aria-label="Previous slide">&larr; Prev</button>
-    <span id="slide-counter" aria-hidden="true">1 / 6</span>
+    <span id="slide-counter" aria-hidden="true">1 / 7</span>
     <button id="next" aria-label="Next slide">Next &rarr;</button>
   </div>
   <button id="print" aria-label="Generate PDF via browser print">Generate PDF</button>
