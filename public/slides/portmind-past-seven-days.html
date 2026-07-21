@@ -79,6 +79,12 @@
   .human-gate span { display: block; color: var(--muted); font-size: .68rem; letter-spacing: .12em; text-transform: uppercase; }
   .human-gate strong { display: block; font-family: var(--serif); font-size: 1.35rem; font-weight: 400; margin: .18rem 0 .25rem; }
   .human-gate p { color: var(--muted); font-size: .78rem; line-height: 1.35; max-width: 42ch; }
+  .eval-slide .comparison th, .eval-slide .comparison td { padding-top: .48rem; padding-bottom: .48rem; }
+  .eval-slide .eval-meta { margin-top: .5rem; }
+  .eval-slide .human-gate { margin-top: .55rem; padding-top: .5rem; padding-bottom: .5rem; }
+  .eval-slide .human-gate strong { font-size: 1.2rem; }
+  .eval-slide .human-gate p { font-size: .74rem; line-height: 1.25; }
+  .eval-slide > .footnote { margin-top: .7rem; max-width: 110ch; font-size: .72rem; line-height: 1.3; }
   .app-gallery { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; max-width: 1120px; }
   figure.app-shot { margin: 0; }
   figure.app-shot img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; object-position: center; border: 1px solid var(--ink); background: #111; }
@@ -202,19 +208,21 @@
         <p class="eval-meta">Agreement against the human reference. Useful as a first-pass signal; human review remains required.</p>
       </div>
       <div class="eval-panel">
-        <div class="eval-panel-header"><strong>This week&rsquo;s open-model pass</strong><span>24 calibration rows<br>via Cloudflare Workers AI</span></div>
-        <table class="comparison" aria-label="Cloudflare model comparison on PortMind calibration packet">
+        <div class="eval-panel-header"><strong>This week&rsquo;s open-model pass</strong><span>24 calibration rows<br>agreement vs Human 1</span></div>
+        <table class="comparison" aria-label="Open-model comparison on PortMind calibration packet">
           <thead><tr><th>Model</th><th>Truck</th><th>Container truck</th></tr></thead>
           <tbody>
-            <tr><td><strong>Llama 3.2 Vision</strong><br><small>Cloudflare Workers AI</small></td><td><strong>95.7%</strong><br><small>22 / 23</small></td><td><strong>82.6%</strong><br><small>19 / 23</small></td></tr>
-            <tr><td><strong>LLaVA 1.5</strong><br><small>Cloudflare Workers AI</small></td><td><strong>100%</strong><br><small>23 / 23</small></td><td><strong>82.6%</strong><br><small>19 / 23</small></td></tr>
-            <tr><td><strong>Moondream 3.1</strong><br><small>Cloudflare Workers AI</small></td><td><strong>100%</strong><br><small>23 / 23</small></td><td><strong>78.3%</strong><br><small>18 / 23</small></td></tr>
+            <tr><td><strong>Llama 3.2 Vision</strong></td><td><strong>95.7%</strong></td><td><strong>82.6%</strong></td></tr>
+            <tr><td><strong>LLaVA 1.5</strong></td><td><strong>100%</strong></td><td><strong>82.6%</strong></td></tr>
+            <tr><td><strong>Moondream 3.1</strong></td><td><strong>100%</strong></td><td><strong>78.3%</strong></td></tr>
+            <tr><td><strong>Llama 4 Scout</strong></td><td><strong>26.1%</strong></td><td><strong>91.3%</strong></td></tr>
+            <tr><td><strong>Mistral Small 3.1</strong></td><td><strong>100%</strong></td><td><strong>87.0%</strong></td></tr>
           </tbody>
         </table>
-        <div class="human-gate"><span>Second human labeler</span><strong>9 / 16 known-answer controls</strong><p>56.3% scene agreement on the 24-row calibration packet. Internally consistent, but failed qualification; retrain before promotion.</p></div>
+        <div class="human-gate"><span>Second human labeler</span><strong>9 / 16 known-answer controls</strong><p>56.3% scene agreement; consistent, but failed qualification. Retrain before promotion.</p></div>
       </div>
     </div>
-    <p class="footnote">Cloudflare scores use the same 24-row packet as Human 2; binary scores use 23 completed reference rows. Report-only calibration results, not production accuracy or benchmark truth.</p>
+    <p class="footnote">Open-model scores use the same 24-row packet as Human 2; binary scores use 23 completed reference rows. Report-only calibration results, not production accuracy or benchmark truth.</p>
   </section>
 
   <section class="slide" aria-label="Slide 5: Human review product">
