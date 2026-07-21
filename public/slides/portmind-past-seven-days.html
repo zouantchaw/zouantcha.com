@@ -62,6 +62,23 @@
   .value-ladder p { border-top: 1px solid var(--hairline); padding: .7rem 0; font-size: .92rem; line-height: 1.38; }
   .value-ladder p:last-child { border-bottom: 1px solid var(--hairline); }
   .value-ladder strong { display: block; font-weight: 600; }
+  .eval-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 1.8rem; max-width: 1120px; align-items: start; }
+  .eval-panel { min-width: 0; }
+  .eval-panel-header { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; border-top: 1px solid var(--ink); padding: .8rem 0 .55rem; }
+  .eval-panel-header strong { font-family: var(--serif); font-size: 1.35rem; font-weight: 400; }
+  .eval-panel-header span { color: var(--muted); font-size: .76rem; line-height: 1.35; text-align: right; }
+  .comparison { border-collapse: collapse; border-bottom: 1px solid var(--ink); width: 100%; }
+  .comparison th, .comparison td { text-align: left; padding: .62rem .5rem; border-top: 1px solid var(--hairline); vertical-align: top; }
+  .comparison th { color: var(--muted); font-size: .67rem; font-weight: 500; letter-spacing: .1em; line-height: 1.25; text-transform: uppercase; border-top: 0; }
+  .comparison td { font-size: .82rem; line-height: 1.3; }
+  .comparison td strong { font-size: 1.05rem; font-weight: 600; }
+  .comparison td small { color: var(--muted); font-size: .72rem; }
+  .comparison .reference { background: #f0f0f0; }
+  .eval-meta { color: var(--muted); font-size: .75rem; line-height: 1.4; margin-top: .7rem; }
+  .human-gate { margin-top: .9rem; border-left: 2px solid var(--accent); padding: .75rem 0 .75rem 1rem; }
+  .human-gate span { display: block; color: var(--muted); font-size: .68rem; letter-spacing: .12em; text-transform: uppercase; }
+  .human-gate strong { display: block; font-family: var(--serif); font-size: 1.35rem; font-weight: 400; margin: .18rem 0 .25rem; }
+  .human-gate p { color: var(--muted); font-size: .78rem; line-height: 1.35; max-width: 42ch; }
   .app-gallery { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; max-width: 1120px; }
   figure.app-shot { margin: 0; }
   figure.app-shot img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; object-position: center; border: 1px solid var(--ink); background: #111; }
@@ -101,7 +118,7 @@
     .slide { padding: 5vh 7vw 16vh; }
     h1 { font-size: 3.4rem; }
     h2 { font-size: 2.35rem; }
-    .roadmap-layout, .review-loop, .conversations, .closing { grid-template-columns: 1fr; gap: 1.25rem; }
+    .roadmap-layout, .eval-layout, .review-loop, .conversations, .closing { grid-template-columns: 1fr; gap: 1.25rem; }
     .flow-diagram { grid-template-columns: repeat(5, minmax(100px, 1fr)); overflow-x: auto; padding-bottom: .25rem; }
     .app-gallery { gap: .7rem; }
   }
@@ -125,7 +142,7 @@
 </style>
 </head>
 <body>
-<div id="progress" role="progressbar" aria-label="Deck progress" aria-valuemin="1" aria-valuemax="7" aria-valuenow="1"></div>
+<div id="progress" role="progressbar" aria-label="Deck progress" aria-valuemin="1" aria-valuemax="8" aria-valuenow="1"></div>
 <span class="wordmark" aria-hidden="true">PortMind</span>
 
 <main aria-live="polite">
@@ -168,7 +185,39 @@
     <p class="footnote">The open release is a defined benchmark and supporting tooling; private customer work stays private. The first benchmark starts with five systems and expands as review capacity grows.</p>
   </section>
 
-  <section class="slide" aria-label="Slide 4: Human review product">
+  <section class="slide eval-slide" aria-label="Slide 4: PortMind evaluation">
+    <p class="kicker">Evaluation</p>
+    <h2>Measure every signal, with a human in the loop.</h2>
+    <div class="eval-layout">
+      <div class="eval-panel">
+        <div class="eval-panel-header"><strong>Established benchmark</strong><span>72 hard-case rows<br>historical comparison</span></div>
+        <table class="comparison" aria-label="Historical PortMind labeler comparison">
+          <thead><tr><th>Labeler</th><th>Truck</th><th>Container truck</th></tr></thead>
+          <tbody>
+            <tr class="reference"><td><strong>Human reference</strong><br><small>72 rows</small></td><td>Reference</td><td>Reference</td></tr>
+            <tr><td><strong>Codex</strong><br><small>72 rows</small></td><td><strong>59.7%</strong></td><td><strong>50.7%</strong></td></tr>
+            <tr><td><strong>Grok 4.5</strong><br><small>72 rows</small></td><td><strong>77.6%</strong></td><td><strong>67.2%</strong></td></tr>
+          </tbody>
+        </table>
+        <p class="eval-meta">Agreement against the human reference. Useful as a first-pass signal; human review remains required.</p>
+      </div>
+      <div class="eval-panel">
+        <div class="eval-panel-header"><strong>This week&rsquo;s open-model pass</strong><span>24 calibration rows<br>via Cloudflare Workers AI</span></div>
+        <table class="comparison" aria-label="Cloudflare model comparison on PortMind calibration packet">
+          <thead><tr><th>Model</th><th>Truck</th><th>Container truck</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Llama 3.2 Vision</strong><br><small>Cloudflare Workers AI</small></td><td><strong>95.7%</strong><br><small>22 / 23</small></td><td><strong>82.6%</strong><br><small>19 / 23</small></td></tr>
+            <tr><td><strong>LLaVA 1.5</strong><br><small>Cloudflare Workers AI</small></td><td><strong>100%</strong><br><small>23 / 23</small></td><td><strong>82.6%</strong><br><small>19 / 23</small></td></tr>
+            <tr><td><strong>Moondream 3.1</strong><br><small>Cloudflare Workers AI</small></td><td><strong>100%</strong><br><small>23 / 23</small></td><td><strong>78.3%</strong><br><small>18 / 23</small></td></tr>
+          </tbody>
+        </table>
+        <div class="human-gate"><span>Second human labeler</span><strong>9 / 16 known-answer controls</strong><p>56.3% scene agreement on the 24-row calibration packet. Internally consistent, but failed qualification; retrain before promotion.</p></div>
+      </div>
+    </div>
+    <p class="footnote">Cloudflare scores use the same 24-row packet as Human 2; binary scores use 23 completed reference rows. Report-only calibration results, not production accuracy or benchmark truth.</p>
+  </section>
+
+  <section class="slide" aria-label="Slide 5: Human review product">
     <p class="kicker">Human Review</p>
     <h2>The reviewer app now turns an image into a saved, checkable decision.</h2>
     <div class="app-gallery" aria-label="PortMind reviewer application screenshots">
@@ -179,7 +228,7 @@
     <p class="footnote">Screenshots from the PortMind reviewer workspace. This is the app itself, not the onboarding video shown in the previous update. Next: complete the first checked set.</p>
   </section>
 
-  <section class="slide" aria-label="Slide 5: Review loop">
+  <section class="slide" aria-label="Slide 6: Review loop">
     <p class="kicker">The Review Loop</p>
     <h2>Each image follows the same path from invite to usable record.</h2>
     <div class="review-loop">
@@ -194,7 +243,7 @@
     </div>
   </section>
 
-  <section class="slide" aria-label="Slide 6: Next conversations">
+  <section class="slide" aria-label="Slide 7: Next conversations">
     <p class="kicker">Next Conversations</p>
     <h2>Use the next two calls to remove the next blockers.</h2>
     <div class="conversations">
@@ -210,7 +259,7 @@
     <p class="footnote">Role reference: <a href="https://www.port-montreal.com/en/the-port-of-montreal/innovation-hub" target="_blank" rel="noopener noreferrer">Port of Montreal Innovation Hub</a>. Portrait: <a href="https://www.startupfest.com/speaker/2262/simon-savard" target="_blank" rel="noopener noreferrer">Startupfest public speaker profile</a>.</p>
   </section>
 
-  <section class="slide" aria-label="Slide 7: Next seven days">
+  <section class="slide" aria-label="Slide 8: Next seven days">
     <p class="kicker">Next Seven Days</p>
     <div class="closing">
       <div><h2>Finish the first set, then use it to make the next sale.</h2><ul class="points"><li><strong>Complete the reviewer flow.</strong> Open the first set and get every assigned image reviewed.</li><li><strong>Summarize the results.</strong> Record where reviewers agree, disagree, or need clearer rules.</li><li><strong>Prepare the customer demo.</strong> Show the checked set and one practical port use case.</li><li><strong>Close the loop on both calls.</strong> Leave with owners, dates, and one next test.</li></ul></div>
@@ -222,7 +271,7 @@
 <nav class="controls" aria-label="Slide navigation">
   <div class="nav-group">
     <button id="prev" aria-label="Previous slide">&larr; Prev</button>
-    <span id="slide-counter" aria-hidden="true">1 / 7</span>
+    <span id="slide-counter" aria-hidden="true">1 / 8</span>
     <button id="next" aria-label="Next slide">Next &rarr;</button>
   </div>
   <button id="print" aria-label="Generate PDF via browser print">Generate PDF</button>
