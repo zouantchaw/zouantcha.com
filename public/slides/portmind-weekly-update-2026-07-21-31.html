@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PortMind - Weekly Update July 21-31</title>
+<style>
+  :root {
+    --ink: #0a0a0a;
+    --paper: #fafafa;
+    --muted: #6e6e6e;
+    --hairline: #e2e2e2;
+    --accent: #efd05c;
+    --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    --sans: "Helvetica Neue", Helvetica, "Segoe UI", sans-serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { height: 100%; }
+  body {
+    font-family: var(--sans);
+    background: var(--paper);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    overflow: hidden;
+  }
+  main { height: 100%; }
+  .slide {
+    position: absolute;
+    inset: 0;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    padding: 6vh 10vw 12vh;
+    background: var(--paper);
+  }
+  .slide.active { display: flex; animation: fadeUp .55s cubic-bezier(.22,.61,.36,1); }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+  .kicker { font-size: 12px; letter-spacing: .22em; text-transform: uppercase; color: var(--muted); margin-bottom: 1.8rem; }
+  h1, h2 { font-family: var(--serif); font-weight: 400; letter-spacing: 0; }
+  h1 { font-size: 4.6rem; line-height: 1.08; max-width: 18ch; }
+  h2 { font-size: 3rem; line-height: 1.12; margin-bottom: 1.8rem; max-width: 25ch; }
+  p.lede { font-size: 1.22rem; line-height: 1.6; color: var(--muted); max-width: 58ch; margin-top: 1.5rem; }
+  .footnote { margin-top: 1.4rem; font-size: .78rem; line-height: 1.45; color: var(--muted); max-width: 78ch; }
+  .footnote a { color: inherit; }
+  ul.points { list-style: none; max-width: 70ch; }
+  ul.points li { padding: .72rem 0; border-top: 1px solid var(--hairline); font-size: 1.02rem; line-height: 1.5; }
+  ul.points li:last-child { border-bottom: 1px solid var(--hairline); }
+  ul.points strong { font-weight: 600; }
+  .snapshot-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; max-width: 1040px; background: var(--hairline); border: 1px solid var(--hairline); }
+  .snapshot-grid-four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .snapshot-card { background: var(--paper); min-height: 12rem; padding: 1.4rem; display: flex; flex-direction: column; justify-content: space-between; }
+  .snapshot-card .index { font-size: .72rem; letter-spacing: .16em; color: var(--muted); }
+  .snapshot-card strong { font-family: var(--serif); font-size: 1.65rem; font-weight: 400; line-height: 1.08; max-width: 12ch; }
+  .snapshot-card span { color: var(--muted); font-size: .86rem; line-height: 1.42; max-width: 28ch; }
+  .roadmap-layout { display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(220px, .7fr); gap: 2.5rem; max-width: 1120px; align-items: start; }
+  .flow-diagram { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); align-items: stretch; gap: .55rem; margin-top: .3rem; }
+  .flow-node { border: 1px solid var(--ink); padding: .95rem; min-height: 10.5rem; display: flex; flex-direction: column; justify-content: space-between; background: #fff; }
+  .flow-node em { font-size: .68rem; color: var(--muted); font-style: normal; letter-spacing: .12em; text-transform: uppercase; }
+  .flow-node strong { font-family: var(--serif); font-size: 1.28rem; font-weight: 400; }
+  .flow-node small { color: var(--muted); line-height: 1.35; font-size: .78rem; }
+  .value-ladder { border-left: 2px solid var(--accent); padding-left: 1.15rem; }
+  .value-ladder h3 { font-size: .72rem; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); margin-bottom: .8rem; font-weight: 500; }
+  .value-ladder p { border-top: 1px solid var(--hairline); padding: .7rem 0; font-size: .92rem; line-height: 1.38; }
+  .value-ladder p:last-child { border-bottom: 1px solid var(--hairline); }
+  .value-ladder strong { display: block; font-weight: 600; }
+  .eval-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 1.8rem; max-width: 1120px; align-items: start; }
+  .eval-panel { min-width: 0; }
+  .eval-panel-header { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; border-top: 1px solid var(--ink); padding: .8rem 0 .55rem; }
+  .eval-panel-header strong { font-family: var(--serif); font-size: 1.35rem; font-weight: 400; }
+  .eval-panel-header span { color: var(--muted); font-size: .76rem; line-height: 1.35; text-align: right; }
+  .comparison { border-collapse: collapse; border-bottom: 1px solid var(--ink); width: 100%; }
+  .comparison th, .comparison td { text-align: left; padding: .62rem .5rem; border-top: 1px solid var(--hairline); vertical-align: top; }
+  .comparison th { color: var(--muted); font-size: .67rem; font-weight: 500; letter-spacing: .1em; line-height: 1.25; text-transform: uppercase; border-top: 0; }
+  .comparison td { font-size: .82rem; line-height: 1.3; }
+  .comparison td strong { font-size: 1.05rem; font-weight: 600; }
+  .comparison td small { color: var(--muted); font-size: .72rem; }
+  .comparison .reference { background: #f0f0f0; }
+  .eval-meta { color: var(--muted); font-size: .75rem; line-height: 1.4; margin-top: .7rem; }
+  .human-gate { margin-top: .9rem; border-left: 2px solid var(--accent); padding: .75rem 0 .75rem 1rem; }
+  .human-gate span { display: block; color: var(--muted); font-size: .68rem; letter-spacing: .12em; text-transform: uppercase; }
+  .human-gate strong { display: block; font-family: var(--serif); font-size: 1.35rem; font-weight: 400; margin: .18rem 0 .25rem; }
+  .human-gate p { color: var(--muted); font-size: .78rem; line-height: 1.35; max-width: 42ch; }
+  .eval-slide .comparison th, .eval-slide .comparison td { padding-top: .48rem; padding-bottom: .48rem; }
+  .eval-slide .eval-meta { margin-top: .5rem; }
+  .eval-slide .human-gate { margin-top: .55rem; padding-top: .5rem; padding-bottom: .5rem; }
+  .eval-slide .human-gate strong { font-size: 1.2rem; }
+  .eval-slide .human-gate p { font-size: .74rem; line-height: 1.25; }
+  .eval-slide > .footnote { margin-top: .7rem; max-width: 110ch; font-size: .72rem; line-height: 1.3; }
+  .app-gallery { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; max-width: 1120px; }
+  figure.app-shot { margin: 0; }
+  figure.app-shot img { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; object-position: center; border: 1px solid var(--ink); background: #111; }
+  figure.app-shot figcaption { padding-top: .65rem; font-size: .8rem; line-height: 1.35; color: var(--muted); }
+  figure.app-shot figcaption strong { display: block; color: var(--ink); font-weight: 600; margin-bottom: .14rem; }
+  .review-loop { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(240px, .75fr); gap: 2rem; max-width: 1080px; align-items: start; }
+  .loop-list { counter-reset: loop; list-style: none; border-top: 1px solid var(--ink); }
+  .loop-list li { counter-increment: loop; display: grid; grid-template-columns: 2.2rem 1fr; gap: .65rem; padding: .8rem 0; border-bottom: 1px solid var(--hairline); font-size: 1rem; line-height: 1.42; }
+  .loop-list li::before { content: counter(loop, decimal-leading-zero); color: var(--muted); font-size: .74rem; letter-spacing: .1em; padding-top: .14rem; }
+  .loop-list strong { display: block; font-weight: 600; }
+  .loop-callout { background: #fff; border: 1px solid var(--ink); padding: 1.25rem; }
+  .loop-callout p { font-family: var(--serif); font-size: 1.5rem; line-height: 1.18; }
+  .loop-callout small { display: block; color: var(--muted); font-size: .8rem; line-height: 1.4; margin-top: 1rem; }
+  .conversations { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(210px, .75fr); gap: 2rem; max-width: 940px; align-items: center; }
+  .conversation { border-top: 1px solid var(--ink); padding: 1rem 0 1.1rem; }
+  .conversation + .conversation { border-top-color: var(--hairline); }
+  .conversation .when { font-size: .72rem; text-transform: uppercase; letter-spacing: .15em; color: var(--muted); }
+  .conversation h3 { font-family: var(--serif); font-size: 1.75rem; font-weight: 400; margin: .4rem 0 .3rem; }
+  .conversation p { color: var(--muted); font-size: .96rem; line-height: 1.45; max-width: 44ch; }
+  .contact-card { display: grid; grid-template-columns: 112px 1fr; gap: 1rem; align-items: center; }
+  .contact-card img { display: block; width: 112px; height: 112px; object-fit: cover; filter: grayscale(1); border: 1px solid var(--ink); }
+  .contact-card strong { display: block; font-family: var(--serif); font-size: 1.45rem; font-weight: 400; }
+  .contact-card span { display: block; color: var(--muted); font-size: .78rem; line-height: 1.38; margin-top: .35rem; }
+  .closing { display: grid; grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr); gap: 3rem; max-width: 1020px; align-items: end; }
+  .closing-note { border-left: 2px solid var(--accent); padding-left: 1.25rem; }
+  .closing-note p { font-family: var(--serif); font-size: 1.65rem; line-height: 1.2; }
+  nav.controls { position: fixed; bottom: 0; left: 0; right: 0; display: flex; align-items: center; justify-content: space-between; padding: 1.1rem 10vw 1.4rem; z-index: 10; }
+  .nav-group { display: flex; align-items: center; gap: .6rem; }
+  button { font-family: var(--sans); font-size: .85rem; background: none; border: 1px solid var(--ink); color: var(--ink); border-radius: 999px; padding: .5rem 1.1rem; cursor: pointer; transition: background .18s, color .18s; }
+  button:hover { background: var(--ink); color: var(--paper); }
+  button:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
+  button:disabled { opacity: .3; cursor: default; }
+  #slide-counter { font-variant-numeric: tabular-nums; font-size: .85rem; color: var(--muted); min-width: 4.5ch; text-align: center; }
+  #progress { position: fixed; top: 0; left: 0; height: 2px; background: var(--ink); width: 0; transition: width .35s ease; z-index: 11; }
+  .wordmark { position: fixed; top: 1.4rem; left: 10vw; font-size: 12px; letter-spacing: .22em; text-transform: uppercase; color: var(--muted); z-index: 10; }
+  @media (max-width: 900px) {
+    .slide { padding: 5vh 7vw 16vh; }
+    h1 { font-size: 3.4rem; }
+    h2 { font-size: 2.35rem; }
+    .roadmap-layout, .eval-layout, .review-loop, .conversations, .closing { grid-template-columns: 1fr; gap: 1.25rem; }
+    .flow-diagram { grid-template-columns: repeat(5, minmax(100px, 1fr)); overflow-x: auto; padding-bottom: .25rem; }
+    .app-gallery { gap: .7rem; }
+  }
+  @media (max-width: 620px) {
+    h1 { font-size: 2.8rem; }
+    h2 { font-size: 2rem; }
+    p.lede { font-size: 1.05rem; }
+    .snapshot-grid, .snapshot-grid-four, .app-gallery { grid-template-columns: 1fr; }
+    .snapshot-card { min-height: 8rem; }
+    .flow-diagram { grid-template-columns: 1fr; overflow: visible; }
+    .flow-node { min-height: 7rem; }
+    .app-gallery { max-height: 52vh; overflow-y: auto; }
+  }
+  @media print {
+    @page { size: letter landscape; margin: 0; }
+    body { overflow: visible; background: #fff; }
+    nav.controls, #progress, .wordmark { display: none !important; }
+    .slide { display: flex !important; position: relative; inset: auto; height: 100vh; page-break-after: always; break-after: page; animation: none; background: #fff; }
+    .slide:last-of-type { page-break-after: auto; break-after: auto; }
+  }
+</style>
+</head>
+<body>
+<div id="progress" role="progressbar" aria-label="Deck progress" aria-valuemin="1" aria-valuemax="8" aria-valuenow="1"></div>
+<span class="wordmark" aria-hidden="true">PortMind</span>
+
+<main aria-live="polite">
+  <section class="slide active" aria-label="Slide 1: Past seven days">
+    <p class="kicker">Weekly Update &middot; July 21-31, 2026</p>
+    <h1>This week, PortMind moved from tool work to operating structure.</h1>
+    <p class="lede">The project now has a cleaner research foundation, a better model-evaluation split, a simpler public story, and a first proposed incubation agreement with Oloodi.</p>
+  </section>
+
+  <section class="slide" aria-label="Slide 2: What moved this week">
+    <p class="kicker">What Moved</p>
+    <h2>Four major pieces landed.</h2>
+    <div class="snapshot-grid snapshot-grid-four" aria-label="Weekly PortMind progress">
+      <div class="snapshot-card"><span class="index">01 &middot; DEFINE</span><strong>Research protocol</strong><span>Locked the experiment protocol and annotation rubric so the benchmark path has a stable base.</span></div>
+      <div class="snapshot-card"><span class="index">02 &middot; BUILD</span><strong>Tool harness</strong><span>Rebuilt the labeler around model interface classes, provider traces, and scorecards.</span></div>
+      <div class="snapshot-card"><span class="index">03 &middot; ORGANIZE</span><strong>Docs map</strong><span>Cleaned the PortMind docs into overview, protocols, labeling, benchmarks, models, and archive folders.</span></div>
+      <div class="snapshot-card"><span class="index">04 &middot; ALIGN</span><strong>Oloodi path</strong><span>Drafted a simple agreement for PortMind to be incubated inside Oloodi.</span></div>
+    </div>
+    <p class="footnote">This update lists the main achievements only. Detailed issue history stays in the repo and project notes.</p>
+  </section>
+
+  <section class="slide" aria-label="Slide 3: Research foundation">
+    <p class="kicker">Research Foundation</p>
+    <h2>The benchmark now has rules before results.</h2>
+    <div class="roadmap-layout">
+      <div class="flow-diagram" aria-label="PortMind research path">
+        <div class="flow-node"><em>01 &middot; Protocol</em><strong>Define</strong><small>State the task, sample rules, leakage controls, metrics, and report gates.</small></div>
+        <div class="flow-node"><em>02 &middot; Ontology</em><strong>Label</strong><small>Use a clear rubric for truck, container truck, image quality, and uncertainty.</small></div>
+        <div class="flow-node"><em>03 &middot; Review</em><strong>Check</strong><small>Keep human review as the reference layer for claim-bearing labels.</small></div>
+        <div class="flow-node"><em>04 &middot; Run</em><strong>Compare</strong><small>Run models under declared interface classes, not mixed assumptions.</small></div>
+        <div class="flow-node"><em>05 &middot; Report</em><strong>Publish</strong><small>Show scores, failures, costs, and unresolved cases together.</small></div>
+      </div>
+      <aside class="value-ladder" aria-label="Research rules">
+        <h3>What changed</h3>
+        <p><strong>Protocol first</strong>Results now need a frozen denominator and declared metrics.</p>
+        <p><strong>Rubric first</strong>The label definitions are stable enough for the next reviewer pipeline pass.</p>
+        <p><strong>Failure counts</strong>Runtime errors and rejected labels count as part of the result.</p>
+        <p><strong>Budget gate</strong>Paid frontier runs wait until there is a funded packet.</p>
+      </aside>
+    </div>
+  </section>
+
+  <section class="slide eval-slide" aria-label="Slide 4: Model evaluation">
+    <p class="kicker">Model Evaluation</p>
+    <h2>We separated image labeling from tool use.</h2>
+    <div class="eval-layout">
+      <div class="eval-panel">
+        <div class="eval-panel-header"><strong>Open-model lane</strong><span>Low-cost<br>Cloudflare/OpenCode</span></div>
+        <table class="comparison" aria-label="Open model evaluation lane">
+          <thead><tr><th>Layer</th><th>Meaning</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td><strong>direct VLM</strong></td><td>Model labels from image only.</td><td>Baseline lane</td></tr>
+            <tr><td><strong>fixed evidence</strong></td><td>Runner gives the model a fixed packet.</td><td>Useful for cheap comparisons</td></tr>
+            <tr><td><strong>harness policy</strong></td><td>Harness chooses evidence for the model.</td><td>Open-model path</td></tr>
+          </tbody>
+        </table>
+        <p class="eval-meta">Cloudflare vision models are still useful, but they should not be described as autonomous tool users.</p>
+      </div>
+      <div class="eval-panel">
+        <div class="eval-panel-header"><strong>Agentic lane</strong><span>Budget-gated<br>native tools</span></div>
+        <table class="comparison" aria-label="Agentic model evaluation lane">
+          <thead><tr><th>Layer</th><th>Meaning</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td><strong>native tools</strong></td><td>Model emits tool calls through the provider API.</td><td>Harness ready</td></tr>
+            <tr><td><strong>agent harness</strong></td><td>Codex, Grok Build, Pi, or similar system controls tools.</td><td>Separate comparison</td></tr>
+            <tr><td><strong>frontier runs</strong></td><td>Paid SOTA packets with frozen metrics.</td><td>Wait for budget</td></tr>
+          </tbody>
+        </table>
+        <div class="human-gate"><span>Smoke result</span><strong>Kimi K3 used tools</strong><p>The OpenCode run proved native tool calls can be traced, even when accepted labels still failed the rubric.</p></div>
+      </div>
+    </div>
+    <p class="footnote">The main learning: model accuracy, tool autonomy, harness policy, and infrastructure failures are separate measurements.</p>
+  </section>
+
+  <section class="slide" aria-label="Slide 5: Oloodi agreement">
+    <p class="kicker">Oloodi</p>
+    <h2>The proposed agreement is simple: incubate PortMind inside Oloodi.</h2>
+    <div class="review-loop">
+      <ol class="loop-list">
+        <li><div><strong>PortMind origin</strong>Wielfried created the idea, process, and work so far.</div></li>
+        <li><div><strong>Oloodi role</strong>Oloodi becomes the Montreal operating home while the project is early.</div></li>
+        <li><div><strong>Initial support</strong>Oloodi provides affiliation, business guidance, introductions, and a proposed CAD 750 August research budget.</div></li>
+        <li><div><strong>Ownership principle</strong>Wielfried keeps founder leadership; Oloodi receives real upside if it incubates and funds the project.</div></li>
+        <li><div><strong>Next document</strong>A short ownership term sheet comes before large funding, incorporation, a paid pilot, or outside investment.</div></li>
+      </ol>
+      <aside class="loop-callout"><p>“PortMind is a research project led by Wielfried and incubated with Oloodi.”</p><small>The PDF is ready for Boris to review before stronger external positioning is used.</small></aside>
+    </div>
+  </section>
+
+  <section class="slide" aria-label="Slide 6: Outreach">
+    <p class="kicker">Outreach</p>
+    <h2>Simon replied. The next contact is Chad McLarnon.</h2>
+    <div class="conversations">
+      <div>
+        <div class="conversation"><span class="when">Port of Montreal</span><h3>Simon Savard</h3><p>Sent the PortMind note and received a response. The thread now moves to a strategy-side contact.</p></div>
+        <div class="conversation"><span class="when">Next email</span><h3>Chad McLarnon</h3><p>Director, Strategy at the Montreal Port Authority. Public Port of Montreal notes describe his work around strategy, business transformation, change management, and strategic-plan execution.</p></div>
+      </div>
+      <aside class="value-ladder" aria-label="Chad McLarnon context">
+        <h3>Why Chad fits</h3>
+        <p><strong>Strategy role</strong>Closer to use-case framing than a broad cold intro.</p>
+        <p><strong>Transportation background</strong>Public profile cites 25 years across aviation, rail, automotive, and marine.</p>
+        <p><strong>Better ask</strong>Share the brief, ask for fit, sensitivities, and the right owner.</p>
+      </aside>
+    </div>
+    <p class="footnote">Reference: <a href="https://www.port-montreal.com/en/the-port-of-montreal/news/news/logbook/nominations-09-2023-en" target="_blank" rel="noopener noreferrer">Port of Montreal, September 2023 team update</a>.</p>
+  </section>
+
+  <section class="slide" aria-label="Slide 7: Current state">
+    <p class="kicker">Current State</p>
+    <h2>PortMind has a clearer split between research, product, and partnership.</h2>
+    <div class="snapshot-grid" aria-label="PortMind current state">
+      <div class="snapshot-card"><span class="index">RESEARCH</span><strong>Benchmark v2 path</strong><span>Protocol, rubric, reviewer process, and model interface classes are now explicit.</span></div>
+      <div class="snapshot-card"><span class="index">PRODUCT</span><strong>Reviewer workflow</strong><span>The next product pass is the reviewer pipeline update and first clean human-reference packet.</span></div>
+      <div class="snapshot-card"><span class="index">PARTNER</span><strong>Oloodi incubation</strong><span>The project now has a proposed operating home, budget ask, and ownership conversation.</span></div>
+    </div>
+    <p class="footnote">This gives the project a better next move: build the reference set, keep open-model runs cheap, and fund expensive agentic model runs only when the packet is worth it.</p>
+  </section>
+
+  <section class="slide" aria-label="Slide 8: Next seven days">
+    <p class="kicker">Next Seven Days</p>
+    <div class="closing">
+      <div><h2>Turn the new structure into action.</h2><ul class="points"><li><strong>Send Chad the right note.</strong> Keep it short, research-first, and tied to strategy fit.</li><li><strong>Review the Oloodi PDF.</strong> Get Boris&rsquo;s reaction to incubation, budget, and ownership terms.</li><li><strong>Continue the reviewer pipeline.</strong> Move toward the first clean human-reference packet.</li><li><strong>Keep model runs scoped.</strong> Use open models for cheap baseline learning; hold paid SOTA packets for budgeted evaluations.</li></ul></div>
+      <aside class="closing-note"><p>Near-term win: one clear Port contact path, one Oloodi incubation decision, and one reviewer-pipeline workstream.</p></aside>
+    </div>
+  </section>
+</main>
+
+<nav class="controls" aria-label="Slide navigation">
+  <div class="nav-group">
+    <button id="prev" aria-label="Previous slide">&larr; Prev</button>
+    <span id="slide-counter" aria-hidden="true">1 / 8</span>
+    <button id="next" aria-label="Next slide">Next &rarr;</button>
+  </div>
+  <button id="print" aria-label="Generate PDF via browser print">Generate PDF</button>
+</nav>
+
+<script>
+(function () {
+  var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+  var total = slides.length;
+  var current = 0;
+  var prevBtn = document.getElementById('prev');
+  var nextBtn = document.getElementById('next');
+  var counter = document.getElementById('slide-counter');
+  var progress = document.getElementById('progress');
+  function show(i) {
+    current = Math.max(0, Math.min(total - 1, i));
+    slides.forEach(function (s, idx) { s.classList.toggle('active', idx === current); });
+    counter.textContent = (current + 1) + ' / ' + total;
+    progress.style.width = ((current + 1) / total * 100) + '%';
+    progress.setAttribute('aria-valuenow', current + 1);
+    prevBtn.disabled = current === 0;
+    nextBtn.disabled = current === total - 1;
+  }
+  prevBtn.addEventListener('click', function () { show(current - 1); });
+  nextBtn.addEventListener('click', function () { show(current + 1); });
+  document.getElementById('print').addEventListener('click', function () { window.print(); });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight' || e.key === 'PageDown' || e.key === ' ') { e.preventDefault(); show(current + 1); }
+    else if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); show(current - 1); }
+    else if (e.key === 'Home') { show(0); }
+    else if (e.key === 'End') { show(total - 1); }
+  });
+  show(0);
+})();
+</script>
+</body>
+</html>

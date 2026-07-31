@@ -10,6 +10,12 @@ const linkClass =
 
 const slides = [
   {
+    title: "PortMind Weekly Update · July 21–31, 2026",
+    description:
+      "Research protocol, tool-harness split, Oloodi incubation agreement, and the next Port contact.",
+    href: "/slides/portmind-weekly-update-2026-07-21-31.html",
+  },
+  {
     title: "PortMind Weekly Update · July 14–21, 2026",
     description: "Roadmap, reviewer-app screenshots, and the next PortMind conversations.",
     href: "/slides/portmind-past-seven-days.html",
