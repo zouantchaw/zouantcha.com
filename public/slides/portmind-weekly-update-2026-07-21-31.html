@@ -149,7 +149,7 @@
 </style>
 </head>
 <body>
-<div id="progress" role="progressbar" aria-label="Deck progress" aria-valuemin="1" aria-valuemax="8" aria-valuenow="1"></div>
+<div id="progress" role="progressbar" aria-label="Deck progress" aria-valuemin="1" aria-valuemax="9" aria-valuenow="1"></div>
 <span class="wordmark" aria-hidden="true">PortMind</span>
 
 <main aria-live="polite">
@@ -199,11 +199,11 @@
       <div class="eval-panel">
         <div class="eval-panel-header"><strong>Image-only lane</strong><span>Low-cost<br>open models</span></div>
         <table class="comparison" aria-label="Open model evaluation lane">
-          <thead><tr><th>Test type</th><th>What it means</th><th>Use</th></tr></thead>
+          <thead><tr><th>Test type</th><th>Models used</th><th>What it means</th></tr></thead>
           <tbody>
-            <tr><td><strong>Image only</strong></td><td>The model sees the image and gives an answer.</td><td>Cheap baseline</td></tr>
-            <tr><td><strong>Prepared evidence</strong></td><td>We give the model crops or zoomed views.</td><td>Better low-cost test</td></tr>
-            <tr><td><strong>Runner-guided</strong></td><td>Our code chooses what evidence to show.</td><td>Open-model path</td></tr>
+            <tr><td><strong>Image only</strong></td><td>Llama 3.2 Vision, LLaVA 1.5, Moondream 3.1</td><td>The model sees the image and gives an answer.</td></tr>
+            <tr><td><strong>More open models</strong></td><td>Llama 4 Scout, Mistral Small 3.1</td><td>Useful for cheap baseline comparisons.</td></tr>
+            <tr><td><strong>Prepared evidence</strong></td><td>Same open-model lane</td><td>We can give the model crops or zoomed views, but the model is not choosing tools by itself.</td></tr>
           </tbody>
         </table>
         <p class="eval-meta">This is the practical lane for Cloudflare and other lower-cost vision models.</p>
@@ -211,11 +211,11 @@
       <div class="eval-panel">
         <div class="eval-panel-header"><strong>Tool-using lane</strong><span>Higher cost<br>agentic models</span></div>
         <table class="comparison" aria-label="Agentic model evaluation lane">
-          <thead><tr><th>Test type</th><th>What it means</th><th>Use</th></tr></thead>
+          <thead><tr><th>Test type</th><th>Models used</th><th>What it means</th></tr></thead>
           <tbody>
-            <tr><td><strong>Model chooses tools</strong></td><td>The model asks to zoom, crop, or inspect before answering.</td><td>Measure autonomy</td></tr>
-            <tr><td><strong>Agent system</strong></td><td>A larger harness like Codex, Grok Build, or Pi helps run the work.</td><td>Separate test</td></tr>
-            <tr><td><strong>Paid model packet</strong></td><td>Run expensive models only on a fixed, serious test set.</td><td>Budget needed</td></tr>
+            <tr><td><strong>Model chooses tools</strong></td><td>Kimi K3 through OpenCode</td><td>The model can ask to zoom, crop, or inspect before answering.</td></tr>
+            <tr><td><strong>Agent system</strong></td><td>Grok 4.5 through Grok Build</td><td>A larger agent harness helps run the work, so it should be scored separately.</td></tr>
+            <tr><td><strong>Paid model packet</strong></td><td>None this week</td><td>Use top paid models only after the test set and budget are ready.</td></tr>
           </tbody>
         </table>
         <div class="human-gate"><span>Smoke result</span><strong>Kimi K3 used tools</strong><p>The test proved we can record tool calls. It also showed the answers still need better rules and review.</p></div>
@@ -224,7 +224,33 @@
     <p class="footnote">The main learning: answering the image and choosing useful tools are two different skills. PortMind now tracks them separately.</p>
   </section>
 
-  <section class="slide" aria-label="Slide 5: Oloodi agreement">
+  <section class="slide" aria-label="Slide 5: Brand and domain">
+    <p class="kicker">Brand</p>
+    <h2>PortMind is still the right name to build around.</h2>
+    <div class="eval-layout">
+      <div class="eval-panel">
+        <div class="eval-panel-header"><strong>What we found</strong><span>Search check<br>July 31</span></div>
+        <table class="comparison" aria-label="PortMind search landscape">
+          <thead><tr><th>Result</th><th>What it is</th><th>Why it matters</th></tr></thead>
+          <tbody>
+            <tr><td><strong>portmind.com</strong></td><td>Trade-compliance AI company, founded in Geneva and operating from Dubai.</td><td>Name overlap, but different focus.</td></tr>
+            <tr><td><strong>Dubai CommerCity news</strong></td><td>Portmind partnership around customs and trade documentation.</td><td>Shows the name has existing AI/logistics use.</td></tr>
+            <tr><td><strong>portmind.ai</strong></td><td>Domain acquired for this project.</td><td>Clean AI positioning for the research and benchmark story.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <aside class="value-ladder" aria-label="PortMind brand position">
+        <h3>Positioning</h3>
+        <p><strong>Keep the name</strong>PortMind is clear, memorable, and fits the project.</p>
+        <p><strong>Different angle</strong>This project is about port-operation AI evaluation, not customs-document automation.</p>
+        <p><strong>SEO path</strong>Use portmind.ai, consistent research updates, and clear pages around Montreal port AI evaluation.</p>
+        <p><strong>Watch the overlap</strong>Do not imply connection to portmind.com or Dubai CommerCity.</p>
+      </aside>
+    </div>
+    <p class="footnote">Sources checked: <a href="https://www.portmind.com/" target="_blank" rel="noopener noreferrer">portmind.com</a>, <a href="https://www.portmind.com/about" target="_blank" rel="noopener noreferrer">Portmind company page</a>, and <a href="https://www.dubaicommercity.ae/w/dubai-commercity-records-unprecedented-growth-in-its-digital-trade-operations-throughout-2023-duplicate-2" target="_blank" rel="noopener noreferrer">Dubai CommerCity announcement</a>.</p>
+  </section>
+
+  <section class="slide" aria-label="Slide 6: Oloodi agreement">
     <p class="kicker">Oloodi</p>
     <h2>The proposed agreement is simple: incubate PortMind inside Oloodi.</h2>
     <div class="review-loop">
@@ -239,7 +265,7 @@
     </div>
   </section>
 
-  <section class="slide" aria-label="Slide 6: Outreach">
+  <section class="slide" aria-label="Slide 7: Outreach">
     <p class="kicker">Outreach</p>
     <h2>Simon replied. The next contact is Chad McLarnon.</h2>
     <div class="conversations">
@@ -257,7 +283,7 @@
     <p class="footnote">Reference: <a href="https://www.port-montreal.com/en/the-port-of-montreal/news/news/logbook/nominations-09-2023-en" target="_blank" rel="noopener noreferrer">Port of Montreal, September 2023 team update</a>.</p>
   </section>
 
-  <section class="slide" aria-label="Slide 7: Current state">
+  <section class="slide" aria-label="Slide 8: Current state">
     <p class="kicker">Current State</p>
     <h2>PortMind now has three tracks that are easier to explain.</h2>
     <div class="snapshot-grid" aria-label="PortMind current state">
@@ -268,7 +294,7 @@
     <p class="footnote">The next move is straightforward: build the trusted image set, keep cheap model tests running, and save expensive model tests for a funded evaluation packet.</p>
   </section>
 
-  <section class="slide" aria-label="Slide 8: Next seven days">
+  <section class="slide" aria-label="Slide 9: Next seven days">
     <p class="kicker">Next Seven Days</p>
     <div class="closing">
       <div><h2>Turn the new structure into action.</h2><ul class="points"><li><strong>Send Chad the right note.</strong> Keep it short, research-first, and tied to strategy fit.</li><li><strong>Review the Oloodi PDF.</strong> Get Boris&rsquo;s reaction to incubation, budget, and ownership terms.</li><li><strong>Continue the reviewer pipeline.</strong> Move toward the first clean human-reference packet.</li><li><strong>Keep model runs scoped.</strong> Use open models for cheap baseline learning; hold top paid models for budgeted evaluations.</li></ul></div>
@@ -280,7 +306,7 @@
 <nav class="controls" aria-label="Slide navigation">
   <div class="nav-group">
     <button id="prev" aria-label="Previous slide">&larr; Prev</button>
-    <span id="slide-counter" aria-hidden="true">1 / 8</span>
+    <span id="slide-counter" aria-hidden="true">1 / 9</span>
     <button id="next" aria-label="Next slide">Next &rarr;</button>
   </div>
   <button id="print" aria-label="Generate PDF via browser print">Generate PDF</button>
