@@ -155,73 +155,73 @@
 <main aria-live="polite">
   <section class="slide active" aria-label="Slide 1: Past seven days">
     <p class="kicker">Weekly Update &middot; July 21-31, 2026</p>
-    <h1>This week, PortMind moved from tool work to operating structure.</h1>
-    <p class="lede">The project now has a cleaner research foundation, a better model-evaluation split, a simpler public story, and a first proposed incubation agreement with Oloodi.</p>
+    <h1>This week, PortMind became easier to explain and move forward.</h1>
+    <p class="lede">We tightened what the project is, built a better way to test models, prepared the Oloodi incubation agreement, and opened the next Port of Montreal conversation.</p>
   </section>
 
   <section class="slide" aria-label="Slide 2: What moved this week">
     <p class="kicker">What Moved</p>
     <h2>Four major pieces landed.</h2>
     <div class="snapshot-grid snapshot-grid-four" aria-label="Weekly PortMind progress">
-      <div class="snapshot-card"><span class="index">01 &middot; DEFINE</span><strong>Research protocol</strong><span>Locked the experiment protocol and annotation rubric so the benchmark path has a stable base.</span></div>
-      <div class="snapshot-card"><span class="index">02 &middot; BUILD</span><strong>Tool harness</strong><span>Rebuilt the labeler around model interface classes, provider traces, and scorecards.</span></div>
-      <div class="snapshot-card"><span class="index">03 &middot; ORGANIZE</span><strong>Docs map</strong><span>Cleaned the PortMind docs into overview, protocols, labeling, benchmarks, models, and archive folders.</span></div>
+      <div class="snapshot-card"><span class="index">01 &middot; DEFINE</span><strong>Clear rules</strong><span>Wrote down what counts as a truck, container truck, unclear image, and valid answer.</span></div>
+      <div class="snapshot-card"><span class="index">02 &middot; BUILD</span><strong>Model testing</strong><span>Built a cleaner way to test models and record how they reached each answer.</span></div>
+      <div class="snapshot-card"><span class="index">03 &middot; EXPLAIN</span><strong>Simple story</strong><span>Updated PortMind&rsquo;s public-facing message so the project is easier to understand.</span></div>
       <div class="snapshot-card"><span class="index">04 &middot; ALIGN</span><strong>Oloodi path</strong><span>Drafted a simple agreement for PortMind to be incubated inside Oloodi.</span></div>
     </div>
-    <p class="footnote">This update lists the main achievements only. Detailed issue history stays in the repo and project notes.</p>
+    <p class="footnote">The short version: PortMind is now easier to test, easier to explain, and closer to having an operating home.</p>
   </section>
 
   <section class="slide" aria-label="Slide 3: Research foundation">
     <p class="kicker">Research Foundation</p>
-    <h2>The benchmark now has rules before results.</h2>
+    <h2>Before scoring models, we first made the task clear.</h2>
     <div class="roadmap-layout">
       <div class="flow-diagram" aria-label="PortMind research path">
-        <div class="flow-node"><em>01 &middot; Protocol</em><strong>Define</strong><small>State the task, sample rules, leakage controls, metrics, and report gates.</small></div>
-        <div class="flow-node"><em>02 &middot; Ontology</em><strong>Label</strong><small>Use a clear rubric for truck, container truck, image quality, and uncertainty.</small></div>
-        <div class="flow-node"><em>03 &middot; Review</em><strong>Check</strong><small>Keep human review as the reference layer for claim-bearing labels.</small></div>
-        <div class="flow-node"><em>04 &middot; Run</em><strong>Compare</strong><small>Run models under declared interface classes, not mixed assumptions.</small></div>
-        <div class="flow-node"><em>05 &middot; Report</em><strong>Publish</strong><small>Show scores, failures, costs, and unresolved cases together.</small></div>
+        <div class="flow-node"><em>01 &middot; Question</em><strong>Ask</strong><small>What are we asking the person or model to decide?</small></div>
+        <div class="flow-node"><em>02 &middot; Rules</em><strong>Define</strong><small>What counts as yes, no, or unsure?</small></div>
+        <div class="flow-node"><em>03 &middot; Human</em><strong>Review</strong><small>Have people check the hard images first.</small></div>
+        <div class="flow-node"><em>04 &middot; Model</em><strong>Test</strong><small>Run each model on the same images and rules.</small></div>
+        <div class="flow-node"><em>05 &middot; Result</em><strong>Report</strong><small>Show what worked, what failed, and what still needs review.</small></div>
       </div>
       <aside class="value-ladder" aria-label="Research rules">
-        <h3>What changed</h3>
-        <p><strong>Protocol first</strong>Results now need a frozen denominator and declared metrics.</p>
-        <p><strong>Rubric first</strong>The label definitions are stable enough for the next reviewer pipeline pass.</p>
-        <p><strong>Failure counts</strong>Runtime errors and rejected labels count as part of the result.</p>
-        <p><strong>Budget gate</strong>Paid frontier runs wait until there is a funded packet.</p>
+        <h3>Plain English</h3>
+        <p><strong>No fuzzy scoring</strong>Everyone answers the same question using the same rules.</p>
+        <p><strong>Humans stay central</strong>People set the reference before we trust model scores.</p>
+        <p><strong>Failures count</strong>If a model crashes or gives a bad answer format, that is part of the result.</p>
+        <p><strong>Spend only when ready</strong>Expensive model tests wait until the test set is worth paying for.</p>
       </aside>
     </div>
   </section>
 
   <section class="slide eval-slide" aria-label="Slide 4: Model evaluation">
     <p class="kicker">Model Evaluation</p>
-    <h2>We separated image labeling from tool use.</h2>
+    <h2>We learned that not every model can be tested the same way.</h2>
     <div class="eval-layout">
       <div class="eval-panel">
-        <div class="eval-panel-header"><strong>Open-model lane</strong><span>Low-cost<br>Cloudflare/OpenCode</span></div>
+        <div class="eval-panel-header"><strong>Image-only lane</strong><span>Low-cost<br>open models</span></div>
         <table class="comparison" aria-label="Open model evaluation lane">
-          <thead><tr><th>Layer</th><th>Meaning</th><th>Status</th></tr></thead>
+          <thead><tr><th>Test type</th><th>What it means</th><th>Use</th></tr></thead>
           <tbody>
-            <tr><td><strong>direct VLM</strong></td><td>Model labels from image only.</td><td>Baseline lane</td></tr>
-            <tr><td><strong>fixed evidence</strong></td><td>Runner gives the model a fixed packet.</td><td>Useful for cheap comparisons</td></tr>
-            <tr><td><strong>harness policy</strong></td><td>Harness chooses evidence for the model.</td><td>Open-model path</td></tr>
+            <tr><td><strong>Image only</strong></td><td>The model sees the image and gives an answer.</td><td>Cheap baseline</td></tr>
+            <tr><td><strong>Prepared evidence</strong></td><td>We give the model crops or zoomed views.</td><td>Better low-cost test</td></tr>
+            <tr><td><strong>Runner-guided</strong></td><td>Our code chooses what evidence to show.</td><td>Open-model path</td></tr>
           </tbody>
         </table>
-        <p class="eval-meta">Cloudflare vision models are still useful, but they should not be described as autonomous tool users.</p>
+        <p class="eval-meta">This is the practical lane for Cloudflare and other lower-cost vision models.</p>
       </div>
       <div class="eval-panel">
-        <div class="eval-panel-header"><strong>Agentic lane</strong><span>Budget-gated<br>native tools</span></div>
+        <div class="eval-panel-header"><strong>Tool-using lane</strong><span>Higher cost<br>agentic models</span></div>
         <table class="comparison" aria-label="Agentic model evaluation lane">
-          <thead><tr><th>Layer</th><th>Meaning</th><th>Status</th></tr></thead>
+          <thead><tr><th>Test type</th><th>What it means</th><th>Use</th></tr></thead>
           <tbody>
-            <tr><td><strong>native tools</strong></td><td>Model emits tool calls through the provider API.</td><td>Harness ready</td></tr>
-            <tr><td><strong>agent harness</strong></td><td>Codex, Grok Build, Pi, or similar system controls tools.</td><td>Separate comparison</td></tr>
-            <tr><td><strong>frontier runs</strong></td><td>Paid SOTA packets with frozen metrics.</td><td>Wait for budget</td></tr>
+            <tr><td><strong>Model chooses tools</strong></td><td>The model asks to zoom, crop, or inspect before answering.</td><td>Measure autonomy</td></tr>
+            <tr><td><strong>Agent system</strong></td><td>A larger harness like Codex, Grok Build, or Pi helps run the work.</td><td>Separate test</td></tr>
+            <tr><td><strong>Paid model packet</strong></td><td>Run expensive models only on a fixed, serious test set.</td><td>Budget needed</td></tr>
           </tbody>
         </table>
-        <div class="human-gate"><span>Smoke result</span><strong>Kimi K3 used tools</strong><p>The OpenCode run proved native tool calls can be traced, even when accepted labels still failed the rubric.</p></div>
+        <div class="human-gate"><span>Smoke result</span><strong>Kimi K3 used tools</strong><p>The test proved we can record tool calls. It also showed the answers still need better rules and review.</p></div>
       </div>
     </div>
-    <p class="footnote">The main learning: model accuracy, tool autonomy, harness policy, and infrastructure failures are separate measurements.</p>
+    <p class="footnote">The main learning: answering the image and choosing useful tools are two different skills. PortMind now tracks them separately.</p>
   </section>
 
   <section class="slide" aria-label="Slide 5: Oloodi agreement">
@@ -259,19 +259,19 @@
 
   <section class="slide" aria-label="Slide 7: Current state">
     <p class="kicker">Current State</p>
-    <h2>PortMind has a clearer split between research, product, and partnership.</h2>
+    <h2>PortMind now has three tracks that are easier to explain.</h2>
     <div class="snapshot-grid" aria-label="PortMind current state">
-      <div class="snapshot-card"><span class="index">RESEARCH</span><strong>Benchmark v2 path</strong><span>Protocol, rubric, reviewer process, and model interface classes are now explicit.</span></div>
-      <div class="snapshot-card"><span class="index">PRODUCT</span><strong>Reviewer workflow</strong><span>The next product pass is the reviewer pipeline update and first clean human-reference packet.</span></div>
+      <div class="snapshot-card"><span class="index">RESEARCH</span><strong>Trusted test set</strong><span>Build a small set of hard images with clear human answers.</span></div>
+      <div class="snapshot-card"><span class="index">PRODUCT</span><strong>Reviewer workflow</strong><span>Make it easy for people to review images and save clean decisions.</span></div>
       <div class="snapshot-card"><span class="index">PARTNER</span><strong>Oloodi incubation</strong><span>The project now has a proposed operating home, budget ask, and ownership conversation.</span></div>
     </div>
-    <p class="footnote">This gives the project a better next move: build the reference set, keep open-model runs cheap, and fund expensive agentic model runs only when the packet is worth it.</p>
+    <p class="footnote">The next move is straightforward: build the trusted image set, keep cheap model tests running, and save expensive model tests for a funded evaluation packet.</p>
   </section>
 
   <section class="slide" aria-label="Slide 8: Next seven days">
     <p class="kicker">Next Seven Days</p>
     <div class="closing">
-      <div><h2>Turn the new structure into action.</h2><ul class="points"><li><strong>Send Chad the right note.</strong> Keep it short, research-first, and tied to strategy fit.</li><li><strong>Review the Oloodi PDF.</strong> Get Boris&rsquo;s reaction to incubation, budget, and ownership terms.</li><li><strong>Continue the reviewer pipeline.</strong> Move toward the first clean human-reference packet.</li><li><strong>Keep model runs scoped.</strong> Use open models for cheap baseline learning; hold paid SOTA packets for budgeted evaluations.</li></ul></div>
+      <div><h2>Turn the new structure into action.</h2><ul class="points"><li><strong>Send Chad the right note.</strong> Keep it short, research-first, and tied to strategy fit.</li><li><strong>Review the Oloodi PDF.</strong> Get Boris&rsquo;s reaction to incubation, budget, and ownership terms.</li><li><strong>Continue the reviewer pipeline.</strong> Move toward the first clean human-reference packet.</li><li><strong>Keep model runs scoped.</strong> Use open models for cheap baseline learning; hold top paid models for budgeted evaluations.</li></ul></div>
       <aside class="closing-note"><p>Near-term win: one clear Port contact path, one Oloodi incubation decision, and one reviewer-pipeline workstream.</p></aside>
     </div>
   </section>
