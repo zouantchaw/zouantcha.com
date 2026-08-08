@@ -7,9 +7,9 @@ const linkClass =
   "underline decoration-neutral-300 underline-offset-4 transition-colors hover:text-neutral-950 dark:decoration-neutral-700 dark:hover:text-neutral-50";
 
 const featuredPostSlugs = [
+  "bitcoin-whitepaper-explained",
   "clip-sees-bureaucracy",
   "books-read-2025",
-  "bitcoin-whitepaper",
 ];
 
 export default function Page() {

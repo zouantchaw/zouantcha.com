@@ -1,0 +1,119 @@
+---
+title: 'Bitcoin Whitepaper Explained'
+publishedAt: '2026-08-08'
+summary: 'My plain-language reading of Nakamoto’s 2008 paper on electronic cash, double-spending, proof of work, and the limits of the design.'
+scholarly: 'true'
+pdf: '/bitcoin-whitepaper-explained.pdf'
+sourceUrl: 'https://bitcoin.org/bitcoin.pdf'
+sourceTitle: 'Bitcoin: A Peer-to-Peer Electronic Cash System'
+---
+
+I keep coming back to the [Bitcoin whitepaper](https://bitcoin.org/bitcoin.pdf) because it is much smaller than the thing it started. Nine pages. A very specific problem. A few mechanisms put together carefully.
+
+This is my attempt to explain what the paper is actually doing. I am not trying to explain the price of Bitcoin, defend the industry around it, or turn the paper into a grand theory of everything. I wanted to understand the argument on its own terms.
+
+There is also a [formatted copy of the original paper](/blog/bitcoin-whitepaper) on this site. Use the [official PDF](https://bitcoin.org/bitcoin.pdf) when you need to cite the source.
+
+## The problem is not digital money
+
+People were already paying online in 2008. The problem was that online payments depended on an institution in the middle.
+
+That institution keeps the ledger. It decides which payments are valid. It handles disputes. It can reverse a transaction, freeze an account, or refuse a customer. That arrangement is useful, but it means online cash is not really cash. It is a message to a trusted operator asking them to update a database.
+
+The technical problem is double-spending. A digital file can be copied. If a coin is only information, what stops me from sending the same coin to two people?
+
+A bank can solve this by seeing every transaction and keeping the official record. Nakamoto asks whether a network can solve it without one institution being in charge.
+
+## A coin is a history of signatures
+
+The paper does not describe a coin as a file sitting in a wallet. It describes a coin as a chain of ownership records.
+
+When I send a coin, I sign a hash of the previous transaction and the next owner’s public key. Anyone can check the signatures and follow the chain. This proves that the person spending the coin had the right key.
+
+That only solves identity. It does not solve double-spending. I can sign two conflicting transactions. The network still needs a shared answer to the question: which one happened first?
+
+## The public history replaces the mint
+
+The obvious solution is a mint. Every payment goes through it, and the mint rejects the second spend.
+
+The whitepaper’s alternative is a public history of transactions. Everyone can see the transactions, and the network agrees on one ordering. The first spend that makes it into the accepted history wins. Later conflicting spends do not.
+
+This is the central move in the paper. Bitcoin is not removing the need for a ledger. It is distributing the ledger and giving the network a rule for choosing between competing versions of history.
+
+## Proof of work makes rewriting expensive
+
+The network needs a way to timestamp transactions without asking a central timestamp authority. The proposed answer is a chain of blocks. Each block includes the hash of the block before it.
+
+Miners search for a value that makes the block hash meet a difficulty target. Finding that value takes work. Checking it is cheap.
+
+This changes the economics of editing history. If someone changes an old transaction, they have to redo the work for that block and every block after it. The honest chain keeps growing while the attacker is trying to catch up.
+
+Proof of work also gives the network a way to resist fake identities. One person can create a million IP addresses. They cannot create a million units of computing power for free. Influence comes from work performed, not from counting network identities.
+
+The paper usually calls the accepted history the longest chain. More precisely, nodes follow the chain with the most accumulated proof of work.
+
+## How the network operates
+
+The loop is simple:
+
+1. New transactions are broadcast.
+2. Nodes collect them into a candidate block.
+3. Miners search for a valid proof of work.
+4. A successful miner broadcasts the block.
+5. Nodes accept it if the transactions are valid and not already spent.
+6. Miners begin working on the next block.
+
+Two miners can find a block at almost the same time. That creates a temporary fork. Nodes keep working, and the branch with more accumulated work eventually wins. Transactions from the discarded branch can be included again later.
+
+This is why confirmation matters. A transaction is not instantly final in the same way a cash handoff is final. Each additional block makes a rewrite more expensive.
+
+## The security claim has a boundary
+
+The paper’s security argument depends on an assumption: honest participants control more proof-of-work than an attacker.
+
+Under that assumption, an attacker who is several blocks behind becomes less likely to catch up as more blocks are added. The paper models that probability mathematically.
+
+This is not a claim that Bitcoin is impossible to attack. A party with enough hash power can attempt to rewrite recent history. The model also says nothing about stolen private keys, dishonest exchanges, bad wallet software, or social engineering. Proof of work only addresses a particular problem in the shared transaction history.
+
+## Incentives are part of the protocol
+
+The first transaction in a block can create new coins for the miner. Transaction fees can also go to the miner.
+
+These rewards pay for the work that secures the chain. They also give miners a reason to follow the rules. If a miner has invested heavily in the network, attacking the system can damage the value of the rewards they already own.
+
+That is an economic argument, not a guarantee. The protocol is designed around incentives because cryptography alone cannot make independent participants cooperate.
+
+## The parts that are easy to miss
+
+The whitepaper also covers several practical details:
+
+- Merkle trees let a block commit to many transactions without keeping every transaction in the block header.
+- Simplified Payment Verification lets a lightweight client check block headers and Merkle proofs without storing the whole chain.
+- Multiple inputs and outputs let users combine coins and receive change.
+- Public keys can be kept pseudonymous, although transaction patterns can still reveal relationships.
+
+The privacy section is especially easy to overstate. The ledger is public. The paper proposes pseudonyms, not private transactions.
+
+## What I think the paper contributed
+
+Most of the ingredients were not invented from scratch. Digital signatures, hash chains, proof of work, timestamping, and electronic cash proposals all existed before 2008.
+
+The contribution was putting them together around one problem: how do strangers agree that one digital payment happened before another without asking a bank?
+
+That is why the paper still matters to me. It is a compact example of systems design. The cryptography authorizes ownership. The chain records history. Proof of work orders competing histories. The incentives pay people to maintain the system.
+
+It is also a useful reminder to read technical papers literally. The whitepaper does not promise anonymous money, instant finality, infinite scale, or a replacement for every financial institution. It makes a narrower claim, and the interesting part is seeing how far that claim can be pushed.
+
+## Related reading
+
+- [Bitcoin Whitepaper](/blog/bitcoin-whitepaper) for the source text mirror.
+- [CLIP Sees Bureaucracy](/blog/clip-sees-bureaucracy) for another essay about what a model finds when it looks at a large archive.
+- [Projects](/projects) for the Montreal Archives Search project behind that essay.
+- [Work](/work) for more context on the systems I have built.
+
+## Sources
+
+1. S. Nakamoto, “Bitcoin: A Peer-to-Peer Electronic Cash System,” 2008. [bitcoin.org/bitcoin.pdf](https://bitcoin.org/bitcoin.pdf)
+2. W. Dai, “b-money,” 1998. [weidai.com/bmoney.txt](http://www.weidai.com/bmoney.txt)
+3. A. Back, “Hashcash: A Denial of Service Counter-Measure,” 2002. [hashcash.org](http://www.hashcash.org/papers/hashcash.pdf)
+4. S. Haber and W. S. Stornetta, “How to Time-Stamp a Digital Document,” *Journal of Cryptology*, 1991.

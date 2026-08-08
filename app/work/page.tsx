@@ -1,11 +1,18 @@
+import Link from 'next/link'
+
 export const metadata = {
   title: 'Work',
-  description: 'My work history.',
+  description:
+    'Work history for Wielfried Zouantcha: customer engineering, full-stack product work, integrations, and independent consulting.',
 }
+
+const linkClass =
+  'underline decoration-neutral-300 underline-offset-4 transition-colors hover:text-neutral-950 dark:decoration-neutral-700 dark:hover:text-neutral-50'
 
 const roles = [
   {
     company: 'Oloodi Technologies',
+    companyHref: 'https://oloodi.com/',
     role: 'Customer Engineer (Contract)',
     period: 'January 2026 - Present',
     body: 'Working on KROW Workforce, a hospitality staffing platform with a web dashboard and mobile apps built for a live customer environment.',
@@ -16,6 +23,7 @@ const roles = [
   },
   {
     company: 'Ethos',
+    companyHref: 'https://www.heyethos.com/',
     role: 'Senior Full Stack Engineer',
     period: 'May 2022 - November 2025',
     body: 'Helped take the product from a single-tenant MVP to a multi-tenant SaaS serving 50+ merchant accounts.',
@@ -38,6 +46,7 @@ const roles = [
   },
   {
     company: 'SaaS Alerts',
+    companyHref: 'https://saasalerts.com/',
     role: 'Software Engineer, Integrations and Security',
     period: 'October 2020 - December 2021',
     body: 'Built integrations and security-event processing for MSP tools.',
@@ -74,7 +83,11 @@ export default function Page() {
         <p className="leading-7 text-neutral-700 dark:text-neutral-300">
           5+ years building data-heavy applications end to end: integrations,
           backend systems, production frontends, ETL pipelines, and applied ML
-          workflows.
+          workflows. For shipped personal work, see{' '}
+          <Link href="/projects" className={linkClass}>
+            projects
+          </Link>
+          .
         </p>
       </div>
 
@@ -82,7 +95,20 @@ export default function Page() {
         {roles.map((role) => (
           <section key={`${role.company}-${role.period}`} className="space-y-3">
             <div>
-              <h2 className="text-lg font-medium">{role.company}</h2>
+              <h2 className="text-lg font-medium">
+                {role.companyHref ? (
+                  <a
+                    href={role.companyHref}
+                    className={linkClass}
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
+                    {role.company}
+                  </a>
+                ) : (
+                  role.company
+                )}
+              </h2>
               <p className="text-sm text-neutral-500 dark:text-neutral-400">
                 {role.role} - {role.period}
               </p>

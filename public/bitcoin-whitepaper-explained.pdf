@@ -1,0 +1,115 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [4 0 R 6 0 R] /Count 2 >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+4 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Contents 5 0 R /Resources << /Font << /F1 3 0 R >> >> >>
+endobj
+5 0 obj
+<< /Length 3144 >>
+stream
+BT
+/F1 10 Tf
+50 720 Td
+13 TL
+(Bitcoin Whitepaper Explained) Tj
+T* (Wielfried Zouantcha  |  August 8, 2026) Tj
+T* (Canonical: https://www.zouantcha.com/blog/bitcoin-whitepaper-explained) Tj
+T* () Tj
+T* (This note explains Satoshi Nakamoto's 2008 paper "Bitcoin: A Peer-to-Peer Electronic Cash) Tj
+T* (System" for readers who want the academic structure, not a trading pitch.) Tj
+T* () Tj
+T* (Problem. Internet payments usually rely on trusted intermediaries. That model enables) Tj
+T* (reversible disputes and raises the minimum practical transaction size. The paper asks) Tj
+T* (whether electronic payments can rest on cryptographic proof instead of institutional) Tj
+T* (trust.) Tj
+T* () Tj
+T* (Electronic coins as signature chains. A coin is a chain of digital signatures. Ownership) Tj
+T* (transfers by signing a hash of the previous transaction and the next owner's public key.) Tj
+T* (Signatures prove a chain of custody, but they do not by themselves prevent) Tj
+T* (double-spending.) Tj
+T* () Tj
+T* (Double-spending without a mint. A central mint can reject second spends, but reintroduces) Tj
+T* (a trusted party. The paper's alternative is a public history: transactions are broadcast,) Tj
+T* (and participants converge on a single ordered ledger of which spend came first.) Tj
+T* () Tj
+T* (Timestamp server and proof-of-work. Blocks hash transactions \(and the previous block\) into) Tj
+T* (a chain. Proof-of-work, in the spirit of Hashcash, makes rewriting history expensive:) Tj
+T* (changing a block requires redoing its work and the work of every block after it. Honest) Tj
+T* (majority hash power makes the honest chain grow fastest.) Tj
+T* () Tj
+T* (Network and incentives. Nodes collect transactions, mine blocks, and extend the longest) Tj
+T* (valid chain. The first transaction in a block mints a coinbase reward to the miner; fees) Tj
+T* (can later replace issuance. Incentives align attackers toward earning rewards rather than) Tj
+T* (destroying the system's value.) Tj
+T* () Tj
+T* (Light clients and privacy. Simplified Payment Verification \(SPV\) checks Merkle proofs) Tj
+T* (against block headers rather than full history. Privacy is partial: keys can stay) Tj
+T* (pseudonymous, but multi-input transactions and address reuse can still link activity.) Tj
+T* () Tj
+T* (Security model. An attacker who rewrites recent history faces a race against the honest) Tj
+T* (chain. Under honest majority, the probability of catching up from z blocks behind falls) Tj
+T* (exponentially in z. Invalid transactions are still rejected by honest nodes even if an) Tj
+T* (attacker mines blocks.) Tj
+T* () Tj
+T* (How to read the original. The source paper is short. Read abstract and sections 1-4 for) Tj
+T* (the design, then incentives, Merkle pruning, SPV, and the calculations appendix for the) Tj
+T* (security argument.) Tj
+T* () Tj
+T* (Canonical URL for this explanation:) Tj
+T* (https://www.zouantcha.com/blog/bitcoin-whitepaper-explained) Tj
+T* () Tj
+T* (Primary source \(Nakamoto, 2008\): https://bitcoin.org/bitcoin.pdf) Tj
+ET
+BT
+/F1 8 Tf
+50 36 Td (https://www.zouantcha.com/blog/bitcoin-whitepaper-explained  -  page 1/2) Tj
+ET
+endstream
+endobj
+6 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Contents 7 0 R /Resources << /Font << /F1 3 0 R >> >> >>
+endobj
+7 0 obj
+<< /Length 565 >>
+stream
+BT
+/F1 10 Tf
+50 720 Td
+13 TL
+() Tj
+T* (Also on this site: https://www.zouantcha.com/blog/bitcoin-whitepaper) Tj
+T* () Tj
+T* (References: Nakamoto, S. \(2008\). Bitcoin: A Peer-to-Peer Electronic Cash System.) Tj
+T* (https://bitcoin.org/bitcoin.pdf; Back, A. \(2002\). Hashcash; Dai, W. \(1998\). b-money; Haber) Tj
+T* (& Stornetta \(1991\). How to time-stamp a digital document; Merkle, R. \(1980\). Protocols for) Tj
+T* (public key cryptosystems.) Tj
+T* () Tj
+ET
+BT
+/F1 8 Tf
+50 36 Td (https://www.zouantcha.com/blog/bitcoin-whitepaper-explained  -  page 2/2) Tj
+ET
+endstream
+endobj
+xref
+0 8
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000121 00000 n 
+0000000191 00000 n 
+0000000317 00000 n 
+0000003513 00000 n 
+0000003639 00000 n 
+trailer
+<< /Size 8 /Root 1 0 R >>
+startxref
+4255
+%%EOF

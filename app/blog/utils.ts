@@ -6,6 +6,10 @@ type Metadata = {
   publishedAt: string
   summary: string
   image?: string
+  scholarly?: string
+  pdf?: string
+  sourceUrl?: string
+  sourceTitle?: string
 }
 
 function parseFrontmatter(fileContent: string) {

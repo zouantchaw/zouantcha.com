@@ -36,6 +36,15 @@ export default function Footer() {
           )
         })}
       </div>
+      <p className="mt-4 text-xs text-neutral-400 dark:text-neutral-500">
+        Occasional notes by email—no form, no tracking.{' '}
+        <a
+          href="mailto:hello@zouantcha.com?subject=Newsletter%20subscription"
+          className="underline decoration-neutral-300 underline-offset-4 transition-colors hover:text-neutral-950 dark:decoration-neutral-700 dark:hover:text-neutral-50"
+        >
+          Say hello
+        </a>
+      </p>
     </footer>
   )
 }

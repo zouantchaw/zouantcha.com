@@ -1,7 +1,11 @@
 import { notFound } from 'next/navigation'
 import { CustomMDX } from 'app/components/mdx'
+import { ArticleCite } from 'app/components/article-cite'
 import { formatDate, getBlogPosts } from 'app/blog/utils'
 import { baseUrl } from 'app/sitemap'
+
+const SCHOLARLY_SLUG = 'bitcoin-whitepaper-explained'
+const SCHOLARLY_SOURCE_URL = 'https://bitcoin.org/bitcoin.pdf'
 
 export async function generateStaticParams() {
   let posts = getBlogPosts()
@@ -33,16 +37,24 @@ export async function generateMetadata({ params }: BlogPageProps) {
   let ogImage = image
     ? image
     : `${baseUrl}/og?title=${encodeURIComponent(title)}${description ? `&summary=${encodeURIComponent(description)}` : ''}`
+  let canonicalUrl = `${baseUrl}/blog/${post.slug}`
 
   return {
     title,
     description,
+    ...(post.slug === SCHOLARLY_SLUG
+      ? {
+          alternates: {
+            canonical: canonicalUrl,
+          },
+        }
+      : {}),
     openGraph: {
       title,
       description,
       type: 'article',
       publishedTime,
-      url: `${baseUrl}/blog/${post.slug}`,
+      url: canonicalUrl,
       images: [
         {
           url: ogImage,
@@ -66,6 +78,9 @@ export default async function Blog({ params }: BlogPageProps) {
     notFound()
   }
 
+  let canonicalUrl = `${baseUrl}/blog/${post.slug}`
+  let isScholarly = post.slug === SCHOLARLY_SLUG
+
   return (
     <section>
       <script
@@ -82,7 +97,7 @@ export default async function Blog({ params }: BlogPageProps) {
             image: post.metadata.image
               ? `${baseUrl}${post.metadata.image}`
               : `${baseUrl}/og?title=${encodeURIComponent(post.metadata.title)}`,
-            url: `${baseUrl}/blog/${post.slug}`,
+            url: canonicalUrl,
             author: {
               '@type': 'Person',
               name: 'Wielfried Zouantcha',
@@ -90,13 +105,45 @@ export default async function Blog({ params }: BlogPageProps) {
           }),
         }}
       />
+      {isScholarly ? (
+        <script
+          type="application/ld+json"
+          suppressHydrationWarning
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'ScholarlyArticle',
+              headline: post.metadata.title,
+              description: post.metadata.summary,
+              author: {
+                '@type': 'Person',
+                name: 'Wielfried Zouantcha',
+              },
+              datePublished: post.metadata.publishedAt,
+              dateModified: post.metadata.publishedAt,
+              url: canonicalUrl,
+              citation: SCHOLARLY_SOURCE_URL,
+            }),
+          }}
+        />
+      ) : null}
       <h1 className="title text-2xl font-semibold">
         {post.metadata.title}
       </h1>
-      <div className="flex justify-between items-center mt-2 mb-8 text-sm">
-        <p className="text-sm text-neutral-600 dark:text-neutral-400">
-          {formatDate(post.metadata.publishedAt)}
-        </p>
+      <div className="mt-2 mb-8 text-sm">
+        <div className="flex justify-between items-center">
+          <p className="text-sm text-neutral-600 dark:text-neutral-400">
+            {formatDate(post.metadata.publishedAt)}
+          </p>
+        </div>
+        {isScholarly ? (
+          <ArticleCite
+            title={post.metadata.title}
+            publishedAt={post.metadata.publishedAt}
+            canonicalUrl={canonicalUrl}
+            pdfHref={post.metadata.pdf}
+          />
+        ) : null}
       </div>
       <article className="prose">
         <CustomMDX source={post.content} />
