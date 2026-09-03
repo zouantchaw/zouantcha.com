@@ -6,6 +6,7 @@ import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import { Nav } from './components/nav'
 import Footer from './components/footer'
+import { LocaleAttribute } from './components/locale-attribute'
 import { site } from './lib/site'
 import { baseUrl } from './sitemap'
 
@@ -63,8 +64,17 @@ export default function RootLayout({
         ></script>
       </head>
       <body className={`${GeistSans.className} min-h-screen bg-paper font-sans text-ink antialiased`}>
+        <LocaleAttribute />
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:bg-ink focus:px-3 focus:py-2 focus:text-sm focus:text-paper"
+        >
+          Skip to content
+        </a>
         <Nav />
-        <main className="pt-8 pb-16 sm:pt-10">{children}</main>
+        <main id="main-content" tabIndex={-1} className="pt-8 pb-16 sm:pt-10">
+          {children}
+        </main>
         <Footer />
         <Analytics />
         <SpeedInsights />

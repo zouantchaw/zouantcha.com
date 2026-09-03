@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation'
 import { nav, site } from 'app/lib/site'
 
 export function Nav() {
-  const pathname = usePathname()
+  const pathname = usePathname() ?? ''
 
   return (
     <header className="sticky top-0 z-30 border-b border-line bg-paper/80 backdrop-blur-md">
