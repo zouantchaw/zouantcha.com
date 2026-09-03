@@ -1,4 +1,5 @@
 import { getBlogPosts } from 'app/blog/utils'
+import { work } from 'app/lib/work'
 
 export const baseUrl = 'https://www.zouantcha.com'
 
@@ -8,13 +9,7 @@ export default async function sitemap() {
     lastModified: post.metadata.publishedAt,
   }))
 
-  let caseStudyPages = [
-    '/case-studies/mtl-archives',
-    '/case-studies/portmind',
-    '/case-studies/diane-party-rentals',
-    '/case-studies/ballerz-football-academy',
-    '/case-studies/starthome',
-  ]
+  let caseStudyPages = work.map((item) => `/case-studies/${item.slug}`)
 
   let routes = [
     '',
@@ -27,7 +22,6 @@ export default async function sitemap() {
     ...caseStudyPages,
   ].map((route) => ({
     url: `${baseUrl}${route}`,
-    lastModified: new Date().toISOString().split('T')[0],
   }))
 
   return [...routes, ...blogs]

@@ -19,6 +19,36 @@ export type WorkImage = {
   layout?: 'phone' | 'wide'
 }
 
+export const workImageDimensions: Record<string, { width: number; height: number }> = {
+  '/images/case-studies/bfa-admin-command-center.png': { width: 1440, height: 1180 },
+  '/images/case-studies/bfa-admin-payroll-exceptions.png': { width: 1280, height: 577 },
+  '/images/case-studies/bfa-admin-payroll.png': { width: 1280, height: 577 },
+  '/images/case-studies/bfa-admin-programs.png': { width: 1512, height: 982 },
+  '/images/case-studies/bfa-admin-sessions.png': { width: 1512, height: 982 },
+  '/images/case-studies/dpr-admin-bookings.png': { width: 1600, height: 900 },
+  '/images/case-studies/dpr-admin-call-detail.png': { width: 1600, height: 1050 },
+  '/images/case-studies/dpr-admin-calls.png': { width: 1600, height: 820 },
+  '/images/case-studies/dpr-admin-inventory.png': { width: 1280, height: 577 },
+  '/images/case-studies/mtl-archives-record.png': { width: 1280, height: 577 },
+  '/images/case-studies/mtl-archives-search.png': { width: 1280, height: 577 },
+  '/images/case-studies/mtl-social-facebook-reels.svg': { width: 980, height: 460 },
+  '/images/case-studies/mtl-social-facebook-views.svg': { width: 980, height: 460 },
+  '/images/case-studies/mtl-social-instagram-views.svg': { width: 980, height: 460 },
+  '/images/case-studies/portmind-reviewer-grid.png': { width: 1280, height: 720 },
+  '/images/case-studies/portmind-reviewer-task.png': { width: 1280, height: 720 },
+  '/images/case-studies/starthome-comparison-hashes.png': { width: 1360, height: 1760 },
+  '/images/case-studies/starthome-comparison-kitchen.png': { width: 1360, height: 1760 },
+  '/images/case-studies/starthome-comparison-photos.png': { width: 1360, height: 1760 },
+  '/images/case-studies/starthome-comparison.png': { width: 1360, height: 1760 },
+  '/images/case-studies/starthome-mobile-detail.png': { width: 893, height: 1778 },
+  '/images/case-studies/starthome-mobile-home.png': { width: 893, height: 1778 },
+  '/images/case-studies/starthome-mobile-inspections.png': { width: 893, height: 1778 },
+  '/images/case-studies/starthome-mobile-language.png': { width: 893, height: 1778 },
+  '/images/case-studies/starthome-mobile-splash.png': { width: 893, height: 1778 },
+  '/images/case-studies/starthome-report-photos.png': { width: 1360, height: 1760 },
+  '/images/case-studies/starthome-report.png': { width: 1360, height: 1760 },
+}
+
 export type WorkFigure =
   | ({ kind: 'image' } & WorkImage)
   | { kind: 'artifact'; id: DesignArtifactId; caption?: string }

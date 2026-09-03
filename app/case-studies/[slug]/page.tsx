@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import { DesignArtifact } from 'app/components/design-artifact'
 import { SectionLabel } from 'app/components/section-label'
@@ -6,6 +7,7 @@ import {
   adjacentWork,
   getWork,
   work,
+  workImageDimensions,
   type WorkBlock,
   type WorkFigure,
   type WorkImage,
@@ -15,6 +17,14 @@ import { baseUrl } from 'app/sitemap'
 
 type PageProps = {
   params: Promise<{ slug: string }>
+}
+
+function dimensionsFor(src: string) {
+  const dimensions = workImageDimensions[src]
+  if (!dimensions) {
+    throw new Error(`Missing dimensions for case study image: ${src}`)
+  }
+  return dimensions
 }
 
 export async function generateStaticParams() {
@@ -39,16 +49,21 @@ export async function generateMetadata({ params }: PageProps) {
 
 function FigureImage({ image }: { image: Extract<WorkFigure, { kind: 'image' }> }) {
   const phone = image.layout === 'phone'
+  const dimensions = dimensionsFor(image.src)
 
   return (
     <figure className="space-y-3">
-      <img
+      <Image
         src={image.src}
         alt={image.alt}
+        {...dimensions}
+        loading="lazy"
+        sizes="(max-width: 1080px) 100vw, 1080px"
+        unoptimized={image.src.endsWith('.svg')}
         className={
           phone
-            ? 'mx-auto w-full max-w-[280px] bg-black'
-            : 'w-full bg-paper-2'
+            ? 'mx-auto h-auto w-full max-w-[280px] bg-black'
+            : 'h-auto w-full bg-paper-2'
         }
       />
       {image.caption ? (
@@ -190,10 +205,13 @@ export default async function Page({ params }: PageProps) {
 
       {item.banner ? (
         <figure>
-          <img
+          <Image
             src={item.banner.src}
             alt={item.banner.alt}
-            className="w-full bg-paper-2"
+            {...dimensionsFor(item.banner.src)}
+            priority
+            sizes="(max-width: 1080px) 100vw, 1080px"
+            className="h-auto w-full bg-paper-2"
           />
         </figure>
       ) : null}
