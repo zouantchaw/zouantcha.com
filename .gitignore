@@ -32,6 +32,9 @@ yarn-error.log*
 # vercel
 .vercel
 
+# local browser review artifacts
+/.playwright-cli/
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
