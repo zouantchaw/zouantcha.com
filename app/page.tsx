@@ -15,7 +15,7 @@ export default function Page() {
   const selected = featuredWork()
 
   return (
-    <div className="site-shell space-y-16 sm:space-y-20">
+    <div className="site-shell space-y-12 sm:space-y-16">
       <section className="pt-4 sm:pt-8">
         <div className="grid items-start gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(240px,320px)] lg:gap-16">
           <div>

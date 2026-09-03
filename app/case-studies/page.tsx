@@ -10,7 +10,7 @@ export const metadata = {
 
 export default function Page() {
   return (
-    <div className="site-shell space-y-16">
+    <div className="site-shell space-y-12">
       <header className="max-w-3xl space-y-5">
         <SectionLabel>Case studies</SectionLabel>
         <h1 className="font-mono text-[32px] leading-[1.15] tracking-[-0.03em] text-ink sm:text-[40px]">

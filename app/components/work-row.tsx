@@ -8,7 +8,7 @@ export function WorkRow({ item }: { item: WorkItem }) {
   return (
     <Link
       href={`/case-studies/${item.slug}`}
-      className="group grid grid-cols-[40px_minmax(0,1fr)] gap-x-4 gap-y-2 border-t border-line py-6 lg:grid-cols-[56px_minmax(0,1fr)_minmax(220px,280px)] lg:items-start"
+      className="group grid grid-cols-[40px_minmax(0,1fr)] gap-x-4 gap-y-2 border-t border-line py-5 lg:grid-cols-[56px_minmax(0,1fr)_minmax(220px,280px)] lg:items-start"
     >
       <span className="font-mono text-[12px] text-muted">{item.number}</span>
       <span className="space-y-1">
