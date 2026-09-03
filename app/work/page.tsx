@@ -1,105 +1,46 @@
 import Link from 'next/link'
+import { SectionLabel } from 'app/components/section-label'
+import { experience } from 'app/lib/site'
 
 export const metadata = {
   title: 'Work',
   description:
-    'Work history for Wielfried Zouantcha: customer engineering, full-stack product work, integrations, and independent consulting.',
+    'Work history for Wiel Zouantcha: customer engineering, full-stack product work, integrations, and independent products.',
 }
-
-const linkClass =
-  'underline decoration-neutral-300 underline-offset-4 transition-colors hover:text-neutral-950 dark:decoration-neutral-700 dark:hover:text-neutral-50'
-
-const roles = [
-  {
-    company: 'Oloodi Technologies',
-    companyHref: 'https://oloodi.com/',
-    role: 'Customer Engineer (Contract)',
-    period: 'January 2026 - Present',
-    body: 'Working on KROW Workforce, a hospitality staffing platform with a web dashboard and mobile apps built for a live customer environment.',
-    bullets: [
-      'Translate sprint output, architecture tradeoffs, and product changes into founder and stakeholder recommendations.',
-      'Bridge customer needs, engineering execution, and product quality in a small-team environment.',
-    ],
-  },
-  {
-    company: 'Ethos',
-    companyHref: 'https://www.heyethos.com/',
-    role: 'Senior Full Stack Engineer',
-    period: 'May 2022 - November 2025',
-    body: 'Helped take the product from a single-tenant MVP to a multi-tenant SaaS serving 50+ merchant accounts.',
-    bullets: [
-      'Built identity management and access-control layers across Next.js, Node.js, and Azure.',
-      'Built internal Jade and Ruby API layers that gave frontend teams a cleaner interface over complex backend operations.',
-      'Wrote Shopify POS integrations with sub-100ms latency for real-time retail sync.',
-      'Set frontend standards and drove architectural decisions across the Luna codebase in a five-person team.',
-    ],
-  },
-  {
-    company: 'Independent Consulting',
-    role: 'Engineering Consultant',
-    period: 'January 2023 - Present',
-    body: 'Partner with small-business owners to gather requirements, architect practical systems, and ship production software.',
-    bullets: [
-      'Diane Party Rentals: custom ERP for quoting, inventory locking, and Stripe payments. Quote turnaround dropped from 24h to under 2h.',
-      'Ballerz Football Academy: scheduling and payout platform for trainer availability, player bookings, and 100+ monthly sessions.',
-    ],
-  },
-  {
-    company: 'SaaS Alerts',
-    companyHref: 'https://saasalerts.com/',
-    role: 'Software Engineer, Integrations and Security',
-    period: 'October 2020 - December 2021',
-    body: 'Built integrations and security-event processing for MSP tools.',
-    bullets: [
-      'Built log ingestion connectors for IT Glue, Datto RMM, ConnectWise, and Kaseya.',
-      'Normalized event data into a unified security schema for downstream alerting.',
-      'Used Microsoft Graph API and Kibana logs to build detection logic for silent MFA changes and unauthorized file sharing.',
-    ],
-  },
-]
-
-const skills = [
-  'TypeScript',
-  'React',
-  'Next.js',
-  'Node.js',
-  'PostgreSQL',
-  'Python',
-  'Ruby',
-  'Cloudflare Workers',
-  'D1',
-  'R2',
-  'Vectorize',
-  'Azure',
-  'Vercel',
-  'Docker',
-]
 
 export default function Page() {
   return (
-    <section className="space-y-10">
-      <div className="space-y-3">
-        <h1 className="text-2xl font-semibold">Work</h1>
-        <p className="leading-7 text-neutral-700 dark:text-neutral-300">
-          5+ years building data-heavy applications end to end: integrations,
-          backend systems, production frontends, ETL pipelines, and applied ML
-          workflows. For shipped personal work, see{' '}
-          <Link href="/projects" className={linkClass}>
-            projects
+    <div className="site-shell space-y-16">
+      <header className="max-w-3xl space-y-5">
+        <SectionLabel>Where I’ve worked</SectionLabel>
+        <h1 className="font-mono text-[32px] leading-[1.15] tracking-[-0.03em] text-ink sm:text-[40px]">
+          Work
+        </h1>
+        <p className="max-w-2xl text-[17px] leading-7 text-ink-soft">
+          Roles, companies, and the kind of problems I was hired to take on.
+          For the systems themselves, see the{' '}
+          <Link
+            href="/case-studies"
+            className="underline decoration-line underline-offset-4 hover:decoration-ink"
+          >
+            case studies
           </Link>
           .
         </p>
-      </div>
+      </header>
 
-      <div className="space-y-9">
-        {roles.map((role) => (
-          <section key={`${role.company}-${role.period}`} className="space-y-3">
+      <div>
+        {experience.map((role) => (
+          <section
+            key={`${role.company}-${role.period}`}
+            className="grid gap-4 border-t border-line py-10 md:grid-cols-[220px_minmax(0,1fr)]"
+          >
             <div>
-              <h2 className="text-lg font-medium">
-                {role.companyHref ? (
+              <h2 className="text-lg">
+                {role.href ? (
                   <a
-                    href={role.companyHref}
-                    className={linkClass}
+                    href={role.href}
+                    className="underline decoration-line underline-offset-4 hover:decoration-ink"
                     rel="noopener noreferrer"
                     target="_blank"
                   >
@@ -109,28 +50,30 @@ export default function Page() {
                   role.company
                 )}
               </h2>
-              <p className="text-sm text-neutral-500 dark:text-neutral-400">
-                {role.role} - {role.period}
-              </p>
+              <p className="mt-1 text-sm text-muted">{role.period}</p>
             </div>
-            <p className="leading-7 text-neutral-700 dark:text-neutral-300">
-              {role.body}
-            </p>
-            <ul className="list-disc space-y-2 pl-5 leading-7 text-neutral-700 dark:text-neutral-300">
-              {role.bullets.map((bullet) => (
-                <li key={bullet}>{bullet}</li>
+            <div className="space-y-4">
+              <p className="text-sm uppercase tracking-[0.12em] text-muted">
+                {role.role}
+              </p>
+              {role.body.map((paragraph) => (
+                <p key={paragraph} className="text-[17px] leading-7 text-ink-soft">
+                  {paragraph}
+                </p>
               ))}
-            </ul>
+              {'caseStudy' in role && role.caseStudy ? (
+                <Link
+                  href={role.caseStudy}
+                  className="inline-block text-sm underline decoration-line underline-offset-4 hover:decoration-ink"
+                >
+                  Read the case study →
+                </Link>
+              ) : null}
+            </div>
           </section>
         ))}
+        <div className="border-t border-line" />
       </div>
-
-      <section className="space-y-3">
-        <h2 className="text-lg font-medium">Skills</h2>
-        <p className="leading-7 text-neutral-700 dark:text-neutral-300">
-          {skills.join(', ')}.
-        </p>
-      </section>
-    </section>
+    </div>
   )
 }

@@ -1,21 +1,26 @@
 import { BlogPosts } from 'app/components/posts'
+import { SectionLabel } from 'app/components/section-label'
 
 export const metadata = {
-  title: 'Blog',
-  description: 'Read my blog.',
+  title: 'Writing',
+  description:
+    'Notes on software, projects, reading, and the systems behind the work.',
 }
 
 export default function Page() {
   return (
-    <section className="space-y-6">
-      <div className="space-y-3">
-        <h1 className="text-2xl font-semibold">Writing</h1>
-        <p className="leading-7 text-neutral-700 dark:text-neutral-300">
-          Notes on software, projects, reading, and things I want to understand
-          better.
+    <div className="site-shell space-y-10">
+      <header className="max-w-3xl space-y-5">
+        <SectionLabel tone="gold">Writing & notes</SectionLabel>
+        <h1 className="font-mono text-[32px] leading-[1.15] tracking-[-0.03em] text-ink sm:text-[40px]">
+          Writing
+        </h1>
+        <p className="max-w-2xl text-[17px] leading-7 text-ink-soft">
+          Notes on software engineering, products, archives, books, and things
+          I want to understand more clearly.
         </p>
-      </div>
+      </header>
       <BlogPosts />
-    </section>
+    </div>
   )
 }

@@ -82,7 +82,8 @@ export default async function Blog({ params }: BlogPageProps) {
   let isScholarly = post.slug === SCHOLARLY_SLUG
 
   return (
-    <section>
+    <section className="site-shell">
+      <div className="max-w-3xl">
       <script
         type="application/ld+json"
         suppressHydrationWarning
@@ -100,7 +101,7 @@ export default async function Blog({ params }: BlogPageProps) {
             url: canonicalUrl,
             author: {
               '@type': 'Person',
-              name: 'Wielfried Zouantcha',
+              name: 'Wiel Zouantcha',
             },
           }),
         }}
@@ -117,7 +118,7 @@ export default async function Blog({ params }: BlogPageProps) {
               description: post.metadata.summary,
               author: {
                 '@type': 'Person',
-                name: 'Wielfried Zouantcha',
+                name: 'Wiel Zouantcha',
               },
               datePublished: post.metadata.publishedAt,
               dateModified: post.metadata.publishedAt,
@@ -127,12 +128,12 @@ export default async function Blog({ params }: BlogPageProps) {
           }}
         />
       ) : null}
-      <h1 className="title text-2xl font-semibold">
+      <h1 className="title font-mono text-[28px] leading-[1.2] tracking-[-0.03em] text-ink sm:text-[36px]">
         {post.metadata.title}
       </h1>
-      <div className="mt-2 mb-8 text-sm">
+      <div className="mt-4 mb-10 text-sm">
         <div className="flex justify-between items-center">
-          <p className="text-sm text-neutral-600 dark:text-neutral-400">
+          <p className="font-mono text-xs text-muted">
             {formatDate(post.metadata.publishedAt)}
           </p>
         </div>
@@ -148,6 +149,7 @@ export default async function Blog({ params }: BlogPageProps) {
       <article className="prose">
         <CustomMDX source={post.content} />
       </article>
+      </div>
     </section>
   )
 }

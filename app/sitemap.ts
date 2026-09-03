@@ -8,7 +8,24 @@ export default async function sitemap() {
     lastModified: post.metadata.publishedAt,
   }))
 
-  let routes = ['', '/work', '/projects', '/blog', '/slides'].map((route) => ({
+  let caseStudyPages = [
+    '/case-studies/mtl-archives',
+    '/case-studies/portmind',
+    '/case-studies/diane-party-rentals',
+    '/case-studies/ballerz-football-academy',
+    '/case-studies/starthome',
+  ]
+
+  let routes = [
+    '',
+    '/case-studies',
+    '/work',
+    '/about',
+    '/contact',
+    '/blog',
+    '/slides',
+    ...caseStudyPages,
+  ].map((route) => ({
     url: `${baseUrl}${route}`,
     lastModified: new Date().toISOString().split('T')[0],
   }))

@@ -2,7 +2,7 @@ import { ImageResponse } from 'next/og'
 
 export function GET(request: Request) {
   let url = new URL(request.url)
-  let title = url.searchParams.get('title') || 'Wielfried Zouantcha'
+  let title = url.searchParams.get('title') || 'Wiel Zouantcha'
   let summary = url.searchParams.get('summary') || ''
   let tag = url.searchParams.get('tag') || ''
 
@@ -11,7 +11,7 @@ export function GET(request: Request) {
       <div
         tw="flex w-full h-full"
         style={{
-          background: '#0a0a0a',
+          background: '#f3f0e8',
           fontFamily: 'system-ui, sans-serif',
         }}
       >
@@ -22,7 +22,7 @@ export function GET(request: Request) {
             {tag && (
               <span
                 tw="text-sm tracking-widest"
-                style={{ color: '#737373', textTransform: 'uppercase', letterSpacing: '0.1em' }}
+                style={{ color: '#8a2e24', textTransform: 'uppercase', letterSpacing: '0.1em' }}
               >
                 {tag}
               </span>
@@ -33,14 +33,14 @@ export function GET(request: Request) {
           <div tw="flex flex-col">
             <h1
               tw="text-6xl font-bold leading-tight"
-              style={{ color: '#fafafa', lineHeight: 1.1 }}
+              style={{ color: '#161412', lineHeight: 1.1 }}
             >
               {title}
             </h1>
             {summary && (
               <p
                 tw="text-xl mt-6"
-                style={{ color: '#a3a3a3', lineHeight: 1.5, maxWidth: '800px' }}
+                style={{ color: '#3c3933', lineHeight: 1.5, maxWidth: '800px' }}
               >
                 {summary}
               </p>
@@ -49,7 +49,7 @@ export function GET(request: Request) {
 
           {/* Bottom: author */}
           <div tw="flex items-center">
-            <span tw="text-sm" style={{ color: '#525252' }}>
+            <span tw="text-sm" style={{ color: '#6f6a60' }}>
               zouantcha.com
             </span>
           </div>
@@ -61,7 +61,7 @@ export function GET(request: Request) {
           style={{
             width: '6px',
             height: '100%',
-            background: 'linear-gradient(to bottom, #3b82f6, #8b5cf6)',
+            background: '#8a2e24',
             position: 'absolute',
             right: '0',
             top: '0',
