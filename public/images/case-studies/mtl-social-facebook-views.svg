@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="460" viewBox="0 0 980 460">
+<rect width="100%" height="100%" fill="#fbfaf7"/>
+<text x="80" y="32" font-family="Arial" font-size="20" font-weight="700" fill="#1f2933">Monthly Facebook page views, Jan-Jul 2026</text>
+<line x1="80" y1="60.0" x2="950" y2="60.0" stroke="#d8dde2"/>
+<text x="70" y="64.0" text-anchor="end" font-family="Arial" font-size="12" fill="#52606d">1,568,024</text>
+<line x1="80" y1="137.5" x2="950" y2="137.5" stroke="#d8dde2"/>
+<text x="70" y="141.5" text-anchor="end" font-family="Arial" font-size="12" fill="#52606d">1,176,018</text>
+<line x1="80" y1="215.0" x2="950" y2="215.0" stroke="#d8dde2"/>
+<text x="70" y="219.0" text-anchor="end" font-family="Arial" font-size="12" fill="#52606d">784,012</text>
+<line x1="80" y1="292.5" x2="950" y2="292.5" stroke="#d8dde2"/>
+<text x="70" y="296.5" text-anchor="end" font-family="Arial" font-size="12" fill="#52606d">392,006</text>
+<line x1="80" y1="370.0" x2="950" y2="370.0" stroke="#d8dde2"/>
+<text x="70" y="374.0" text-anchor="end" font-family="Arial" font-size="12" fill="#52606d">0</text>
+<rect x="99.9" y="280.7" width="84.5" height="89.3" fill="#2d5d87"/>
+<text x="142.1" y="273.7" text-anchor="middle" font-family="Arial" font-size="12" fill="#1f2933">451,473</text>
+<text x="142.1" y="408" text-anchor="middle" font-family="Arial" font-size="12" fill="#52606d">01</text>
+<rect x="224.2" y="100.4" width="84.5" height="269.6" fill="#2d5d87"/>
+<text x="266.4" y="93.4" text-anchor="middle" font-family="Arial" font-size="12" fill="#1f2933">1,363,500</text>
+<text x="266.4" y="408" text-anchor="middle" font-family="Arial" font-size="12" fill="#52606d">02</text>
+<rect x="348.5" y="288.5" width="84.5" height="81.5" fill="#2d5d87"/>
+<text x="390.7" y="281.5" text-anchor="middle" font-family="Arial" font-size="12" fill="#1f2933">412,258</text>
+<text x="390.7" y="408" text-anchor="middle" font-family="Arial" font-size="12" fill="#52606d">03</text>
+<rect x="472.7" y="351.1" width="84.5" height="18.9" fill="#2d5d87"/>
+<text x="515.0" y="344.1" text-anchor="middle" font-family="Arial" font-size="12" fill="#1f2933">95,559</text>
+<text x="515.0" y="408" text-anchor="middle" font-family="Arial" font-size="12" fill="#52606d">04</text>
+<rect x="597.0" y="364.1" width="84.5" height="5.9" fill="#2d5d87"/>
+<text x="639.3" y="357.1" text-anchor="middle" font-family="Arial" font-size="12" fill="#1f2933">30,028</text>
+<text x="639.3" y="408" text-anchor="middle" font-family="Arial" font-size="12" fill="#52606d">05</text>
+<rect x="721.3" y="368.5" width="84.5" height="1.5" fill="#2d5d87"/>
+<text x="763.6" y="361.5" text-anchor="middle" font-family="Arial" font-size="12" fill="#1f2933">7,606</text>
+<text x="763.6" y="408" text-anchor="middle" font-family="Arial" font-size="12" fill="#52606d">06</text>
+<rect x="845.6" y="368.7" width="84.5" height="1.3" fill="#2d5d87"/>
+<text x="887.9" y="361.7" text-anchor="middle" font-family="Arial" font-size="12" fill="#1f2933">6,560</text>
+<text x="887.9" y="408" text-anchor="middle" font-family="Arial" font-size="12" fill="#52606d">07</text>
+<text x="18" y="215.0" transform="rotate(-90 18 215.0)" font-family="Arial" font-size="12" fill="#52606d">Facebook page Views</text>
+</svg>
