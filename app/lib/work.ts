@@ -900,268 +900,150 @@ export const work: WorkItem[] = [
     }
   ]
 },
-  {
-    slug: 'starthome',
-    number: '05',
-    title: 'Starthome',
-    dek: 'Quebec banned the damage deposit. The inspection is how you prove anything at all.',
-    summary:
-      'Expo field app, Cloudflare Worker API, D1 and R2, bilingual PDFs, assistive AI that cannot become the record on its own.',
-    evidence: 'Expo · Workers · pdf-lib · EN/FR · AI suggestions stay suggestions',
-    role: 'Full Stack Design Engineer',
-    period: '2026',
-    scope: 'Mobile · API · Documents · i18n',
-    tools: 'Paper · Expo · Cloudflare Workers · Hono · D1 · R2 · Better Auth · Stripe · pdf-lib · AI Gateway',
-    featured: true,
-    metrics: [
-      { value: '1890', label: 'Civil Code: incoming condition by description or photographs, or the tenant is presumed to have received it in good condition' },
-      { value: '1904', label: 'No security deposit. If you want money for damage, you claim it and you prove it' },
-      { value: 'EN / FR', label: 'A French PDF cannot leak English legal copy' },
-    ],
-    links: [
-      { href: 'https://starthome.ca/', label: 'starthome.ca', external: true },
-      {
-        href: 'https://www.legisquebec.gouv.qc.ca/en/version/lc/ccq-1991?code=se:1890&history=20251027&langCont=en',
-        label: 'Civil Code art. 1890',
-        external: true,
-      },
-      {
-        href: 'https://www.legisquebec.gouv.qc.ca/en/version/lc/ccq-1991?code=se:1904&history=20251027&langCont=en',
-        label: 'Civil Code art. 1904',
-        external: true,
-      },
-      {
-        href: 'https://www.tal.gouv.qc.ca/en/hearing/preparing-for-a-hearing',
-        label: 'TAL: preparing for a hearing',
-        external: true,
-      },
-    ],
-    images: [
-      {
-        src: '/images/case-studies/starthome-mobile-home.png',
-        alt: 'Starthome home screen on iPhone with inspections in progress, awaiting signature, and signed',
-        layout: 'phone',
-      },
-    ],
-    sections: [
-      {
-        heading: 'How this started',
-        blocks: [
-          {
-            kind: 'p',
-            text: 'A Quebec property manager came to me because the inspection apps they were looking at were built for somewhere else. Ontario checklists. US deposit walkthroughs. English-only PDFs. Five-star condition sliders. None of that maps to an état des lieux.',
-          },
-          {
-            kind: 'p',
-            text: 'They weren\'t trying to return a security deposit. Quebec makes that deposit illegal. They needed to walk a unit on a phone, in French, room by room, take photos, get signatures, and leave with a file they could keep. Later they needed the comparison: what changed between move-in and move-out. That file is the product. The app is how you get there.',
-          },
-        ],
-      },
-      {
-        heading: 'Why Quebec is a different problem',
-        blocks: [
-          {
-            kind: 'p',
-            text: 'Most of North America treats a move-in inspection as a nice-to-have around a deposit. Quebec puts the incoming condition in the Civil Code, and it bans the deposit.',
-          },
-          {
-            kind: 'p',
-            text: 'Article 1890 is the one that matters for the photos. When the lease ends, the tenant has to return the dwelling in the condition they received it, minus aging, fair wear, and superior force. The condition can be established by a description the parties made, or by photographs they took. If you never established it, the tenant is presumed to have received the place in good condition.',
-          },
-          {
-            kind: 'p',
-            text: 'That presumption is why both sides want the file. If the unit wasn\'t actually good on day one and nobody photographed it, the tenant is on the hook for what was already there. If something actually got worse, the landlord still has to show the change. Photos aren\'t extra here. They\'re how 1890 says you prove the incoming state.',
-          },
-          {
-            kind: 'p',
-            text: 'Article 1904 is why the US apps don\'t transfer. The lessor may not exact any amount of money other than the rent, in the form of a deposit or otherwise. No security deposit. No key deposit. No last month sitting in an account. In New York or Florida the walkthrough exists so you can keep or return a deposit. In Ontario you at least have last month\'s rent. In Quebec, if you want money for damage, you claim it at the Tribunal administratif du logement. You prove it.',
-          },
-          {
-            kind: 'p',
-            text: 'TAL tells you what to bring. The applicant has to prove each allegation with documents and/or testimony. Photographs are on the official list, next to the lease and the invoices. Documents have to be clearly labeled and put in order so you can find them at the hearing. For a videoconference, a legible copy of all photos has to be in the file ten days before. That\'s the comparison PDF\'s actual job. Not a star rating. An exhibit index, paired photos, hashes, signatures.',
-          },
-          {
-            kind: 'p',
-            text: 'Electronic documents have their own rule. C-1.1 says the legal value of a technology-based document depends on preserving integrity through its life. That\'s why a locked inspection, a SHA-256 on every photo, and a signature bound to a source hash. If the file changes, they sign again.',
-          },
-          {
-            kind: 'p',
-            text: 'The rest of the Code sits around that. 1855: the tenant uses the place with prudence and diligence. 1856: nobody changes the form or destination of the dwelling during the lease. 1864: the landlord does the necessary repairs, the tenant does minor maintenance unless it\'s age or superior force. French is the working language. The lease form is mandatory. Default locale is French.',
-          },
-          {
-            kind: 'table',
-            table: {
-              columns: ['', 'Quebec', 'Ontario / most of Canada', 'United States'],
-              rows: [
-                ['Tribunal', 'TAL', 'LTB or equivalent', 'Housing court / small claims'],
-                ['Deposit', 'Illegal (1904). First month only.', 'Last month\'s rent is typical. Damage deposits usually not.', 'Security deposit. The walkthrough exists to keep or return it.'],
-                ['Incoming condition', '1890: description or photographs. Otherwise presumed good.', 'Best practice. BC requires a condition report to claim the deposit.', 'State-by-state walkthrough. Photos are extra, not in a civil code.'],
-                ['What you bring', 'Lease, labeled photos, invoices, a file in order.', 'Inspection report plus the deposit ledger.', 'Itemized damage list against the deposit.'],
-              ],
-              footnote: 'Not legal advice. 1890 and 1904 from Légis Québec. TAL evidence list from Preparing for a hearing.',
-            },
-          },
-          {
-            kind: 'p',
-            text: 'So the software has a specific job. Produce a bilingual evidence record: rooms, conditions, photos next to the finding, who signed, when, and a hash so you can tell if the file got regenerated. It does not decide liability. It does not say it\'s an official document. It does not invent a seven-day window that counsel hasn\'t approved. It organizes what 1890 actually asks for: a description, photographs, and a comparison against what was received.',
-          },
-        ],
-      },
-      {
-        heading: 'In the unit',
-        blocks: [
-          {
-            kind: 'p',
-            text: 'You\'re in a unit, on a phone, often in French. If nobody picked a language, it defaults to French. A wall is new, good, okay, or poor. Type, location, template, rooms, photos, signature. That\'s the walkthrough.',
-          },
-          {
-            kind: 'figure',
-            figure: { kind: 'artifact', id: 'starthome-system' },
-          },
-          {
-            kind: 'phones',
-            images: [
-              {
-                src: '/images/case-studies/starthome-mobile-splash.png',
-                alt: 'Starthome splash screen on iPhone, gold roof mark on black',
-                caption: 'Splash',
-                layout: 'phone',
-              },
-              {
-                src: '/images/case-studies/starthome-mobile-language.png',
-                alt: 'Starthome language screen with English and French',
-                caption: 'Language',
-                layout: 'phone',
-              },
-              {
-                src: '/images/case-studies/starthome-mobile-home.png',
-                alt: 'Starthome home screen with this month, pending, and reports',
-                caption: 'Home',
-                layout: 'phone',
-              },
-              {
-                src: '/images/case-studies/starthome-mobile-inspections.png',
-                alt: 'Starthome inspections list with in progress, awaiting signature, and signed jobs',
-                caption: 'Inspections',
-                layout: 'phone',
-              },
-              {
-                src: '/images/case-studies/starthome-mobile-detail.png',
-                alt: 'Signed move-out inspection with room conditions and Share PDF',
-                caption: 'Signed inspection',
-                layout: 'phone',
-              },
-            ],
-          },
-          {
-            kind: 'p',
-            text: 'The phone has to keep working while the network, billing, and AI jobs do their own thing. Photos and draft edits queue on the device. If those queues are still pending or failed, the report doesn\'t generate. I don\'t want a PDF that\'s missing half the photos.',
-          },
-        ],
-      },
-      {
-        heading: 'The PDF is the actual product',
-        blocks: [
-          {
-            kind: 'p',
-            text: 'An inspection isn\'t a photo dump. Quebec templates 1.5 through 6.5 expand into rooms and findings so you\'re not inventing the checklist in the hallway. A 3.5 is living room, kitchen, bedroom, bathroom. A kitchen already has walls, floor, cabinets, counters, sink, appliances.',
-          },
-          {
-            kind: 'p',
-            text: 'Still photos are the real evidence, which is what 1890 is talking about. You can do a short video sweep to help, six seconds, four frames max, but those frames don\'t count until someone picks them. Anything that looks like an ID gets rejected. The Worker builds the PDF with pdf-lib. Owner or property manager has to sign or there is no report. Tenant signature is optional. A French PDF is not allowed to leak the English notice. If the photos aren\'t in R2, it just doesn\'t generate.',
-          },
-          {
-            kind: 'figure',
-            figure: {
-              kind: 'image',
-              src: '/images/case-studies/starthome-report.png',
-              alt: 'French move-out état des lieux: parties, dates, and a room-by-room constats table with exhibit numbers',
-              caption: 'Page 1. Identification and constats, like a TAL exhibit list. Not a dashboard.',
-            },
-          },
-          {
-            kind: 'figure',
-            figure: {
-              kind: 'image',
-              src: '/images/case-studies/starthome-report-photos.png',
-              alt: 'Move-out photograph exhibits P-1 to P-5 with SHA-256 hashes and in-person signature blocks',
-              caption: 'Page 2. Numbered pièces, hashes, then signature lines. A person can tab this.',
-            },
-          },
-          {
-            kind: 'p',
-            text: 'Move-out has to sit next to a locked move-in. That\'s the 1890 comparison: what they received versus what they handed back. The comparison PDF is a second artifact, the one you\'d actually tab and bring. Identification first. Then a list of pièces, like TAL-137A. Then paired photos for anything that needs a look, with a SHA-256 on every file, a capture time, and a GPS. Then signatures bound to a source hash so you can tell if the file got regenerated. It doesn\'t declare the tenant caused the damage. It doesn\'t call itself an official document. It flags what a person still has to review.',
-          },
-          {
-            kind: 'figure',
-            figure: {
-              kind: 'image',
-              src: '/images/case-studies/starthome-comparison.png',
-              alt: 'Comparison dossier cover with party identification, source hash, and numbered exhibit list',
-              caption: 'Comparison, page 1. Two locked inspections, a source hash, and an exhibit index. The register is the list of pièces.',
-            },
-          },
-          {
-            kind: 'figure',
-            figure: {
-              kind: 'image',
-              src: '/images/case-studies/starthome-comparison-photos.png',
-              alt: 'Paired move-in and move-out photographs of the living room, plus close-ups of a nail hole and a ceiling humidity stain, each with a SHA-256',
-              caption: 'Pièce 1, salon murs. Overview plus close-ups. Each shot has a time, GPS, and hash. The stain vs an 1864 leak is left for a person.',
-            },
-          },
-          {
-            kind: 'figure',
-            figure: {
-              kind: 'image',
-              src: '/images/case-studies/starthome-comparison-kitchen.png',
-              alt: 'Paired kitchen floor and bathroom silicone photographs, move-in versus move-out, marked for review',
-              caption: 'Pièces 2 and 3. Kitchen scratches and bathroom mildew, both marked à vérifier. Wear versus tenant upkeep is not auto-decided.',
-            },
-          },
-          {
-            kind: 'figure',
-            figure: {
-              kind: 'image',
-              src: '/images/case-studies/starthome-comparison-hashes.png',
-              alt: 'Evidence appendix with SHA-256 for every photograph, plus signature lines bound to the source hash and the counsel notice',
-              caption: 'Empreintes and signatures. Nine photos, nine hashes, two signature lines, counsel notice. If the file changes, they sign again.',
-            },
-          },
-        ],
-      },
-      {
-        heading: 'What the software is allowed to do',
-        blocks: [
-          {
-            kind: 'p',
-            text: 'One Cloudflare Worker, Hono, behind the Expo app and a Next.js admin. Same Better Auth login. Orgs have owner, admin, inspector. The inspection lives in D1 as JSON. Photos and PDFs in R2. Stripe for plans and checkout. Starter is the phone. The admin web isn\'t the field product.',
-          },
-          {
-            kind: 'p',
-            text: 'AI runs after you\'ve taken the photos, through Cloudflare Queues and AI Gateway. It can suggest a condition, a note, some evidence text. That goes into suggestion fields. The saved condition is still whatever the inspector typed or accepted.',
-          },
-          {
-            kind: 'p',
-            text: 'I kept the live path boring on purpose. One photo per Worker invocation, so a 15-photo room is 15 attempts, not one giant request that dies. On staging, a contact-sheet triage bench went from about 27 seconds to about 2. That\'s me testing the shape of the pipeline. It\'s not me claiming the PDF is court-ready because Gemini was fast.',
-          },
-        ],
-      },
-      {
-        heading: 'What I took from it',
-        blocks: [
-          {
-            kind: 'p',
-            text: 'If the photos don\'t make it into the PDF, the field app is a toy. In Quebec you need the incoming description or photographs, or the tenant is presumed to have received the place in good condition. And because there\'s no deposit to hold, the file is the claim. Landlords need that file. Later they need the comparison.',
-          },
-          {
-            kind: 'p',
-            text: 'AI is only useful if the saved condition is still a person\'s call, and if a French file can\'t accidentally print the English notice.',
-          },
-        ],
-      },
-    ],
-  },
+{
+  "slug": "starthome",
+  "number": "05",
+  "title": "Starthome",
+  "dek": "Designing the walkthrough, from the first photograph to the signed report.",
+  "summary": "A closer look at the mobile interactions in Starthome: moving through a rental inspection, reviewing the evidence, and signing a record you can come back to.",
+  "evidence": "Product and engineering · Native mobile · 2026",
+  "role": "Product & Engineering Lead",
+  "period": "2026 · Mobile redesign, September",
+  "scope": "Product design · Native mobile · Inspection records",
+  "featured": true,
+  "links": [
+    {
+      "href": "#mobile-preview",
+      "label": "An interaction from the app"
+    },
+    {
+      "href": "/images/case-studies/starthome-redesign/sample-report.pdf",
+      "label": "Example report · PDF",
+      "external": true
+    }
+  ],
+  "glance": [],
+  "images": [
+    {
+      "src": "/images/case-studies/starthome-craft/home.jpg",
+      "alt": "Starthome inspection workspace on iOS",
+      "layout": "phone"
+    }
+  ],
+  "sections": [
+    {
+      "heading": "Walking through Starthome",
+      "blocks": [
+        {
+          "kind": "p",
+          "text": "Starthome is an inspection app for property owners and managers in Québec. You walk through a rental unit, photograph what you see, and record its condition. At the next visit, you have something to compare it with. I work on both the product and the engineering."
+        },
+        {
+          "kind": "p",
+          "text": "The first mobile redesign connected the whole journey, but moving through it still felt like filling out a series of separate forms. Almost every action opened another page. The screens worked individually; there was less care in how one led to the next."
+        },
+        {
+          "kind": "p",
+          "text": "That became the focus of this pass. I wanted the app to be easier to follow while someone is occupied with the room around them. A small choice should feel small. An unfinished observation should be easy to return to. Signing should give you a reason to pause."
+        }
+      ]
+    },
+    {
+      "heading": "Arriving in the room",
+      "blocks": [
+        {"kind":"p","text":"The welcome starts with a Montréal apartment. The first version used an illustration, which felt oddly distant from the work of looking at a real place. This version uses a generated image with points attached to the window, wall and floor. You can move the scene and open each point before starting the visit."},
+        {"kind":"video","src":"/images/case-studies/starthome-craft/welcome.mp4","poster":"/images/case-studies/starthome-craft/welcome.jpg","caption":"Opening an inspection point, closing it and beginning onboarding. The apartment image is generated.","description":"A sunlit apartment fills the welcome. Tapping the wall marker reveals a short note inside the photograph. The note closes back into the room, then the start button opens account setup."},
+        {"kind":"p","text":"Creating an account, signing in and exploring the demo stay together at the bottom. During testing, the sign-in link was slipping under the fixed action area. Moving it into that area made all three choices visible without scrolling."}
+      ]
+    },
+    {
+      "heading": "A little help, when you need it",
+      "blocks": [
+        {
+          "kind": "p",
+          "text": "Writing help used to occupy a large card beneath every observation, including when you had nothing to ask it. I moved it behind a single row. Tapping it brings up a short sheet while the photograph and condition remain visible underneath."
+        },
+        {
+          "kind": "video",
+          "src": "/images/case-studies/starthome-craft/finding-review.mp4",
+          "poster": "/images/case-studies/starthome-craft/suggestion.jpg",
+          "caption": "Opening writing help, returning to the finding, and confirming it. Recorded in the iOS app.",
+          "description": "A sheet opens over the finding. It contains an example observation and an action to use it. Closing the sheet returns to the same photograph and condition. Confirming the finding returns to the room, where the completed count increases."
+        },
+        {
+          "kind": "p",
+          "text": "The wording comes back into the observation field, where it can still be changed. It does not confirm the finding for you. There is a useful distinction between accepting some help with a sentence and agreeing that the sentence accurately describes the photograph."
+        },
+        {
+          "kind": "p",
+          "text": "The sheet can be closed with its button, the space around it, or a downward drag on the handle. That last detail is small, but it is the sort of thing I expect when a surface appears from the bottom of my phone."
+        }
+      ]
+    },
+    {
+      "heading": "The next thing to look at",
+      "blocks": [
+        {
+          "kind": "p",
+          "text": "An incomplete room originally ended with a disabled validation button. It told you that you could not continue, but left you to work out where to go. The action now opens the next unchecked element. When the room is complete, it becomes the action that validates the room."
+        },
+        {
+          "kind": "p",
+          "text": "Inside a finding, the first photograph gets enough space to actually look at. The condition labels stay in place as the selection moves between them. Extra photos and writing help remain available without taking over the screen."
+        },
+        {
+          "kind": "p",
+          "text": "I kept the existing roof mark, gold and typefaces. Most of the working surfaces are quieter now: a light background, a white surface for the current task, and gold reserved for the action or selected state. The welcome can spend a little more time on the apartment; checking the fourth door in a visit should be quick."
+        }
+      ]
+    },
+    {
+      "heading": "Before you put your name on it",
+      "blocks": [
+        {
+          "kind": "p",
+          "text": "The review screen was the clearest example of something that worked without being useful enough. It listed room names and counts, then asked you to proceed to signatures. To read an observation, you had to leave the review and find it again."
+        },
+        {
+          "kind": "figure",
+          "figure": {
+            "kind": "image",
+            "src": "/images/case-studies/starthome-craft/review.jpg",
+            "alt": "Starthome review screen with an expanded room showing photographs and the condition of each element.",
+            "layout": "phone",
+            "caption": "The room opens into its observations. Tap a finding to correct it."
+          }
+        },
+        {
+          "kind": "p",
+          "text": "Now a room opens in place. Its photographs, conditions and notes sit together, with a direct path to edit anything that needs attention. The initial open room is one with a condition to examine, when there is one."
+        },
+        {
+          "kind": "p",
+          "text": "The signature screen offers drawing and a typed name in the same area. Changing methods clears the consent check, so it takes an explicit action to confirm the new choice. For the tenant, the next sheet records what actually happened: a signature on the device, a remote invitation, an absence or a refusal."
+        }
+      ]
+    },
+    {
+      "heading": "After the visit",
+      "blocks": [
+        {
+          "kind": "p",
+          "text": "Finishing changes what you can do with the record. The report stays as it was signed. If you notice a mistake later, creating a corrected version keeps the original and opens a new, unsigned draft."
+        },
+        {
+          "kind": "p",
+          "text": "The same care needs to extend to the unremarkable parts: returning from a photo, finding a saved draft, running out of credits, closing a sheet without choosing anything. I have been walking those paths on the simulator as I build. They reveal problems that a collection of finished screenshots tends to hide."
+        },
+        {
+          "kind": "p",
+          "text": "This is still a local, French-first demo. The people and properties are examples; account creation, analysis, purchases and invitations are simulated. The app does generate and share a real PDF on the device. Field testing with property managers, real-device camera evaluation and production integration are the next pieces of work."
+        }
+      ]
+    }
+  ]
+},
+
 ]
 
 export function getWork(slug: string) {
