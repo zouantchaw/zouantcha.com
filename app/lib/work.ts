@@ -20,6 +20,10 @@ export type WorkImage = {
 }
 
 export const workImageDimensions: Record<string, { width: number; height: number }> = {
+  '/images/case-studies/dpr-story/brand-marks.png': { width: 2000, height: 1966 },
+  '/images/case-studies/dpr-story/social.png': { width: 2000, height: 2000 },
+  '/images/case-studies/dpr-story/delivery-signoff.png': { width: 780, height: 1506 },
+
   '/images/case-studies/dpr-stripe/payments.png': { width: 786, height: 800 },
   '/images/case-studies/dpr-stripe/customers.png': { width: 786, height: 816 },
   '/images/case-studies/dpr-stripe/net.png': { width: 790, height: 804 },
@@ -539,7 +543,7 @@ export const work: WorkItem[] = [
   "evidence": "$5,032.66 gross payment volume · April–September 2026",
   "role": "Design engineer",
   "period": "March 2026–present",
-  "scope": "Website · Booking · Payments · Operations",
+  "scope": "Brand · Website · Booking · Operations",
   "featured": true,
   "links": [
     {
@@ -556,20 +560,52 @@ export const work: WorkItem[] = [
   ],
   "sections": [
     {
-      "heading": "Starting with the website",
+      "heading": "Where it started",
       "blocks": [
         {
           "kind": "p",
-          "text": "Diane Party Rentals is a family-operated rental company in Frederick, Maryland. They reached out to me in March 2026 with a site on Wix’s free plan. No online payments. Bookings, quotes and customer questions were all handled manually."
+          "text": "Diane Party Rentals is a family-operated rental company in Frederick, Maryland. They reached out to me in March 2026 with a site on Wix’s free plan. Bookings and quotes were handled manually. Payments came in as cash, Cash App, Venmo or Zelle."
         },
         {
           "kind": "p",
-          "text": "I worked across product design and engineering: the public website, quote and payment flow, and the admin behind each booking. I started with the customer’s path to a paid order, then followed that order through loading, delivery and pickup. That became the scope of the platform."
+          "text": "I started with the brand and assets, then designed and built the website, quote and payment flow, and the admin behind each booking. The work runs from how someone first encounters Diane to what the crew sees when it arrives at their event."
+        }
+      ]
+    },
+    {
+      "heading": "Giving Diane an identity",
+      "blocks": [
+        {
+          "kind": "p",
+          "text": "Before the website, I worked on the identity in Paper: the diane wordmark, a D monogram, the type, colors and reusable assets. I wanted it to feel welcoming enough for a celebration and clear enough for an invoice."
         },
         {
           "kind": "p",
-          "text": "Working with the team changed where I put the effort. Payments were straightforward once they were online. Fulfillment was where the interruptions were: competing delivery windows, missing details and replies someone had to chase. I shaped the admin around those situations."
+          "text": "Fraunces gives the name and headings their character. Cream and warm neutrals leave room for equipment photography; terracotta picks out the mark and actions. The smaller D works where the full name would be too much."
         },
+        {
+          "kind": "gallery",
+          "images": [
+            {
+              "src": "/images/case-studies/dpr-story/brand-marks.png",
+              "alt": "Diane brand system with light and dark wordmarks, D monograms and compact logo lockups"
+            },
+            {
+              "src": "/images/case-studies/dpr-story/social.png",
+              "alt": "Gold Chiavari chair social asset using the Diane wordmark, equipment image and price"
+            }
+          ],
+          "caption": "The identity and one of its product assets, from Paper. The same pieces carry into the website, customer emails and documents."
+        },
+        {
+          "kind": "p",
+          "text": "I made product templates for Instagram and Facebook, alongside quotes, contracts, receipts and customer emails. These are often the things a customer keeps or forwards. They needed to feel like they came from the same company as the website."
+        }
+      ]
+    },
+    {
+      "heading": "Choosing what to rent",
+      "blocks": [
         {
           "kind": "figure",
           "figure": {
@@ -590,8 +626,16 @@ export const work: WorkItem[] = [
       ]
     },
     {
-      "heading": "Taking payments",
+      "heading": "From a quote to a paid booking",
       "blocks": [
+        {
+          "kind": "p",
+          "text": "The old payment methods worked, but the booking lived elsewhere. Someone still had to connect the money to the event and keep track of what remained to be paid. Adding a checkout meant bringing those pieces together."
+        },
+        {
+          "kind": "p",
+          "text": "The customer reviews the equipment and dates, accepts the quote and follows the payment link. The payment then belongs to that booking, alongside its balance and receipt. The team has a record to return to when the customer calls."
+        },
         {
           "kind": "rich-p",
           "parts": [
@@ -600,7 +644,7 @@ export const work: WorkItem[] = [
               "href": "https://stripe.com/payments",
               "external": true
             },
-            " handles payment. Between April and September, the dashboard records $5,032.66 in gross volume, $4,881.62 in net volume and 15 new customers. These are the numbers from September 8, 2026."
+            " handles the online payment. By September 8, the dashboard records $5,032.66 in gross volume, $4,881.62 in net volume and 15 new customers across April–September 2026."
           ]
         },
         {
@@ -632,7 +676,7 @@ export const work: WorkItem[] = [
       "blocks": [
         {
           "kind": "p",
-          "text": "Getting paid is one part of the job. There is still a truck to load, a crew to assign and a customer waiting at the other end. A late pickup can affect the next delivery. A damaged table can leave tomorrow’s booking short."
+          "text": "With the customer’s booking and payment in one place, I followed the work into fulfillment. There is still a truck to load, a crew to assign and a customer waiting at the other end. A late pickup can affect the next delivery. A damaged table can leave tomorrow’s booking short."
         },
         {
           "kind": "p",
@@ -702,6 +746,29 @@ export const work: WorkItem[] = [
         {
           "kind": "p",
           "text": "Availability requests and reminders can go out under the team’s policy. Committing money needs approval. If a supplier does not answer, the request stays open and the follow-up has a deadline. It does not disappear into an email thread."
+        }
+      ]
+    },
+    {
+      "heading": "At the venue",
+      "blocks": [
+        {
+          "kind": "p",
+          "text": "The office view is only half of the handoff. The person unloading needs the venue, item count and setup instructions on a phone. I designed the mobile flow around that moment: check what arrived, take a photograph, record the condition and capture who accepted it."
+        },
+        {
+          "kind": "figure",
+          "figure": {
+            "kind": "image",
+            "src": "/images/case-studies/dpr-story/delivery-signoff.png",
+            "layout": "phone",
+            "alt": "Mobile delivery signoff with delivered item count, setup photo, condition notes, recipient and signature",
+            "caption": "The delivery signoff keeps the physical handoff with the booking."
+          }
+        },
+        {
+          "kind": "p",
+          "text": "Pickup and inspection continue the record. A missing chair or a damaged table needs evidence before it becomes a stock adjustment or a customer charge. The agent can gather the relevant records and flag the discrepancy; the crew still has to count and inspect the equipment."
         }
       ]
     },
