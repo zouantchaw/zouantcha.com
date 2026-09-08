@@ -20,6 +20,13 @@ export type WorkImage = {
 }
 
 export const workImageDimensions: Record<string, { width: number; height: number }> = {
+  '/images/case-studies/starthome-paper/home.png': { width: 780, height: 1688 },
+  '/images/case-studies/starthome-paper/room.png': { width: 780, height: 1688 },
+  '/images/case-studies/starthome-paper/observation.png': { width: 780, height: 1688 },
+  '/images/case-studies/starthome-paper/review.png': { width: 780, height: 1688 },
+  '/images/case-studies/starthome-paper/participation.png': { width: 780, height: 1688 },
+  '/images/case-studies/starthome-paper/report.png': { width: 780, height: 1688 },
+
   '/images/case-studies/dpr-story/brand-marks.png': { width: 2000, height: 1966 },
   '/images/case-studies/dpr-story/social.png': { width: 2000, height: 2000 },
   '/images/case-studies/dpr-story/delivery-signoff.png': { width: 780, height: 1506 },
@@ -837,140 +844,191 @@ export const work: WorkItem[] = [
   "slug": "starthome",
   "number": "05",
   "title": "Starthome",
-  "dek": "Designing the walkthrough, from the first photograph to the signed report.",
-  "summary": "A closer look at the mobile interactions in Starthome: moving through a rental inspection, reviewing the evidence, and signing a record you can come back to.",
+  "dek": "A rental inspection you can follow, and a record you can return to.",
+  "summary": "Designing and building a Québec rental inspection app, from room-by-room photographs to reviewed observations and a shared report.",
   "evidence": "Product and engineering · Native mobile · 2026",
-  "role": "Product & Engineering Lead",
-  "period": "2026 · Mobile redesign, September",
-  "scope": "Product design · Native mobile · Inspection records",
+  "role": "Product design & engineering",
+  "period": "February 2026–present",
+  "scope": "Mobile app · Web admin · Inspection records",
   "featured": true,
-  "links": [
-    {
-      "href": "#mobile-preview",
-      "label": "An interaction from the app"
-    },
-    {
-      "href": "/images/case-studies/starthome-redesign/sample-report.pdf",
-      "label": "Example report · PDF",
-      "external": true
-    }
-  ],
+  "links": [],
   "glance": [],
   "images": [
     {
-      "src": "/images/case-studies/starthome-craft/home.jpg",
-      "alt": "Starthome inspection workspace on iOS",
+      "src": "/images/case-studies/starthome-paper/home.png",
+      "alt": "Starthome mobile home with an inspection ready to resume",
       "layout": "phone"
     }
   ],
   "sections": [
     {
-      "heading": "Walking through Starthome",
+      "heading": "A record of the apartment",
       "blocks": [
         {
           "kind": "p",
-          "text": "Starthome is an inspection app for property owners and managers in Québec. You walk through a rental unit, photograph what you see, and record its condition. At the next visit, you have something to compare it with. I work on both the product and the engineering."
+          "text": "Starthome helps property owners and managers in Québec document a rental’s condition. You walk through the apartment, take photographs and record what you see. When it is time to inspect it again, the earlier visit gives you a reference."
         },
         {
           "kind": "p",
-          "text": "The first mobile redesign connected the whole journey, but moving through it still felt like filling out a series of separate forms. Almost every action opened another page. The screens worked individually; there was less care in how one led to the next."
-        },
-        {
-          "kind": "p",
-          "text": "That became the focus of this pass. I wanted the app to be easier to follow while someone is occupied with the room around them. A small choice should feel small. An unfinished observation should be easy to return to. Signing should give you a reason to pause."
+          "text": "I started working on Starthome in February 2026. The founder came with the logo and an initial design already in place. My work spans product design and engineering: shaping the mobile inspection, building the application around it, and connecting the photographs, observations and signatures to the final report."
         }
       ]
     },
     {
-      "heading": "Arriving in the room",
-      "blocks": [
-        {"kind":"p","text":"The welcome starts with a Montréal apartment. The first version used an illustration, which felt oddly distant from the work of looking at a real place. This version uses a generated image with points attached to the window, wall and floor. You can move the scene and open each point before starting the visit."},
-        {"kind":"video","src":"/images/case-studies/starthome-craft/welcome.mp4","poster":"/images/case-studies/starthome-craft/welcome.jpg","caption":"Opening an inspection point, closing it and beginning onboarding. The apartment image is generated.","description":"A sunlit apartment fills the welcome. Tapping the wall marker reveals a short note inside the photograph. The note closes back into the room, then the start button opens account setup."},
-        {"kind":"p","text":"Creating an account, signing in and exploring the demo stay together at the bottom. During testing, the sign-in link was slipping under the fixed action area. Moving it into that area made all three choices visible without scrolling."}
-      ]
-    },
-    {
-      "heading": "A little help, when you need it",
+      "heading": "Starting with Québec",
       "blocks": [
         {
-          "kind": "p",
-          "text": "Writing help used to occupy a large card beneath every observation, including when you had nothing to ask it. I moved it behind a single row. Tapping it brings up a short sheet while the photograph and condition remain visible underneath."
-        },
-        {
-          "kind": "video",
-          "src": "/images/case-studies/starthome-craft/finding-review.mp4",
-          "poster": "/images/case-studies/starthome-craft/suggestion.jpg",
-          "caption": "Opening writing help, returning to the finding, and confirming it. Recorded in the iOS app.",
-          "description": "A sheet opens over the finding. It contains an example observation and an action to use it. Closing the sheet returns to the same photograph and condition. Confirming the finding returns to the room, where the completed count increases."
-        },
-        {
-          "kind": "p",
-          "text": "The wording comes back into the observation field, where it can still be changed. It does not confirm the finding for you. There is a useful distinction between accepting some help with a sentence and agreeing that the sentence accurately describes the photograph."
+          "kind": "rich-p",
+          "parts": [
+            "The local rental context matters. ",
+            {
+              "label": "Article 1890 of Québec’s Civil Code",
+              "href": "https://www.legisquebec.gouv.qc.ca/fr/version/lc/ccq-1991?code=se%3A1890",
+              "external": true
+            },
+            " recognizes descriptions and photographs as ways to record a property’s condition. It also distinguishes ordinary wear from changes a tenant may need to answer for. That makes the detail of the record important: what was there at the beginning, what is visible now, and what someone actually checked."
+          ]
         },
         {
           "kind": "p",
-          "text": "The sheet can be closed with its button, the space around it, or a downward drag on the handle. That last detail is small, but it is the sort of thing I expect when a surface appears from the bottom of my phone."
+          "text": "I built the flow around entry and exit inspections, with the earlier inspection available as a reference. The French interface uses the language of the visit—logement, pièces, état des lieux. A photograph belongs to a room and an observation, so it can be understood later without the person who took it having to explain it."
         }
       ]
     },
     {
-      "heading": "The next thing to look at",
+      "heading": "Keeping the visit moving",
       "blocks": [
         {
           "kind": "p",
-          "text": "An incomplete room originally ended with a disabled validation button. It told you that you could not continue, but left you to work out where to go. The action now opens the next unchecked element. When the room is complete, it becomes the action that validates the room."
+          "text": "Someone inspecting an apartment is looking around, opening doors and talking to another person. The phone has to fit into that. I kept the founder’s identity and used its gold for the main action, with photographs and short lists doing most of the work."
         },
         {
           "kind": "p",
-          "text": "Inside a finding, the first photograph gets enough space to actually look at. The condition labels stay in place as the selection moves between them. Extra photos and writing help remain available without taking over the screen."
+          "text": "The home screen brings the unfinished visit back into view: the address, rooms checked and observations still needing attention. Inside a room, adding photographs is the primary action. Analysis can run while the person continues the visit, and entering an observation manually stays within reach."
+        },
+        {
+          "kind": "phones",
+          "images": [
+            {
+              "src": "/images/case-studies/starthome-paper/home.png",
+              "alt": "The unfinished visit stays in view, including what still needs checking.",
+              "caption": "The unfinished visit stays in view, including what still needs checking.",
+              "layout": "phone"
+            },
+            {
+              "src": "/images/case-studies/starthome-paper/room.png",
+              "alt": "Capture comes first. Photo analysis can continue in the background.",
+              "caption": "Capture comes first. Photo analysis can continue in the background.",
+              "layout": "phone"
+            }
+          ]
         },
         {
           "kind": "p",
-          "text": "I kept the existing roof mark, gold and typefaces. Most of the working surfaces are quieter now: a light background, a white surface for the current task, and gold reserved for the action or selected state. The welcome can spend a little more time on the apartment; checking the fourth door in a visit should be quick."
+          "text": "I also worked through the less convenient moments: a camera permission that has not been granted, a room that needs another photograph, a connection that drops. The offline flow separates photos saved on the device from work waiting for a connection. It gives someone a way to continue taking notes without implying that a report is already ready."
         }
       ]
     },
     {
-      "heading": "Before you put your name on it",
+      "heading": "Look, then confirm",
       "blocks": [
         {
           "kind": "p",
-          "text": "The review screen was the clearest example of something that worked without being useful enough. It listed room names and counts, then asked you to proceed to signatures. To read an observation, you had to leave the review and find it again."
-        },
-        {
-          "kind": "figure",
-          "figure": {
-            "kind": "image",
-            "src": "/images/case-studies/starthome-craft/review.jpg",
-            "alt": "Starthome review screen with an expanded room showing photographs and the condition of each element.",
-            "layout": "phone",
-            "caption": "The room opens into its observations. Tap a finding to correct it."
-          }
+          "text": "Photo assistance is useful when it gives someone less to write and something specific to check. A proposed observation opens beside the entry and exit photographs. The person can enlarge them, change the condition, edit the wording or discard the suggestion."
         },
         {
           "kind": "p",
-          "text": "Now a room opens in place. Its photographs, conditions and notes sit together, with a direct path to edit anything that needs attention. The initial open room is one with a condition to examine, when there is one."
+          "text": "I kept confirmation explicit. Marks on a floor may be ordinary wear; a photograph alone does not settle responsibility. The app asks the person on site to make the observation their own before it enters the reviewed record. If the evidence is insufficient, taking another photograph or writing a note remains part of the same flow."
+        },
+        {
+          "kind": "phones",
+          "images": [
+            {
+              "src": "/images/case-studies/starthome-paper/observation.png",
+              "alt": "The photographs, condition and editable observation stay together.",
+              "caption": "The photographs, condition and editable observation stay together.",
+              "layout": "phone"
+            },
+            {
+              "src": "/images/case-studies/starthome-paper/review.png",
+              "alt": "A final review brings the observations back into one readable list.",
+              "caption": "A final review brings the observations back into one readable list.",
+              "layout": "phone"
+            }
+          ]
         },
         {
           "kind": "p",
-          "text": "The signature screen offers drawing and a typed name in the same area. Changing methods clears the consent check, so it takes an explicit action to confirm the new choice. For the tenant, the next sheet records what actually happened: a signature on the device, a remote invitation, an absence or a refusal."
+          "text": "Before signatures, the review shows the rooms checked, photographs and confirmed observations. Each item leads back to its source. A change after signing requires another signature, so the review is a meaningful point in the visit."
         }
       ]
     },
     {
-      "heading": "After the visit",
+      "heading": "Finishing the handoff",
       "blocks": [
         {
           "kind": "p",
-          "text": "Finishing changes what you can do with the record. The report stays as it was signed. If you notice a mistake later, creating a corrected version keeps the original and opens a new, unsigned draft."
+          "text": "The tenant will not always be standing beside the property manager. I designed separate paths for signing on the device, receiving an email invitation, being absent and declining to sign. Each leaves a clear status in the record."
+        },
+        {
+          "kind": "phones",
+          "images": [
+            {
+              "src": "/images/case-studies/starthome-paper/participation.png",
+              "alt": "Tenant participation has its own paths, including absence and refusal.",
+              "caption": "Tenant participation has its own paths, including absence and refusal.",
+              "layout": "phone"
+            },
+            {
+              "src": "/images/case-studies/starthome-paper/report.png",
+              "alt": "The report shows what is ready and which participation is still pending.",
+              "caption": "The report shows what is ready and which participation is still pending.",
+              "layout": "phone"
+            }
+          ]
         },
         {
           "kind": "p",
-          "text": "The same care needs to extend to the unremarkable parts: returning from a photo, finding a saved draft, running out of credits, closing a sheet without choosing anything. I have been walking those paths on the simulator as I build. They reveal problems that a collection of finished screenshots tends to hide."
+          "text": "Those distinctions continue through the report. An invitation sent is different from a signature received. Generating the PDF is different from sharing it. The interface keeps those states visible, with the report available to open before sending a copy through the phone’s share sheet."
+        }
+      ]
+    },
+    {
+      "heading": "Connecting the product",
+      "blocks": [
+        {
+          "kind": "rich-p",
+          "parts": [
+            "I build the mobile app with ",
+            {
+              "label": "Expo",
+              "href": "https://docs.expo.dev/",
+              "external": true
+            },
+            ", alongside a web admin for organizations, teams and inspection oversight. ",
+            {
+              "label": "Cloudflare Workers",
+              "href": "https://developers.cloudflare.com/workers/",
+              "external": true
+            },
+            " runs the API, with D1 for records and R2 for photographs and documents. The report brings the room observations, photos and signatures together."
+          ]
         },
         {
           "kind": "p",
-          "text": "This is still a local, French-first demo. The people and properties are examples; account creation, analysis, purchases and invitations are simulated. The app does generate and share a real PDF on the device. Field testing with property managers, real-device camera evaluation and production integration are the next pieces of work."
+          "text": "The interaction and the underlying record have to agree. A proposed observation needs a different state from a confirmed one. A tenant invitation needs a different state from a signature. Those are design decisions that carry through the API and into the PDF, not just labels on a screen."
+        },
+        {
+          "kind": "rich-p",
+          "parts": [
+            "This is the kind of product work I enjoy: following a real task through the interface and the system behind it. If you are building something similar or hiring a design engineer, ",
+            {
+              "label": "I’d be happy to talk",
+              "href": "/contact",
+              "external": false
+            },
+            "."
+          ]
         }
       ]
     }
