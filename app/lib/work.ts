@@ -767,146 +767,139 @@ export const work: WorkItem[] = [
   ]
 },
   {
-    slug: 'ballerz-football-academy',
-    number: '04',
-    title: 'Ballerz Football Academy',
-    dek: 'Soccer training in the DC area. There was no website and no admin when I started. I\'m rebuilding the admin around an agent now.',
-    summary:
-      'Youth soccer training across Maryland, DC, and Virginia. No website and no admin when I started. The work in development is Eve, an owner command center.',
-    evidence: 'Built from zero · 7 DMV locations · $125 private / $75 group · Eve command center',
-    role: 'Full Stack Design Engineer',
-    period: '2024–present',
-    scope: 'Scheduling · Payments · Ops · Agents',
-    tools: 'Next.js · Cloudflare · Stripe · Eve',
-    featured: true,
-    metrics: [
-      { value: '$125 / $75', label: 'Private session vs small-group, per 60 minutes' },
-      { value: '7', label: 'Training locations across MD, DC, and VA' },
-      { value: '50+', label: 'Athletes on the public site' },
-      { value: 'From zero', label: 'No website and no admin when I started' },
-    ],
-    links: [
-      {
-        href: 'https://www.ballerzfootballacademy.com/',
-        label: 'ballerzfootballacademy.com',
-        external: true,
-      },
-    ],
-    banner: {
-      src: '/images/case-studies/bfa-admin-command-center.png',
-      alt: 'Ballerz owner command center with Eve prompt',
+  "slug": "ballerz-football-academy",
+  "number": "04",
+  "title": "Ballerz Football Academy",
+  "dek": "The operations behind youth soccer training in the DMV: coach coverage, family requests, attendance and package credits.",
+  "summary": "An operations workspace for sessions, family requests and reviewable agent actions.",
+  "evidence": "Youth coaching · Maryland, DC & Virginia",
+  "role": "Design & engineering",
+  "period": "2023–present",
+  "scope": "Operations · Scheduling · Credits · Public website",
+  "tools": "Next.js · Cloudflare · D1 · Eve direction",
+  "featured": true,
+  "metrics": [],
+  "links": [
+    {
+      "href": "https://www.ballerzfootballacademy.com/",
+      "label": "Current live website",
+      "external": true
+    }
+  ],
+  "images": [
+    {
+      "src": "/images/case-studies/ballerz-craft/operations.jpg",
+      "alt": "Ballerz operations workspace with sessions and prepared review items"
+    }
+  ],
+  "sections": [
+    {
+      "heading": "Keep the coach on the field",
+      "blocks": [
+        {
+          "kind": "p",
+          "text": "Ballerz Football Academy provides private training, small groups, camps and clinics across Maryland, DC and Virginia. Jerry Zouantcha founded the academy. Behind the training are families changing plans, coaches moving between venues, attendance records and packages that need to add up."
+        },
+        {
+          "kind": "p",
+          "text": "I started this revision with those operations. A useful admin should make the day legible and bring the exceptions forward. It should not require the owner to ask a chat window whether something needs attention."
+        }
+      ]
     },
-    images: [
-      {
-        src: '/images/case-studies/bfa-admin-command-center.png',
-        alt: 'Ballerz owner command center with Eve prompt, four sessions today, and an operations queue',
-      },
-    ],
-    sections: [
-      {
-        heading: 'How this started',
-        blocks: [
-          {
-            kind: 'p',
-            text: 'Ballerz is a soccer training business around Washington, DC. Private sessions, small groups, camps, clinics. Coaches with D1 backgrounds. Seven locations in Maryland, DC, and Virginia. Main field is Gaithersburg.',
-          },
-          {
-            kind: 'p',
-            text: 'There was no website and no admin when I started. Programs, bookings, payments, all living in chats and whatever tool was open that week. I needed somewhere to actually run sessions, families, coaches, and money. Not just a page listing the programs.',
-          },
-        ],
-      },
-      {
-        heading: 'Getting it running',
-        blocks: [
-          {
-            kind: 'p',
-            text: 'I built the public site and the back office together. Registration, scheduling, parent and staff access, Stripe, package credits, bookings, sessions. Private is $125 an hour. Small group is $75. That\'s still what the live site sits on.',
-          },
-          {
-            kind: 'figure',
-            figure: {
-              kind: 'image',
-              src: '/images/case-studies/bfa-admin-sessions.png',
-              alt: 'Ballerz week schedule with private, group, goalkeeper, and assessment sessions',
-              caption: 'The week. Private, group, goalkeeper, assessment.',
-            },
-          },
-          {
-            kind: 'figure',
-            figure: {
-              kind: 'image',
-              src: '/images/case-studies/bfa-admin-programs.png',
-              alt: 'Ballerz programs catalog with private, group, clinic, and assessment offerings',
-              caption: 'Programs. This is what the public site still sells.',
-            },
-          },
-        ],
-      },
-      {
-        heading: 'What the owner still had to decide',
-        blocks: [
-          {
-            kind: 'p',
-            text: 'That got the business running. It didn\'t really shrink the owner\'s morning. What was left was judgment. What needs a decision today. Which session has no coach. Which payment failed. Which family needs a follow-up.',
-          },
-        ],
-      },
-      {
-        heading: 'Eve, in development',
-        blocks: [
-          {
-            kind: 'p',
-            text: 'I\'m rebuilding the admin on Cloudflare. Workers API, D1 as the system of record, R2 for files. Public booking still goes through Stripe Checkout. The calendar is evidence. It\'s not the only place a session is true.',
-          },
-          {
-            kind: 'p',
-            text: 'Eve sits in the command center. It can read sessions, payments, exceptions, payroll over MCP. Writes still go through approval. So it can brief the day and hand you the exact record that needs a decision, without quietly changing payroll or a booking.',
-          },
-          {
-            kind: 'figure',
-            figure: {
-              kind: 'image',
-              src: '/images/case-studies/bfa-admin-command-center.png',
-              alt: 'Ballerz owner command center with Eve prompt, four sessions today, and an operations queue',
-              caption: 'Command center. Eve briefs. A person still has to approve.',
-            },
-          },
-          {
-            kind: 'p',
-            text: 'Payroll is on the same surface. Semi-monthly periods, a timesheet per coach, an exceptions queue, then you approve and export.',
-          },
-          {
-            kind: 'figure',
-            figure: {
-              kind: 'image',
-              src: '/images/case-studies/bfa-admin-payroll.png',
-              alt: 'Ballerz coach payroll with three semi-monthly pay periods and timesheets for two coaches',
-              caption: 'Payroll. Periods, timesheets, then export.',
-            },
-          },
-          {
-            kind: 'figure',
-            figure: {
-              kind: 'image',
-              src: '/images/case-studies/bfa-admin-payroll-exceptions.png',
-              alt: 'Ballerz payroll exceptions queue with missing candidate, calendar conflict, duration, and attendance issues',
-              caption: 'Exceptions. Missing coach, conflict, duration, attendance.',
-            },
-          },
-        ],
-      },
-      {
-        heading: 'What I took from it',
-        blocks: [
-          {
-            kind: 'p',
-            text: 'Without an admin, the business is a calendar and a Venmo thread. The public site sells the hour. Somebody still has to know who\'s on the field, who got paid, and which coach is owed.',
-          },
-        ],
-      },
-    ],
-  },
+    {
+      "heading": "The day is made of sessions",
+      "blocks": [
+        {
+          "kind": "p",
+          "text": "The schedule opens on one day, with separate columns for Jerry, Marcus and unassigned sessions. That last column makes the afternoon coverage gap visible. Coach filters and a week view provide a wider look; selecting a session opens its details without leaving the schedule."
+        },
+        {
+          "kind": "figure",
+          "figure": {
+            "kind": "image",
+            "src": "/images/case-studies/ballerz-craft/operations.jpg",
+            "alt": "Ballerz day calendar organized by coach with an unassigned afternoon session",
+            "caption": "The daily view keeps the training schedule and its exceptions together."
+          }
+        },
+        {
+          "kind": "p",
+          "text": "Families, coaches, programs and credits have their own workspaces, but they share the same records and review pattern. A parent request can be followed back to the player and the affected session."
+        }
+      ]
+    },
+    {
+      "heading": "Coverage is more than an empty calendar slot",
+      "blocks": [
+        {
+          "kind": "p",
+          "text": "For the coverage flow, I used an afternoon group whose coach is unavailable. A replacement needs the right availability and enough time to get to the next venue. The proposal includes those checks and the group it affects."
+        },
+        {
+          "kind": "p",
+          "text": "The owner can approve the next step, but that does not mean the replacement has accepted. The interface keeps that distinction visible. A family update is prepared alongside the coverage request and waits for the assignment to be confirmed."
+        },
+        {
+          "kind": "figure",
+          "figure": {
+            "kind": "image",
+            "src": "/images/case-studies/ballerz-craft/proposal.jpg",
+            "alt": "Coach coverage proposal showing the existing gap, replacement and evidence",
+            "caption": "Availability supports a proposal. Coach acceptance completes the assignment."
+          }
+        }
+      ]
+    },
+    {
+      "heading": "A calendar entry should not spend a credit",
+      "blocks": [
+        {
+          "kind": "p",
+          "text": "Attendance and package use need a more careful relationship. A calendar event marked complete does not prove that a player attended. In this flow, the calendar and the coach’s record disagree: one says finished, the other has no confirmation."
+        },
+        {
+          "kind": "p",
+          "text": "The interface holds the adjustment and asks for the missing evidence. It shows the confirmed balance and what remains unresolved. Decisions and corrections have a history, so the owner can see why a balance changed instead of finding only the final number."
+        },
+        {
+          "kind": "figure",
+          "figure": {
+            "kind": "image",
+            "src": "/images/case-studies/ballerz-craft/credits.jpg",
+            "alt": "Attendance and credit review with a missing coach confirmation",
+            "caption": "The missing record is visible before any credit adjustment."
+          }
+        },
+        {
+          "kind": "p",
+          "text": "This follows the direction already established in the Eve branch: the operator works through business capabilities, while Cloudflare remains the source of truth for families, sessions, payments and credits. The interface makes those responsibilities understandable without exposing infrastructure details."
+        }
+      ]
+    },
+    {
+      "heading": "One public system, including the local pages",
+      "blocks": [
+        {
+          "kind": "p",
+          "text": "The public redesign now extends through the location and regional pages, coaches, programs and registration surfaces. I kept the existing Ballerz logo after reviewing a replacement. The location content, canonical metadata and structured data stay intact."
+        },
+        {
+          "kind": "figure",
+          "figure": {
+            "kind": "image",
+            "src": "/images/case-studies/ballerz-craft/location.jpg",
+            "alt": "Rockville training page with the original Ballerz logo",
+            "caption": "The Rockville page uses the same public design system."
+          }
+        },
+        {
+          "kind": "p",
+          "text": "These screens are implemented locally with controlled records. The proposed agent actions can be reviewed, recorded and revisited in the interface; connecting them to the Eve and Cloudflare execution paths is a separate integration step. No production booking, message, payment or credit was changed."
+        }
+      ]
+    }
+  ]
+},
   {
     slug: 'starthome',
     number: '05',
