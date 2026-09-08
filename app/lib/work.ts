@@ -20,6 +20,39 @@ export type WorkImage = {
 }
 
 export const workImageDimensions: Record<string, { width: number; height: number }> = {
+  '/images/case-studies/dpr-stripe/payments.png': { width: 786, height: 800 },
+  '/images/case-studies/dpr-stripe/customers.png': { width: 786, height: 816 },
+  '/images/case-studies/dpr-stripe/net.png': { width: 790, height: 804 },
+  '/images/case-studies/dpr-stripe/gross.png': { width: 782, height: 802 },
+  '/images/case-studies/dpr-landing.png': { width: 1440, height: 900 },
+  '/images/case-studies/dpr-v2/work.png': { width: 2880, height: 1800 },
+  '/images/case-studies/dpr-v2/readiness.png': { width: 2880, height: 1800 },
+  '/images/case-studies/dpr-v2/sourcing.png': { width: 2880, height: 1800 },
+
+  '/images/case-studies/ballerz-craft/operations.jpg': { width: 1440, height: 1000 },
+  '/images/case-studies/ballerz-craft/proposal.jpg': { width: 1440, height: 1000 },
+  '/images/case-studies/ballerz-craft/credits.jpg': { width: 1440, height: 1000 },
+  '/images/case-studies/ballerz-craft/location.jpg': { width: 1440, height: 1000 },
+  '/images/case-studies/diane-craft/operations.jpg': { width: 1440, height: 1000 },
+  '/images/case-studies/diane-craft/proposal.jpg': { width: 1440, height: 1000 },
+  '/images/case-studies/diane-craft/calls.jpg': { width: 1440, height: 1000 },
+  '/images/case-studies/diane-craft/location.jpg': { width: 1440, height: 1000 },
+  '/images/case-studies/ballerz-craft/home.jpg': { width: 1440, height: 1000 },
+  '/images/case-studies/ballerz-craft/schedule.jpg': { width: 390, height: 844 },
+  '/images/case-studies/ballerz-craft/session.jpg': { width: 390, height: 844 },
+  '/images/case-studies/diane-craft/home.jpg': { width: 1440, height: 1000 },
+  '/images/case-studies/diane-craft/catalog.jpg': { width: 1440, height: 1000 },
+  '/images/case-studies/diane-craft/review.jpg': { width: 390, height: 844 },
+  "/images/case-studies/starthome-craft/home.jpg": {width:368,height:800},
+  "/images/case-studies/starthome-craft/welcome.jpg": {width:368,height:800},
+  '/images/case-studies/starthome-craft/review.jpg': { width: 368, height: 800 },
+  '/images/case-studies/starthome-craft/suggestion.jpg': { width: 368, height: 800 },
+  '/images/case-studies/starthome-redesign/final-page-2.png': { width: 850, height: 1100 },
+  '/images/case-studies/starthome-redesign/final-page-1.png': { width: 850, height: 1100 },
+  '/images/case-studies/starthome-redesign/comparison.jpg': { width: 368, height: 800 },
+  '/images/case-studies/starthome-redesign/finding.jpg': { width: 368, height: 800 },
+  '/images/case-studies/starthome-redesign/home.jpg': { width: 368, height: 800 },
+  '/images/case-studies/starthome-redesign/welcome.jpg': { width: 368, height: 800 },
   '/images/case-studies/bfa-admin-command-center.png': { width: 1440, height: 1180 },
   '/images/case-studies/bfa-admin-payroll-exceptions.png': { width: 1280, height: 577 },
   '/images/case-studies/bfa-admin-payroll.png': { width: 1280, height: 577 },
@@ -60,6 +93,9 @@ export type WorkTable = {
 }
 
 export type WorkBlock =
+  | { kind: 'rich-p'; parts: (string | WorkLink)[] }
+  | { kind: 'gallery'; images: WorkImage[]; caption: string }
+  | { kind: 'video'; src: string; poster: string; caption: string; description: string }
   | { kind: 'p'; text: string }
   | { kind: 'h3'; text: string }
   | { kind: 'ul'; items: string[] }

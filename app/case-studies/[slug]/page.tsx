@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { InteractionFilm } from 'app/components/interaction-film'
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import { DesignArtifact } from 'app/components/design-artifact'
@@ -66,6 +67,17 @@ function FigureImage({ image }: { image: Extract<WorkFigure, { kind: 'image' }> 
             : 'h-auto w-full bg-paper-2'
         }
       />
+      {image.src.includes('/dpr-v2/') ? (
+        <a
+          href={image.src}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-block text-[13px] underline decoration-line underline-offset-4 hover:text-ink"
+          aria-label={`Open full-size design: ${image.alt}`}
+        >
+          View full-size design ↗
+        </a>
+      ) : null}
       {image.caption ? (
         <figcaption
           className={
@@ -83,7 +95,7 @@ function FigureImage({ image }: { image: Extract<WorkFigure, { kind: 'image' }> 
 
 function Phones({ images }: { images: WorkImage[] }) {
   return (
-    <div className="grid grid-cols-2 gap-6 bg-paper-2 px-4 py-8 sm:grid-cols-3 sm:px-8">
+    <div className={`grid gap-6 bg-paper-2 px-4 py-8 sm:px-8 ${images.length === 2 ? 'grid-cols-1 sm:grid-cols-2' : 'grid-cols-2 sm:grid-cols-3'}`}>
       {images.map((image) => (
         <FigureImage key={image.src} image={{ kind: 'image', ...image, layout: 'phone' }} />
       ))}
@@ -136,6 +148,42 @@ function ScoreTable({ table }: { table: WorkTable }) {
 }
 
 function Block({ block }: { block: WorkBlock }) {
+  if (block.kind === 'rich-p') {
+    return (
+      <p className="max-w-2xl text-[17px] leading-7 text-ink-soft">
+        {block.parts.map((part, index) => {
+          if (typeof part === 'string') return part
+          const className = 'underline decoration-line underline-offset-4 hover:text-ink hover:decoration-ink'
+          return part.external ? (
+            <a key={`${part.href}-${index}`} href={part.href} className={className}
+              target="_blank" rel="noopener noreferrer">{part.label}</a>
+          ) : (
+            <a key={`${part.href}-${index}`} href={part.href} className={className}>{part.label}</a>
+          )
+        })}
+      </p>
+    )
+  }
+
+  if (block.kind === 'gallery') {
+    return (
+      <figure className="space-y-3">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+          {block.images.map((image) => (
+            <Image key={image.src} src={image.src} alt={image.alt}
+              {...dimensionsFor(image.src)} sizes="(max-width: 640px) 100vw, 330px"
+              className="h-auto w-full rounded-xl border border-line" />
+          ))}
+        </div>
+        <figcaption className="text-[13px] leading-6 text-muted">{block.caption}</figcaption>
+      </figure>
+    )
+  }
+
+  if (block.kind === 'video') {
+    return <InteractionFilm {...block} />
+  }
+
   if (block.kind === 'p') {
     return (
       <p className="max-w-2xl text-[17px] leading-7 text-ink-soft">{block.text}</p>
@@ -177,10 +225,10 @@ export default async function Page({ params }: PageProps) {
 
   if (!item) notFound()
 
-  const { prev, next, total } = adjacentWork(item.slug)
+  const { prev, next } = adjacentWork(item.slug)
 
   return (
-    <article className="site-shell space-y-12">
+    <article className="case-essay">
       <div className="flex flex-wrap items-center justify-between gap-3 text-sm text-muted">
         <Link
           href="/case-studies"
@@ -188,9 +236,7 @@ export default async function Page({ params }: PageProps) {
         >
           ← Index
         </Link>
-        <p className="font-mono text-[12px]">
-          {item.research ? 'Research' : `Case study ${item.number}`} / {String(total).padStart(2, '0')}
-        </p>
+
         {next ? (
           <Link
             href={`/case-studies/${next.slug}`}
@@ -216,12 +262,12 @@ export default async function Page({ params }: PageProps) {
         </figure>
       ) : null}
 
-      <header className="max-w-3xl space-y-5">
+      <header className="case-essay-header">
         <h1 className="text-[40px] font-medium leading-[1.08] tracking-[-0.035em] text-ink sm:text-[56px]">
           {item.title}
         </h1>
         <p className="text-xl leading-8 text-ink-soft">{item.dek}</p>
-        <dl className="grid gap-4 pt-4 text-sm sm:grid-cols-3">
+        <dl className="case-essay-meta">
           <div>
             <dt className="font-mono text-[12px] text-muted">Role</dt>
             <dd className="mt-1 text-ink-soft">{item.role}</dd>
@@ -264,7 +310,7 @@ export default async function Page({ params }: PageProps) {
         ) : null}
       </header>
 
-      {item.metrics?.length ? (
+      {item.slug === "starthome" ? null : item.metrics?.length ? (
         <section className="border-y border-line py-10">
           <SectionLabel>At a glance</SectionLabel>
           <ul className="mt-8 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
@@ -291,13 +337,11 @@ export default async function Page({ params }: PageProps) {
         </section>
       ) : null}
 
-      <div className="space-y-20">
-        {item.sections.map((section, sectionIndex) => (
-          <section key={section.heading} className="space-y-6">
+      <div className="case-essay-body">
+        {item.sections.map((section) => (
+          <section key={section.heading} id={section.heading === "A little help, when you need it" ? "mobile-preview" : undefined} className="case-essay-section">
             <div className="max-w-2xl space-y-2">
-              <p className="font-mono text-[13px] text-muted">
-                {String(sectionIndex + 1).padStart(2, '0')}
-              </p>
+
               <h2 className="text-[28px] font-medium tracking-tight text-ink sm:text-[32px]">
                 {section.heading}
               </h2>
