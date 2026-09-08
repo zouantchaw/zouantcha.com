@@ -141,11 +141,11 @@ export const contact = {
   title: 'Email is the fastest way.',
   hiring: {
     title: 'Hiring?',
-    body: 'I want work where I own the surface and the system. Data-heavy products, ops tools, or AI that has to hold up outside a screenshot.',
+    body: 'I’m interested in roles where I can work on the interface and the engineering behind it. Tell me about the team, the product, and what you need help building.',
   },
   project: {
     title: 'Got an operations problem?',
-    body: 'I am most useful when the work is real and the software shape is not obvious yet. First conversation: what happens today, who feels it, what the workaround costs, what a useful first outcome looks like.',
+    body: 'Tell me what you’re working on, who will use it, and where you’re getting stuck. A few sentences are enough to start.',
     subject: 'Project inquiry',
   },
 }

@@ -72,7 +72,7 @@ export default function RootLayout({
           Skip to content
         </a>
         <Nav />
-        <main id="main-content" tabIndex={-1} className="pt-8 pb-16 sm:pt-10">
+        <main id="main-content" tabIndex={-1} className="site-main">
           {children}
         </main>
         <Footer />

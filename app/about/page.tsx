@@ -10,7 +10,7 @@ export const metadata = {
 
 export default function Page() {
   return (
-    <div className="site-shell space-y-16">
+    <div className="site-shell personal-page space-y-16">
       <header className="max-w-3xl space-y-6">
         <div className="flex items-center gap-3.5">
           <ProfilePhoto size={56} priority />

@@ -35,13 +35,13 @@ export function BlogPosts({
         .map((post) => (
           <Link
             key={post.slug}
-            className="group grid gap-1 border-t border-line py-5 sm:grid-cols-[160px_minmax(0,1fr)] sm:items-baseline"
+            className="reading-row writing-entry"
             href={`${basePath}/${post.slug}`}
           >
             <p className="font-mono text-xs text-muted">
               {formatDate(post.metadata.publishedAt, false)}
             </p>
-            <p className="text-lg tracking-tight text-ink group-hover:underline group-hover:underline-offset-4">
+            <p className="writing-title">
               {post.metadata.title}
             </p>
           </Link>

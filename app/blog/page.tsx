@@ -9,7 +9,7 @@ export const metadata = {
 
 export default function Page() {
   return (
-    <div className="site-shell space-y-10">
+    <div className="site-shell personal-page space-y-10">
       <header className="max-w-3xl space-y-5">
         <SectionLabel tone="gold">Writing & notes</SectionLabel>
         <h1 className="font-mono text-[32px] leading-[1.15] tracking-[-0.03em] text-ink sm:text-[40px]">
