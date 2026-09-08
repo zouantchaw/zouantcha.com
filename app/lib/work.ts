@@ -531,155 +531,241 @@ export const work: WorkItem[] = [
     ],
   },
   {
-    slug: 'diane-party-rentals',
-    number: '03',
-    title: 'Diane Party Rentals',
-    dek: 'A rental shop in Frederick that used to quote by hand on a free Wix site. Bookings take about 20 minutes now, and someone picks up at 9pm.',
-    summary:
-      'Chairs, tables, tents, bounce houses. Leads, quotes, bookings, inventory, payments, and an AI call center for nights and weekends.',
-    evidence: '24h → 20 min · After-hours Vapi · Inventory on-hand counts',
-    role: 'Full Stack Design Engineer',
-    period: '2025–present',
-    scope: 'Design · Ops · Inventory · Voice',
-    tools: 'Paper · Next.js · Cloudflare · D1 · Stripe · Vapi',
-    featured: true,
-    metrics: [
-      { value: '24h → 20 min', label: 'Quote and booking turnaround' },
-      { value: 'Nights + weekends', label: 'Vapi answers the business line after hours' },
-      { value: 'On-hand', label: 'Inventory counts and date locks before a date is promised' },
-    ],
-    links: [{ href: 'https://www.dianepartyrentals.com/', label: 'dianepartyrentals.com', external: true }],
-    banner: {
-      src: '/images/case-studies/dpr-admin-inventory.png',
-      alt: 'Diane Party Rentals inventory with on-hand counts',
+  "slug": "diane-party-rentals",
+  "number": "03",
+  "title": "Diane Party Rentals",
+  "dek": "A website and operating platform for a party rental company. Equipment, quotes, payments, and the work of getting everything there.",
+  "summary": "Online bookings and payments, with agents handling the coordination behind each rental.",
+  "evidence": "$5,032.66 gross payment volume · April–September 2026",
+  "role": "Design engineer",
+  "period": "March 2026–present",
+  "scope": "Website · Booking · Payments · Operations",
+  "featured": true,
+  "links": [
+    {
+      "href": "https://www.dianepartyrentals.com/",
+      "label": "Visit Diane Party Rentals",
+      "external": true
+    }
+  ],
+  "images": [
+    {
+      "src": "/images/case-studies/dpr-v2/work.png",
+      "alt": "Diane Party Rentals work queue with delivery, supplier and purchase-order decisions"
+    }
+  ],
+  "sections": [
+    {
+      "heading": "Starting with the website",
+      "blocks": [
+        {
+          "kind": "p",
+          "text": "Diane Party Rentals is a family-operated rental company in Frederick, Maryland. They reached out to me in March 2026 with a site on Wix’s free plan. No online payments. Bookings, quotes and customer questions were all handled manually."
+        },
+        {
+          "kind": "p",
+          "text": "I worked across product design and engineering: the public website, quote and payment flow, and the admin behind each booking. I started with the customer’s path to a paid order, then followed that order through loading, delivery and pickup. That became the scope of the platform."
+        },
+        {
+          "kind": "p",
+          "text": "Working with the team changed where I put the effort. Payments were straightforward once they were online. Fulfillment was where the interruptions were: competing delivery windows, missing details and replies someone had to chase. I shaped the admin around those situations."
+        },
+        {
+          "kind": "figure",
+          "figure": {
+            "kind": "image",
+            "src": "/images/case-studies/dpr-landing.png",
+            "alt": "The website, with the catalog and quote flow a click away.",
+            "caption": "The website, with the catalog and quote flow a click away."
+          }
+        },
+        {
+          "kind": "p",
+          "text": "Most customers arrive with an occasion in mind. A birthday, a wedding, a school event. I wanted the site to help them work out what they needed: which chairs, how many tables, whether delivery and setup were available. Equipment photographs do much of that work."
+        },
+        {
+          "kind": "p",
+          "text": "The location pages carry the same catalog into the areas DPR serves, with local delivery information. Schools and other institutions have their own path too. A purchase order comes with different questions from a birthday booking."
+        }
+      ]
     },
-    images: [
-      {
-        src: '/images/case-studies/dpr-admin-inventory.png',
-        alt: 'Diane Party Rentals inventory with on-hand counts for tables, chairs, and bounce houses',
-      },
-    ],
-    sections: [
-      {
-        heading: 'How this started',
-        blocks: [
-          {
-            kind: 'p',
-            text: 'Diane Party Rentals is a rental shop in Frederick, Maryland. Chairs, tables, tents, bounce houses. They deliver around the DMV.',
-          },
-          {
-            kind: 'p',
-            text: 'When I showed up, the public site was a free Wix account. Everything behind it was manual. Check the floor, write the quote, call back. Something that came in at 9pm sat until morning. Weekends went to voicemail.',
-          },
-        ],
-      },
-      {
-        heading: 'It wasn\'t the website',
-        blocks: [
-          {
-            kind: 'p',
-            text: 'I looked at other rental shops in the area. Same story almost everywhere. Wix or Squarespace, Facebook DMs, a quote that took a day, a phone that died after hours. The busy-looking shops had the same delay.',
-          },
-          {
-            kind: 'p',
-            text: 'The landing page wasn\'t the bottleneck. Quoting and booking were.',
-          },
-          {
-            kind: 'figure',
-            figure: { kind: 'artifact', id: 'dpr-system' },
-          },
-          {
-            kind: 'figure',
-            figure: { kind: 'artifact', id: 'dpr-social' },
-          },
-        ],
-      },
-      {
-        heading: 'Inventory first',
-        blocks: [
-          {
-            kind: 'p',
-            text: 'You can\'t promise a bounce house that\'s already out, or 80 chairs you don\'t have. It\'s not a t-shirt. So the admin checks inventory first: what\'s on hand, what\'s free that date, the rate, whether you\'re about to run out.',
-          },
-          {
-            kind: 'figure',
-            figure: {
-              kind: 'image',
-              src: '/images/case-studies/dpr-admin-inventory.png',
-              alt: 'Diane Party Rentals inventory with on-hand counts for tables, chairs, and bounce houses',
-              caption: 'Inventory. You look here before you promise a date.',
+    {
+      "heading": "Taking payments",
+      "blocks": [
+        {
+          "kind": "rich-p",
+          "parts": [
+            {
+              "label": "Stripe",
+              "href": "https://stripe.com/payments",
+              "external": true
             },
-          },
-          {
-            kind: 'p',
-            text: 'People can still request a quote on the public site. It just lands in the same queue instead of a spreadsheet. Staff lock the inventory, confirm the booking, take the deposit, all from one screen. Schools and churches can do a purchase order if they don\'t want to put a card down.',
-          },
-          {
-            kind: 'figure',
-            figure: {
-              kind: 'image',
-              src: '/images/case-studies/dpr-admin-bookings.png',
-              alt: 'Diane Party Rentals admin bookings workspace with confirmed and pending events',
-              caption: 'Bookings. Confirmed and pending on the same list.',
+            " handles payment. Between April and September, the dashboard records $5,032.66 in gross volume, $4,881.62 in net volume and 15 new customers. These are the numbers from September 8, 2026."
+          ]
+        },
+        {
+          "kind": "gallery",
+          "images": [
+            {
+              "src": "/images/case-studies/dpr-stripe/gross.png",
+              "alt": "Stripe gross volume: $5,032.66, April to September 2026"
             },
-          },
-        ],
-      },
-      {
-        heading: 'Nights and weekends',
-        blocks: [
-          {
-            kind: 'p',
-            text: 'After hours and on weekends, a Vapi assistant picks up the business line. It can take intake, look up a booking, log a change, then drop a transcript into the same queue the office uses.',
-          },
-          {
-            kind: 'p',
-            text: 'The Worker creates the lead. Voice isn\'t allowed to quietly finalize a priced quote. A Saturday night call used to sit on voicemail until Monday. Now it\'s already in the queue when they open.',
-          },
-          {
-            kind: 'figure',
-            figure: {
-              kind: 'image',
-              src: '/images/case-studies/dpr-admin-calls.png',
-              alt: 'Diane Party Rentals admin call center listing after-hours Vapi inbound calls',
-              caption: 'The call log. After-hours stuff lands here instead of voicemail.',
+            {
+              "src": "/images/case-studies/dpr-stripe/net.png",
+              "alt": "Stripe net volume: $4,881.62, April to September 2026"
             },
-          },
-          {
-            kind: 'figure',
-            figure: {
-              kind: 'image',
-              src: '/images/case-studies/dpr-admin-call-detail.png',
-              alt: 'After-hours Vapi call that captured a Saturday bounce-house quote request',
-              caption: 'Saturday night. Already in the queue.',
+            {
+              "src": "/images/case-studies/dpr-stripe/customers.png",
+              "alt": "Stripe new customers: 15, April to September 2026"
             },
-          },
-        ],
-      },
-      {
-        heading: 'What changed',
-        blocks: [
-          {
-            kind: 'p',
-            text: 'Public site, quote builder, and admin all hit one Cloudflare Workers API. Inventory, quotes, bookings, payments, call records: D1. Stripe for deposits. Before anyone promises a date, the quote flow checks on-hand stock and date locks, same check the desk sees.',
-          },
-          {
-            kind: 'p',
-            text: 'Turnaround went from about 24 hours to about 20 minutes. That\'s the number I actually care about. Not page views. How long a family or a school waits before the date is held.',
-          },
-        ],
-      },
-      {
-        heading: 'What I took from it',
-        blocks: [
-          {
-            kind: 'p',
-            text: 'A prettier landing page on a process that still takes a day doesn\'t do much. What helped was inventory, covering nights and weekends, and getting a quote back in 20 minutes so the shop isn\'t depending on whoever happens to remember.',
-          },
-        ],
-      },
-    ],
-  },
+            {
+              "src": "/images/case-studies/dpr-stripe/payments.png",
+              "alt": "Stripe payments overview: $5,116.93 succeeded; other displayed categories $0"
+            }
+          ],
+          "caption": "Stripe, September 8, 2026. The volume and customer charts cover April–September; September is partial. The payments overview has its own total, with no date range shown."
+        }
+      ]
+    },
+    {
+      "heading": "Getting everything there",
+      "blocks": [
+        {
+          "kind": "p",
+          "text": "Getting paid is one part of the job. There is still a truck to load, a crew to assign and a customer waiting at the other end. A late pickup can affect the next delivery. A damaged table can leave tomorrow’s booking short."
+        },
+        {
+          "kind": "p",
+          "text": "That is where I spent most of the time on the admin. It opens on the work that needs a decision: a delivery conflict, a supplier reservation, a purchase order with the wrong quantity. Open an item and you are in the booking or request it belongs to. Work already under way and completed actions sit below it."
+        },
+        {
+          "kind": "figure",
+          "figure": {
+            "kind": "image",
+            "src": "/images/case-studies/dpr-v2/work.png",
+            "alt": "The work view. Three decisions, with the ongoing work and receipts underneath.",
+            "caption": "The work view. Three decisions, with the ongoing work and receipts underneath."
+          }
+        },
+        {
+          "kind": "p",
+          "text": "Agents handle the checking and follow-through. A booking change starts a readiness check. A shortage starts sourcing. An unanswered request gets a follow-up. The team can ask a question about a record, but it does not need to ask for these checks to happen."
+        }
+      ]
+    },
+    {
+      "heading": "Moving a delivery",
+      "blocks": [
+        {
+          "kind": "p",
+          "text": "Two customers need equipment at the same time. One has a fixed loading window; the other may be able to take delivery the evening before. That is a common sort of problem here, and solving it involves more than dragging a calendar entry."
+        },
+        {
+          "kind": "p",
+          "text": "The platform checks stock, crew and the vehicle, then prepares another window. The operator sees what changes, what stays put and the message the customer will receive. Approving sends the request. The appointment moves after the customer agrees and capacity is checked again."
+        },
+        {
+          "kind": "figure",
+          "figure": {
+            "kind": "image",
+            "src": "/images/case-studies/dpr-v2/readiness.png",
+            "alt": "A Friday delivery frees the truck for Saturday’s fixed appointment. The Sunday pickup stays the same.",
+            "caption": "A Friday delivery frees the truck for Saturday’s fixed appointment. The Sunday pickup stays the same."
+          }
+        },
+        {
+          "kind": "p",
+          "text": "I kept those steps visible. A sent message is not an agreement. If someone changes the booking while a reply is coming back, the old approval needs another look. The record holds the conversation and the decision together, so the next person can pick it up."
+        }
+      ]
+    },
+    {
+      "heading": "Finding thirty more chairs",
+      "blocks": [
+        {
+          "kind": "p",
+          "text": "DPR also brings in equipment from other suppliers. For larger setups, it hires temporary help. Both involve finding someone, checking availability, agreeing on terms and making sure they actually confirm."
+        },
+        {
+          "kind": "p",
+          "text": "For equipment, the agent starts with approved suppliers and researches alternatives when needed. It collects quantities, prices and collection terms in one request. A chair listed on a website stays unverified until the supplier confirms it is available for the date."
+        },
+        {
+          "kind": "figure",
+          "figure": {
+            "kind": "image",
+            "src": "/images/case-studies/dpr-v2/sourcing.png",
+            "alt": "Thirty chairs to source. Confirmed quantities and prices sit beside the options that still need checking.",
+            "caption": "Thirty chairs to source. Confirmed quantities and prices sit beside the options that still need checking."
+          }
+        },
+        {
+          "kind": "p",
+          "text": "Availability requests and reminders can go out under the team’s policy. Committing money needs approval. If a supplier does not answer, the request stays open and the follow-up has a deadline. It does not disappear into an email thread."
+        }
+      ]
+    },
+    {
+      "heading": "Keeping the context",
+      "blocks": [
+        {
+          "kind": "p",
+          "text": "A booking accumulates things: a quote, a payment, a purchase order, delivery photographs, a note about which gate to use. Those details need to travel with the work. The agent can find them, and the person checking its answer can open the source."
+        },
+        {
+          "kind": "rich-p",
+          "parts": [
+            "I use ",
+            {
+              "label": "Eve",
+              "href": "https://eve.dev/docs",
+              "external": true
+            },
+            " to coordinate the agents and work that waits for a reply or approval. ",
+            {
+              "label": "Cloudflare Workers",
+              "href": "https://developers.cloudflare.com/workers/",
+              "external": true
+            },
+            " runs the application logic around the operational records. I keep prices, stock and permissions in that layer so every action passes the same checks, whether it starts with a person or an agent."
+          ]
+        },
+        {
+          "kind": "rich-p",
+          "parts": [
+            "I used ",
+            {
+              "label": "shadcn/ui",
+              "href": "https://ui.shadcn.com/docs",
+              "external": true
+            },
+            " for the interface, giving me established components to build on and more time for the behavior around them. Details open in sheets beside the current record, and a question stays with the work it concerns. Closing a sheet does not cancel the task. Coming back to it does not start the same action again."
+          ]
+        },
+        {
+          "kind": "p",
+          "text": "The point is to give the team less to chase. A customer knows when to expect the delivery. A supplier has confirmed the extra chairs. The crew can see what needs loading. The useful work is in those details."
+        },
+        {
+          "kind": "p",
+          "text": "The design and engineering decisions are closely tied here. A delivery approval needs to show the customer’s message, but it also needs to notice if the booking changed while that message was being reviewed. I work through both sides of that interaction: what a person needs to understand, and what the system has to guarantee."
+        },
+        {
+          "kind": "rich-p",
+          "parts": [
+            "If you’re hiring a design engineer or have an operational problem like this, ",
+            {
+              "label": "I’d be happy to talk",
+              "href": "/contact",
+              "external": false
+            },
+            "."
+          ]
+        }
+      ]
+    }
+  ]
+},
   {
     slug: 'ballerz-football-academy',
     number: '04',
