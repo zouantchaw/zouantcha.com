@@ -5,7 +5,7 @@ import { work } from 'app/lib/work'
 export const metadata = {
   title: 'Case studies',
   description:
-    'Selected products and systems: MTL Archives, PortMind, Diane Party Rentals, Ballerz Football Academy, and Starthome.',
+    'Selected products and systems: MTL Archives, PortMind, Diane Party Rentals, and Starthome.',
 }
 
 export default function Page() {
