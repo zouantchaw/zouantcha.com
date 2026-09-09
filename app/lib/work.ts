@@ -115,6 +115,7 @@ export type WorkBlock =
   | { kind: 'mtl-audience' }
   | { kind: 'mtl-brand' }
   | { kind: 'mtl-technology' }
+  | { kind: 'mtl-shape' }
   | { kind: 'portmind-pipeline' }
   | { kind: 'portmind-explorer' }
   | { kind: 'portmind-results' }
@@ -375,6 +376,7 @@ export const work: WorkItem[] = [
       "heading": "Stepping back to see the whole collection",
       "blocks": [
         { "kind": "rich-p", "parts": ["A search result shows what the system found. I built the ", { "label": "MTL Archives Explorer", "href": "https://explorer.mtlarchives.com/", "external": true }, " to ask a different question: how had it organized the collection? Each of its 14,715 points represents one photograph. I could move through the projection, open a record and compare a group of images instead of guessing from a handful of thumbnails."] },
+        { "kind": "mtl-shape" },
         { "kind": "p", "text": "The flat view uses the saved UMAP coordinates. The 3D view keeps that layout and adds depth from the recorded date, with a little spacing to avoid stacked points. Its shape is a way to navigate the evidence, not the geography of Montréal or a third dimension discovered by UMAP. Colour views offer other ways to inspect it, including dates, photographer labels and annotated visual groups." },
         { "kind": "p", "text": "That made the split between aerial photographs, framed survey documents and index cards easier to investigate. I could move from an unusual group back to the images that formed it. Labels and anomaly highlights were prompts for review, not new archival facts. The useful outcome was a more specific question about the influence of document formatting, which led to the small cropping experiment." },
         { "kind": "rich-p", "parts": ["The explorer is built with ", { "label": "Three.js", "href": "https://threejs.org/", "external": true }, ", a browser graphics library. It loads the saved positions and record identifiers first, then fetches the larger vector file when needed. Similar-image lookup compares the original CLIP vectors, not distances on the flattened map. Selected records can be collected and exported for follow-up. I kept this research workspace separate from the main site's simpler search, game and print flows."] }
@@ -515,6 +517,18 @@ export const work: WorkItem[] = [
           "kind": "p",
           "text": "Generating a package and publishing it are separate events. The pipeline records attempts, successful post identifiers and permalinks, which helps prevent duplicate delivery and makes later analysis possible. The home server holds operational state; an optional Obsidian mirror holds the editorial notes. A local fallback can prepare a package when the server is unavailable."
         }
+      ]
+    },
+    {
+      "heading": "One archive, two editorial experiments",
+      "blocks": [
+        { "kind": "p", "text": "I was also experimenting with the writing around each photograph. The January caption formatter assembled a location and era, researched context, a surprising detail, a follow prompt and hashtags. The published reels tested a more dramatic opening: something lost, hidden or changed beyond recognition. The photograph supplied the evidence; the first line gave someone a reason to stop scrolling." },
+        { "kind": "p", "text": "Facebook responded strongly to that approach. In the March 31 analysis of 135 first-quarter posts across both platforms, Facebook reels using loss or erasure language averaged 100,260 views, compared with 35,974 for reels without it. Openings such as “Une rue fantôme” made urban change the story. These were observed post-level averages at the time of the export, not views earned only in February or a controlled test of the recommendation algorithm." },
+        { "kind": "p", "text": "February concentrated that experiment: 18 Facebook reels averaged 62,519 views in the saved cohort. But the same format did not travel equally well to Instagram. There, February had 17 reels and only five carousels. The carousels averaged 9,468 views; the reels averaged 1,533. Optimizing both accounts around the largest Facebook number would have missed the difference." },
+        { "kind": "p", "text": "Instagram's stronger pattern was more documentary: lead with a place and date, point out a detail, explain what changed or survived, and provide context in French and English. Across the first-quarter snapshot, place-and-date openings averaged 4,866 views versus 2,315 without them. Bilingual contextual captions also performed better in that comparison. Format, subject and posting date varied together, so I treated those findings as directions to test rather than isolated effects of the caption." },
+        { "kind": "p", "text": "I shifted the writing toward that local-archivist voice. The later pipeline separates carousel and reel captions, checks whether generated text fits the story, and falls back to a structured template when it does not. Its reel instructions ask for a location and date, something visible to look at, concrete historical context and what survived. The March revision also filters generic mystery language. The engineering work was making that editorial choice repeatable, not just asking a model to write something engaging." },
+        { "kind": "p", "text": "The change in mix is visible in March: Instagram moved to 12 carousels and eight reels, while its monthly account views recovered from 48,996 to 68,263. Facebook still published 17 reels, but their average in the saved cohort fell to 17,800. That helps explain why the February peak should not be read as a steady growth rate. It does not establish that a caption change alone caused the later decline." },
+        { "kind": "p", "text": "I could have kept testing the dramatic Facebook pattern. Instead, I chose to put more weight on context, specificity and the kind of archive I wanted people to return to. Repeating the same framing would not have guaranteed the same distribution. The result I can stand behind is narrower and more useful: I found two different editorial patterns, measured their tradeoffs, and changed the pipeline to reflect that choice." }
       ]
     },
     {

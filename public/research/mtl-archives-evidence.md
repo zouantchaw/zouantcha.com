@@ -194,3 +194,24 @@ uses saved 2D positions and IDs; `loadEmbeddings` defers the 512D binary;
 `findSimilar` uses cosine similarity on original vectors. Colour modes and
 cluster/anomaly annotations are inspection aids. The 3D form must not be
 presented as a 3D UMAP embedding or a geographic reconstruction.
+
+## Caption experiments and full shape
+
+Social comparison: `MTL Archives - Q1 Content Correlation (Meta x Analytics).md`,
+March 31, 2026, 135 posts (66 Instagram, 69 Facebook). All creative/format averages
+are post-level values at that snapshot, not February-only accrual. Classification
+was observational. The article preserves the platform split and does not claim
+that identical hooks guarantee identical future distribution or that caption
+changes alone explain the later decline.
+
+Caption code history inspected: `7f2ac1b` (January 26) and `bf0cc88` (March 22),
+`pipelines/daily-reel/caption.py`. Initial formatter used location, era, research
+context, fun fact, follow prompt and hashtags. Later code separates static/reel
+copy, checks brand fit, supports optional model generation and template fallback.
+The user also supplied their recollection of the deliberate editorial shift.
+
+The embedded shape includes all 14,715 saved coordinates, rounded to four decimal
+places, plus depth reproduced from the explorer's `yearToZ` implementation using
+original row order as the jitter seed and SCALE=1000. A lightweight canvas provides
+rotation, tilt and zoom; it does not rerun UMAP. Keyboard-accessible controls offer
+an alternative to dragging. The full explorer remains the record-inspection tool.

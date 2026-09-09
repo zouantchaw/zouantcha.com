@@ -533,3 +533,10 @@ table {
 .mtl-controls.mtl-suggestion-row { flex-wrap: nowrap; overflow-x: auto; overscroll-behavior-x: contain; padding: 4px 3px 10px; scrollbar-width: thin; scrollbar-color: #c9c4b8 transparent; }
 .mtl-suggestion-row button { flex: 0 0 auto; white-space: nowrap; }
 .mtl-suggestion-heading button:focus-visible { outline: 2px solid #827659; outline-offset: 2px; }
+
+.mtl-shape-canvas { display: block; width: 100%; height: 330px; background: #f8f7f3; touch-action: none; cursor: grab; }
+.mtl-shape-canvas:active { cursor: grabbing; }
+.mtl-shape-controls { display: flex; gap: 18px; margin: 16px 0; }
+.mtl-shape-controls label { display: grid; gap: 7px; flex: 1; min-width: 0; font-size: 12px; }
+.mtl-shape-controls input { width: 100%; accent-color: #827659; }
+@media(max-width:480px) { .mtl-shape-canvas { height: 270px; } }
