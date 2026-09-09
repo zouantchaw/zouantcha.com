@@ -215,3 +215,9 @@ places, plus depth reproduced from the explorer's `yearToZ` implementation using
 original row order as the jitter seed and SCALE=1000. A lightweight canvas provides
 rotation, tilt and zoom; it does not rerun UMAP. Keyboard-accessible controls offer
 an alternative to dragging. The full explorer remains the record-inspection tool.
+
+Region colours reuse the eight `SUB_CLUSTERS` reference centres and the nearest
+centre rule in the explorer. Colours are adjusted for the portfolio's light
+background. Counts describe point assignments in this view, not verified counts
+of photograph subjects. Region labels, including directional aerial names, are
+preserved as research annotations and are not geographic bounds or UMAP outputs.

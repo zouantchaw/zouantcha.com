@@ -548,3 +548,10 @@ table {
 .mtl-tech-source .mtl-image-frame { height: 220px; }
 @media(max-width:480px) { .mtl-live-results .mtl-image-frame { height: 135px; } .mtl-tech-source .mtl-image-frame { height: 180px; } }
 .mtl-live-results a > .mtl-image-frame { display: block; margin-top: 0; -webkit-line-clamp: unset; }
+
+.mtl-region-legend { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; }
+.mtl-region-legend button { display: inline-flex; align-items: center; gap: 7px; padding: 8px 10px; border: 1px solid #ddd; border-radius: 5px; font-size: 12px; text-align: left; cursor: pointer; }
+.mtl-region-legend button[aria-pressed=true] { background: #f0ede5; border-color: #827659; }
+.mtl-region-legend button > span { width: 9px; height: 9px; flex-shrink: 0; border-radius: 50%; }
+.mtl-region-legend button:focus-visible { outline: 2px solid #827659; outline-offset: 2px; }
+.mtl-region-note { min-height: 90px; font-size: 13px !important; line-height: 1.65; margin-top: 12px; }
