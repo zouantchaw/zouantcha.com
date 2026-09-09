@@ -380,11 +380,15 @@ export const work: WorkItem[] = [
       "blocks": [
         {
           "kind": "p",
-          "text": "PortMind started with a question: how much can a vision model actually tell from a port camera? There are trucks, stacks of containers, shadows and things partly hidden behind other things. Recognizing a truck is one task. Seeing whether it is attached to a shipping container is another."
+          "text": "The starting point was an initiative from the City of Montréal. It prompted me to build Port Observatory MTL and begin collecting public port camera images and operational data. That collection work came first. PortMind grew out of the questions it raised."
         },
         {
           "kind": "p",
-          "text": "I began collecting public camera images in Montréal through Port Observatory MTL. That gave me a record to work with, but it also raised a harder question: what would count as a correct answer? PortMind grew out of that work. I design and build the collection and research tooling, the visual identity, and the interfaces for reviewing images and comparing models."
+          "text": "Once I had a record to work with, I wanted to understand how much a vision model could actually tell from it. There are trucks, stacks of containers, shadows and things partly hidden behind other things. Recognizing a truck is one task. Seeing whether it is attached to a shipping container is another. And before I could measure either, I needed to establish what counted as a correct answer."
+        },
+        {
+          "kind": "p",
+          "text": "PortMind became the research project around those questions. My work spans the collection and research tooling, the visual identity, and the interfaces for reviewing images and comparing models."
         },
         {
           "kind": "figure",
