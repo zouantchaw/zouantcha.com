@@ -569,7 +569,7 @@ export const work: WorkItem[] = [
       "blocks": [
         {
           "kind": "p",
-          "text": "The most important finding came from the labels. The audit found that every row in the historical locked set had been reviewed by Codex, OpenAI’s coding agent, even though the files used human-review field names. The files passed their format checks. Their names still overstated the evidence."
+          "text": "The most important finding came from the labels. The audit found that every row in the historical locked set had been labeled through Codex, OpenAI’s agent environment, even though the files used human-review field names. Here, Codex identifies the workflow that ran the labeling workers, not a particular model. The reviewer IDs and run report do not establish an exact underlying model version for all 1,744 rows. The files passed their format checks. Their names still overstated the evidence."
         },
         {
           "kind": "p",

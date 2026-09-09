@@ -471,3 +471,8 @@ table {
 .pm-inspection-grid button span { color: white; background: #111b; border-radius: 3px; padding: 2px 5px; font-size: 11px; }
 .pm-inspection-grid button:focus-visible { outline-offset: -3px; background: #2563eb30; }
 @media (hover: hover) and (pointer: fine) { .pm-inspection-grid button:hover { background: #2563eb30; } }
+.pm-area-selector { position: absolute; inset: 0; cursor: crosshair; touch-action: none; overflow: hidden; }
+.pm-area-selector:focus-visible { outline: 2px solid #2563eb; outline-offset: -3px; }
+.pm-area-outline { position: absolute; border: 2px solid white; background: #2563eb20; box-shadow: 0 0 0 999px #0005; pointer-events: none; }
+.pm-inspection-context { flex-wrap: wrap; }
+@media (max-width: 480px) { .pm-inspection-context > span { flex-basis: 100%; } }

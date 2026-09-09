@@ -1,6 +1,7 @@
 'use client'
 
 import { useRef, useState } from 'react'
+import { PortmindAreaSelector, type ImageArea } from './portmind-area-selector'
 
 // Published July 28 guided-inspection snapshot; task repeats are retained.
 const models = [
@@ -42,35 +43,39 @@ const areas = Array.from({ length: 9 }, (_, index) => ({
 
 export function PortmindInspection() {
   const areaControl = useRef<HTMLButtonElement>(null)
+  const [custom, setCustom] = useState<ImageArea | null>(null)
+  const [drawing, setDrawing] = useState(false)
   const [zoom, setZoom] = useState(1)
   const [area, setArea] = useState<number | null>(null)
   const [choosing, setChoosing] = useState(true)
   const [brightness, setBrightness] = useState(100)
   const [contrast, setContrast] = useState(100)
   const [original, setOriginal] = useState(false)
-  const fullImage = () => { setArea(null); setZoom(1); setChoosing(false) }
+  const fullImage = () => { setArea(null); setCustom(null); setDrawing(false); setZoom(1); setChoosing(false) }
   const reset = () => { fullImage(); setBrightness(100); setContrast(100); setOriginal(false) }
-  const scale = choosing ? 1 : zoom
-  const center = area === null ? { x: .5, y: .5 } : areas[area]
+  const scale = choosing || drawing ? 1 : zoom
+  const center = custom ? { x: custom.x + custom.width / 2, y: custom.y + custom.height / 2 } : area === null ? { x: .5, y: .5 } : areas[area]
   const offset = (position: number) => Math.min(0, Math.max(1 - scale, .5 - position * scale)) * 100
-  const select = (index: number) => { setArea(index); setZoom(3); setChoosing(false); areaControl.current?.focus({ preventScroll: true }) }
+  const select = (index: number) => { setCustom(null); setArea(index); setZoom(3); setChoosing(false); areaControl.current?.focus({ preventScroll: true }) }
   return <figure className="pm-example pm-inspection" aria-label="Try the image inspection controls">
     <div className="pm-example-title">Look closer before deciding</div>
     <div className="pm-inspection-context">
-      <span aria-live="polite">{choosing ? 'Select an area to inspect' : area === null ? 'Full image' : `Area ${areas[area].id}`}</span>
-      <button ref={areaControl} type="button" onClick={() => setChoosing(!choosing)}>{choosing ? 'Hide grid' : 'Choose area'}</button>
+      <span aria-live="polite">{drawing ? 'Drag a rectangle to zoom' : choosing ? 'Select an area to inspect' : custom ? 'Custom area' : area === null ? 'Full image' : `Area ${areas[area].id}`}</span>
+      <button ref={areaControl} type="button" onClick={() => { setDrawing(false); setChoosing(!choosing) }}>{choosing ? 'Hide grid' : 'Choose area'}</button>
+      <button type="button" aria-pressed={drawing} onClick={() => { setChoosing(false); setDrawing(!drawing) }}>{drawing ? 'Cancel draw' : 'Draw area'}</button>
       <button type="button" onClick={fullImage}>Full image</button>
     </div>
     <div className="pm-inspection-canvas">
       <img src="/images/case-studies/portmind-paper/montreal-viterra.jpg" alt="Viterra port camera: the small truck left of center is towing an empty chassis" style={{ transformOrigin: '0 0', transform: `translate(${offset(center.x)}%, ${offset(center.y)}%) scale(${scale})`, filter: original ? 'none' : `brightness(${brightness}%) contrast(${contrast}%)` }} />
+      {drawing && <PortmindAreaSelector onCancel={() => { setDrawing(false); areaControl.current?.focus({ preventScroll: true }) }} onSelect={next => { setCustom(next); setArea(null); setZoom(Math.min(6, 1 / Math.max(next.width, next.height))); setDrawing(false); areaControl.current?.focus({ preventScroll: true }) }} />}
       {choosing && <div className="pm-inspection-grid" aria-label="Image areas, rows A to C from top to bottom">
         {areas.map((item, index) => <button key={item.id} type="button" aria-label={`Inspect area ${item.id}, row ${Math.floor(index / 3) + 1}, column ${index % 3 + 1}`} onClick={() => select(index)}><span>{item.id}</span></button>)}
       </div>}
     </div>
     <div className="pm-example-controls">
-      <button type="button" disabled={zoom === 1 || choosing} onClick={() => setZoom(Math.max(1, zoom - 1))} aria-label="Zoom out">−</button>
-      <output aria-label="Inspection zoom">{scale * 100}%</output>
-      <button type="button" disabled={zoom === 6 || choosing} onClick={() => setZoom(Math.min(6, zoom + 1))} aria-label="Zoom in">+</button>
+      <button type="button" disabled={zoom <= 1 || choosing || drawing} onClick={() => setZoom(Math.max(1, zoom - 1))} aria-label="Zoom out">−</button>
+      <output aria-label="Inspection zoom">{Math.round(scale * 100)}%</output>
+      <button type="button" disabled={zoom >= 6 || choosing || drawing} onClick={() => setZoom(Math.min(6, zoom + 1))} aria-label="Zoom in">+</button>
       <button type="button" aria-pressed={original} onClick={() => setOriginal(!original)}>Show original</button>
       <button type="button" onClick={reset}>Reset view</button>
     </div>
@@ -78,6 +83,6 @@ export function PortmindInspection() {
       <label>Brightness <output>{brightness}%</output><input type="range" aria-label="Brightness" min="50" max="180" value={brightness} disabled={original} onChange={e => setBrightness(Number(e.target.value))} /></label>
       <label>Contrast <output>{contrast}%</output><input type="range" aria-label="Contrast" min="50" max="180" value={contrast} disabled={original} onChange={e => setContrast(Number(e.target.value))} /></label>
     </div>
-    <figcaption>Select one of nine areas, then adjust the view. Show original removes brightness and contrast adjustments while keeping your position. The labeling question still applies to the whole image.</figcaption>
+    <figcaption>Select a grid cell or use Draw area to drag your own rectangle. Zoom is capped at 6× to keep some context. Show original removes brightness and contrast adjustments while keeping your position. The labeling question still applies to the whole image.</figcaption>
   </figure>
 }
