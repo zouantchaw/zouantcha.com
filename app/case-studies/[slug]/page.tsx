@@ -1,3 +1,4 @@
+import { CaseStudyDownload } from 'app/components/case-study-download'
 import { MtlExplorerShape } from 'app/components/mtl-research/explorer-shape'
 import { MtlArchiveExample, MtlPipeline, MtlLiveSearch, MtlTechnology, MtlAudience, MtlBrand } from 'app/components/mtl-research'
 import { PortImageExplorer } from 'app/components/portmind-explorer'
@@ -325,6 +326,7 @@ export default async function Page({ params }: PageProps) {
             )}
           </div>
         ) : null}
+        <CaseStudyDownload slug={item.slug} title={item.title} />
       </header>
 
       {item.slug === "starthome" ? null : item.metrics?.length ? (

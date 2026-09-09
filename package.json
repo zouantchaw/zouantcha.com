@@ -3,7 +3,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build --webpack",
-    "start": "next start"
+    "start": "next start",
+    "export:case-studies": "node scripts/export-case-studies.mjs"
   },
   "dependencies": {
     "@tailwindcss/postcss": "4.0.0-alpha.13",

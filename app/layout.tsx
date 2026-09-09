@@ -56,13 +56,6 @@ export default function RootLayout({
       lang="en"
       className={cx(GeistSans.variable, GeistMono.variable)}
     >
-      <head>
-        <script
-          async
-          src="https://cdn.seline.so/seline.js"
-          data-token="dfbe2e89cb93290"
-        ></script>
-      </head>
       <body className={`${GeistSans.className} min-h-screen bg-paper font-sans text-ink antialiased`}>
         <LocaleAttribute />
         <a
