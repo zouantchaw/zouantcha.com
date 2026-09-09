@@ -20,6 +20,9 @@ export type WorkImage = {
 }
 
 export const workImageDimensions: Record<string, { width: number; height: number }> = {
+  '/images/case-studies/meta/miron-reel-september-9.png': { width: 1040, height: 863 },
+  '/images/case-studies/meta/facebook-february-2026.png': { width: 1040, height: 863 },
+  '/images/case-studies/meta/instagram-february-2026.png': { width: 1040, height: 863 },
   '/images/case-studies/portmind-paper/logo-explorations.png': { width: 1440, height: 1040 },
   '/images/case-studies/portmind-paper/scene.png': { width: 65536, height: 4293001688 },
   '/images/case-studies/portmind-paper/site.png': { width: 65536, height: 4293001688 },
@@ -528,6 +531,7 @@ export const work: WorkItem[] = [
       "blocks": [
         { "kind": "p", "text": "I was also experimenting with the writing around each photograph. The January caption formatter assembled a location and era, researched context, a surprising detail, a follow prompt and hashtags. The published reels tested a more dramatic opening: something lost, hidden or changed beyond recognition. The photograph supplied the evidence; the first line gave someone a reason to stop scrolling." },
         { "kind": "p", "text": "Facebook responded strongly to that approach. In the March 31 analysis of 135 first-quarter posts across both platforms, Facebook reels using loss or erasure language averaged 100,260 views, compared with 35,974 for reels without it. Openings such as “Une rue fantôme” made urban change the story. These were observed post-level averages at the time of the export, not views earned only in February or a controlled test of the recommendation algorithm." },
+{"kind": "figure", "figure": {"kind": "image", "src": "/images/case-studies/meta/miron-reel-september-9.png", "alt": "Miron quarry reel insights showing 204.0K rounded views with 200,234 from Facebook and 3,739 from Instagram, beside the reel preview.", "caption": "The Miron quarry reel, published January 26. Captured September 9: 200,234 Facebook views and 3,739 Instagram views. These are cumulative post results, not February-only views. The same reel travelled very differently on the two platforms."}},
         { "kind": "p", "text": "February concentrated that experiment: 18 Facebook reels averaged 62,519 views in the saved cohort. But the same format did not travel equally well to Instagram. There, February had 17 reels and only five carousels. The carousels averaged 9,468 views; the reels averaged 1,533. Optimizing both accounts around the largest Facebook number would have missed the difference." },
         { "kind": "p", "text": "Instagram's stronger pattern was more documentary: lead with a place and date, point out a detail, explain what changed or survived, and provide context in French and English. Across the first-quarter snapshot, place-and-date openings averaged 4,866 views versus 2,315 without them. Bilingual contextual captions also performed better in that comparison. Format, subject and posting date varied together, so I treated those findings as directions to test rather than isolated effects of the caption." },
         { "kind": "p", "text": "I shifted the writing toward that local-archivist voice. The later pipeline separates carousel and reel captions, checks whether generated text fits the story, and falls back to a structured template when it does not. Its reel instructions ask for a location and date, something visible to look at, concrete historical context and what survived. The March revision also filters generic mystery language. The engineering work was making that editorial choice repeatable, not just asking a model to write something engaging." },
@@ -545,6 +549,9 @@ export const work: WorkItem[] = [
         {
           "kind": "mtl-audience"
         },
+{"kind": "figure", "figure": {"kind": "image", "src": "/images/case-studies/meta/facebook-february-2026.png", "alt": "Facebook February 1–28 results: 1.4M views and 447.1K viewers.", "caption": "Facebook, February 1–28, 2026, captured September 9. Meta rounds the views total to 1.4M and reports 447.1K viewers. The saved report supplies the more precise 1,363,500 views used above."}},
+{"kind": "figure", "figure": {"kind": "image", "src": "/images/case-studies/meta/instagram-february-2026.png", "alt": "Instagram February report showing 197.6K combined views, split into 148,600 Facebook views and 48,996 Instagram views, plus 10.5K reach.", "caption": "Instagram, February 1–28, 2026, captured September 9. The headline 197.6K includes 148,600 Facebook views and 48,996 Instagram views. I use the Instagram breakdown, not the combined headline, in the monthly chart."}},
+{"kind": "p", "text": "By September 9, Meta Business Suite showed approximately 8.7K Facebook followers and 3.7K Instagram followers. Those are account totals at the time of review, rather than followers gained during the February experiment."},
         { "kind": "rich-p", "parts": ["The saved March 19 account export recorded 3,340 followers and 425 posts on ", { "label": "Instagram (@mtlarchives)", "href": "https://www.instagram.com/mtlarchives/", "external": true }, ". That is a dated account snapshot, separate from the view totals above. You can also explore the published work on ", { "label": "Facebook", "href": "https://www.facebook.com/100799958627875", "external": true }, "."] },
         {
           "kind": "p",

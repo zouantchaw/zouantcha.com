@@ -221,3 +221,26 @@ centre rule in the explorer. Colours are adjusted for the portfolio's light
 background. Counts describe point assignments in this view, not verified counts
 of photograph subjects. Region labels, including directional aerial names, are
 preserved as research annotations and are not geographic bounds or UMAP outputs.
+
+## Meta Business Suite captures, September 9, 2026
+
+Captured directly from the authenticated account UI with the user's authorization.
+Screenshots retain the reporting UI and aggregate results. Inbox contents and
+settings were not captured for the case study. The header follower totals were
+recorded as text; screenshots use native browser captures.
+- Header: approximately 8.7K Facebook followers and 3.7K Instagram followers.
+- Facebook Results, February 1–28: rounded 1.4M views, 447.1K viewers.
+- Instagram Results, same dates: 197.6K headline views includes 148,600 Facebook
+  views and 48,996 Instagram views; reach is 10.5K. Do not add the combined headline
+  to Facebook's total. Screenshots preserve the split and date selector.
+
+The current content list also exposed generic fallback captions in July, including
+unresolved date/source wording. That is a pipeline-quality issue to investigate,
+not evidence that a deliberate change in editorial voice alone caused the decline.
+No published content or account settings were changed during this review.
+
+Miron quarry reel detail, published January 26, captured September 9: 203,973
+combined views (display rounds to 204.0K), 200,234 Facebook, 3,739 Instagram;
+overview also shows 1.3K interactions, 0 link clicks and 10 follows. These are
+cumulative post-level results, not monthly accrual. Captured the original reel
+preview and platform split without comments or private account controls.
