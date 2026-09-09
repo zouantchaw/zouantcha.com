@@ -20,6 +20,10 @@ export type WorkImage = {
 }
 
 export const workImageDimensions: Record<string, { width: number; height: number }> = {
+  '/images/case-studies/portmind-paper/scene.png': { width: 65536, height: 4293001688 },
+  '/images/case-studies/portmind-paper/site.png': { width: 65536, height: 4293001688 },
+  '/images/case-studies/portmind-paper/review.png': { width: 65536, height: 4293001688 },
+  '/images/case-studies/portmind-paper/workspace.png': { width: 65536, height: 4293001688 },
   '/images/case-studies/starthome-paper/home.png': { width: 780, height: 1688 },
   '/images/case-studies/starthome-paper/room.png': { width: 780, height: 1688 },
   '/images/case-studies/starthome-paper/observation.png': { width: 780, height: 1688 },
@@ -338,209 +342,197 @@ export const work: WorkItem[] = [
       },
     ],
   },
-  {
-    slug: 'portmind',
-    number: '02',
-    title: 'PortMind',
-    dek: 'This one is still in progress. I\'m building a benchmark for port AI off public Montreal cameras.',
-    summary:
-      'Ongoing research. Port Observatory MTL is the live capture. PortMind is the factory on that record: labels, held-out splits, and model comparison.',
-    evidence: '81k snapshots · locked 350-row test · SigLIP 0.65 · ongoing research',
-    role: 'Full Stack Design Engineer',
-    period: '2026–present',
-    scope: 'Capture · Dataset · Labels · Benchmark · Brand',
-    tools: 'Cloudflare Workers · D1 · R2 · DETR · LLaVA · SigLIP · Grok 4.5 · Mistral Small · Python · Reviewer portal',
-    featured: true,
-    research: true,
-    links: [
-      {
-        href: 'https://www.port-montreal.com/en/the-port-of-montreal/news/news/visibility-data',
-        label: 'Where the idea started',
-        external: true,
-      },
-      { href: '/slides', label: 'Research notes and slides' },
-    ],
-    metrics: [
-      { value: 'Ongoing', label: 'Still research. I haven\'t shipped this.' },
-      { value: '81,200', label: 'Webcam snapshots, six Montreal cameras' },
-      { value: '0.65', label: 'Best held-out macro F1 on container-truck, frozen SigLIP' },
-      { value: '0', label: 'Independent-human gold rows in locked v1' },
-    ],
-    banner: {
-      src: '/images/case-studies/portmind-reviewer-task.png',
-      alt: 'PortMind reviewer labeling a port webcam frame',
+{
+  "slug": "portmind",
+  "number": "02",
+  "title": "PortMind",
+  "dek": "Making vision models easier to evaluate, one port image at a time.",
+  "summary": "An independent project connecting port camera imagery, human review and model evaluation. I design and build the public site and the workspace behind it.",
+  "evidence": "Public studies · Human review · Model evaluation",
+  "role": "Product design & engineering",
+  "period": "2026–present",
+  "scope": "Brand · Website · Review tools · Model evaluation",
+  "featured": true,
+  "research": true,
+  "links": [
+    {
+      "label": "Visit PortMind",
+      "href": "https://www.portmind.dev/",
+      "external": true
     },
-    images: [
-      {
-        src: '/images/case-studies/portmind-reviewer-task.png',
-        alt: 'PortMind reviewer labeling a port webcam frame with scene-decision options',
-      },
-    ],
-    sections: [
-      {
-        heading: 'How this started',
-        blocks: [
-          {
-            kind: 'p',
-            text: 'The Port of Montreal announced a $6.6 million data visibility project for 2027. Terminals, rail, shipping lines, all supposed to share what\'s happening in real time. I got curious what you could already get from stuff that\'s public.',
-          },
-          {
-            kind: 'p',
-            text: 'That\'s Port Observatory MTL. Live map, AIS, schedules, the public webcams. PortMind is the thing I\'m still building on top of that capture: labels, splits, scores. It\'s research. I haven\'t shipped a product here, and I haven\'t locked the brand either.',
-          },
-          {
-            kind: 'p',
-            text: 'I don\'t care if a detector looks good in a screenshot. I care if it\'s any good on a Montreal gate in January, and whether I can trust the labels I scored it on.',
-          },
-        ],
-      },
-      {
-        heading: 'First I had to record the port',
-        blocks: [
-          {
-            kind: 'p',
-            text: 'Six cameras. A Cloudflare Worker grabs a JPEG every three minutes, dumps it in R2, writes a row in D1. AIS on the same timeline. Public site is Next.js, English and French, MapLibre on the map.',
-          },
-          {
-            kind: 'p',
-            text: 'July 9, 2026 I took inventory: 81,200 snapshots since January 28, 199,214 objects in R2, 36.7 GB. DETR ran on 66,132 frames. I backfilled LLaVA on 15,068 of those for truck type. That\'s the collector guessing. It\'s not the eval.',
-          },
-        ],
-      },
-      {
-        heading: 'The brand is still open',
-        blocks: [
-          {
-            kind: 'p',
-            text: 'I\'m also still deciding what PortMind even looks like. I\'m in Paper, drawing four marks, seeing what still reads at favicon size in one color on that labeling screen. That\'s just a constraint I gave myself. I haven\'t picked.',
-          },
-          {
-            kind: 'p',
-            text: 'Harbor loop, rhumbline, hull wake, cargo stack. One of them might be it. I don\'t know yet. Building the brand is part of the project, same as the labels. I\'m not going to pretend I already picked.',
-          },
-          {
-            kind: 'figure',
-            figure: {
-              kind: 'artifact',
-              id: 'portmind-marks',
-              caption: 'Brand study. Four directions. I haven\'t locked one.',
+    {
+      "label": "Read the method",
+      "href": "https://www.portmind.dev/method",
+      "external": true
+    }
+  ],
+  "images": [
+    {
+      "src": "/images/case-studies/portmind-paper/scene.png",
+      "alt": "A Montréal port camera image showing a truck with an empty chassis beside container stacks"
+    }
+  ],
+  "sections": [
+    {
+      "heading": "Looking closer at the port",
+      "blocks": [
+        {
+          "kind": "p",
+          "text": "PortMind started with a question: how much can a vision model actually tell from a port camera? There are trucks, stacks of containers, shadows and things partly hidden behind other things. Recognizing a truck is one task. Seeing whether it is attached to a shipping container is another."
+        },
+        {
+          "kind": "p",
+          "text": "I began collecting public camera images in Montréal through Port Observatory MTL. That gave me a record to work with, but it also raised a harder question: what would count as a correct answer? PortMind grew out of that work. I design and build the identity, public website, review tools and evaluation workflow."
+        },
+        {
+          "kind": "figure",
+          "figure": {
+            "kind": "image",
+            "src": "/images/case-studies/portmind-paper/scene.png",
+            "alt": "The site starts with an example: a truck towing an empty chassis, with stationary containers nearby.",
+            "caption": "The site starts with an example: a truck towing an empty chassis, with stationary containers nearby."
+          }
+        }
+      ]
+    },
+    {
+      "heading": "Making the question visible",
+      "blocks": [
+        {
+          "kind": "p",
+          "text": "I wanted someone arriving on the site to understand the task before seeing a score. The opening image lets them hover or tap an object to see its label. A truck with an empty chassis counts as a container attachment. A stack of containers beside the road does not."
+        },
+        {
+          "kind": "p",
+          "text": "That small interaction does some of the work a long explanation would otherwise have to do. It gives the results a concrete meaning. The rest of the visual identity stays quiet: a compact mark, black type, white space and blue for actions and selection. The camera imagery carries the character of the project."
+        },
+        {
+          "kind": "p",
+          "text": "The scope is deliberately narrow. A still image can show that a truck is present; it cannot establish how long that truck has been waiting. I kept those boundaries in the product language, so a recognition result does not turn into a claim about port traffic."
+        }
+      ]
+    },
+    {
+      "heading": "A score needs a little context",
+      "blocks": [
+        {
+          "kind": "p",
+          "text": "The results page lets a reader choose a study and a task before comparing models. Each row opens the model’s results within that same context. The study setup sits beside the scores: how many answers were scored, who supplied the reference labels and which images were repeated."
+        },
+        {
+          "kind": "rich-p",
+          "parts": [
+            "One ",
+            {
+              "label": "guided-inspection study",
+              "href": "https://www.portmind.dev/method#study-inspection",
+              "external": true
             },
-          },
-        ],
-      },
-      {
-        heading: 'The labeling screen',
-        blocks: [
-          {
-            kind: 'p',
-            text: 'If you\'re a reviewer, this is the screen you actually sit with. The original frame, a 3-by-3 grid, a confidence. No detector sitting next to the answer, because that just makes you agree with it. Camera, time, prior model output, all hidden.',
-          },
-          {
-            kind: 'figure',
-            figure: {
-              kind: 'image',
-              src: '/images/case-studies/portmind-reviewer-task.png',
-              alt: 'PortMind reviewer labeling a port webcam frame with scene-decision options',
-              caption: 'The labeling task. You don\'t see what the model said.',
+            " makes the problem clear. Grok 4.5 agreed with the container labels on 73.9% of scored tasks. But always answering “No” would score 65.2% on that set. There were 23 scored task rows, including repeats, and one human reference. A ranking alone would hide most of what matters."
+          ]
+        },
+        {
+          "kind": "figure",
+          "figure": {
+            "kind": "image",
+            "src": "/images/case-studies/portmind-paper/site.png",
+            "alt": "Misses and false alarms explain the behavior behind the ranking. The chart also has a table view.",
+            "caption": "Misses and false alarms explain the behavior behind the ranking. The chart also has a table view."
+          }
+        },
+        {
+          "kind": "p",
+          "text": "I added a second view that separates finding the positive cases from raising false alarms. In that same study, Llama 3.2 Vision found all eight positive tasks but also flagged fourteen of the fifteen negatives. Seeing both numbers changes how you read the result. A team choosing a model needs to understand what kind of mistake it makes."
+        }
+      ]
+    },
+    {
+      "heading": "Helping people give better answers",
+      "blocks": [
+        {
+          "kind": "p",
+          "text": "The reference labels need as much care as the model run. I designed the reviewer flow around two questions: is there a truck, and is a truck carrying a container or towing an empty chassis? Each has Yes, No and Unsure. A reviewer should be able to say that the image does not contain enough evidence."
+        },
+        {
+          "kind": "figure",
+          "figure": {
+            "kind": "image",
+            "src": "/images/case-studies/portmind-paper/review.png",
+            "alt": "The inspection tools keep the image and labeling rules together. Model answers stay hidden.",
+            "caption": "The inspection tools keep the image and labeling rules together. Model answers stay hidden."
+          }
+        },
+        {
+          "kind": "p",
+          "text": "Zoom, brightness and contrast controls help with distant or poorly lit details. Show original and Reset view give the reviewer a way back. The questions still apply to the whole image, even when someone is inspecting a small part of it."
+        },
+        {
+          "kind": "p",
+          "text": "Before the session, examples and practice introduce the rules. During it, answers remain private and model predictions stay hidden. The organizer can then resolve disagreements before releasing the reference set. That sequence matters: showing a model’s answer too early can influence the label it will later be measured against."
+        }
+      ]
+    },
+    {
+      "heading": "Giving the work a place to live",
+      "blocks": [
+        {
+          "kind": "p",
+          "text": "The workspace brings sources, reference sets, benchmark versions and runs into one place. Its first screen shows what needs to happen next: register the source, review the images and freeze a version. Each step opens the record it belongs to."
+        },
+        {
+          "kind": "figure",
+          "figure": {
+            "kind": "image",
+            "src": "/images/case-studies/portmind-paper/workspace.png",
+            "alt": "The workspace follows the preparation of a benchmark, with the next decision attached to its version.",
+            "caption": "The workspace follows the preparation of a benchmark, with the next decision attached to its version."
+          }
+        },
+        {
+          "kind": "p",
+          "text": "I designed agent assistance around the preparation and execution of that work. A run plan brings together the reference, models, request limits and budget for approval. Failed requests remain part of the report. The operator can inspect what happened instead of relying on a chat message saying the run finished."
+        },
+        {
+          "kind": "p",
+          "text": "The same approach extends to connecting an external agent through MCP: it should work with the same records and permissions as someone in the interface. The useful part is keeping a benchmark repeatable, with an explicit plan and a record of execution."
+        }
+      ]
+    },
+    {
+      "heading": "From an experiment to a product",
+      "blocks": [
+        {
+          "kind": "rich-p",
+          "parts": [
+            "The ",
+            {
+              "label": "public site",
+              "href": "https://www.portmind.dev/",
+              "external": true
             },
-          },
-          {
-            kind: 'figure',
-            figure: {
-              kind: 'image',
-              src: '/images/case-studies/portmind-reviewer-grid.png',
-              alt: 'PortMind reviewer inspection grid for a port operations scene',
-              caption: 'The grid, for frames you can\'t read at full size.',
+            " now brings the earlier studies together, while the next benchmark is being prepared with independently reviewed labels. I keep those separate on the site. Readers can explore the work already done without mistaking it for the new reference set."
+          ]
+        },
+        {
+          "kind": "p",
+          "text": "My role has moved between collecting images, running experiments and designing how another person understands the result. The interface affects the research: which context a reviewer sees, how uncertainty is recorded, and whether two scores are actually comparable."
+        },
+        {
+          "kind": "rich-p",
+          "parts": [
+            "That is what I want PortMind to make easier: looking beyond a model’s headline score and deciding whether its behavior fits the task. If you are building a product around model evaluation or hiring a design engineer, ",
+            {
+              "label": "I’d be happy to talk",
+              "href": "/contact",
+              "external": false
             },
-          },
-        ],
-      },
-      {
-        heading: 'The numbers I\'ll actually stand behind',
-        blocks: [
-          {
-            kind: 'p',
-            text: 'The labels are picky on purpose. Is there a truck. Is it a container truck, or just a pickup. Is there a queue. Can you even use the frame. Quiet, normal, or busy. Parked container stacks don\'t count as a container truck. I wrote that down so people would stop arguing with the UI.',
-          },
-          {
-            kind: 'p',
-            text: 'Locked benchmark v1 is 1,744 labels: 1,175 train, 219 validation, 350 test. I fit on train and val. Test is report-only. I don\'t go fishing in the test errors for the next batch, because then it stops being a test.',
-          },
-          {
-            kind: 'p',
-            text: 'I should also tell you this: a later audit found every locked-v1 row had been stored as an agent review. Independent-human gold rows: zero. So the table below is a diagnostic on a locked split. It\'s not two humans agreeing.',
-          },
-          {
-            kind: 'p',
-            text: 'July 9, 2026. Frozen SigLIP nearest-centroid against a linear head on frozen embeddings. My promotion floor is 0.70 macro F1. Nothing cleared it. The linear head looked great on validation, 0.86, and then did 0.64 on test. SigLIP held at 0.65. I\'m publishing the 0.65.',
-          },
-          {
-            kind: 'table',
-            table: {
-              columns: ['Task', 'Val F1', 'Test F1', 'Test acc.'],
-              rows: [
-                ['Container truck', '0.86 / 0.85', '0.64 / 0.65', '0.65 / 0.65'],
-                ['Truck present', '0.61', '0.62', '0.70'],
-                ['Queue present', '0.54', '0.54', '0.60'],
-                ['Scene activity', '0.48', '0.40', '0.41'],
-                ['Image quality', '0.34', '0.29', '0.68'],
-              ],
-              footnote:
-                'Locked benchmark v1, 350-row test, macro F1. Where two numbers appear, linear head is first and frozen SigLIP is second. Test is report-only.',
-            },
-          },
-        ],
-      },
-      {
-        heading: 'I also tried models as labelers',
-        blocks: [
-          {
-            kind: 'p',
-            text: 'I ran models as labelers too, but I don\'t let them become the answer. Grok 4.5, on a 72-row hard packet, caught 12 of 29 container-truck misses Codex had made, and it didn\'t invent container trucks on the decidable negatives. Still report-only. A person has to adjudicate.',
-          },
-          {
-            kind: 'p',
-            text: 'I also ran a 24-row open-model pass on the same packet I used to qualify a second human: Llama 3.2 Vision, LLaVA 1.5, Moondream 3.1, Llama 4 Scout, Mistral Small 3.1. Calibration, not the locked score. Mistral Small looked good on 23 rows. I\'m not promoting a model off 23 rows.',
-          },
-          {
-            kind: 'p',
-            text: 'The second human finished all 24 calibration tasks and didn\'t qualify. 9 of 16 known-answer scene controls. They were consistent when they saw the same image twice, they just hadn\'t learned the rule. Gold is two people who passed the gate. Not a model that sounds sure.',
-          },
-          {
-            kind: 'table',
-            table: {
-              columns: ['Labeler', 'n', 'Truck', 'Container truck'],
-              rows: [
-                ['Human reference', '72', 'Reference', 'Reference'],
-                ['Codex, first pass', '72', '58.8%', '43.1%'],
-                ['Grok 4.5 + grid', '72', '77.6%', '67.2%'],
-                ['Llama 3.2 Vision', '24', '95.7%', '82.6%'],
-                ['LLaVA 1.5', '24', '100%', '82.6%'],
-                ['Moondream 3.1', '24', '100%', '78.3%'],
-                ['Llama 4 Scout', '24', '26.1%', '91.3%'],
-                ['Mistral Small 3.1', '24', '100%', '87.0%'],
-              ],
-              footnote:
-                '72-row numbers are agreement against a human relabel, excluding abstentions. 24-row numbers are open-model calibration, not locked benchmark v1.',
-            },
-          },
-        ],
-      },
-      {
-        heading: 'What I took from it',
-        blocks: [
-          {
-            kind: 'p',
-            text: 'If you look at the model before you lock the labels and the scoring rules, you will talk yourself into whatever the UI is showing. Agent labels are useful as a first pass. They\'re not gold.',
-          },
-          {
-            kind: 'p',
-            text: 'I\'d rather put 0.65 on a page, name the camera it fails on, and say the reviewer didn\'t qualify. That\'s why this is still research. Next step is better labels, not a bigger number.',
-          },
-        ],
-      },
-    ],
-  },
+            "."
+          ]
+        }
+      ]
+    }
+  ]
+},
   {
   "slug": "diane-party-rentals",
   "number": "03",

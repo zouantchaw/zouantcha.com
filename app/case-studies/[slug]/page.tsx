@@ -64,10 +64,10 @@ function FigureImage({ image }: { image: Extract<WorkFigure, { kind: 'image' }> 
         className={
           phone
             ? 'mx-auto h-auto w-full max-w-[280px] bg-black'
-            : 'h-auto w-full bg-paper-2'
+            : image.src.includes('/portmind-paper/') ? 'h-auto w-full bg-white' : 'h-auto w-full bg-paper-2'
         }
       />
-      {image.src.includes('/dpr-v2/') ? (
+      {(image.src.includes('/dpr-v2/') || image.src.includes('/portmind-paper/')) ? (
         <a
           href={image.src}
           target="_blank"
