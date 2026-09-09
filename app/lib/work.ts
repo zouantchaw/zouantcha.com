@@ -193,12 +193,16 @@ export const work: WorkItem[] = [
   ],
   "sections": [
     {
-      "heading": "A collection is not yet a way to explore it",
+      "heading": "Following an interest in the city",
       "blocks": [
+        {
+          "kind": "p",
+          "text": "I don't remember exactly what led me to Montréal’s open data portal. I was interested in the city and followed that curiosity. I started browsing the datasets without a particular project in mind."
+        },
         {
           "kind": "rich-p",
           "parts": [
-            "The starting point was Montréal’s ",
+            "Among them, I came across the ",
             {
               "label": "open photographic archive",
               "href": "https://donnees.montreal.ca/ville-de-montreal/phototheque-archives",
@@ -210,12 +214,12 @@ export const work: WorkItem[] = [
               "href": "https://donnees.montreal.ca/dataset/phototheque",
               "external": true
             },
-            ". The images were public: streets, aerial surveys, municipal documents and index cards. But discovering something still depended on the words attached to it. A catalogue reference is useful if you know it. It is less helpful if you want to see what a familiar neighbourhood used to look like."
+            ". There were photographs of streets, aerial views and records of the city at different points in its history. That was the collection I wanted to spend more time with. As I explored it, I started wondering how someone could find a photograph without already knowing its title or catalogue reference."
           ]
         },
         {
           "kind": "p",
-          "text": "I started building MTL Archives in October 2025 to make that collection easier to enter. It became a search engine, then a daily location game and a print-order flow. Along the way, it became a research project about the data itself: what a model notices in an old photograph, what makes a search useful, and whether attention on social media leads people back to the archive."
+          "text": "I started building MTL Archives in October 2025 as a way to explore that collection. It became a search engine, then a daily location game and a print-order flow. Along the way, it became a research project about the data itself: what a model notices in an old photograph, what makes a search useful, and whether attention on social media leads people back to the archive."
         },
         {
           "kind": "p",
