@@ -1,4 +1,4 @@
-import { MtlArchiveExample, MtlPipeline, MtlSearchReplay, MtlAudience, MtlBrand } from 'app/components/mtl-research'
+import { MtlArchiveExample, MtlPipeline, MtlLiveSearch, MtlTechnology, MtlAudience, MtlBrand } from 'app/components/mtl-research'
 import { PortImageExplorer } from 'app/components/portmind-explorer'
 import { PortmindResults, PortmindInspection } from 'app/components/portmind-research-examples'
 import Link from 'next/link'
@@ -154,7 +154,8 @@ function ScoreTable({ table }: { table: WorkTable }) {
 function Block({ block }: { block: WorkBlock }) {
   if (block.kind === 'mtl-archive') return <MtlArchiveExample />
   if (block.kind === 'mtl-pipeline') return <MtlPipeline />
-  if (block.kind === 'mtl-search') return <MtlSearchReplay />
+  if (block.kind === 'mtl-technology') return <MtlTechnology />
+  if (block.kind === 'mtl-search') return <MtlLiveSearch />
   if (block.kind === 'mtl-audience') return <MtlAudience />
   if (block.kind === 'mtl-brand') return <MtlBrand />
   if (block.kind === 'portmind-explorer') return <PortImageExplorer />

@@ -1,11 +1,11 @@
 'use client'
 
 import { useState } from 'react'
-import snapshots from './search-snapshot.json'
 import analytics from './analytics.json'
 import { MtlArchivesLogo } from './logo'
 
-const thumbnail = (src: string, width: number, height: number) => `https://www.mtlarchives.com/api/thumb?${new URLSearchParams({ src, width: String(width), height: String(height), fit: 'contain', format: 'webp' })}`
+import { thumbnail } from './media'
+export { MtlLiveSearch } from './live-search'
 
 const formats = [
   { label: 'Aerial photograph', file: '1667', text: 'An aerial photograph without the municipal document border. The January analysis placed many of these images together.', alt: 'Black-and-white aerial photograph from the Montréal collection' },
@@ -39,19 +39,6 @@ export function MtlPipeline() {
   </figure>
 }
 
-export function MtlSearchReplay() {
-  const [model, setModel] = useState<'clip' | 'siglip'>('clip')
-  const [query, setQuery] = useState(0)
-  const item = snapshots[model][query]
-  return <figure className="mtl-example">
-    <div className="mtl-example-title">Replay a recorded search</div>
-    <label className="mtl-query-label">Query<select value={query} onChange={e => setQuery(Number(e.target.value))}>{snapshots.clip.map((q, i) => <option key={q.id} value={i}>{q.query}</option>)}</select></label>
-    <div className="mtl-controls" aria-label="Embedding model">{(['clip','siglip'] as const).map(m => <button type="button" key={m} aria-pressed={m === model} onClick={() => setModel(m)}>{m === 'clip' ? 'CLIP ViT-B/32' : 'SigLIP base'}</button>)}</div>
-    <div className="mtl-replay-results" aria-live="polite">{item.results.map((r, i) => <a key={r.id} href={`https://www.mtlarchives.com/photo/${r.id}`} target="_blank" rel="noreferrer"><img src={thumbnail(r.src, 480, 360)} alt={r.title === 'Untitled archive record' ? `Archive result ${i + 1}, ${r.category.replaceAll('_',' ')}` : r.title} loading="lazy" /><span className="mtl-rank">{i + 1}. {r.title}</span><small>{r.hit ? 'Matches the category rule' : 'Outside the category rule'}</small></a>)}</div>
-    <figcaption>May 26, 2026 · First three results from the saved 500-image experiment. These are recorded outputs, not a live search. Category-rule matches are automated checks, not human relevance judgments.</figcaption>
-  </figure>
-}
-
 const measures = { facebook: 'Facebook views', instagram: 'Instagram views', visitors: 'Website visitors', pages: 'Website page views' }
 export function MtlAudience() {
   const [metric, setMetric] = useState<keyof typeof measures>('facebook')
@@ -75,3 +62,5 @@ export function MtlBrand() {
     <figcaption>The product’s dotted rosette, rendered as a vector. The Paper exploration tested dense, medium, minimal and monochrome versions; this is the compact mark used by the site.</figcaption>
   </figure>
 }
+
+export { MtlTechnology } from './technology'

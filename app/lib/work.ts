@@ -114,6 +114,7 @@ export type WorkBlock =
   | { kind: 'mtl-search' }
   | { kind: 'mtl-audience' }
   | { kind: 'mtl-brand' }
+  | { kind: 'mtl-technology' }
   | { kind: 'portmind-pipeline' }
   | { kind: 'portmind-explorer' }
   | { kind: 'portmind-results' }
@@ -164,7 +165,7 @@ export const work: WorkItem[] = [
   "slug": "mtl-archives",
   "number": "01",
   "title": "MTL Archives",
-  "dek": "Making Montréal’s photographic archive easier to explore—and studying what makes people come back.",
+  "dek": "Making Montréal’s photographic archive easier to explore, and studying what makes people come back.",
   "summary": "An independent research and product project spanning archival data, visual search, a daily game and measured social distribution.",
   "evidence": "Archive research · Search experiments · Audience studies",
   "role": "Product design & engineering",
@@ -363,6 +364,7 @@ export const work: WorkItem[] = [
             "."
           ]
         },
+        { "kind": "mtl-technology" },
         {
           "kind": "p",
           "text": "That led to a practical question: should borders and document framing be removed before indexing? A later experiment tried deterministic cropping and tone adjustment on 12 flagged images. Two changed their predicted category. That was enough to justify reviewing individual cases, not enough to justify automatically cropping the archive. Borders can contain evidence worth preserving."
@@ -416,7 +418,7 @@ export const work: WorkItem[] = [
         },
         {
           "kind": "p",
-          "text": "These results supported keeping CLIP rather than rebuilding the production index around this SigLIP model. They did not show that CLIP was best for every archive question. The expected answers were broad category rules, and some queries were poorly represented in the sample. A stronger comparison needs independent judgments about whether each result answers the actual query."
+          "text": "The recorded comparison supported keeping CLIP rather than rebuilding the production index around this SigLIP model. They did not show that CLIP was best for every archive question. The expected answers were broad category rules, and some queries were poorly represented in the sample. A stronger comparison needs independent judgments about whether each result answers the actual query."
         },
         {
           "kind": "p",
@@ -516,6 +518,7 @@ export const work: WorkItem[] = [
         {
           "kind": "mtl-audience"
         },
+        { "kind": "rich-p", "parts": ["The saved March 19 account export recorded 3,340 followers and 425 posts on ", { "label": "Instagram (@mtlarchives)", "href": "https://www.instagram.com/mtlarchives/", "external": true }, ". That is a dated account snapshot, separate from the view totals above. You can also explore the published work on ", { "label": "Facebook", "href": "https://www.facebook.com/100799958627875", "external": true }, "."] },
         {
           "kind": "p",
           "text": "A small number of reels accounted for much of the observed Facebook attention. In the saved August post snapshot, the top five unique January reels represented 82.4% of that month’s reel cohort’s cumulative views. These are lifetime post counts, not views accrued during January, so I do not add them to the monthly account totals."

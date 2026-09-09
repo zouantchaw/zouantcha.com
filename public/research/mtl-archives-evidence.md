@@ -157,3 +157,24 @@ manual fulfillment. Stripe webhook confirmation is distinct from a browser
 redirect. Newsletter enrollment is explicit opt-in. Social generation and
 publication have different logs; a generated package is not a published post.
 The case-study work did not alter those live systems or publish social content.
+
+## Interactive additions, September 9, 2026
+
+The search example submits to the same public `/api/search` endpoint as the
+product, using `mode=smart` and six results. A fixed-origin, read-only portfolio
+route applies input bounds, a 15-second timeout and five-minute response caching.
+The initial tramway selection was retrieved on September 9 and is explicitly
+labelled as saved until a visitor submits a live search. This example is separate
+from the May CLIP/SigLIP comparison and must not be interpreted as that benchmark.
+
+The technology explainer uses the research explorer's published
+`embeddings/embeddings_2d.json`, `embeddings_ids.json` and `embeddings_512d.bin`
+on the project R2 host. The binary header declares 14,715 vectors of 512 float32
+values. Image IDs 1667, 12901 and 8227 are joined by ID, not assumed row position.
+Only the first 64 values per selected image are shipped. The UMAP background
+samples every twelfth stored coordinate; the highlighted coordinates are exact
+selected records. Coordinates are recorded outputs, not newly computed results.
+
+Instagram: `data/social/2026-03-19-refresh/instagram_profile.json` records 3,340
+followers and 425 media entries. This is a March 19, 2026 snapshot, not a current
+follower count. No authenticated account screenshot is reconstructed from it.

@@ -1,0 +1,1 @@
+export const thumbnail = (src: string, width: number, height: number) => `https://www.mtlarchives.com/api/thumb?${new URLSearchParams({ src, width: String(width), height: String(height), fit: 'contain', format: 'webp' })}`
