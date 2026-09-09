@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
-const links = [{href:'/case-studies',label:'Projects'},{href:'/blog',label:'Writing'},{href:'/about',label:'About'},{href:'/contact',label:'Contact'}]
+import { nav as links } from 'app/lib/site'
 
 export function Nav() {
   const pathname = usePathname() ?? ''

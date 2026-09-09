@@ -599,15 +599,27 @@ export const work: WorkItem[] = [
       ]
     },
     {
-      "heading": "What I would carry forward",
+      "heading": "What changed how I work",
       "blocks": [
         {
           "kind": "p",
-          "text": "MTL Archives taught me to treat search quality, interface design and distribution as connected research questions. Better captions help only if they improve retrieval. A model comparison helps only if the evaluation measures the task. A large audience matters only if the product offers a useful next step."
+          "text": "I started by wanting to look through old photographs. I ended up learning how much the choices before the interface shape what someone can find. My own fallback descriptions made the records look more complete than they were. Keeping the city’s metadata, extracted text, and generated captions separate became part of the product, not just housekeeping in the pipeline."
         },
         {
           "kind": "p",
-          "text": "The result is a working archive product and a record of experiments that changed its direction. I kept source evidence separate from generated text, retained the simpler model when the replacement did not earn its place, and built publishing records so attention could be studied rather than guessed at."
+          "text": "The model experiments changed how I read a benchmark. A promising replacement did not beat the simpler search model on my test set. Then I had to look harder at the test itself: a category rule is not a person deciding whether a photograph answers their question. I would now build a small, carefully reviewed set of real search tasks earlier, before spending more time tuning scores."
+        },
+        {
+          "kind": "p",
+          "text": "The explorer gave me another way to question the data. The islands in the map were compelling, but some reflected document formats rather than subjects. A visualization can reveal a pattern and still leave its meaning unresolved. I learned to keep the original photographs close enough that someone can check the interpretation for themselves."
+        },
+        {
+          "kind": "p",
+          "text": "Publishing taught me something different. A caption could travel widely on Facebook and do little to bring people into the archive. The February experiments made that distinction hard to ignore. I would set up campaign links and product events from the beginning, and review what actually gets published. A successful pipeline run does not tell me whether the caption is specific, useful, or even finished."
+        },
+        {
+          "kind": "p",
+          "text": "What I value most is that I could follow the work all the way through: from public records to search results, from a photograph to a post, and from attention to what people did next. Each part challenged an assumption I had made in another. That is the kind of research I want to keep doing: building something people can use, then letting the evidence change it."
         },
         {
           "kind": "rich-p",

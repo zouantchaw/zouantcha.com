@@ -68,7 +68,7 @@ export const about = {
     'I did not follow a conventional computer-science path. I studied pre-nursing, stepped away, and eventually completed a full-stack software engineering program at Flatiron School. My first production role was at SaaS Alerts, where I learned that integration work is rarely about connecting two clean APIs. It is about inconsistent data, incomplete documentation, operational constraints, and making careful claims about what the system actually knows.',
     'I later spent three and a half years at Ethos. I joined through blockchain work and grew into a senior full-stack role spanning commerce, product interfaces, internal APIs, multi-tenant systems, and production reliability.',
     'Alongside that work, I kept building products of my own. MTL Archives began with a public dataset and became a cultural archive. Port Observatory MTL started as a live view of the Port of Montreal. That work became PortMind, an ongoing research project: a benchmark for port-operations AI on this dataset. Diane Party Rentals put me inside the operational reality of a physical business rather than outside it writing software requirements.',
-    'The common thread is that I enjoy turning incomplete information into a system people can inspect, use, and improve.',
+    'I don’t always start with a product in mind. Sometimes I’m just curious about a city, a photograph, or how someone runs their business. Building gives me a way to stay with that curiosity. I can follow it from a question into the data, the interface, and eventually a conversation with someone using what I made.',
   ],
   principles: [
     {
@@ -103,8 +103,10 @@ export const experience = [
     role: 'Customer Engineer / Full-Stack Engineer',
     period: '2026–present',
     body: [
-      'I work on KROW Workforce, a hospitality staffing platform with web dashboards, mobile applications, backend APIs, customer and vendor workflows, reporting, compliance, messaging, and operational QA.',
-      'My role sits between engineering, product understanding, delivery coordination, and customer-facing clarity. I review product behavior, surface authorization and reliability risks, translate stakeholder needs into implementation decisions, and help make a complex platform easier to explain and operate.',
+      'At Oloodi, I work on KROW Workforce, the software connecting staffing companies, their clients, and the people working each shift. My role combines full-stack development with customer engineering: understanding an operation, building the workflows it needs, and helping people use them.',
+      'On the engineering side, I work across the web application and backend. That includes order creation and editing, vendor workflows, reporting, permissions, and the checks that keep a change from breaking another part of the product. A shift edit has to save correctly, respect the rules for an existing order, and show up consistently for the people relying on it.',
+      'I also prepare and deliver product demos for teams including EA Sports, Snapchat, and Google. I build the walkthrough around their work: requesting staff, repeating a schedule across locations, checking attendance, reviewing invoices, and following up with a vendor. The preparation includes realistic workspaces, a tested sequence, and coordination with the teammate running the live application.',
+      'For the EA Sports walkthrough, we followed a recurring staffing request from the client dashboard through attendance, invoices, and reporting, then moved to mobile check-in. Explaining that whole sequence makes the gaps easier to see. Those conversations help me turn a broad request into a specific product change and explain the tradeoffs back to the team.',
     ],
   },
   {
@@ -157,13 +159,6 @@ export const featuredWriting = [
     summary:
       'What happens when you embed 14,715 historical Montreal photographs and look at the archive through a vision model.',
     source: 'Original',
-  },
-  {
-    slug: 'bitcoin-whitepaper-explained',
-    title: 'The Bitcoin whitepaper, explained',
-    summary:
-      'A section-by-section reading of Satoshi Nakamoto’s original paper. Archive and reference, not original research.',
-    source: 'Archive',
   },
   {
     slug: 'books-read-2025',
