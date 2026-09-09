@@ -109,6 +109,11 @@ export type WorkTable = {
 }
 
 export type WorkBlock =
+  | { kind: 'mtl-archive' }
+  | { kind: 'mtl-pipeline' }
+  | { kind: 'mtl-search' }
+  | { kind: 'mtl-audience' }
+  | { kind: 'mtl-brand' }
   | { kind: 'portmind-pipeline' }
   | { kind: 'portmind-explorer' }
   | { kind: 'portmind-results' }
@@ -155,199 +160,447 @@ export type WorkItem = {
 }
 
 export const work: WorkItem[] = [
-  {
-    slug: 'mtl-archives',
-    number: '01',
-    title: 'MTL Archives',
-    dek: 'I took 14,822 Montreal archive photos and made them searchable. Then I had to go find the people.',
-    summary:
-      'Ingested Montreal open data, cleaned and linked it, ran OCR and CLIP, then built search, a daily game, and an automated Instagram and Facebook pipeline on top.',
-    evidence: '14,822 records · 2.66M social views · daily game',
-    role: 'Full Stack Design Engineer',
-    period: '2025–present',
-    scope: 'Design · ETL · Search · Distribution',
-    tools: 'Paper · Cloudflare Workers · D1 · R2 · Vectorize · CLIP · BGE-M3 · Tesseract · LLaVA · Meta Graph',
-    featured: true,
-    links: [
-      { href: 'https://www.mtlarchives.com/', label: 'mtlarchives.com', external: true },
-      {
-        href: 'https://donnees.montreal.ca/dataset/phototheque',
-        label: 'Montreal open data (aerial)',
-        external: true,
-      },
-      {
-        href: 'https://donnees.montreal.ca/ville-de-montreal/phototheque-archives',
-        label: 'Montreal open data (photo archives)',
-        external: true,
-      },
-      { href: 'https://github.com/zouantchaw/mtl-archives-search', label: 'Code', external: true },
-      { href: 'https://instagram.com/mtlarchives', label: 'Instagram', external: true },
-      { href: '/blog/clip-sees-bureaucracy', label: 'Related writing' },
-    ],
-    metrics: [
-      { value: '14,822', label: 'Records after ingest and linkage' },
-      { value: '97%', label: 'Source records with no real description' },
-      { value: '2.66M', label: 'Instagram and Facebook page views, Jan-Jul 2026' },
-      { value: '2,500+', label: 'Daily game players' },
-    ],
-    banner: {
-      src: '/images/case-studies/mtl-archives-search.png',
-      alt: 'MTL Archives explorer showing search results for tramway',
-    },
-    images: [
-      {
-        src: '/images/case-studies/mtl-archives-search.png',
-        alt: 'MTL Archives explorer showing 47 search results for tramway',
-      },
-    ],
-    sections: [
-      {
-        heading: 'How this started',
-        blocks: [
-          {
-            kind: 'p',
-            text: 'Montreal put a bunch of old photos on its open data portal. Street photos, aerial surveys, planning documents, index cards. I pulled them down and linked them up and ended up with 14,822 records.',
-          },
-          {
-            kind: 'p',
-            text: 'You still couldn\'t find anything unless you already knew the cote code, or you got lucky with a filename. About 97% of the records had no real description. Just a placeholder the city generated from the cote and a date. If you typed "church" or "street scene," you got nothing.',
-          },
-          {
-            kind: 'p',
-            text: 'I wanted people to be able to search it, play the daily game, maybe order a print. So I treated the whole mess like a product, even the parts of the data that were ugly.',
-          },
-        ],
-      },
-      {
-        heading: 'Getting the photos to actually search',
-        blocks: [
-          {
-            kind: 'p',
-            text: 'The files are public, which is the nice part. I pulled them off donnees.montreal.ca through the CKAN API, 500 records at a time. Photographic archives first, then the aerial photothèque year by year from 1925 through 1975.',
-          },
-          {
-            kind: 'p',
-            text: 'Then I spent a long time matching a metadata row to a file that actually existed. Dead URLs. Titles that were just cote codes, like VM97,S3,D08,P298. The city portal only matched 109 of the 14,822 records. The rest I had to figure out myself.',
-          },
-          {
-            kind: 'p',
-            text: 'A lot of the useful text is printed on the photo. Index cards, survey stamps. I ran Tesseract in French and English and kept that as its own field. Then I captioned the images with LLaVA on a Lambda A100: 12,304 photos, 10.86 hours, $14. Those captions live in the manifest as a separate field. I didn\'t want a model sentence quietly replacing the original archive text.',
-          },
-          {
-            kind: 'p',
-            text: 'Search itself is a Cloudflare Worker. Metadata in D1, images in R2, about 153 GB. Two Vectorize indexes: BGE-M3 if you\'re searching with words, CLIP if you\'re searching with what the photo looks like. The Next.js site is just the front door. It calls the Worker. It doesn\'t own the search.',
-          },
-        ],
-      },
-      {
-        heading: 'The site',
-        blocks: [
-          {
-            kind: 'p',
-            text: 'Nobody is going to type a cote. They\'ll type a street, or a neighborhood, or they\'ll show up from Instagram. So the explorer had to feel like something you\'d actually open. Bilingual. Quiet. Still looks like a record, not a stock photo site.',
-          },
-          {
-            kind: 'figure',
-            figure: { kind: 'artifact', id: 'mtl-system' },
-          },
-          {
-            kind: 'p',
-            text: 'You pick semantic or visual on purpose. There are neighborhood chips. On the record page I leave the cote and the geocode confidence sitting there, because pretending we\'re sure is worse. Search "tramway" right now and you get 47 photos.',
-          },
-          {
-            kind: 'figure',
-            figure: {
-              kind: 'image',
-              src: '/images/case-studies/mtl-archives-search.png',
-              alt: 'MTL Archives explorer showing 47 search results for tramway',
-              caption: 'Searching tramway. 47 photos.',
-            },
-          },
-          {
-            kind: 'figure',
-            figure: {
-              kind: 'image',
-              src: '/images/case-studies/mtl-archives-record.png',
-              alt: 'MTL Archives record page for Avenue du Mont-Royal, 1928, with cote and geocode confidence',
-              caption: 'A record page. I leave the cote and the confidence on it.',
-            },
-          },
-          {
-            kind: 'p',
-            text: 'There\'s a daily location game on the same records. Prints go through Stripe, I still fulfill them by hand. I also built a 3D explorer over the CLIP space, which is how I noticed the model cared more about municipal borders than churches. I wrote that up separately.',
-          },
-        ],
-      },
-      {
-        heading: 'Instagram and Facebook',
-        blocks: [
-          {
-            kind: 'p',
-            text: 'If nobody can find the site, I just have a database with a URL. So I made @mtlarchives and automated the daily post. The pipeline picks a photo, does a research pass, builds an Instagram carousel and a Facebook reel, writes a ledger so I don\'t post the same image twice, and publishes through the Meta Graph API.',
-          },
-          {
-            kind: 'p',
-            text: 'The two platforms want different posts, which I learned the hard way. On Instagram, carousels beat reels in Q1, about 5,131 average views versus 1,935. Leading with the place and the date worked. Parc Marquette, 1969, is still sitting at 20,727. Facebook only really moved when it was a reel with a French hook.',
-          },
-          {
-            kind: 'figure',
-            figure: {
-              kind: 'image',
-              src: '/images/case-studies/mtl-social-facebook-views.svg',
-              alt: 'Monthly Facebook page views for MTL Archives, January through July 2026, peaking in February',
-              caption: 'Facebook, January through July 2026. February did 1.36 million views.',
-            },
-          },
-          {
-            kind: 'figure',
-            figure: {
-              kind: 'image',
-              src: '/images/case-studies/mtl-social-instagram-views.svg',
-              alt: 'Monthly Instagram page views for MTL Archives, January through July 2026',
-              caption: 'Instagram over the same months. Smaller, and it held up better after Facebook dropped.',
-            },
-          },
-          {
-            kind: 'figure',
-            figure: {
-              kind: 'image',
-              src: '/images/case-studies/mtl-social-facebook-reels.svg',
-              alt: 'Top ten Facebook reels for MTL Archives by lifetime views',
-              caption: 'Top Facebook reels. First bar is the one about the park with 70,000 graves under it.',
-              layout: 'wide',
-            },
-          },
-        ],
-      },
-      {
-        heading: 'What actually happened',
-        blocks: [
-          {
-            kind: 'p',
-            text: 'I kept the Meta and Vercel exports so I wouldn\'t be guessing. January through July 2026: 2.37 million Facebook page views, 290 thousand Instagram, 2.66 million combined. February was the crazy month, 1.36 million Facebook views. January 26 and January 31 were more than half of January by themselves.',
-          },
-          {
-            kind: 'p',
-            text: 'Views didn\'t turn into visits the way you\'d hope. Seven months: 2,456 people on the site, 13,783 page views. Link clicks from Meta were tiny next to the view counts. The people who did show up used /search, which was a relief. The game is at 2,500+ players.',
-          },
-        ],
-      },
-      {
-        heading: 'What I took from it',
-        blocks: [
-          {
-            kind: 'p',
-            text: 'Publishing a dataset doesn\'t make it searchable. This only started working after I cleaned it, ran OCR, captioned it, and put two embedding indexes on it.',
-          },
-          {
-            kind: 'p',
-            text: 'And posting can\'t be a blank page every morning, and it can\'t be the same caption on both apps. Facebook will do a million views in a month and still send almost nobody to the archive. What stuck is search, the game, and the record page.',
-          },
-        ],
-      },
-    ],
-  },
 {
+  "slug": "mtl-archives",
+  "number": "01",
+  "title": "MTL Archives",
+  "dek": "Making Montréal’s photographic archive easier to explore—and studying what makes people come back.",
+  "summary": "An independent research and product project spanning archival data, visual search, a daily game and measured social distribution.",
+  "evidence": "Archive research · Search experiments · Audience studies",
+  "role": "Product design & engineering",
+  "period": "2025–present",
+  "scope": "Data pipelines · Search research · Brand · Product · Distribution",
+  "featured": true,
+  "research": true,
+  "links": [
+    {
+      "label": "Explore the archive",
+      "href": "https://www.mtlarchives.com/",
+      "external": true
+    },
+    {
+      "label": "Code",
+      "href": "https://github.com/zouantchaw/mtl-archives-search",
+      "external": true
+    },
+    {
+      "label": "Research notes",
+      "href": "/research/mtl-archives-evidence.md",
+      "external": true
+    }
+  ],
+  "sections": [
+    {
+      "heading": "A collection is not yet a way to explore it",
+      "blocks": [
+        {
+          "kind": "rich-p",
+          "parts": [
+            "The starting point was Montréal’s ",
+            {
+              "label": "open photographic archive",
+              "href": "https://donnees.montreal.ca/ville-de-montreal/phototheque-archives",
+              "external": true
+            },
+            " and ",
+            {
+              "label": "aerial photothèque",
+              "href": "https://donnees.montreal.ca/dataset/phototheque",
+              "external": true
+            },
+            ". The images were public: streets, aerial surveys, municipal documents and index cards. But discovering something still depended on the words attached to it. A catalogue reference is useful if you know it. It is less helpful if you want to see what a familiar neighbourhood used to look like."
+          ]
+        },
+        {
+          "kind": "p",
+          "text": "I started building MTL Archives in October 2025 to make that collection easier to enter. It became a search engine, then a daily location game and a print-order flow. Along the way, it became a research project about the data itself: what a model notices in an old photograph, what makes a search useful, and whether attention on social media leads people back to the archive."
+        },
+        {
+          "kind": "p",
+          "text": "My work spans the ingestion scripts, model experiments, website, visual identity and daily editorial pipeline. The public product now presents 13,000+ records. The larger research datasets include earlier versions and duplicates, so I keep their counts separate."
+        },
+        {
+          "kind": "mtl-archive"
+        }
+      ]
+    },
+    {
+      "heading": "The first problem was the description",
+      "blocks": [
+        {
+          "kind": "p",
+          "text": "An early audit found that about 97% of the working records had synthetic descriptions. That needs a distinction: my cleaning pipeline had filled missing text with a title, date and archive reference. Those fallback sentences made the rows look complete without adding much meaning. They were not rich descriptions supplied by the city."
+        },
+        {
+          "kind": "p",
+          "text": "That matters for semantic search, which looks for meaning rather than an exact word match. If thousands of records say little more than “photograph, reference, date,” a better search model still has very little to work with. I needed to improve the evidence behind each result before improving its presentation."
+        }
+      ]
+    },
+    {
+      "heading": "Building the collection in layers",
+      "blocks": [
+        {
+          "kind": "p",
+          "text": "The extract, transform and load (ETL) pipeline downloads the city catalogues in batches, normalizes their fields, links records to image files and produces a manifest: a structured inventory of the collection. The source archive reference, or cote, stays attached to the record. Missing files, duplicate records and uncertain locations are data problems to track, not details to hide in the interface."
+        },
+        {
+          "kind": "rich-p",
+          "parts": [
+            "Some useful words are printed inside the image. I used ",
+            {
+              "label": "Tesseract",
+              "href": "https://tesseract-ocr.github.io/",
+              "external": true
+            },
+            ", an optical character recognition (OCR) engine, with French and English support to extract them. A vision-language model, which can interpret an image and produce text, supplies a separate description. Original metadata, extracted text and generated descriptions remain distinct."
+          ]
+        },
+        {
+          "kind": "mtl-pipeline"
+        },
+        {
+          "kind": "rich-p",
+          "parts": [
+            "The preparation jobs use Python and TypeScript. ",
+            {
+              "label": "Cloudflare R2",
+              "href": "https://developers.cloudflare.com/r2/",
+              "external": true
+            },
+            " stores images; ",
+            {
+              "label": "D1",
+              "href": "https://developers.cloudflare.com/d1/",
+              "external": true
+            },
+            " stores records; ",
+            {
+              "label": "Vectorize",
+              "href": "https://developers.cloudflare.com/vectorize/",
+              "external": true
+            },
+            " stores the numerical representations used for similarity search. The public ",
+            {
+              "label": "Worker",
+              "href": "https://developers.cloudflare.com/workers/",
+              "external": true
+            },
+            " answers requests, while the ",
+            {
+              "label": "Next.js",
+              "href": "https://nextjs.org/docs",
+              "external": true
+            },
+            " website presents the results."
+          ]
+        },
+        {
+          "kind": "p",
+          "text": "The ingestion code streams records in batches and writes checkpoints so an interruption does not require starting over. Failures have their own logs. The serving database is also distinct from the research corpus: a June audit recorded 13,499 deduplicated production records and 14,822 development records. A larger file or vector count does not mean the website has that many distinct photographs."
+        }
+      ]
+    },
+    {
+      "heading": "Captioning was a job to measure",
+      "blocks": [
+        {
+          "kind": "rich-p",
+          "parts": [
+            "The first recorded large captioning run used ",
+            {
+              "label": "LLaVA, the Large Language and Vision Assistant",
+              "href": "https://llava-vl.github.io/",
+              "external": true
+            },
+            " 1.5 7B on a rented graphics processing unit (GPU). In December, the run report recorded 12,304 captioned images, 23 errors, 10.86 hours and $14 in compute. It was a partial run, with roughly 2,500 images still remaining."
+          ]
+        },
+        {
+          "kind": "p",
+          "text": "By May, I had moved to structured outputs: descriptions, visual categories and fields that later tools could use. The full-run report contains 14,822 output rows, including 14,706 captions, 79 captions that failed the required structure and 116 image or model errors. A valid structure tells me the program can read an answer; it does not prove the description is historically correct."
+        },
+        {
+          "kind": "p",
+          "text": "That run also had to recover from interrupted work. The first 12,100 rows were reconstructed from saved chunks, then the remaining 2,722 were resumed. The report estimates 24.47 GPU hours, but the recovered portion does not have the same complete timing record as the tail. I keep it as an estimate rather than presenting it as a measured invoice."
+        }
+      ]
+    },
+    {
+      "heading": "What the image model was noticing",
+      "blocks": [
+        {
+          "kind": "rich-p",
+          "parts": [
+            "For visual search I used ",
+            {
+              "label": "CLIP, Contrastive Language–Image Pre-training",
+              "href": "https://openai.com/research/clip",
+              "external": true
+            },
+            ", which represents images and text as numerical vectors. Similar vectors can help match a phrase to a picture. I also built an explorer to inspect the collection rather than judge the system only through a few search queries."
+          ]
+        },
+        {
+          "kind": "p",
+          "text": "In January, the projection of 14,715 image embeddings showed a striking split: many plain aerial photographs grouped separately from survey documents with municipal headers and borders. Index cards formed their own tight group. The formatting was part of the signal, even when the underlying subject was similar."
+        },
+        {
+          "kind": "rich-p",
+          "parts": [
+            "The projection used ",
+            {
+              "label": "UMAP, Uniform Manifold Approximation and Projection",
+              "href": "https://umap-learn.readthedocs.io/en/latest/",
+              "external": true
+            },
+            ", to turn high-dimensional vectors into a view I could inspect. It suggested what to investigate; distances on that map were not proof of semantic similarity or a controlled explanation of the model. I wrote about the observation in ",
+            {
+              "label": "CLIP Sees Bureaucracy",
+              "href": "/blog/clip-sees-bureaucracy",
+              "external": true
+            },
+            "."
+          ]
+        },
+        {
+          "kind": "p",
+          "text": "That led to a practical question: should borders and document framing be removed before indexing? A later experiment tried deterministic cropping and tone adjustment on 12 flagged images. Two changed their predicted category. That was enough to justify reviewing individual cases, not enough to justify automatically cropping the archive. Borders can contain evidence worth preserving."
+        }
+      ]
+    },
+    {
+      "heading": "Trying a replacement before changing the index",
+      "blocks": [
+        {
+          "kind": "rich-p",
+          "parts": [
+            "In May I compared the existing CLIP model with ",
+            {
+              "label": "SigLIP, Sigmoid Loss for Language Image Pre-Training",
+              "href": "https://arxiv.org/abs/2303.15343",
+              "external": true
+            },
+            ", on a selected 500-image sample and 13 queries. The sample included aerials, documents and ground photographs, but it was uneven: 174 general aerials and only one ground-transit image. This was a local diagnostic, not a representative search benchmark."
+          ]
+        },
+        {
+          "kind": "table",
+          "table": {
+            "columns": [
+              "Recorded measure",
+              "CLIP ViT-B/32",
+              "SigLIP base"
+            ],
+            "rows": [
+              [
+                "Mean reciprocal rank",
+                "0.8269",
+                "0.4484"
+              ],
+              [
+                "Queries with a rule match in top 5",
+                "13 / 13",
+                "8 / 13"
+              ]
+            ],
+            "footnote": "May 26, 2026 · 500 images, 13 queries. Expected matches came from generated category/theme rules, not independent human relevance judgments."
+          }
+        },
+        {
+          "kind": "p",
+          "text": "Mean reciprocal rank asks how early the first expected match appears: first place scores one, second place one-half, and so on. The report called its other measure “P@5,” but the code actually checks whether any expected match appears in the first five results. I describe it as a hit rate here. It does not mean all five results were relevant."
+        },
+        {
+          "kind": "mtl-search"
+        },
+        {
+          "kind": "p",
+          "text": "These results supported keeping CLIP rather than rebuilding the production index around this SigLIP model. They did not show that CLIP was best for every archive question. The expected answers were broad category rules, and some queries were poorly represented in the sample. A stronger comparison needs independent judgments about whether each result answers the actual query."
+        },
+        {
+          "kind": "p",
+          "text": "The ranking experiments brought another useful negative result. Broad boosts from generated categories and quality labels underperformed the existing ranking on the recorded query set. A visually plausible park or waterfront image could move above a more directly relevant result. The documented decision was to keep those signals available for inspection without letting them change scores until better relevance labels support the change."
+        }
+      ]
+    },
+    {
+      "heading": "Designing a way into the archive",
+      "blocks": [
+        {
+          "kind": "rich-p",
+          "parts": [
+            "I worked through the identity and product states in ",
+            {
+              "label": "Paper",
+              "href": "https://app.paper.design/file/01KJT1EB3Z2N2FYHB3VDDBF496/01KJT1EB3ZN11EN8P6G678B9DZ",
+              "external": true
+            },
+            ". The board covers the logo, typography, search, photo detail, game, print ordering, empty states and emails. That let me consider the same photograph as a search result, an archival record and a daily invitation to explore."
+          ]
+        },
+        {
+          "kind": "mtl-brand"
+        },
+        {
+          "kind": "p",
+          "text": "The rosette draws on Montréal’s civic emblem and turns it into a small arrangement of points. I explored different densities so the idea could survive at icon size. The rest of the system gives the photographs room: paper-toned surfaces, dark text and restrained colour. Spectral carries editorial headings, Figtree handles interface copy, and IBM Plex Mono distinguishes archival details."
+        },
+        {
+          "kind": "p",
+          "text": "The interface is bilingual, with familiar places and subjects as entry points. A person arriving from a phone should be able to browse before learning how the catalogue works. On the record, the source reference and location confidence remain available. The design needs to make discovery easier without making uncertain metadata look authoritative."
+        }
+      ]
+    },
+    {
+      "heading": "A reason to return, and a way to collect",
+      "blocks": [
+        {
+          "kind": "rich-p",
+          "parts": [
+            "The ",
+            {
+              "label": "daily location game",
+              "href": "https://www.mtlarchives.com/game",
+              "external": true
+            },
+            " asks people to place a photograph on a map. It reuses the archive rather than requiring a separate content library. The code keeps challenges and guesses in the backend, while the map and photo controls belong to the interface. A daily game makes a different invitation from search: you can start with curiosity instead of a query."
+          ]
+        },
+        {
+          "kind": "rich-p",
+          "parts": [
+            "Print ordering uses ",
+            {
+              "label": "Stripe Checkout",
+              "href": "https://docs.stripe.com/payments/checkout",
+              "external": true
+            },
+            ". The app validates the shipping details and quote, then a signed payment notification triggers confirmation and fulfilment emails. The print work itself remains manual. A successful browser redirect is not treated as proof of payment."
+          ]
+        },
+        {
+          "kind": "p",
+          "text": "The newsletter is another return path. Signing up is explicit; playing the game does not subscribe someone automatically. Subscription state and delivery history live in the database. The daily scheduler checks Montréal’s local time, including daylight saving changes, rather than assuming the same server hour means morning all year."
+        },
+        {
+          "kind": "p",
+          "text": "These are working product surfaces, but their existence is not evidence of strong conversion. The saved business notes describe revenue as weak relative to attention. That is the next product problem, not a result I can claim to have solved."
+        }
+      ]
+    },
+    {
+      "heading": "Taking the archive to the feed",
+      "blocks": [
+        {
+          "kind": "p",
+          "text": "A searchable website still needs people to find it. I began using Instagram and Facebook as editorial experiments: exact places and dates, street transformations, lost landmarks and questions about what used to be there. Each post had to be worth looking at even if the viewer never ordered a print."
+        },
+        {
+          "kind": "p",
+          "text": "The daily pipeline selects an archive record, assembles its source material, drafts bilingual copy and produces a carousel or reel package. An image interpretation or a web search can suggest context, but unsupported exact locations should not quietly become facts. The code tracks location confidence and can reject copy that reintroduces a place name the evidence does not support."
+        },
+        {
+          "kind": "p",
+          "text": "Generating a package and publishing it are separate events. The pipeline records attempts, successful post identifiers and permalinks, which helps prevent duplicate delivery and makes later analysis possible. The home server holds operational state; an optional Obsidian mirror holds the editorial notes. A local fallback can prepare a package when the server is unavailable."
+        }
+      ]
+    },
+    {
+      "heading": "The reach was real. It did not stay there.",
+      "blocks": [
+        {
+          "kind": "p",
+          "text": "The saved January–July reports total about 2.66 million Facebook and Instagram account-level views. February was the peak: 1,363,500 Facebook views and 48,996 Instagram views. By July, Facebook was down to 6,560 while Instagram recorded 25,787. Showing only the peak would miss most of what the experiment taught me."
+        },
+        {
+          "kind": "mtl-audience"
+        },
+        {
+          "kind": "p",
+          "text": "A small number of reels accounted for much of the observed Facebook attention. In the saved August post snapshot, the top five unique January reels represented 82.4% of that month’s reel cohort’s cumulative views. These are lifetime post counts, not views accrued during January, so I do not add them to the monthly account totals."
+        },
+        {
+          "kind": "rich-p",
+          "parts": [
+            "Concrete places and a reason to be curious appeared repeatedly among the stronger posts. On Instagram, examples included ",
+            {
+              "label": "Parc Marquette, 1969",
+              "href": "https://www.instagram.com/p/DWKRqfNjcBT/",
+              "external": true
+            },
+            " and ",
+            {
+              "label": "Avenue du Mont-Royal at Saint-Denis, 1928",
+              "href": "https://www.instagram.com/p/DXfqpzSG88k/",
+              "external": true
+            },
+            ". The saved analysis found different patterns for documentary carousels and curiosity-led reels. These were observational comparisons; timing, format and platform distribution changed together, so they do not establish a causal recipe."
+          ]
+        },
+        {
+          "kind": "p",
+          "text": "The data needed its own cleanup. Facebook’s published-post export contained 196 reel rows for 98 unique reels. Counting the rows as separate pieces of content would double the denominator. Some monthly reports also lacked preserved daily exports. Those limitations remain in the supporting notes instead of being smoothed into an uninterrupted growth story."
+        }
+      ]
+    },
+    {
+      "heading": "What happened on the website",
+      "blocks": [
+        {
+          "kind": "p",
+          "text": "February brought 875 reported website visitors and 4,747 page views. March had fewer visitors, 714, but more page views, 5,296. The seven-month reports contain 13,783 page views in total. I do not sum monthly visitor counts and call that a unique audience: the same person can return in several months."
+        },
+        {
+          "kind": "p",
+          "text": "The gap between feed attention and website activity is the important result. The available exports do not reliably connect an individual post to a visit, game session or order. I can describe when activity rose and fell, but I cannot turn the social totals into an attributed conversion rate."
+        },
+        {
+          "kind": "p",
+          "text": "The later website captures show the smaller scale clearly: July recorded 130 visitors and 442 page views; August 1–10 recorded 33 and 122. The partial August period is kept out of the full-month chart. Better campaign links, preserved month-end exports and product events are needed to tell which forms of discovery lead to repeat archive use."
+        }
+      ]
+    },
+    {
+      "heading": "What I would carry forward",
+      "blocks": [
+        {
+          "kind": "p",
+          "text": "MTL Archives taught me to treat search quality, interface design and distribution as connected research questions. Better captions help only if they improve retrieval. A model comparison helps only if the evaluation measures the task. A large audience matters only if the product offers a useful next step."
+        },
+        {
+          "kind": "p",
+          "text": "The result is a working archive product and a record of experiments that changed its direction. I kept source evidence separate from generated text, retained the simpler model when the replacement did not earn its place, and built publishing records so attention could be studied rather than guessed at."
+        },
+        {
+          "kind": "rich-p",
+          "parts": [
+            "The ",
+            {
+              "label": "code",
+              "href": "https://github.com/zouantchaw/mtl-archives-search",
+              "external": true
+            },
+            " and ",
+            {
+              "label": "source notes for this case study",
+              "href": "/research/mtl-archives-evidence.md",
+              "external": true
+            },
+            " show the implementation and limits behind the story. If you are opening up a difficult collection, evaluating search, or building a product around specialist data, ",
+            {
+              "label": "I’d be happy to talk",
+              "href": "/contact",
+              "external": true
+            },
+            "."
+          ]
+        }
+      ]
+    }
+  ]
+},
+  {
   "slug": "portmind",
   "number": "02",
   "title": "PortMind",

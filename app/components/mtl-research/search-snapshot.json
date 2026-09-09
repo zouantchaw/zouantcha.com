@@ -1,0 +1,174 @@
+{
+  "clip": [
+    {
+      "id": "aerial-1",
+      "query": "aerial view of downtown",
+      "firstHitRank": 1,
+      "results": [
+        {
+          "id": "mtl_archives_metadata_14713.json",
+          "title": "Untitled archive record",
+          "src": "https://pub-6a29793ea7664738880d1cc5afb21b87.r2.dev/mtl_archives_image_14713.jpg",
+          "category": "aerial_general",
+          "hit": true
+        },
+        {
+          "id": "mtl_archives_metadata_15204.json",
+          "title": "Untitled archive record",
+          "src": "https://pub-6a29793ea7664738880d1cc5afb21b87.r2.dev/mtl_archives_image_15204.jpg",
+          "category": "document_map",
+          "hit": false
+        },
+        {
+          "id": "mtl_archives_metadata_13266.json",
+          "title": "Route Transcanadienne du Centre d'achat Fairview vers l'ouest / Martel . - 12 juillet 1974",
+          "src": "https://pub-6a29793ea7664738880d1cc5afb21b87.r2.dev/mtl_archives_image_13266.jpg",
+          "category": "aerial_general",
+          "hit": true
+        }
+      ]
+    },
+    {
+      "id": "park-2",
+      "query": "people walking in a city park",
+      "firstHitRank": 1,
+      "results": [
+        {
+          "id": "mtl_archives_metadata_98.json",
+          "title": "Bassin et fontaine du parc La Fontaine",
+          "src": "https://pub-6a29793ea7664738880d1cc5afb21b87.r2.dev/mtl_archives_image_98.jpg",
+          "category": "ground_photo",
+          "hit": true
+        },
+        {
+          "id": "mtl_archives_metadata_84.json",
+          "title": "Étang du parc La Fontaine",
+          "src": "https://pub-6a29793ea7664738880d1cc5afb21b87.r2.dev/mtl_archives_image_84.jpg",
+          "category": "ground_photo",
+          "hit": true
+        },
+        {
+          "id": "mtl_archives_metadata_15204.json",
+          "title": "Untitled archive record",
+          "src": "https://pub-6a29793ea7664738880d1cc5afb21b87.r2.dev/mtl_archives_image_15204.jpg",
+          "category": "document_map",
+          "hit": true
+        }
+      ]
+    },
+    {
+      "id": "streetcar-1",
+      "query": "tramway on montreal street",
+      "firstHitRank": 1,
+      "results": [
+        {
+          "id": "mtl_archives_metadata_6.json",
+          "title": "Avenue du Mont-Royal",
+          "src": "https://pub-6a29793ea7664738880d1cc5afb21b87.r2.dev/mtl_archives_image_6.jpg",
+          "category": "ground_photo",
+          "hit": true
+        },
+        {
+          "id": "mtl_archives_metadata_5.json",
+          "title": "Avenue du Mont-Royal",
+          "src": "https://pub-6a29793ea7664738880d1cc5afb21b87.r2.dev/mtl_archives_image_5.jpg",
+          "category": "ground_photo",
+          "hit": true
+        },
+        {
+          "id": "mtl_archives_metadata_2.json",
+          "title": "Avenue du Mont-Royal",
+          "src": "https://pub-6a29793ea7664738880d1cc5afb21b87.r2.dev/mtl_archives_image_2.jpg",
+          "category": "ground_photo",
+          "hit": true
+        }
+      ]
+    }
+  ],
+  "siglip": [
+    {
+      "id": "aerial-1",
+      "query": "aerial view of downtown",
+      "firstHitRank": 2,
+      "results": [
+        {
+          "id": "mtl_archives_metadata_27.json",
+          "title": "Aqueduc de Montréal (devenu usine de traitement Atwater - 3161, rue Joseph)",
+          "src": "https://pub-6a29793ea7664738880d1cc5afb21b87.r2.dev/mtl_archives_image_27.jpg",
+          "category": "ground_photo",
+          "hit": false
+        },
+        {
+          "id": "mtl_archives_metadata_8307.json",
+          "title": "VM97,S3,D04,P455",
+          "src": "https://pub-6a29793ea7664738880d1cc5afb21b87.r2.dev/mtl_archives_image_8307.jpg",
+          "category": "aerial_general",
+          "hit": true
+        },
+        {
+          "id": "mtl_archives_metadata_10708.json",
+          "title": "VM97,S3,D13,P121",
+          "src": "https://pub-6a29793ea7664738880d1cc5afb21b87.r2.dev/mtl_archives_image_10708.jpg",
+          "category": "aerial_industrial",
+          "hit": true
+        }
+      ]
+    },
+    {
+      "id": "park-2",
+      "query": "people walking in a city park",
+      "firstHitRank": 1,
+      "results": [
+        {
+          "id": "mtl_archives_metadata_14623.json",
+          "title": "Untitled archive record",
+          "src": "https://pub-6a29793ea7664738880d1cc5afb21b87.r2.dev/mtl_archives_image_14623.jpg",
+          "category": "document_map",
+          "hit": true
+        },
+        {
+          "id": "mtl_archives_metadata_14729.json",
+          "title": "Untitled archive record",
+          "src": "https://pub-6a29793ea7664738880d1cc5afb21b87.r2.dev/mtl_archives_image_14729.jpg",
+          "category": "aerial_residential",
+          "hit": true
+        },
+        {
+          "id": "mtl_archives_metadata_14267.json",
+          "title": "Untitled archive record",
+          "src": "https://pub-6a29793ea7664738880d1cc5afb21b87.r2.dev/mtl_archives_image_14267.jpg",
+          "category": "document_map",
+          "hit": true
+        }
+      ]
+    },
+    {
+      "id": "streetcar-1",
+      "query": "tramway on montreal street",
+      "firstHitRank": 4,
+      "results": [
+        {
+          "id": "mtl_archives_metadata_14623.json",
+          "title": "Untitled archive record",
+          "src": "https://pub-6a29793ea7664738880d1cc5afb21b87.r2.dev/mtl_archives_image_14623.jpg",
+          "category": "document_map",
+          "hit": false
+        },
+        {
+          "id": "mtl_archives_metadata_14631.json",
+          "title": "Untitled archive record",
+          "src": "https://pub-6a29793ea7664738880d1cc5afb21b87.r2.dev/mtl_archives_image_14631.jpg",
+          "category": "people_event",
+          "hit": false
+        },
+        {
+          "id": "mtl_archives_metadata_14729.json",
+          "title": "Untitled archive record",
+          "src": "https://pub-6a29793ea7664738880d1cc5afb21b87.r2.dev/mtl_archives_image_14729.jpg",
+          "category": "aerial_residential",
+          "hit": false
+        }
+      ]
+    }
+  ]
+}
