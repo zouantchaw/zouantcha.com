@@ -459,3 +459,15 @@ table {
 .pm-inspection-sliders label { font-size: 13px; display: grid; grid-template-columns: 1fr auto; gap: 8px; }
 .pm-inspection-sliders input { grid-column: 1 / -1; width: 100%; min-height: 32px; accent-color: #2563eb; }
 @media (max-width: 480px) { .pm-example .pm-example-note { min-height: 72px; } .pm-inspection-sliders { gap: 16px; } }
+
+.pm-model-name { display: flex; align-items: center; gap: 10px; }
+.pm-model-name img { width: 20px; height: 20px; object-fit: contain; flex-shrink: 0; }
+.pm-inspection-canvas { position: relative; }
+.pm-inspection-context { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; font-size: 13px; }
+.pm-inspection-context > span { flex: 1; }
+.pm-inspection-context button { min-height: 36px; border: 1px solid #ddd; border-radius: 6px; padding: 6px 10px; background: #fff; cursor: pointer; font-size: 12px; }
+.pm-inspection-grid { position: absolute; inset: 0; display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: repeat(3, 1fr); }
+.pm-inspection-grid button { position: relative; background: transparent; border: 1px solid #ffffff80; cursor: zoom-in; padding: 8px; text-align: left; display: flex; align-items: flex-start; }
+.pm-inspection-grid button span { color: white; background: #111b; border-radius: 3px; padding: 2px 5px; font-size: 11px; }
+.pm-inspection-grid button:focus-visible { outline-offset: -3px; background: #2563eb30; }
+@media (hover: hover) and (pointer: fine) { .pm-inspection-grid button:hover { background: #2563eb30; } }
