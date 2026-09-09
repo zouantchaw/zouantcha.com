@@ -13,7 +13,7 @@ export default function Page() {
       </header>
       <div className="personal-intro">
         <p>I’m Wiel. I design and build software, and I tend to follow an interest further than I originally planned.</p>
-        <p>Browsing Montréal’s open data led me to <Link href="/case-studies/mtl-archives">MTL Archives</Link>. Watching the port became <Link href="/case-studies/portmind">PortMind</Link>, a research project about what AI can actually tell us from those images. I like having room to ask a question, build something, and find out where I was wrong.</p>
+        <p>Browsing Montréal’s open data led me to <Link href="/case-studies/mtl-archives">MTL Archives</Link>. Watching the port became <Link href="/case-studies/portmind">PortMind</Link>, a research project about what vision models can actually tell us from those images. I like having room to ask a question, build something, and find out where I was wrong.</p>
         <p>At Oloodi, I work on workforce software across full-stack development and customer engineering. Some days that means fixing an order flow; others, walking an operations team through the product. Before that, I worked on commerce at Ethos and security integrations at SaaS Alerts. <Link href="/work">More about my work</Link>.</p>
         <p>I also help people turn their businesses and ideas into products, including <Link href="/case-studies/diane-party-rentals">Diane Party Rentals</Link> and <Link href="/case-studies/starthome">Starthome</Link>. Outside of that, I’m a father, a reader, and very interested in the city around me. <Link href="/about">A little more about me</Link>, or <a href={mailto()}>say hello</a>.</p>
       </div>
