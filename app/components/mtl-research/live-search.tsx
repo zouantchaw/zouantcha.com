@@ -1,9 +1,9 @@
 'use client'
 import { useEffect, useRef, useState } from 'react'
 import initial from './live-initial.json'
-import { thumbnail } from './media'
+import { ArchiveImage } from './archive-image'
 
-type Result = { id: string; title: string; src: string; date: string; credits: string }
+type Result = { id: string; title: string; src: string; date: string; credits: string; source?: string }
 const suggestions = ['tramway', 'red', 'trees', 'water', 'park', 'snowy street', 'Marché Bonsecours', 'pont Jacques-Cartier', 'Biosphère', 'Mont Royal', 'children playing']
 
 export function MtlLiveSearch() {
@@ -49,7 +49,7 @@ export function MtlLiveSearch() {
     <div ref={suggestionRow} className="mtl-controls mtl-suggestion-row" aria-label="Suggested searches">{suggestions.map(q => <button key={q} type="button" aria-pressed={committed === q && status !== 'idle'} onClick={e => { e.currentTarget.scrollIntoView({ block: 'nearest', inline: 'nearest' }); void search(q) }}>{q}</button>)}</div>
     <p role="status" className="mtl-search-status">{status === 'loading' ? 'Searching the live collection. Previous results remain below.' : status === 'error' ? error : `${items.length} results for “${committed}”${status === 'idle' ? ' · saved starting selection' : ''}`}</p>
     <div className="mtl-live-results" aria-busy={status === 'loading'}>{items.map(item => <a href={`https://www.mtlarchives.com/photo/${encodeURIComponent(item.id)}`} key={item.id} target="_blank" rel="noreferrer">
-      <img src={thumbnail(item.src, 480, 360)} alt={item.title} loading="lazy" />
+      <ArchiveImage src={item.src} source={item.source} width={480} height={360} alt={item.title} />
       <span>{item.title}</span><small>{item.date || 'Date not recorded'}</small>
     </a>)}</div>
     {status === 'success' && !items.length && <p>No photographs found. Try a street name, a landmark or a broader description.</p>}

@@ -540,3 +540,11 @@ table {
 .mtl-shape-controls label { display: grid; gap: 7px; flex: 1; min-width: 0; font-size: 12px; }
 .mtl-shape-controls input { width: 100%; accent-color: #827659; }
 @media(max-width:480px) { .mtl-shape-canvas { height: 270px; } }
+
+.mtl-image-frame { position: relative; display: block; overflow: hidden; background: #f3f2ef; }
+.mtl-image-frame > img { display: block; width: 100%; height: 100% !important; object-fit: contain; }
+.mtl-image-status { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; padding: 16px; font-size: 12px; line-height: 1.5; color: #777; text-align: center; }
+.mtl-live-results .mtl-image-frame { height: 150px; }
+.mtl-tech-source .mtl-image-frame { height: 220px; }
+@media(max-width:480px) { .mtl-live-results .mtl-image-frame { height: 135px; } .mtl-tech-source .mtl-image-frame { height: 180px; } }
+.mtl-live-results a > .mtl-image-frame { display: block; margin-top: 0; -webkit-line-clamp: unset; }

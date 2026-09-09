@@ -4,7 +4,7 @@ import { useState } from 'react'
 import analytics from './analytics.json'
 import { MtlArchivesLogo } from './logo'
 
-import { thumbnail } from './media'
+import { ArchiveImage } from './archive-image'
 export { MtlLiveSearch } from './live-search'
 
 const formats = [
@@ -17,7 +17,7 @@ export function MtlArchiveExample() {
   const item = formats[active]
   return <figure className="mtl-example">
     <div className="mtl-controls" aria-label="Archive document type">{formats.map((f, i) => <button type="button" key={f.file} aria-pressed={active === i} onClick={() => setActive(i)}>{f.label}</button>)}</div>
-    <img className="mtl-archive-image" src={thumbnail(`https://pub-6a29793ea7664738880d1cc5afb21b87.r2.dev/mtl_archives_image_${item.file}.jpg`, 1000, 700)} alt={item.alt} loading="lazy" />
+    <ArchiveImage className="mtl-archive-image" src={`https://pub-6a29793ea7664738880d1cc5afb21b87.r2.dev/mtl_archives_image_${item.file}.jpg`} width={1000} height={700} alt={item.alt} />
     <figcaption aria-live="polite">{item.text} <a href={`https://www.mtlarchives.com/photo/mtl_archives_metadata_${item.file}.json`} target="_blank" rel="noreferrer">Open archive record ↗</a></figcaption>
   </figure>
 }

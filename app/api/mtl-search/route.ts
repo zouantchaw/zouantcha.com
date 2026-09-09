@@ -16,7 +16,7 @@ export async function GET(request: NextRequest) {
     if (!Array.isArray(data.items)) throw new Error('Invalid search response')
     return NextResponse.json({ items: data.items.slice(0, 6).map((item: Record<string, unknown>) => ({
       id: item.metadataFilename, title: item.name || 'Archive photograph',
-      src: item.imageUrl, date: item.dateValue, credits: item.credits,
+      src: item.imageUrl, source: typeof item.externalUrl === 'string' && /^https?:\/\/depot\.ville\.montreal\.qc\.ca\//.test(item.externalUrl) ? item.externalUrl.replace(/^http:/, 'https:') : undefined, date: item.dateValue, credits: item.credits,
     })) }, { headers: { 'Cache-Control': 'public, s-maxage=300, stale-while-revalidate=600' } })
   } catch {
     return NextResponse.json({ error: 'The archive is taking longer than usual. Please try again.' }, { status: 503 })
