@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { PortmindPipeline } from 'app/components/portmind-pipeline'
 import { InteractionFilm } from 'app/components/interaction-film'
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
@@ -148,6 +149,8 @@ function ScoreTable({ table }: { table: WorkTable }) {
 }
 
 function Block({ block }: { block: WorkBlock }) {
+  if (block.kind === 'portmind-pipeline') return <PortmindPipeline />
+
   if (block.kind === 'rich-p') {
     return (
       <p className="max-w-2xl text-[17px] leading-7 text-ink-soft">
