@@ -372,6 +372,15 @@ export const work: WorkItem[] = [
       ]
     },
     {
+      "heading": "Stepping back to see the whole collection",
+      "blocks": [
+        { "kind": "rich-p", "parts": ["A search result shows what the system found. I built the ", { "label": "MTL Archives Explorer", "href": "https://explorer.mtlarchives.com/", "external": true }, " to ask a different question: how had it organized the collection? Each of its 14,715 points represents one photograph. I could move through the projection, open a record and compare a group of images instead of guessing from a handful of thumbnails."] },
+        { "kind": "p", "text": "The flat view uses the saved UMAP coordinates. The 3D view keeps that layout and adds depth from the recorded date, with a little spacing to avoid stacked points. Its shape is a way to navigate the evidence, not the geography of Montréal or a third dimension discovered by UMAP. Colour views offer other ways to inspect it, including dates, photographer labels and annotated visual groups." },
+        { "kind": "p", "text": "That made the split between aerial photographs, framed survey documents and index cards easier to investigate. I could move from an unusual group back to the images that formed it. Labels and anomaly highlights were prompts for review, not new archival facts. The useful outcome was a more specific question about the influence of document formatting, which led to the small cropping experiment." },
+        { "kind": "rich-p", "parts": ["The explorer is built with ", { "label": "Three.js", "href": "https://threejs.org/", "external": true }, ", a browser graphics library. It loads the saved positions and record identifiers first, then fetches the larger vector file when needed. Similar-image lookup compares the original CLIP vectors, not distances on the flattened map. Selected records can be collected and exported for follow-up. I kept this research workspace separate from the main site's simpler search, game and print flows."] }
+      ]
+    },
+    {
       "heading": "Trying a replacement before changing the index",
       "blocks": [
         {

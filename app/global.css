@@ -526,3 +526,10 @@ table {
 .mtl-search-form input:focus-visible { outline: 2px solid #827659; outline-offset: 3px; }
 @media(max-width:480px) { .mtl-live-results { grid-template-columns: repeat(2,minmax(0,1fr)); } .mtl-live-results img { height: 135px; } .mtl-tech-layout { grid-template-columns: 1fr; } .mtl-tech-source img { height: 180px; } .mtl-tech-explanation { min-height: 190px; } }
 @media(prefers-reduced-motion:reduce) { .mtl-tech-motion .mtl-map-point,.mtl-tech-motion rect { transition: none; } }
+
+.mtl-suggestion-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: 16px 0 8px; font-size: 12px; color: #737373; }
+.mtl-suggestion-heading > div { display: flex; flex-shrink: 0; gap: 4px; }
+.mtl-suggestion-heading button { width: 32px; height: 32px; border: 1px solid #ddd; border-radius: 5px; cursor: pointer; color: #302d25; }
+.mtl-controls.mtl-suggestion-row { flex-wrap: nowrap; overflow-x: auto; overscroll-behavior-x: contain; padding: 4px 3px 10px; scrollbar-width: thin; scrollbar-color: #c9c4b8 transparent; }
+.mtl-suggestion-row button { flex: 0 0 auto; white-space: nowrap; }
+.mtl-suggestion-heading button:focus-visible { outline: 2px solid #827659; outline-offset: 2px; }

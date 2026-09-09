@@ -178,3 +178,19 @@ selected records. Coordinates are recorded outputs, not newly computed results.
 Instagram: `data/social/2026-03-19-refresh/instagram_profile.json` records 3,340
 followers and 425 media entries. This is a March 19, 2026 snapshot, not a current
 follower count. No authenticated account screenshot is reconstructed from it.
+
+## Explorer and query suggestions
+
+September 9: checked twelve live smart-search queries through the portfolio
+proxy. Marché Bonsecours, pont Jacques-Cartier and Biosphère returned named
+matching records. Broad visual terms returned results with sparse catalogue
+titles; they are exploratory suggestions, not a relevance benchmark. Farine
+Five Roses was omitted because the inspected top titles did not establish a
+clear match. The row is user-scrolled rather than an automatic marquee.
+
+Inspected the deployed explorer and `apps/web/src/components/EmbeddingExplorer.tsx`:
+`yearToZ` supplies date-derived depth and seeded jitter; initial data loading
+uses saved 2D positions and IDs; `loadEmbeddings` defers the 512D binary;
+`findSimilar` uses cosine similarity on original vectors. Colour modes and
+cluster/anomaly annotations are inspection aids. The 3D form must not be
+presented as a 3D UMAP embedding or a geographic reconstruction.
