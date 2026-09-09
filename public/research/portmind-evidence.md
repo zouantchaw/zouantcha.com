@@ -3,6 +3,19 @@
 Prepared 9 September 2026. These notes accompany the portfolio case study and
 summarize repository evidence; they are not a new experiment or benchmark run.
 
+## Origin
+
+The founding inspiration is the Montreal Port Authority article
+[Data visibility: a new technological tool for information sharing](https://www.port-montreal.com/en/the-port-of-montreal/news/news/visibility-data).
+It describes a port community system for secure, real-time operational data
+sharing and logistics coordination. This is a Montreal Port Authority initiative,
+not a City of Montréal program. The author identifies it as the inspiration for
+independent Port Observatory MTL collection work, from which PortMind grew.
+
+The article was saved in the personal PKM clippings and is also referenced by
+the PKM Lab Port Community System Reference note. Its live source was checked
+on 9 September 2026. The clipping creation date is not a project start date.
+
 ## Collection
 
 Source: Port Observatory MTL `cloudflare/src/worker.ts`, revision `f8c4402`,

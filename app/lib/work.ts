@@ -379,8 +379,20 @@ export const work: WorkItem[] = [
       "heading": "Looking closer at the port",
       "blocks": [
         {
+          "kind": "rich-p",
+          "parts": [
+            "The starting point was an article from the Montreal Port Authority: ",
+            {
+              "label": "Data visibility: a new technological tool for information sharing",
+              "href": "https://www.port-montreal.com/en/the-port-of-montreal/news/news/visibility-data",
+              "external": true
+            },
+            ". It described a port community system that would let shipping lines, railways and operators share operational data in real time. Better visibility would help them coordinate arrivals, plan resources and reduce manual handoffs."
+          ]
+        },
+        {
           "kind": "p",
-          "text": "The starting point was an initiative from the City of Montréal. It prompted me to build Port Observatory MTL and begin collecting public port camera images and operational data. That collection work came first. PortMind grew out of the questions it raised."
+          "text": "That initiative made me curious about what I could learn from the data already available to the public. I started Port Observatory MTL as an independent project, collecting port camera images alongside vessel activity and schedules. The collection system came first: a way to keep a record of what was happening at the port."
         },
         {
           "kind": "p",
