@@ -1,3 +1,5 @@
+import { PortImageExplorer } from 'app/components/portmind-explorer'
+import { PortmindResults, PortmindInspection } from 'app/components/portmind-research-examples'
 import Link from 'next/link'
 import { PortmindPipeline } from 'app/components/portmind-pipeline'
 import { InteractionFilm } from 'app/components/interaction-film'
@@ -149,6 +151,9 @@ function ScoreTable({ table }: { table: WorkTable }) {
 }
 
 function Block({ block }: { block: WorkBlock }) {
+  if (block.kind === 'portmind-explorer') return <PortImageExplorer />
+  if (block.kind === 'portmind-results') return <PortmindResults />
+  if (block.kind === 'portmind-inspection') return <PortmindInspection />
   if (block.kind === 'portmind-pipeline') return <PortmindPipeline />
 
   if (block.kind === 'rich-p') {

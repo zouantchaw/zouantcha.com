@@ -110,6 +110,9 @@ export type WorkTable = {
 
 export type WorkBlock =
   | { kind: 'portmind-pipeline' }
+  | { kind: 'portmind-explorer' }
+  | { kind: 'portmind-results' }
+  | { kind: 'portmind-inspection' }
   | { kind: 'rich-p'; parts: (string | WorkLink)[] }
   | { kind: 'gallery'; images: WorkImage[]; caption: string }
   | { kind: 'video'; src: string; poster: string; caption: string; description: string }
@@ -403,13 +406,7 @@ export const work: WorkItem[] = [
           "text": "PortMind became the research project around those questions. My work spans the collection and research tooling, the visual identity, and the interfaces for reviewing images and comparing models."
         },
         {
-          "kind": "figure",
-          "figure": {
-            "kind": "image",
-            "src": "/images/case-studies/portmind-paper/scene.png",
-            "alt": "The site starts with an example: a truck towing an empty chassis, with stationary containers nearby.",
-            "caption": "The site starts with an example: a truck towing an empty chassis, with stationary containers nearby."
-          }
+          "kind": "portmind-explorer"
         }
       ]
     },
@@ -429,12 +426,44 @@ export const work: WorkItem[] = [
               "href": "https://developers.cloudflare.com/workers/",
               "external": true
             },
-            " runs on a three-minute schedule, rotating through pairs of the six Montréal cameras. It hashes each fetched image before running inference. When a camera serves the same frame again, the collector can reuse the previous observation and mark it as cached. Fresh frames go through DETR vehicle detection, with LLaVA used for truck-type classification when enabled."
+            ", a small program that runs on Cloudflare’s servers, checks the cameras every three minutes. It rotates through pairs of the six Montréal cameras. An image hash, a fingerprint of the file’s contents, tells it whether a frame has changed. Unchanged frames can reuse the previous observation, marked as cached."
           ]
         },
         {
-          "kind": "p",
-          "text": "The JPEGs live in R2. D1 keeps activity snapshots, image references and collection logs. Each camera records its own outcome, including fetch failures and timeouts. The wider observatory also collects vessel events and schedules, but those contextual signals do not become reference labels for the image task."
+          "kind": "rich-p",
+          "parts": [
+            "For new frames, ",
+            {
+              "label": "DETR, the Detection Transformer",
+              "href": "https://arxiv.org/abs/2005.12872",
+              "external": true
+            },
+            ", locates vehicles. When enabled, ",
+            {
+              "label": "LLaVA, the Large Language and Vision Assistant",
+              "href": "https://llava-vl.github.io/",
+              "external": true
+            },
+            ", then classifies the truck type. These are model predictions. Collecting them does not make them correct labels."
+          ]
+        },
+        {
+          "kind": "rich-p",
+          "parts": [
+            "The images live in ",
+            {
+              "label": "R2, Cloudflare’s file storage",
+              "href": "https://developers.cloudflare.com/r2/",
+              "external": true
+            },
+            ". ",
+            {
+              "label": "D1, its managed database",
+              "href": "https://developers.cloudflare.com/d1/",
+              "external": true
+            },
+            ", keeps the observation records and collection logs. Each camera records its own outcome, including failures and timeouts. Vessel events and schedules provide context, but do not supply the correct answers for an image evaluation."
+          ]
         },
         {
           "kind": "portmind-pipeline"
@@ -445,7 +474,36 @@ export const work: WorkItem[] = [
         },
         {
           "kind": "p",
-          "text": "The Python tooling builds manifests, records artifact hashes and produces sampling and split files. That makes it possible to trace an experiment back to its inputs. The practical question is no longer just whether an image exists, but which camera and time it came from, whether it is fresh, and where it was used."
+          "text": "The Python tooling builds a manifest, an inventory connecting each observation to its source, camera, time and image file. It also records file fingerprints and produces the lists used for training and evaluation. That lets me trace a result back to the exact inputs instead of relying on a folder name."
+        }
+      ]
+    },
+    {
+      "heading": "From a live map to a research tool",
+      "blocks": [
+        {
+          "kind": "p",
+          "text": "The Observatory’s first commits are from January 19, 2026. It began as a live map. Vessel positions from the Automatic Identification System, the broadcast system used by ships, joined traffic information and terminal schedules. Camera detection and the background collector followed on January 21; truck classification followed the next day."
+        },
+        {
+          "kind": "p",
+          "text": "The early engineering work was about keeping that view useful. On January 24, the database report recorded 72.96 million rows read in a day. Repeated queries were examining far more data than they returned. I added response caching, changed the expensive queries, and reduced polling that was faster than the source updates. Camera collection was split into smaller batches on January 27. These changes addressed specific failures; the report does not establish a measured before-and-after cost saving."
+        },
+        {
+          "kind": "p",
+          "text": "PortMind became a separate repository on June 25. The next steps were a source registry, a read-only connection to the collector, manifests and date-based sampling tools. Then came review packets, simple model comparisons and an experiment registry. The question had shifted from “can I show the activity?” to “can I measure whether the interpretation is right?”"
+        },
+        {
+          "kind": "p",
+          "text": "The iteration loop used model mistakes to select the next images for review. This is active learning: spend labeling effort where another answer may be useful. The repository records several rounds of harder examples, image-quality checks, expanded training sets and new comparisons. It also records a later change from the original chronological split tools to the July distribution-matched split, which balanced rows rather than holding out a later period. Those are different evaluation choices."
+        },
+        {
+          "kind": "p",
+          "text": "The experiment registry connected inputs, outputs, file fingerprints, code revisions and summary scores. It was not a complete laboratory notebook from day one. Some early entries have no recorded execution command, refer to uncommitted code, or lack a fingerprint for an output. Later checks began rejecting changed files, overlapping evaluation images and unsupported claims that an agent’s labels came from a human. Keeping that history matters as much as keeping the best score."
+        },
+        {
+          "kind": "p",
+          "text": "The tests cover those contracts: normalizing a source record, respecting date boundaries, detecting an image used in both training and evaluation, rejecting a modified input, and refusing to treat an agent as an independent human reviewer. They check the machinery. A separate human review still has to establish whether the answer itself is right."
         }
       ]
     },
@@ -453,12 +511,20 @@ export const work: WorkItem[] = [
       "heading": "Trying the smaller model first",
       "blocks": [
         {
-          "kind": "p",
-          "text": "Before committing to GPU fine-tuning, I tried frozen SigLIP image embeddings. One baseline assigns an image to the nearest class centroid; another learns a small linear classifier on the same embeddings. That comparison asks whether learning a decision boundary helps before paying to change the image representation itself."
+          "kind": "rich-p",
+          "parts": [
+            "Before paying for a larger training run, I tried ",
+            {
+              "label": "SigLIP, Sigmoid Loss for Language Image Pre-Training",
+              "href": "https://arxiv.org/abs/2303.15343",
+              "external": true
+            },
+            ". It turns an image into a list of numbers describing its visual features, called an embedding. I kept that image model fixed. One baseline chose the nearest class average; another learned a small classifier, or head, on the same features. Would learning that decision boundary help?"
+          ]
         },
         {
           "kind": "p",
-          "text": "The July experiment used 1,744 labeled rows: 1,175 for training, 219 for validation and 350 for the held-out readout. For container-truck presence, the learned head reached 0.8584 macro F1 on validation, then 0.6434 on the test split. The simpler centroid baseline reached 0.6468 on that same test. Threshold calibration did not improve the result."
+          "text": "The July experiment used 1,744 labeled rows: 1,175 to train on, 219 to choose settings, and 350 reserved for evaluation. The score was macro F1: calculate F1 for each class, then average them. F1 balances finding the positive cases with avoiding false alarms, on a scale from zero to one. The learned head reached 0.8584 on validation, then 0.6434 on the test split. The simpler baseline reached 0.6468 on that same test. Adjusting the cutoff for a positive prediction did not help."
         },
         {
           "kind": "table",
@@ -490,11 +556,11 @@ export const work: WorkItem[] = [
         },
         {
           "kind": "p",
-          "text": "There was no demonstrated improvement to justify a larger training run. More importantly, the validation-to-test gap needed an explanation. Camera and time differences, near-duplicate frames, repeated tuning and label errors were all plausible contributors. The result did not isolate one cause."
+          "text": "The learned classifier did not beat the simple baseline on this test. That gave me no evidence to justify a larger training run. The gap between validation and test also needed investigation. Camera and time differences, near-duplicate frames, repeated tuning and label errors were all plausible contributors. This comparison did not tell me which was responsible."
         },
         {
           "kind": "p",
-          "text": "There was also a scale problem worth investigating: the full-frame SigLIP path reduced a large port image to 224 pixels, while people often needed to zoom in to see a distant truck. That suggested tiled or multi-scale inputs as a next experiment. It remained a hypothesis to test after repairing the evaluation set."
+          "text": "Image size was another question. The model’s full-frame input was reduced to 224 pixels, while people often needed to zoom in to see a distant truck. That suggested testing smaller crops or several image scales. It was a next experiment, not a result I could claim yet."
         }
       ]
     },
@@ -503,7 +569,7 @@ export const work: WorkItem[] = [
       "blocks": [
         {
           "kind": "p",
-          "text": "The most important finding came from the labels. The audit found that every row in the historical locked set had been reviewed by Codex, even though the artifact used human-review field names. Structural validation had passed. The names still overstated the evidence."
+          "text": "The most important finding came from the labels. The audit found that every row in the historical locked set had been reviewed by Codex, OpenAI’s coding agent, even though the files used human-review field names. The files passed their format checks. Their names still overstated the evidence."
         },
         {
           "kind": "p",
@@ -511,11 +577,11 @@ export const work: WorkItem[] = [
         },
         {
           "kind": "p",
-          "text": "The split also had 84 same-camera near-time warnings, and the test results had been consulted repeatedly during development. I retained the old runs as historical diagnostics and stopped treating that split as a final exam. The lesson was concrete: immutable files and passing schema checks do not establish trustworthy labels or an untouched holdout."
+          "text": "The split also had 84 warnings about images from the same camera taken close together. Similar frames can make a test less independent than it looks. I had also consulted the test results repeatedly during development. I kept those runs as historical diagnostics and stopped treating that split as a final exam. A fixed file and a passing format check were not enough."
         },
         {
           "kind": "p",
-          "text": "The new flow records who supplied an answer, keeps model proposals separate from independent human review, and checks image identities and camera/date overlap. The September draft starts with 96 verified images across six cameras from June through August. Sampling allows one uncached capture per camera and UTC date before seeded camera balancing. That is an initial review packet, with its own sampling assumptions, rather than a claim to represent every operating condition."
+          "text": "The new flow records who supplied an answer, separates model suggestions from independent human review, and checks for overlapping images and camera dates. The September draft starts with 96 verified images across six cameras from June through August. It allows one uncached capture per camera and day, measured in Coordinated Universal Time (UTC), before balancing cameras with a repeatable random seed. It is an initial review packet, not a claim to represent every operating condition."
         }
       ]
     },
@@ -524,7 +590,7 @@ export const work: WorkItem[] = [
       "blocks": [
         {
           "kind": "p",
-          "text": "I also explored whether closer inspection helps a model make a better decision. The harness can provide the full frame, a three-by-three grid, a crop, and brightness or contrast adjustments. I separated runs where the harness chooses those steps from runs where the model actually calls the tools."
+          "text": "I also explored whether closer inspection helps a model make a better decision. The test harness, the program that runs the experiment, can supply the full image, a three-by-three grid, a crop, and brightness or contrast adjustments. I separated runs where that program chooses the steps from runs where the model calls the tools itself."
         },
         {
           "kind": "p",
@@ -580,11 +646,11 @@ export const work: WorkItem[] = [
         },
         {
           "kind": "p",
-          "text": "A separate strict autonomous run with GPT-5.5 completed 14 of 24 tasks. That added another dimension to the evaluation: a model can fail to finish the protocol before its visual judgment can be assessed. The native harness therefore records candidate actions, schema failures, repairs, executed tools and terminal outcomes separately from label agreement."
+          "text": "A separate run required GPT-5.5 to choose and call its own inspection tools. It completed 14 of 24 tasks. That introduced another question: can the model finish the procedure at all? The harness records the actions it requests, requests that fail the expected format, repair attempts, tools actually executed and how the run ends. Those records sit beside the label score."
         },
         {
           "kind": "p",
-          "text": "To establish a benefit from tools, the next comparison needs the same model, images, rubric and prompt with and without tool access. Comparing one model with guided crops to another model acting autonomously mixes too many changes. The earlier image-labeling pilot also used a different setup and lacks verified original response traces, so I keep its published scores separate."
+          "text": "To establish a benefit from tools, the next comparison needs the same model, images, labeling rules and instructions with and without tool access. Comparing one model with guided crops to another model acting autonomously mixes too many changes. The earlier image-labeling pilot also used a different setup and lacks verified original response traces, so I keep its published scores separate."
         }
       ]
     },
@@ -639,13 +705,7 @@ export const work: WorkItem[] = [
           "text": "The results page lets a reader choose a study and a task before comparing models. Each row opens the model’s results within that same context. The study setup sits beside the scores: how many answers were scored, who supplied the reference labels and which images were repeated."
         },
         {
-          "kind": "figure",
-          "figure": {
-            "kind": "image",
-            "src": "/images/case-studies/portmind-paper/site.png",
-            "alt": "The public site puts each study’s setup beside its results, with misses and false alarms below.",
-            "caption": "The public site puts each study’s setup beside its results, with misses and false alarms below."
-          }
+          "kind": "portmind-results"
         },
         {
           "kind": "p",
@@ -661,13 +721,7 @@ export const work: WorkItem[] = [
           "text": "The reference labels need as much care as the model run. I designed the reviewer flow around two questions: is there a truck, and is a truck carrying a container or towing an empty chassis? Each has Yes, No and Unsure. A reviewer should be able to say that the image does not contain enough evidence."
         },
         {
-          "kind": "figure",
-          "figure": {
-            "kind": "image",
-            "src": "/images/case-studies/portmind-paper/review.png",
-            "alt": "The inspection tools keep the image and labeling rules together. Model answers stay hidden.",
-            "caption": "The inspection tools keep the image and labeling rules together. Model answers stay hidden."
-          }
+          "kind": "portmind-inspection"
         },
         {
           "kind": "p",
@@ -698,28 +752,42 @@ export const work: WorkItem[] = [
         {
           "kind": "rich-p",
           "parts": [
-            "The agent runs through ",
+            "The coordinator uses ",
             {
               "label": "Eve",
               "href": "https://eve.dev/docs",
               "external": true
             },
-            ", alongside the Next.js interfaces on Vercel. It can prepare a benchmark plan and monitor the outcome. ",
+            ", a framework for agents that can prepare work and follow it through. The web interfaces use ",
+            {
+              "label": "Next.js",
+              "href": "https://nextjs.org/docs",
+              "external": true
+            },
+            " on Vercel. ",
             {
               "label": "Cloudflare Workflows",
               "href": "https://developers.cloudflare.com/workflows/",
               "external": true
             },
-            " owns image verification, bounded model calls and deterministic scoring. D1 stores the plan and attempt history; R2 holds private media and raw responses."
+            " runs the longer jobs: checking image files, calling models within the approved limits and calculating scores. The database keeps the plan and attempt history; file storage holds the private images and original model responses."
           ]
         },
         {
           "kind": "p",
-          "text": "Approval binds the exact reference, model IDs, prompt, attempt limits and budget. A workflow retry must not silently send an ambiguous request twice, substitute another model or reuse a cached answer. Failed calls and unsure answers remain visible. The owner publishes an aggregate snapshot separately from the private evidence."
+          "text": "Approval applies to a specific plan: the reference answers, models, instructions, attempt limits and budget. If a request might already have reached a model, retrying must not quietly send it twice. It must not swap models or reuse an old answer either. Failed calls and unsure answers remain visible. Publishing the summary is a separate owner decision."
         },
         {
-          "kind": "p",
-          "text": "Authenticated MCP access exposes the same operational records to an external harness. The coordinator’s tools cannot approve spending, freeze human references or publish results. Those boundaries keep assistance useful without allowing it to manufacture the answer key it is helping evaluate."
+          "kind": "rich-p",
+          "parts": [
+            "The same records are available through authenticated ",
+            {
+              "label": "Model Context Protocol (MCP)",
+              "href": "https://modelcontextprotocol.io/docs/getting-started/intro",
+              "external": true
+            },
+            ", which lets an external agent use the platform’s tools. The coordinator cannot approve spending, finalize human reference answers or publish results. It can help run the work without controlling the answers it will be measured against."
+          ]
         }
       ]
     },
@@ -732,7 +800,7 @@ export const work: WorkItem[] = [
         },
         {
           "kind": "p",
-          "text": "PortMind now has a public site and a working path from imported images to a reviewed reference, an approved run and a published report. The new Montréal benchmark still needs independent reviews and a frozen reference before its first research results. Small operational smoke tests establish that the plumbing works; they do not establish model performance."
+          "text": "In September, those command-line steps became a public site, a reviewer app and an agent-assisted workspace. The new Montréal benchmark still needs independent reviews and a finalized reference before its first research results. Small operational checks show that jobs can run through the system; they do not establish model performance."
         },
         {
           "kind": "p",
