@@ -1,29 +1,91 @@
 import Link from 'next/link'
-import { ProfilePhoto } from 'app/components/profile-photo'
-import { WorkRow } from 'app/components/work-row'
-import { featuredWriting, mailto, site } from 'app/lib/site'
-import { featuredWork } from 'app/lib/work'
-
+import Image from 'next/image'
 export default function Page() {
   return (
-    <div className="site-shell personal-home">
-      <header className="personal-heading">
-        <ProfilePhoto size={48} priority />
-        <div><h1>{site.name}</h1><p>Design engineer · {site.location}</p></div>
+    <div className="site-shell index-home">
+      <header className="index-hero">
+        <div>
+          <p className="eyebrow">
+            A personal index / notes, software & other interests
+          </p>
+          <h1>
+            Some things I make.
+            <br />
+            Some things I’m
+            <br />
+            still figuring out.
+          </h1>
+          <p className="hero-intro">
+            I’m Wiel. I build software, read widely, and tend to follow an
+            interest further than I originally planned.
+          </p>
+          <div className="hero-links">
+            <Link href="/case-studies">Start with the case studies ↗</Link>
+            <a href="#interests">Or have a look around ↓</a>
+          </div>
+        </div>
+        <aside className="home-portrait">
+          <Image
+            src="/images/wiel.jpg"
+            alt="Wiel Zouantcha"
+            width={250}
+            height={285}
+            priority
+            sizes="(max-width: 700px) 120px, 250px"
+          />
+          <h2>
+            Engineer, reader,
+            <br />
+            father. Usually curious.
+          </h2>
+          <p>
+            This is where the finished work
+            <br />
+            and the loose ends meet.
+          </p>
+          <Link href="/about">A little more about me ↗</Link>
+        </aside>
       </header>
-      <div className="personal-intro">
-        <p>I’m Wiel. I design and build software, and I tend to follow an interest further than I originally planned.</p>
-        <p>Browsing Montréal’s open data led me to <Link href="/case-studies/mtl-archives">MTL Archives</Link>. Watching the port became <Link href="/case-studies/portmind">PortMind</Link>, a research project about what vision models can actually tell us from those images. I like having room to ask a question, build something, and find out where I was wrong.</p>
-        <p>At Oloodi, I work on workforce software across full-stack development and customer engineering. Some days that means fixing an order flow; others, walking an operations team through the product. Before that, I worked on commerce at Ethos and security integrations at SaaS Alerts. <Link href="/work">More about my work</Link>.</p>
-        <p>I also help people turn their businesses and ideas into products, including <Link href="/case-studies/diane-party-rentals">Diane Party Rentals</Link> and <Link href="/case-studies/starthome">Starthome</Link>. Outside of that, I’m a father, a reader, and very interested in the city around me. <Link href="/about">A little more about me</Link>, or <a href={mailto()}>say hello</a>.</p>
-      </div>
-      <section className="personal-section">
-        <div className="index-heading"><h2>Case studies</h2><Link href="/case-studies">View all <span aria-hidden="true">↗</span></Link></div>
-        {featuredWork().map(item => <WorkRow key={item.slug} item={item} />)}
-      </section>
-      <section className="personal-section">
-        <div className="index-heading"><h2>Writing</h2><Link href="/blog">All notes <span aria-hidden="true">↗</span></Link></div>
-        {featuredWriting.map(post => <Link key={post.slug} href={`/blog/${post.slug}`} className="reading-row"><span>{post.title}</span><span className="reading-meta">{post.source}<span className="row-arrow" aria-hidden="true">↗</span></span></Link>)}
+      <section id="interests" className="interest-index">
+        <div className="interest-label">
+          <h2 className="eyebrow">Follow an interest</h2>
+          <p>
+            There isn’t only one
+            <br />
+            way through here.
+          </p>
+        </div>
+        <article>
+          <h3>
+            <Link href="/topics/montreal">The city ↗</Link>
+          </h3>
+          <p>Old photographs, a port camera, and questions about Montréal.</p>
+          <div>
+            <Link href="/case-studies/mtl-archives">MTL Archives</Link> ·{' '}
+            <Link href="/case-studies/portmind">PortMind ↗</Link>
+          </div>
+        </article>
+        <article>
+          <h3>
+            <Link href="/work">The work ↗</Link>
+          </h3>
+          <p>Software for the people keeping things moving.</p>
+          <div>
+            <Link href="/case-studies/diane-party-rentals">DPR</Link> ·{' '}
+            <Link href="/case-studies/starthome">Starthome</Link> ·{' '}
+            <Link href="/work/oloodi">Oloodi ↗</Link>
+          </div>
+        </article>
+        <article>
+          <h3>
+            <Link href="/blog">The margins ↗</Link>
+          </h3>
+          <p>Books, questions, and ideas I want to come back to.</p>
+          <div>
+            <Link href="/blog">Reading notes</Link> ·{' '}
+            <Link href="/bookshelf">Bookshelf ↗</Link>
+          </div>
+        </article>
       </section>
     </div>
   )

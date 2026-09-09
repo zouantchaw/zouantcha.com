@@ -1,3 +1,4 @@
+import { CopyEmail } from 'app/components/copy-email'
 import { SectionLabel } from 'app/components/section-label'
 import { contact, mailto, site } from 'app/lib/site'
 
@@ -12,14 +13,20 @@ export default function Page() {
       <header className="max-w-3xl space-y-5">
         <SectionLabel>Contact</SectionLabel>
         <h1 className="font-mono text-[32px] leading-[1.15] tracking-[-0.03em] text-ink sm:text-[40px]">
-          {contact.title}
+          Say hello.
         </h1>
       </header>
 
+      <div className="flex items-center flex-wrap gap-4">
+        <a href={mailto()}>{site.email}</a>
+        <CopyEmail email={site.email} />
+      </div>
       <div className="grid gap-12 border-t border-line pt-12 lg:grid-cols-2">
         <section className="space-y-4">
           <h2 className="text-2xl tracking-tight">{contact.hiring.title}</h2>
-          <p className="text-[17px] leading-7 text-ink-soft">{contact.hiring.body}</p>
+          <p className="text-[17px] leading-7 text-ink-soft">
+            {contact.hiring.body}
+          </p>
           <div className="space-y-2 pt-2 text-sm">
             <a
               href={mailto('Software engineering role')}
@@ -40,7 +47,9 @@ export default function Page() {
 
         <section className="space-y-4">
           <h2 className="text-2xl tracking-tight">{contact.project.title}</h2>
-          <p className="text-[17px] leading-7 text-ink-soft">{contact.project.body}</p>
+          <p className="text-[17px] leading-7 text-ink-soft">
+            {contact.project.body}
+          </p>
           <p className="text-sm text-muted">
             Email subject: Project inquiry, [organization or problem]
           </p>

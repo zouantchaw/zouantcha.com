@@ -5,7 +5,7 @@ type SectionLabelProps = {
 
 export function SectionLabel({ children }: SectionLabelProps) {
   return (
-    <p className="font-mono text-[13px] text-muted">
+    <p className="eyebrow">
       {children}
     </p>
   )

@@ -1,4 +1,5 @@
 import { getBlogPosts } from 'app/blog/utils'
+import { getBooks } from 'app/lib/books'
 import { work } from 'app/lib/work'
 
 export const baseUrl = 'https://www.zouantcha.com'
@@ -19,6 +20,13 @@ export default async function sitemap() {
     '/contact',
     '/blog',
     '/slides',
+    '/bookshelf',
+    '/topics/montreal',
+    '/work/oloodi',
+    '/work/ethos',
+    '/work/independent',
+    '/work/saas-alerts',
+    ...getBooks().map((book) => '/bookshelf/' + book.slug),
     ...caseStudyPages,
   ].map((route) => ({
     url: `${baseUrl}${route}`,

@@ -22,8 +22,8 @@ export default function Page() {
       </header>
 
       <section>
-        {work.map((item) => (
-          <WorkRow key={item.slug} item={item} />
+        {work.map((item, index) => (
+          <WorkRow key={item.slug} item={item} index={index} />
         ))}
         <div className="border-t border-line" />
       </section>

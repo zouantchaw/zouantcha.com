@@ -70,7 +70,8 @@ export default async function Blog({ params }: BlogPageProps) {
   let canonicalUrl = `${baseUrl}/blog/${post.slug}`
 
   return (
-    <section className="site-shell">
+    <section className="site-shell reader-page">
+      <a href="/blog" className="reader-back">← Notes</a>
       <div className="max-w-3xl">
       <script
         type="application/ld+json"
@@ -108,6 +109,7 @@ export default async function Blog({ params }: BlogPageProps) {
       <article className="prose">
         <CustomMDX source={post.content} />
       </article>
+      <nav className="mt-16 border-t border-line pt-8"><a href="/blog">Back to the notes ↗</a></nav>
       </div>
     </section>
   )

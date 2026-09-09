@@ -9,17 +9,17 @@ export const site = {
   x: 'https://twitter.com/love_thegame_',
   linkedin: 'https://www.linkedin.com/in/wielfried-zouantcha-6b4722136/',
   description:
-    'Wiel Zouantcha is a full stack design engineer. Archives, rentals, academies, workforce software, and the operations behind them.',
+    'Wiel Zouantcha is a full stack design engineer. A personal index of software, research, reading, and the work behind it.',
   socialDescription:
-    'Search over 14,822 Montreal photos. A rental desk that used to quote by hand. A soccer-training admin built from zero.',
+    'Software, research, books, and questions worth staying with. A personal index by Wiel Zouantcha.',
 }
 
 export const nav = [
   { href: '/case-studies', label: 'Case studies' },
   { href: '/work', label: 'Work' },
-  { href: '/blog', label: 'Writing' },
+  { href: '/blog', label: 'Notes' },
   { href: '/about', label: 'About' },
-  { href: '/contact', label: 'Contact' },
+  { href: '/bookshelf', label: 'Bookshelf' },
 ]
 
 export const intro = {
