@@ -2,6 +2,7 @@ import fs from 'fs'
 import path from 'path'
 
 type Metadata = {
+  topic?: string
   title: string
   publishedAt: string
   summary: string

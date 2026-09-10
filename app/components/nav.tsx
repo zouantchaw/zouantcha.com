@@ -68,7 +68,6 @@ export function Nav() {
             </Link>
           ))}
         </nav>
-        <p>A personal index. There isn’t only one way through here.</p>
       </Dialog>
     </header>
   )

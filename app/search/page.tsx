@@ -53,8 +53,8 @@ export default async function Page({
   return (
     <div className="site-shell personal-page">
       <header className="space-y-5">
-        <p className="eyebrow">Find a thread</p>
-        <h1>What caught your attention?</h1>
+        <p className="eyebrow">Site search</p>
+        <h1>Search the index.</h1>
         <p>Search the published notes, work, case studies, and bookshelf.</p>
       </header>
       <form className="search-form" action="/search">

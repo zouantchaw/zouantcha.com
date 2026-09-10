@@ -1,3 +1,5 @@
+import { NotebookIndex } from 'app/components/notebook-index'
+import { ContinueReading } from 'app/components/continue-reading'
 import Link from 'next/link'
 import Image from 'next/image'
 export default function Page() {
@@ -8,16 +10,20 @@ export default function Page() {
           <p className="eyebrow">
             A personal index / notes, software & other interests
           </p>
-          <h1>
-            Some things I make.
-            <br />
-            Some things I’m
-            <br />
-            still figuring out.
-          </h1>
+          <h1>Hi, I’m Wiel.</h1>
           <p className="hero-intro">
-            I’m Wiel. I build software, read widely, and tend to follow an
-            interest further than I originally planned.
+            I design and build software. These days, I’m working on{' '}
+            <Link href="/work/oloodi">workforce software at Oloodi</Link>,
+            studying port imagery with{' '}
+            <Link href="/case-studies/portmind">PortMind</Link>, and making{' '}
+            <Link href="/case-studies/mtl-archives">
+              Montréal’s old photographs
+            </Link>{' '}
+            easier to explore.
+          </p>
+          <p className="hero-intro hero-personal">
+            I’m also a father and a reader. I’ve been keeping notes for years;
+            I’m starting to put more of them here.
           </p>
           <div className="hero-links">
             <Link href="/case-studies">Start with the case studies ↗</Link>
@@ -33,31 +39,19 @@ export default function Page() {
             priority
             sizes="(max-width: 700px) 120px, 250px"
           />
-          <h2>
-            Engineer, reader,
-            <br />
-            father. Usually curious.
-          </h2>
-          <p>
-            This is where the finished work
-            <br />
-            and the loose ends meet.
-          </p>
+          <h2>Wiel Zouantcha</h2>
+          <p>Based in Washington, DC.</p>
           <Link href="/about">A little more about me ↗</Link>
         </aside>
       </header>
+      <ContinueReading />
       <section id="interests" className="interest-index">
         <div className="interest-label">
-          <h2 className="eyebrow">Follow an interest</h2>
-          <p>
-            There isn’t only one
-            <br />
-            way through here.
-          </p>
+          <h2 className="eyebrow">Around here</h2>
         </div>
         <article>
           <h3>
-            <Link href="/topics/montreal">The city ↗</Link>
+            <Link href="/topics/montreal">Montréal ↗</Link>
           </h3>
           <p>Old photographs, a port camera, and questions about Montréal.</p>
           <div>
@@ -67,9 +61,9 @@ export default function Page() {
         </article>
         <article>
           <h3>
-            <Link href="/work">The work ↗</Link>
+            <Link href="/work">Software ↗</Link>
           </h3>
-          <p>Software for the people keeping things moving.</p>
+          <p>Staffing, commerce, rental deliveries, and home inspections.</p>
           <div>
             <Link href="/case-studies/diane-party-rentals">DPR</Link> ·{' '}
             <Link href="/case-studies/starthome">Starthome</Link> ·{' '}
@@ -78,15 +72,16 @@ export default function Page() {
         </article>
         <article>
           <h3>
-            <Link href="/blog">The margins ↗</Link>
+            <Link href="/blog">Reading ↗</Link>
           </h3>
-          <p>Books, questions, and ideas I want to come back to.</p>
+          <p>Reading lists since 2022, plus notes on what I took from them.</p>
           <div>
             <Link href="/blog">Reading notes</Link> ·{' '}
             <Link href="/bookshelf">Bookshelf ↗</Link>
           </div>
         </article>
       </section>
+      <NotebookIndex />
     </div>
   )
 }

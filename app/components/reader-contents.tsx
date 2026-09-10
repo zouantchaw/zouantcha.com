@@ -1,25 +1,41 @@
 'use client'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
+import { savePosition } from 'app/lib/reading-position'
 import { Dialog } from './dialog'
 export function ReaderContents({
   sections,
+  title,
+  slug,
 }: {
+  title: string
+  slug: string
   sections: { id: string; title: string }[]
 }) {
+  const lastSaved = useRef('')
   const [open, setOpen] = useState(false)
   const [active, setActive] = useState(sections[0]?.id)
   useEffect(() => {
-    const update = () => {
+    const update = (event?: Event) => {
       const passed = sections.filter((s) => {
         const node = document.getElementById(s.id)
         return node && node.getBoundingClientRect().top < 180
       })
-      setActive(passed.at(-1)?.id ?? sections[0]?.id)
+      const current = passed.at(-1)
+      setActive(current?.id ?? sections[0]?.id)
+      if (event && current && lastSaved.current !== slug + current.id) {
+        savePosition({
+          slug,
+          title,
+          section: current.id,
+          heading: current.title,
+        })
+        lastSaved.current = slug + current.id
+      }
     }
     window.addEventListener('scroll', update, { passive: true })
     update()
     return () => window.removeEventListener('scroll', update)
-  }, [sections])
+  }, [sections, slug, title])
   const list = (
     <ol>
       {sections.map((s, i) => (

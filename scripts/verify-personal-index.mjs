@@ -20,7 +20,6 @@ const routes = [
   '/blog',
   '/bookshelf?year=2025',
   '/topics/montreal',
-  '/slides',
   '/search?q=PortMind',
   '/case-studies/mtl-archives',
   '/case-studies/portmind',

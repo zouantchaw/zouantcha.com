@@ -304,6 +304,8 @@ export default async function Page({ params }: PageProps) {
   return (
     <article className="case-essay">
       <ReaderContents
+        title={item.title}
+        slug={item.slug}
         sections={item.sections.map((s) => ({
           id: sectionId(s.heading),
           title: s.heading,

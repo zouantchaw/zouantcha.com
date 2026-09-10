@@ -2,7 +2,7 @@ export const site = {
   name: 'Wiel Zouantcha',
   formalName: 'Wielfried Zouantcha',
   title: 'Full Stack Design Engineer',
-  headline: 'I build software for work that is already happening.',
+  headline: 'Software, research, and reading notes.',
   location: 'Washington, DC',
   email: 'zouantchaw74@gmail.com',
   github: 'https://github.com/zouantchaw',
@@ -11,7 +11,7 @@ export const site = {
   description:
     'Wiel Zouantcha is a full stack design engineer. A personal index of software, research, reading, and the work behind it.',
   socialDescription:
-    'Software, research, books, and questions worth staying with. A personal index by Wiel Zouantcha.',
+    'Wiel Zouantcha: design engineering, Montréal archives, port research, and reading notes.',
 }
 
 export const nav = [
@@ -62,7 +62,7 @@ export const record = [
 
 export const about = {
   eyebrow: 'Get to know me',
-  title: 'I learned software by building my way into real problems.',
+  title: 'I didn’t start in software.',
   body: [
     'I’m Wiel Zouantcha, a full stack design engineer based in Washington, DC.',
     'I did not follow a conventional computer-science path. I studied pre-nursing, stepped away, and eventually completed a full-stack software engineering program at Flatiron School. My first production role was at SaaS Alerts, where I learned that integration work is rarely about connecting two clean APIs. It is about inconsistent data, incomplete documentation, operational constraints, and making careful claims about what the system actually knows.',
@@ -103,10 +103,10 @@ export const experience = [
     role: 'Customer Engineer / Full-Stack Engineer',
     period: '2026–present',
     body: [
-      'At Oloodi, I work on KROW Workforce, the software connecting staffing companies, their clients, and the people working each shift. My role combines full-stack development with customer engineering: understanding an operation, building the workflows it needs, and helping people use them.',
-      'On the engineering side, I work across the web application and backend. That includes order creation and editing, vendor workflows, reporting, permissions, and the checks that keep a change from breaking another part of the product. A shift edit has to save correctly, respect the rules for an existing order, and show up consistently for the people relying on it.',
-      'I also prepare and deliver product demos for teams including EA Sports, Snapchat, and Google. I build the walkthrough around their work: requesting staff, repeating a schedule across locations, checking attendance, reviewing invoices, and following up with a vendor. The preparation includes realistic workspaces, a tested sequence, and coordination with the teammate running the live application.',
-      'For the EA Sports walkthrough, we followed a recurring staffing request from the client dashboard through attendance, invoices, and reporting, then moved to mobile check-in. Explaining that whole sequence makes the gaps easier to see. Those conversations help me turn a broad request into a specific product change and explain the tradeoffs back to the team.',
+      'At Oloodi, I build KROW Workforce, which connects staffing companies, their clients, and the people working each shift. I work on both the product and the conversations around it.',
+      'A staffing order runs through a lot of hands. I work on the steps between them: onboarding, assigning shifts, checking certifications, recording time, and turning timesheets into invoices. The code spans a React and TypeScript portal, Node.js services, Firebase, PostgreSQL, and Cloud Run.',
+      'I’ve given product demos to teams at Snapchat, Google, EA Sports, and Nvidia. I prepare the walkthrough around how that team would use the product, from requesting staff to checking attendance and reviewing invoices. Those conversations are also a way to find out where a workflow is confusing or incomplete.',
+      'The engineering and customer work feed into each other. I can hear where someone gets stuck, trace it through the interface and backend, and work on the change with the team.',
     ],
   },
   {
@@ -115,8 +115,8 @@ export const experience = [
     role: 'Senior Full-Stack Developer',
     period: '2022–2025',
     body: [
-      'I joined Ethos as a blockchain developer and grew into a broader full-stack product role. I built and maintained smart contracts, Flow and EVM service layers, Shopify applications and extensions, merchant administration, loyalty and token-gated commerce flows, and the Luna self-serve platform.',
-      'The later work focused heavily on turning an early product into a more reliable multi-tenant platform: merchant isolation, webhook authentication, server-side cart behavior, theme compatibility, product variants, application configuration, and production debugging.',
+      'I joined Ethos through blockchain work and stayed for three and a half years. My role grew into building the product around it: Shopify apps, checkout and point-of-sale flows, loyalty features, merchant dashboards, and the Luna self-serve platform.',
+      'I worked across React and Next.js interfaces, Node.js APIs, and deployment on Azure and Vercel. Much of the later work was about making the product reliable for different merchants: keeping their data separate, verifying incoming webhook requests, and making cart and checkout behavior consistent across Shopify themes.',
     ],
   },
   {
@@ -133,7 +133,7 @@ export const experience = [
     role: 'Software Engineer, Integrations and Security',
     period: '2020–2021',
     body: [
-      'SaaS Alerts was my first production software role. I built and researched integrations for MSP security monitoring across IT Glue, Datto, ConnectWise, Kaseya, Microsoft Graph, and related systems.',
+      'SaaS Alerts was my first production software role. I worked on integrations that helped managed service providers monitor security events across IT Glue, Datto, ConnectWise, Kaseya, and Microsoft Graph.',
       'The work taught me to recreate events, inspect raw vendor data, normalize inconsistent schemas, document unsupported security signals, and distinguish between what a product wants to detect and what an external platform can truthfully expose.',
     ],
   },

@@ -19,11 +19,8 @@ export default async function Page({
   return (
     <div className="site-shell personal-page">
       <header className="space-y-5">
-        <p className="eyebrow">The margins / reading</p>
-        <h1>
-          A few shelves,
-          <br />a few ways of seeing.
-        </h1>
+        <p className="eyebrow">Reading / 2022 onwards</p>
+        <h1>My bookshelf.</h1>
         <p>
           I read across software, history, business, and whatever catches my
           attention. These are books from the reading lists I’ve kept here.

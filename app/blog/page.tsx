@@ -22,8 +22,10 @@ export default async function Page({
     (p) =>
       (selected === 'all' ||
         (selected === 'reading'
-          ? p.slug.startsWith('books-read')
-          : !p.slug.startsWith('books-read'))) &&
+          ? p.slug.startsWith('books-read') || p.metadata.topic === 'reading'
+          : !(
+              p.slug.startsWith('books-read') || p.metadata.topic === 'reading'
+            ))) &&
       (!year || p.metadata.publishedAt.startsWith(year)),
   )
   return (

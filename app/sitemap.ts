@@ -19,7 +19,6 @@ export default async function sitemap() {
     '/about',
     '/contact',
     '/blog',
-    '/slides',
     '/bookshelf',
     '/topics/montreal',
     '/work/oloodi',
