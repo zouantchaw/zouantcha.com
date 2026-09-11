@@ -20,9 +20,11 @@ const results = [
     href: '/case-studies/portmind#build-a-record-of-the-port',
   },
   {
-    value: '$5,032.66',
-    label: 'Online gross payment volume',
-    context: 'Diane Party Rentals · Apr–Sep 8, 2026',
+    value: 'Manual → online',
+    narrative: true,
+    label: 'Quotes, payments and bookings connected',
+    context:
+      'Diane Party Rentals · $5,032.66 gross processed through Stripe, Apr–Sep 8, 2026',
     href: '/case-studies/diane-party-rentals#from-a-quote-to-a-paid-booking',
   },
 ]
@@ -40,7 +42,15 @@ export function WorkResults() {
         {results.map((result) => (
           <li key={result.label}>
             <Link href={result.href}>
-              <span className="work-result-value">{result.value}</span>
+              <span
+                className={
+                  result.narrative
+                    ? 'work-result-value work-result-value--words'
+                    : 'work-result-value'
+                }
+              >
+                {result.value}
+              </span>
               <span className="work-result-label">{result.label} ↗</span>
               <span className="work-result-context">{result.context}</span>
             </Link>

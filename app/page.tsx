@@ -23,7 +23,7 @@ export default function Page() {
           </p>
           <p className="hero-intro hero-personal">
             I’m also a father and a reader. You’ll find my reading lists and
-            longer essays here too.
+            writings and notes here too.
           </p>
           <div className="hero-links">
             <Link href="/case-studies">Start with the case studies ↗</Link>

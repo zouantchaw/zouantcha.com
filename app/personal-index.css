@@ -1234,6 +1234,9 @@ button:active:not(:disabled) {
   line-height: 1.1;
   font-variant-numeric: tabular-nums;
 }
+.work-result-value--words {
+  font-size: clamp(24px, 2.4vw, 34px);
+}
 .work-result-label {
   font-size: 14px;
   line-height: 1.5;
