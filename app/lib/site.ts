@@ -62,11 +62,8 @@ export const record = [
 
 export const about = {
   eyebrow: 'Get to know me',
-  title:
-    'I build software for problems that don’t fit neatly into the interface.',
   body: [
     'I’m Wiel Zouantcha, a software engineer working across product, data and applied AI, based in Washington, DC.',
-    'I’m interested in what happens when software has to represent something that isn’t clear-cut: an incomplete archive record, a truck partly hidden in a photograph, or a delivery that competes with another booking. The interface has to make sense, but so do the records and decisions behind it.',
     'I came into software without a conventional computer-science path and learned by building. At SaaS Alerts, production integrations taught me to work with inconsistent data and incomplete documentation. I later spent three and a half years at Ethos working across commerce and merchant software. Today, I combine full-stack development and customer engineering at Oloodi.',
     'I don’t always start with a product in mind. Browsing Montréal’s public datasets led to MTL Archives. Collecting observations of the port led to PortMind and questions about how to evaluate vision models. Working with Diane Party Rentals meant following a booking beyond checkout to the equipment, crew and customer waiting for it.',
     'Building gives me a way to stay with a question. I can follow it into the data, make something someone can use, and find out where my understanding was incomplete.',
@@ -247,13 +244,6 @@ export const contact = {
 }
 
 export const featuredWriting = [
-  {
-    slug: 'clip-sees-bureaucracy',
-    title: 'CLIP sees bureaucracy',
-    summary:
-      'What happens when you embed 14,715 historical Montreal photographs and look at the archive through a vision model.',
-    source: 'Original',
-  },
   {
     slug: 'books-read-2025',
     title: 'Books read in 2025',

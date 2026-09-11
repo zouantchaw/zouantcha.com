@@ -378,13 +378,7 @@ export const work: WorkItem[] = [
                 "href": "https://umap-learn.readthedocs.io/en/latest/",
                 "external": true
               },
-              ", to turn high-dimensional vectors into a view I could inspect. It suggested what to investigate; distances on that map were not proof of semantic similarity or a controlled explanation of the model. I wrote about the observation in ",
-              {
-                "label": "CLIP Sees Bureaucracy",
-                "href": "/blog/clip-sees-bureaucracy",
-                "external": true
-              },
-              "."
+              ", to turn high-dimensional vectors into a view I could inspect. It suggested what to investigate; distances on that map were not proof of semantic similarity or a controlled explanation of the model."
             ]
           },
           {

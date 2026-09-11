@@ -11,7 +11,6 @@ The city photographic archive and aerial photothèque are the source collections
 
 The repository begins 19 October 2025 (`451b8d1`). Text search followed
 (`b7206c5`); CLIP image embeddings were added 8 December (`b09cfc7`).
-The January article *CLIP Sees Bureaucracy* records exploratory analysis.
 May reports record structured captioning, cleanup and embedding comparisons.
 Commit dates establish recorded implementation dates, not a precise date of
 personal inspiration. The case study does not invent an earlier founding event.
@@ -55,8 +54,7 @@ independent verification of historical correctness.
 
 ## Visual research and model comparison
 
-January projection: 14,715 valid image embeddings, documented in
-https://zouantcha.com/blog/clip-sees-bureaucracy . UMAP projection distances
+January projection: 14,715 valid image embeddings. UMAP projection distances
 are not distances in the original embedding space and do not isolate the causal
 features of the model. The article uses the qualitative formatting observation,
 not the older projection ratios as a general retrieval guarantee.

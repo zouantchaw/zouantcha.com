@@ -37,10 +37,6 @@ export default async function Page({
           <p className="eyebrow">Reading / {b.year}</p>
           <h1>{b.title}</h1>
           {b.author && <p>{b.author}</p>}
-          <p>
-            This is part of my {b.year} reading list. The original entry keeps
-            the notes and passages I chose to save together.
-          </p>
           {b.note && <p className="text-sm text-muted">{b.note}</p>}
           <Link href={'/blog/' + b.source}>Read the {b.year} notes ↗</Link>
           {b.href && (
@@ -50,14 +46,6 @@ export default async function Page({
               </a>
             </p>
           )}
-          <details className="reference-details">
-            <summary>Where this fits in the index</summary>
-            <p>
-              The bookshelf collects the books listed in my published reading
-              notes. Open the yearly entry for the original context.
-            </p>
-            <Link href="/blog?topic=reading">More reading notes ↗</Link>
-          </details>
         </div>
       </article>
     </div>

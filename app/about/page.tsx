@@ -15,13 +15,10 @@ export default function Page() {
         <div className="flex items-center gap-3.5">
           <ProfilePhoto size={56} priority />
           <div>
-            <p className="font-mono text-[15px] text-ink">{site.name}</p>
+            <h1 className="font-mono text-[15px] text-ink">{site.name}</h1>
             <p className="text-[13px] text-muted">{about.eyebrow}</p>
           </div>
         </div>
-        <h1 className="font-mono text-[32px] leading-[1.15] tracking-[-0.03em] text-ink sm:text-[40px]">
-          {about.title}
-        </h1>
       </header>
 
       <div className="max-w-2xl space-y-5 text-[17px] leading-7 text-ink-soft">
