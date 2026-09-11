@@ -153,6 +153,7 @@ export type WorkItem = {
   role: string
   period: string
   scope: string
+  ownership?: string
   tools?: string
   featured?: boolean
   research?: boolean
@@ -169,7 +170,8 @@ export const work: WorkItem[] = [
     "slug": "mtl-archives",
     "number": "01",
     "title": "MTL Archives",
-    "dek": "Making 13,499 archival records searchable, then testing whether discovery turns into a reason to return.",
+    "dek": "A searchable archive of 13,000+ Montréal photographs, with a daily game and an editorial system that reached 2.66 million social views.",
+    "ownership": "I designed and built the data pipelines, image enrichment, visual search, model evaluations, website, payments and editorial automation. The reach was measurable; whether it brought people back to the archive became the next question.",
     "summary": "From public records to visual search and a daily game, with 2.66 million social views and a much smaller website audience.",
     "evidence": "13,499 serving records · 2.66M social views, January–July 2026",
     "role": "Independent researcher, designer & engineer",
@@ -736,7 +738,8 @@ export const work: WorkItem[] = [
     "slug": "portmind",
     "number": "02",
     "title": "PortMind",
-    "dek": "I built a port-image collector and model evaluations. The most useful result was finding that my benchmark needed better evidence.",
+    "dek": "A six-camera port observatory and vision-model evaluation system, built from 81,202 activity snapshots.",
+    "ownership": "I built the collector, datasets, experiment tooling and review interfaces. Auditing 1,744 benchmark labels revealed that apparently human-reviewed answers came from an agent workflow, so I changed how the system records and verifies its reference answers.",
     "summary": "81,202 activity snapshots across six cameras, and the evaluation work needed to distinguish a model score from a trustworthy result.",
     "evidence": "Six cameras · 81,202 activity snapshots · Label-provenance audit",
     "role": "Independent researcher, designer & engineer",

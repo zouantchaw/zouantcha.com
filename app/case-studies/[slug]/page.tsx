@@ -349,6 +349,9 @@ export default async function Page({ params }: PageProps) {
           {item.title}
         </h1>
         <p className="text-xl leading-8 text-ink-soft">{item.dek}</p>
+        {item.ownership ? (
+          <p className="max-w-3xl text-[17px] leading-7 text-ink-soft">{item.ownership}</p>
+        ) : null}
         <dl className="case-essay-meta">
           <div>
             <dt className="font-mono text-[12px] text-muted">Role</dt>
