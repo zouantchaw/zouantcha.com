@@ -22,7 +22,7 @@ export default function Page() {
             easier to explore.
           </p>
           <p className="hero-intro hero-personal">
-            I’m also a father and a reader. You’ll find my reading lists and
+            I’m also a father and a reader. You’ll find my reading lists,
             writings and notes here too.
           </p>
           <div className="hero-links">
