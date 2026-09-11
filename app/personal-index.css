@@ -861,7 +861,7 @@ button:active:not(:disabled) {
     padding-top: 0;
   }
   .portrait-entry {
-    grid-row: 1/4;
+    grid-row: 1/3;
     width: 110px;
   }
   .portrait-tab {

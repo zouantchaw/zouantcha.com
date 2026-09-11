@@ -48,7 +48,6 @@ export default function Page() {
           </div>
           <h2>Wiel Zouantcha</h2>
           <p>Based in Washington, DC.</p>
-          <Link href="/about">A little more about me ↗</Link>
         </aside>
       </header>
       <WorkResults />

@@ -61,12 +61,6 @@ export function getBooks(): Book[] {
       })
     }
   }
-  for (const book of books) {
-    const otherYears = Array.from(new Set(books.filter(other =>
-      other.title.toLowerCase() === book.title.toLowerCase() && other.year !== book.year
-    ).map(other => other.year))).sort()
-    if (otherYears.length) book.note = `Also listed in ${otherYears.join(', ')}. The reading notes do not specify whether this was a reread.`
-  }
   return books.sort((a, b) => b.year.localeCompare(a.year))
 }
 function slugify(s: string) {
