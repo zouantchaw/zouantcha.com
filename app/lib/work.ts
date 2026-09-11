@@ -170,7 +170,7 @@ export const work: WorkItem[] = [
     "slug": "mtl-archives",
     "number": "01",
     "title": "MTL Archives",
-    "dek": "A searchable archive of 13,000+ Montréal photographs, with a daily game and an editorial system that reached 2.66 million social views.",
+    "dek": "13,000+ historical photographs transformed into an AI-powered archive, search engine and daily game, with an automated editorial system reaching 2.66M social views.",
     "ownership": "I designed and built the data pipelines, image enrichment, visual search, model evaluations, website, payments and editorial automation. The reach was measurable; whether it brought people back to the archive became the next question.",
     "summary": "From public records to visual search and a daily game, with 2.66 million social views and a much smaller website audience.",
     "evidence": "13,499 serving records · 2.66M social views, January–July 2026",
