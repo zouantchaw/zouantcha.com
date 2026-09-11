@@ -1,10 +1,12 @@
+import { pageMetadata } from 'app/lib/metadata'
 import Link from 'next/link'
 import { getBlogPosts, formatDate } from './utils'
-export const metadata = {
+export const metadata = pageMetadata({
   title: 'Notes',
   description:
     'Notes on software, research, reading, and things I want to understand.',
-}
+  path: '/blog',
+})
 export default async function Page({
   searchParams,
 }: {

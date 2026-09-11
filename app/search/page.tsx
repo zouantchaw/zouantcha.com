@@ -1,12 +1,15 @@
+import { pageMetadata } from 'app/lib/metadata'
 import Link from 'next/link'
 import { getBlogPosts } from 'app/blog/utils'
 import { work } from 'app/lib/work'
 import { getBooks } from 'app/lib/books'
 import { experience } from 'app/lib/site'
-export const metadata = {
+export const metadata = pageMetadata({
   title: 'Find something',
   description: 'Search published case studies, work, notes, and reading lists.',
-}
+  path: '/search',
+  noIndex: true,
+})
 export default async function Page({
   searchParams,
 }: {

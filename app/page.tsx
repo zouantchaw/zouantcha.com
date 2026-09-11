@@ -1,8 +1,13 @@
+import { pageMetadata } from 'app/lib/metadata'
 import { site } from 'app/lib/site'
 import { WorkResults } from 'app/components/work-results'
 import { ContinueReading } from 'app/components/continue-reading'
 import Link from 'next/link'
 import Image from 'next/image'
+const homeMetadata = pageMetadata({ title: `${site.name}, ${site.title}`, description: site.description, path: '', section: 'Software / research / reading' })
+
+export const metadata = { ...homeMetadata, title: { absolute: `${site.name}, ${site.title}` } }
+
 export default function Page() {
   return (
     <div className="site-shell index-home">

@@ -1,3 +1,4 @@
+import { pageMetadata } from 'app/lib/metadata'
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { getBooks } from 'app/lib/books'
@@ -10,7 +11,9 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>
 }) {
   const { slug } = await params
-  return { title: getBooks().find((b) => b.slug === slug)?.title ?? 'Book' }
+  const book = getBooks().find((b) => b.slug === slug)
+  if (!book) notFound()
+  return pageMetadata({ title: book.title, description: `${book.title}${book.author ? ' by ' + book.author : ''}, from Wiel Zouantcha’s ${book.year} reading list.`, path: `/bookshelf/${slug}`, section: 'Bookshelf' })
 }
 export default async function Page({
   params,

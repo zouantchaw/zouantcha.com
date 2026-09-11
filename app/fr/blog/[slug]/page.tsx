@@ -1,3 +1,4 @@
+import { pageMetadata } from 'app/lib/metadata'
 import { notFound } from 'next/navigation'
 import { CustomMDX } from 'app/components/mdx'
 import { formatDate, getBlogPostsByLocale } from 'app/blog/utils'
@@ -11,48 +12,20 @@ export async function generateStaticParams() {
   }))
 }
 
-export function generateMetadata({ params }) {
-  let post = getBlogPostsByLocale('fr').find((post) => post.slug === params.slug)
-  if (!post) {
-    return
-  }
-
-  let {
-    title,
-    publishedAt: publishedTime,
-    summary: description,
-    image,
-  } = post.metadata
-  let ogImage = image
-    ? image
-    : `${baseUrl}/og?title=${encodeURIComponent(title)}${description ? `&summary=${encodeURIComponent(description)}` : ''}`
-
-  return {
-    title,
-    description,
-    openGraph: {
-      title,
-      description,
-      type: 'article',
-      publishedTime,
-      url: `${baseUrl}/fr/blog/${post.slug}`,
-      images: [
-        {
-          url: ogImage,
-        },
-      ],
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title,
-      description,
-      images: [ogImage],
-    },
-  }
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
+  const post = getBlogPostsByLocale('fr').find(post => post.slug === slug)
+  if (!post) notFound()
+  return pageMetadata({
+    title: post.metadata.title, description: post.metadata.summary,
+    path: `/fr/blog/${slug}`, section: 'Notes en français',
+    publishedTime: post.metadata.publishedAt, locale: 'fr_CA',
+  })
 }
 
-export default function Blog({ params }) {
-  let post = getBlogPostsByLocale('fr').find((post) => post.slug === params.slug)
+export default async function Blog({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
+  let post = getBlogPostsByLocale('fr').find((post) => post.slug === slug)
 
   if (!post) {
     notFound()

@@ -1,3 +1,4 @@
+import { shareImage } from './lib/metadata'
 import './global.css'
 import type { Metadata } from 'next'
 import {
@@ -40,6 +41,9 @@ export const metadata: Metadata = {
     template: `%s | ${site.name}`,
   },
   description: site.description,
+  authors: [{ name: site.name, url: baseUrl }],
+  creator: site.name,
+  alternates: { types: { 'application/rss+xml': `${baseUrl}/rss` } },
   openGraph: {
     title: `${site.name}, ${site.title}`,
     description: site.socialDescription,
@@ -47,9 +51,11 @@ export const metadata: Metadata = {
     siteName: site.name,
     locale: 'en_US',
     type: 'website',
+    images: [{ url: shareImage(site.name, site.socialDescription), width: 1200, height: 630, alt: site.name }],
   },
   twitter: {
     card: 'summary_large_image',
+    images: [shareImage(site.name, site.socialDescription)],
     title: `${site.name}, ${site.title}`,
     description: site.socialDescription,
   },
@@ -82,6 +88,13 @@ export default function RootLayout({
       <body
         className={`${sans.className} min-h-screen bg-paper font-sans text-ink antialiased`}
       >
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+          '@context': 'https://schema.org',
+          '@graph': [
+            { '@type': 'Person', '@id': `${baseUrl}/#person`, name: site.name, alternateName: site.formalName, url: baseUrl, jobTitle: 'Software Engineer', image: `${baseUrl}/images/wiel-avatar.jpg`, sameAs: [site.github, site.linkedin] },
+            { '@type': 'WebSite', '@id': `${baseUrl}/#website`, url: baseUrl, name: site.name, description: site.description, publisher: { '@id': `${baseUrl}/#person` } },
+          ],
+        }).replace(/</g, '\\u003c') }} />
         <LocaleAttribute />
         <a
           href="#main-content"

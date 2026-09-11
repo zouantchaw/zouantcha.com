@@ -1,12 +1,14 @@
+import { pageMetadata } from 'app/lib/metadata'
 import { SectionLabel } from 'app/components/section-label'
 import { WorkRow } from 'app/components/work-row'
 import { work } from 'app/lib/work'
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: 'Case studies',
   description:
     'Selected products and systems: MTL Archives, PortMind, Diane Party Rentals, and Starthome.',
-}
+  path: '/case-studies',
+})
 
 export default function Page() {
   return (

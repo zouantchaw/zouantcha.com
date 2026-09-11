@@ -1,12 +1,14 @@
+import { pageMetadata } from 'app/lib/metadata'
 import Link from 'next/link'
 import { SectionLabel } from 'app/components/section-label'
 import { experience } from 'app/lib/site'
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: 'Work',
   description:
     'Work history for Wiel Zouantcha: customer engineering, full-stack product work, integrations, and independent products.',
-}
+  path: '/work',
+})
 
 export default function Page() {
   return (

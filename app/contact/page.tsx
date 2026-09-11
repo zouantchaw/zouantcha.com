@@ -1,11 +1,13 @@
+import { pageMetadata } from 'app/lib/metadata'
 import { CopyEmail } from 'app/components/copy-email'
 import { SectionLabel } from 'app/components/section-label'
 import { contact, mailto, site } from 'app/lib/site'
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: 'Contact',
   description: `Get in touch with ${site.name} about software engineering roles across product, data and AI or independent projects.`,
-}
+  path: '/contact',
+})
 
 export default function Page() {
   return (

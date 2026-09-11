@@ -1,10 +1,12 @@
+import { pageMetadata } from 'app/lib/metadata'
 import { ReferencePreview } from 'app/components/reference-preview'
 import Link from 'next/link'
-export const metadata = {
+export const metadata = pageMetadata({
   title: 'Montréal',
   description:
     'Books, old photographs, and a camera at the port. An interest across the personal index.',
-}
+  path: '/topics/montreal',
+})
 export default function Page() {
   return (
     <div className="site-shell personal-page">

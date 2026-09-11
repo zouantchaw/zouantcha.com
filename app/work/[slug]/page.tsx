@@ -1,3 +1,4 @@
+import { pageMetadata } from 'app/lib/metadata'
 import Link from 'next/link'
 import { notFound, redirect } from 'next/navigation'
 import { getWork, work } from 'app/lib/work'
@@ -15,9 +16,9 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>
 }) {
   const { slug } = await params
-  return {
-    title: experience.find((role) => role.slug === slug)?.company ?? 'Work',
-  }
+  const role = experience.find((role) => role.slug === slug)
+  if (!role) return
+  return pageMetadata({ title: role.company, description: role.body[0], path: `/work/${slug}`, section: 'Work' })
 }
 export default async function Page({
   params,

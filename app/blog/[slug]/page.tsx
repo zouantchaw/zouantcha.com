@@ -1,3 +1,4 @@
+import { pageMetadata } from 'app/lib/metadata'
 import type { ComponentProps } from 'react'
 import { notFound } from 'next/navigation'
 import { CustomMDX } from 'app/components/mdx'
@@ -24,46 +25,15 @@ type BlogPageProps = {
   }>
 }
 
-export async function generateMetadata({ params }: BlogPageProps) {
-  let { slug } = await params
-  let post = getBlogPosts().find((post) => post.slug === slug)
-  if (!post) {
-    return
-  }
-
-  let {
-    title,
-    publishedAt: publishedTime,
-    summary: description,
-    image,
-  } = post.metadata
-  let ogImage = image
-    ? image
-    : `${baseUrl}/og?title=${encodeURIComponent(title)}${description ? `&summary=${encodeURIComponent(description)}` : ''}`
-  let canonicalUrl = `${baseUrl}/blog/${post.slug}`
-
-  return {
-    title,
-    description,
-    openGraph: {
-      title,
-      description,
-      type: 'article',
-      publishedTime,
-      url: canonicalUrl,
-      images: [
-        {
-          url: ogImage,
-        },
-      ],
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title,
-      description,
-      images: [ogImage],
-    },
-  }
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
+  const post = getBlogPosts().find(post => post.slug === slug)
+  if (!post) notFound()
+  return pageMetadata({
+    title: post.metadata.title, description: post.metadata.summary,
+    path: `/blog/${slug}`, section: 'Notes',
+    publishedTime: post.metadata.publishedAt, locale: 'en_US',
+  })
 }
 
 export default async function Blog({ params }: BlogPageProps) {

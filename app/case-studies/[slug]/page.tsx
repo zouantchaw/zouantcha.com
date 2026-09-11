@@ -1,3 +1,4 @@
+import { pageMetadata } from 'app/lib/metadata'
 import { ImageViewer } from 'app/components/image-viewer'
 import { ReaderContents } from 'app/components/reader-contents'
 import { sectionId } from 'app/lib/section-id'
@@ -56,15 +57,7 @@ export async function generateMetadata({ params }: PageProps) {
   const item = getWork(slug)
   if (!item) return
 
-  return {
-    title: item.title,
-    description: item.dek,
-    openGraph: {
-      title: item.title,
-      description: item.dek,
-      url: `${baseUrl}/case-studies/${item.slug}`,
-    },
-  }
+  return pageMetadata({ title: item.title, description: item.dek, path: `/case-studies/${item.slug}`, section: item.research ? 'Research case study' : 'Product case study' })
 }
 
 function FigureImage({

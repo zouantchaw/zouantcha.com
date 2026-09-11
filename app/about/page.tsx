@@ -1,12 +1,14 @@
+import { pageMetadata } from 'app/lib/metadata'
 import Link from 'next/link'
 import { ProfilePhoto } from 'app/components/profile-photo'
 import { SectionLabel } from 'app/components/section-label'
 import { about, mailto, site } from 'app/lib/site'
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: 'About',
   description: `${site.name} is a software engineer working across product, data and applied AI, based in ${site.location}.`,
-}
+  path: '/about',
+})
 
 export default function Page() {
   return (

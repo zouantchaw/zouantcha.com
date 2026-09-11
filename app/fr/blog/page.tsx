@@ -1,10 +1,13 @@
+import { pageMetadata } from 'app/lib/metadata'
 import { BlogPosts } from 'app/components/posts'
 import { getBlogPostsByLocale } from 'app/blog/utils'
 
-export const metadata = {
+export const metadata = pageMetadata({
   title: 'Blog (FR)',
   description: 'Articles en français.',
-}
+  path: '/fr/blog',
+  locale: 'fr_CA',
+})
 
 export default function Page() {
   let posts = getBlogPostsByLocale('fr')

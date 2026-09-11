@@ -1,10 +1,12 @@
+import { pageMetadata } from 'app/lib/metadata'
 import Link from 'next/link'
 import { getBooks } from 'app/lib/books'
-export const metadata = {
+export const metadata = pageMetadata({
   title: 'Bookshelf',
   description:
     'A few shelves, a few years of reading. Books and notes from Wiel Zouantcha.',
-}
+  path: '/bookshelf',
+})
 export default async function Page({
   searchParams,
 }: {

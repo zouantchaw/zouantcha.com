@@ -1,4 +1,4 @@
-import { getBlogPosts } from 'app/blog/utils'
+import { getBlogPosts, getBlogPostsByLocale } from 'app/blog/utils'
 import { getBooks } from 'app/lib/books'
 import { work } from 'app/lib/work'
 
@@ -31,5 +31,6 @@ export default async function sitemap() {
     url: `${baseUrl}${route}`,
   }))
 
-  return [...routes, ...blogs]
+  const french = getBlogPostsByLocale('fr').map(post => ({ url: `${baseUrl}/fr/blog/${post.slug}`, lastModified: post.metadata.publishedAt }))
+  return [...routes, { url: `${baseUrl}/fr/blog` }, ...blogs, ...french]
 }
