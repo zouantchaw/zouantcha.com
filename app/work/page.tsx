@@ -24,13 +24,6 @@ export default function Page() {
           </Link>{' '}
           follow individual products in more detail.
         </p>
-        <a
-          className="inline-block text-sm underline underline-offset-4"
-          href="/downloads/wielfried-zouantcha-resume.pdf"
-          download
-        >
-          Download résumé · PDF ↓
-        </a>
       </header>
 
       <div>
