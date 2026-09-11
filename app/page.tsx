@@ -21,8 +21,9 @@ export default function Page() {
             easier to explore.
           </p>
           <p className="hero-intro hero-personal">
-            I’m also a father and a reader. You’ll find my reading lists,
-            writings and notes here too.
+            I’m also a father, and I enjoy reading. You’ll find my{' '}
+            <Link href="/bookshelf">reading lists</Link>,{' '}
+            <Link href="/blog">writings and notes</Link> here too.
           </p>
           <div className="hero-links">
             <Link href="/case-studies">Start with the case studies ↗</Link>
@@ -30,14 +31,21 @@ export default function Page() {
           </div>
         </div>
         <aside className="home-portrait">
-          <Image
-            src="/images/wiel.jpg"
-            alt="Wiel Zouantcha"
-            width={250}
-            height={285}
-            priority
-            sizes="(max-width: 700px) 120px, 250px"
-          />
+          <div className="portrait-entry">
+            <Link href="/about" className="portrait-link" aria-label="A little more about Wiel">
+              <span className="portrait-crop">
+                <Image
+                  src="/images/wiel-avatar.jpg"
+                  alt="Wiel Zouantcha"
+                  width={460}
+                  height={460}
+                  priority
+                  sizes="(max-width: 700px) 110px, (max-width: 1000px) 210px, 250px"
+                />
+              </span>
+              <span className="portrait-tab" aria-hidden="true">↗</span>
+            </Link>
+          </div>
           <h2>Wiel Zouantcha</h2>
           <p>Based in Washington, DC.</p>
           <Link href="/about">A little more about me ↗</Link>
