@@ -15,7 +15,10 @@ export function WorkRow({ item, index }: { item: WorkItem; index?: number }) {
         </span>
         <span className="project-title">{item.title}</span>
       </span>
-      <span className="project-description">{item.dek}</span>
+      <span className="project-description">
+        {item.summary}
+        <small className="project-evidence">{item.evidence}</small>
+      </span>
       <span className="row-arrow" aria-hidden="true">
         ↗
       </span>

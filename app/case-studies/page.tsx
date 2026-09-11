@@ -17,14 +17,31 @@ export default function Page() {
           Case studies
         </h1>
         <p className="max-w-2xl text-[17px] leading-7 text-ink-soft">
-          Products I’ve built and the decisions behind them.
+          Research into images and evidence, followed by the systems I build for
+          businesses. Each case study follows a different problem through to the
+          result and what still needs work.
         </p>
       </header>
 
-      <section>
-        {work.map((item, index) => (
-          <WorkRow key={item.slug} item={item} index={index} />
-        ))}
+      <section aria-labelledby="research-heading">
+        <h2 id="research-heading" className="eyebrow mb-6">
+          Research / data, experiments & evaluation
+        </h2>
+        {work
+          .filter((item) => item.research)
+          .map((item) => (
+            <WorkRow key={item.slug} item={item} index={work.indexOf(item)} />
+          ))}
+      </section>
+      <section aria-labelledby="client-heading">
+        <h2 id="client-heading" className="eyebrow mb-6">
+          Client work / operations & mobile workflows
+        </h2>
+        {work
+          .filter((item) => !item.research)
+          .map((item) => (
+            <WorkRow key={item.slug} item={item} index={work.indexOf(item)} />
+          ))}
         <div className="border-t border-line" />
       </section>
     </div>

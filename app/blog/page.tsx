@@ -5,18 +5,6 @@ export const metadata = {
   description:
     'Notes on software, research, reading, and things I want to understand.',
 }
-const topics = {
-  all: 'All notes',
-  everyday: 'Everyday',
-  cities: 'Cities & places',
-  software: 'Software & research',
-  reading: 'Reading',
-}
-const noteDate = (post) => post.metadata.writtenAt || post.metadata.publishedAt
-const noteTopic = (post) =>
-  post.metadata.topic ||
-  (post.slug.startsWith('books-read') ? 'reading' : 'software')
-
 export default async function Page({
   searchParams,
 }: {
@@ -24,35 +12,42 @@ export default async function Page({
 }) {
   const { topic, year } = await searchParams
   const posts = getBlogPosts().sort((a, b) =>
-    noteDate(b).localeCompare(noteDate(a)),
+    b.metadata.publishedAt.localeCompare(a.metadata.publishedAt),
   )
-  const selected = topic && Object.hasOwn(topics, topic) ? topic : 'all'
-  const years = Array.from(new Set(posts.map((p) => noteDate(p).slice(0, 4))))
+  const selected = topic === 'reading' || topic === 'software' ? topic : 'all'
+  const years = Array.from(
+    new Set(posts.map((p) => p.metadata.publishedAt.slice(0, 4))),
+  )
   const filtered = posts.filter(
     (p) =>
-      (selected === 'all' || noteTopic(p) === selected) &&
-      (!year || noteDate(p).startsWith(year)),
+      (selected === 'all' ||
+        (selected === 'reading'
+          ? p.slug.startsWith('books-read')
+          : !p.slug.startsWith('books-read'))) &&
+      (!year || p.metadata.publishedAt.startsWith(year)),
   )
   return (
     <div className="site-shell personal-page">
       <header className="space-y-5">
-        <p className="eyebrow">Notebook / 2020 onwards</p>
-        <h1>From my notebooks.</h1>
+        <p className="eyebrow">Notes / ideas to come back to</p>
+        <h1>Things I’m thinking about.</h1>
         <p>
-          I started keeping these in Logseq. These days I use Obsidian. There
-          are coding journals, reading notes, walks, trips, and questions I
-          haven’t answered. I’ve cleaned up older entries a little for this
-          site. They’re ordered by when I wrote them.
+          Some notes come from building. Others come from a book, or a question
+          that stayed with me.
         </p>
       </header>
       <nav className="index-tools" aria-label="Filter notes">
-        {Object.keys(topics).map((t) => (
+        {['all', 'software', 'reading'].map((t) => (
           <Link
             key={t}
             href={'/blog?topic=' + t + (year ? '&year=' + year : '')}
             aria-current={selected === t ? 'page' : undefined}
           >
-            {topics[t]}
+            {t === 'all'
+              ? 'All notes'
+              : t === 'reading'
+                ? 'Reading'
+                : 'Software & research'}
           </Link>
         ))}
         <Link href="/fr/blog">En français ↗</Link>
@@ -81,7 +76,7 @@ export default async function Page({
             key={post.slug}
             href={'/blog/' + post.slug}
           >
-            <small>{formatDate(noteDate(post))}</small>
+            <small>{formatDate(post.metadata.publishedAt)}</small>
             <h2>{post.metadata.title} ↗</h2>
             <p>{post.metadata.summary}</p>
           </Link>

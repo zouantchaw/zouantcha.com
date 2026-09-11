@@ -260,7 +260,7 @@ function Block({ block }: { block: WorkBlock }) {
 
   if (block.kind === 'h3') {
     return (
-      <h3 className="max-w-2xl pt-2 text-lg font-medium text-ink">
+      <h3 id={sectionId(block.text)} className="max-w-2xl scroll-mt-24 pt-2 text-lg font-medium text-ink">
         {block.text}
       </h3>
     )

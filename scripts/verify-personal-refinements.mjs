@@ -59,12 +59,6 @@ try {
   await page.goto(base + '/')
   assert.equal(await page.locator('a[href*="/slides"]').count(), 0)
   assert(await page.getByRole('heading', { name: 'Hi, I’m Wiel.' }).isVisible())
-  await page.getByRole('button', { name: 'Notes', exact: true }).click()
-  assert(
-    await page.getByRole('heading', { name: /Moving four years/ }).isVisible(),
-  )
-  await page.getByRole('button', { name: 'Work', exact: true }).click()
-  assert(await page.getByRole('heading', { name: /More parallel/ }).isVisible())
   await page.screenshot({ path: '/tmp/personal-refined-desktop.png' })
   await page.setViewportSize({ width: 390, height: 844 })
   await page.goto(base + '/')
@@ -78,8 +72,6 @@ try {
     path: '/tmp/personal-refined-mobile.png',
     fullPage: true,
   })
-  await page.getByRole('button', { name: 'Books', exact: true }).click()
-  assert(await page.getByRole('heading', { name: /Deep Work/ }).isVisible())
   await page.goto(base + '/case-studies/portmind')
   await page.locator('.case-essay-section').nth(2).scrollIntoViewIfNeeded()
   await page.waitForFunction(() =>
@@ -104,14 +96,10 @@ try {
     'moving-from-logseq-to-obsidian',
     'more-parallel-less-organized',
   ]) {
-    assert.equal((await page.goto(base + '/blog/' + slug)).status(), 200)
-    assert.match(
-      await page.locator('article.prose').textContent(),
-      /Edited for publication/,
-    )
+    assert.equal((await page.goto(base + '/blog/' + slug)).status(), 404)
   }
   console.log(
-    'Slides removed; notebook browser, mobile layout, reading position, clear control and new notes passed',
+    'Slides removed; mobile layout, reading position, clear control and removed personal notes passed',
   )
 } finally {
   await browser.close()

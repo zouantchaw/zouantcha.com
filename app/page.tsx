@@ -1,4 +1,4 @@
-import { NotebookIndex } from 'app/components/notebook-index'
+import { WorkResults } from 'app/components/work-results'
 import { ContinueReading } from 'app/components/continue-reading'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -22,8 +22,8 @@ export default function Page() {
             easier to explore.
           </p>
           <p className="hero-intro hero-personal">
-            I’m also a father and a reader. I’ve been keeping notes for years;
-            I’m starting to put more of them here.
+            I’m also a father and a reader. You’ll find my reading lists and
+            longer essays here too.
           </p>
           <div className="hero-links">
             <Link href="/case-studies">Start with the case studies ↗</Link>
@@ -44,6 +44,7 @@ export default function Page() {
           <Link href="/about">A little more about me ↗</Link>
         </aside>
       </header>
+      <WorkResults />
       <ContinueReading />
       <section id="interests" className="interest-index">
         <div className="interest-label">
@@ -81,7 +82,6 @@ export default function Page() {
           </div>
         </article>
       </section>
-      <NotebookIndex />
     </div>
   )
 }
