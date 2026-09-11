@@ -117,6 +117,7 @@ body {
 }
 
 .prose a {
+  overflow-wrap: anywhere;
   text-decoration: underline;
   text-decoration-color: var(--color-line);
   text-underline-offset: 4px;
@@ -545,3 +546,16 @@ table {
 .mtl-region-legend button > span { width: 9px; height: 9px; flex-shrink: 0; border-radius: 50%; }
 .mtl-region-legend button:focus-visible { outline: 2px solid #827659; outline-offset: 2px; }
 .mtl-region-note { min-height: 90px; font-size: 13px !important; line-height: 1.65; margin-top: 12px; }
+
+/* Keep touch controls comfortable without expanding inline prose links. */
+@media (pointer: coarse) {
+  .mtl-controls button, .mtl-query-label select, .mtl-region-legend button,
+  .mtl-suggestion-heading button, .pm-example-controls button,
+  .pm-inspection-context button, .pm-inspection-sliders input {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  .mtl-example select, .pm-example-controls select {
+    font-size: 16px;
+  }
+}

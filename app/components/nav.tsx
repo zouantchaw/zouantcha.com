@@ -61,7 +61,7 @@ export function Nav() {
               key={item.href}
               href={item.href}
               onClick={() => setOpen(false)}
-              aria-current={pathname === item.href ? 'page' : undefined}
+              aria-current={pathname === item.href || pathname.startsWith(item.href + '/') ? 'page' : undefined}
             >
               {item.label}
               <span aria-hidden="true">↗</span>

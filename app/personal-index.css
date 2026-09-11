@@ -451,6 +451,7 @@ button:active:not(:disabled) {
   width: min(640px, calc(100% - 32px));
   max-height: 85dvh;
   overflow: auto;
+  overscroll-behavior: contain;
   margin: auto;
   box-shadow: 0 24px 100px #0002;
 }
@@ -581,6 +582,9 @@ button:active:not(:disabled) {
   min-width: 0;
 }
 .book-cover {
+  width: 100%;
+  min-width: 0;
+  overflow-wrap: anywhere;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -961,9 +965,20 @@ button:active:not(:disabled) {
   .index-dialog {
     padding: 24px;
     width: 100%;
+    max-width: 100%;
+    padding-bottom: max(24px, env(safe-area-inset-bottom));
     max-height: 90dvh;
     margin: auto 0 0;
     border-radius: 14px 14px 0 0;
+  }
+  .index-dialog .dialog-heading {
+    position: sticky;
+    top: -24px;
+    z-index: 2;
+    background: white;
+    margin: -24px -24px 16px;
+    padding: 12px 24px;
+    border-bottom: 1px solid #d9dde5;
   }
   .index-dialog[open] {
     animation-duration: 240ms;
