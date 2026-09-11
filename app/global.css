@@ -359,15 +359,6 @@ table {
 .reading-meta {display:flex;gap:16px;align-items:center;font-size:12px;color:#777;}
 .writing-entry > :first-child {order:2;flex-shrink:0;font-family:inherit;font-size:12px;}
 .writing-title {font-size:15px;}
-.personal-page > header h1 {font-family:var(--font-sans);font-size:28px;line-height:1.3;letter-spacing:-.7px;}
-.personal-page > header > :first-child:not(h1) {font-family:var(--font-sans);font-size:13px;letter-spacing:0;text-transform:none;}
-.personal-page > header p, .personal-page p {line-height:1.8;}
-.personal-page > header {margin-bottom:36px;}
-.personal-page > * + * {margin-top:36px;}
-.personal-page section h2 {font-size:17px;letter-spacing:-.2px;}
-.personal-page .grid {grid-template-columns:minmax(0,1fr);}
-.personal-page .uppercase {text-transform:none;letter-spacing:0;}
-.personal-page .border-t {border-color:#efefec;}
 .site-footer {margin-top:72px;padding-block:24px 36px;border-top:1px solid #eaeae6;font-size:12px;color:#777;}
 .footer-contact {display:flex;align-items:center;justify-content:space-between;gap:16px;}
 .footer-bottom {display:flex;justify-content:space-between;gap:24px;margin-top:20px;}
@@ -394,7 +385,6 @@ table {
  .site-main {padding-top:36px;}
  .personal-intro {font-size:15px;}
  .personal-section {margin-top:36px;}
- .personal-page > header h1 {font-size:26px;}
  .footer-bottom {flex-direction:column;gap:14px;}
  .writing-entry {align-items:flex-start;}
  .writing-entry > :first-child {font-size:11px;max-width:90px;}

@@ -10,8 +10,11 @@ export default function Page() {
   let posts = getBlogPostsByLocale('fr')
 
   return (
-    <section className="site-shell space-y-6">
-      <h1 className="font-mono text-[32px] tracking-tight">Writing in French</h1>
+    <section className="site-shell personal-page space-y-6">
+      <header>
+        <p className="eyebrow">Notes / en français</p>
+        <h1>Notes en français</h1>
+      </header>
       <BlogPosts
         posts={posts}
         basePath="/fr/blog"

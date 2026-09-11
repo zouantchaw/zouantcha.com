@@ -43,7 +43,7 @@ try {
         @page { size: A4; margin: 18mm 17mm 20mm; }
         body { background:white!important; }
         body > header, body > footer, body > a, nextjs-portal,
-        .case-essay > nav, .case-essay > div:first-child, .case-study-download { display:none!important; }
+        .reader-contents, .contents-toggle, .image-expand-label, .case-essay > nav, .case-essay > div:first-of-type, .case-study-download { display:none!important; }
         .site-main { padding:0!important; margin:0!important; }
         .case-essay { width:100%; margin:0; }
         .case-essay-body { display:block; }

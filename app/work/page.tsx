@@ -17,15 +17,12 @@ export default function Page() {
           Work
         </h1>
         <p className="max-w-2xl text-[17px] leading-7 text-ink-soft">
-          Roles, companies, and the kind of problems I was hired to take on.
-          For the systems themselves, see the{' '}
-          <Link
-            href="/case-studies"
-            className="underline decoration-line underline-offset-4 hover:decoration-ink"
-          >
+          The teams I’ve worked with, what I was responsible for, and a few
+          examples of the work. The{' '}
+          <Link href="/case-studies" className="underline underline-offset-4">
             case studies
-          </Link>
-          .
+          </Link>{' '}
+          follow individual products in more detail.
         </p>
       </header>
 
@@ -57,18 +54,19 @@ export default function Page() {
                 {role.role}
               </p>
               {role.body.map((paragraph) => (
-                <p key={paragraph} className="text-[17px] leading-7 text-ink-soft">
+                <p
+                  key={paragraph}
+                  className="text-[17px] leading-7 text-ink-soft"
+                >
                   {paragraph}
                 </p>
               ))}
-              {'caseStudy' in role && role.caseStudy ? (
-                <Link
-                  href={role.caseStudy}
-                  className="inline-block text-sm underline decoration-line underline-offset-4 hover:decoration-ink"
-                >
-                  Read the case study →
-                </Link>
-              ) : null}
+              <Link
+                href={'/work/' + role.slug}
+                className="inline-block text-sm"
+              >
+                More about this work ↗
+              </Link>
             </div>
           </section>
         ))}

@@ -1,7 +1,30 @@
 import './global.css'
 import type { Metadata } from 'next'
-import { GeistSans } from 'geist/font/sans'
-import { GeistMono } from 'geist/font/mono'
+import {
+  IBM_Plex_Sans,
+  IBM_Plex_Mono,
+  Instrument_Serif,
+} from 'next/font/google'
+import './personal-index.css'
+const sans = IBM_Plex_Sans({
+  subsets: ['latin'],
+  weight: ['400', '500', '600'],
+  variable: '--font-index-sans',
+  display: 'swap',
+})
+const mono = IBM_Plex_Mono({
+  subsets: ['latin'],
+  weight: ['400'],
+  variable: '--font-index-mono',
+  display: 'swap',
+})
+const serif = Instrument_Serif({
+  subsets: ['latin'],
+  weight: ['400'],
+  variable: '--font-index-serif',
+  display: 'swap',
+})
+
 import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import { Nav } from './components/nav'
@@ -54,9 +77,11 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={cx(GeistSans.variable, GeistMono.variable)}
+      className={cx(sans.variable, mono.variable, serif.variable)}
     >
-      <body className={`${GeistSans.className} min-h-screen bg-paper font-sans text-ink antialiased`}>
+      <body
+        className={`${sans.className} min-h-screen bg-paper font-sans text-ink antialiased`}
+      >
         <LocaleAttribute />
         <a
           href="#main-content"

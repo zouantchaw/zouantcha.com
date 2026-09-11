@@ -1,8 +1,21 @@
+import { ImageViewer } from 'app/components/image-viewer'
+import { ReaderContents } from 'app/components/reader-contents'
+import { sectionId } from 'app/lib/section-id'
 import { CaseStudyDownload } from 'app/components/case-study-download'
 import { MtlExplorerShape } from 'app/components/mtl-research/explorer-shape'
-import { MtlArchiveExample, MtlPipeline, MtlLiveSearch, MtlTechnology, MtlAudience, MtlBrand } from 'app/components/mtl-research'
+import {
+  MtlArchiveExample,
+  MtlPipeline,
+  MtlLiveSearch,
+  MtlTechnology,
+  MtlAudience,
+  MtlBrand,
+} from 'app/components/mtl-research'
 import { PortImageExplorer } from 'app/components/portmind-explorer'
-import { PortmindResults, PortmindInspection } from 'app/components/portmind-research-examples'
+import {
+  PortmindResults,
+  PortmindInspection,
+} from 'app/components/portmind-research-examples'
 import Link from 'next/link'
 import { PortmindPipeline } from 'app/components/portmind-pipeline'
 import { InteractionFilm } from 'app/components/interaction-film'
@@ -54,26 +67,35 @@ export async function generateMetadata({ params }: PageProps) {
   }
 }
 
-function FigureImage({ image }: { image: Extract<WorkFigure, { kind: 'image' }> }) {
+function FigureImage({
+  image,
+}: {
+  image: Extract<WorkFigure, { kind: 'image' }>
+}) {
   const phone = image.layout === 'phone'
   const dimensions = dimensionsFor(image.src)
 
   return (
     <figure className="space-y-3">
-      <Image
-        src={image.src}
-        alt={image.alt}
-        {...dimensions}
-        loading="lazy"
-        sizes="(max-width: 1080px) 100vw, 1080px"
-        unoptimized={image.src.endsWith('.svg')}
-        className={
-          phone
-            ? 'mx-auto h-auto w-full max-w-[280px] bg-black'
-            : image.src.includes('/portmind-paper/') ? 'h-auto w-full bg-white' : 'h-auto w-full bg-paper-2'
-        }
-      />
-      {(image.src.includes('/dpr-v2/') || image.src.includes('/portmind-paper/')) ? (
+      <ImageViewer src={image.src} alt={image.alt}>
+        <Image
+          src={image.src}
+          alt={image.alt}
+          {...dimensions}
+          loading="lazy"
+          sizes="(max-width: 1080px) 100vw, 1080px"
+          unoptimized={image.src.endsWith('.svg')}
+          className={
+            phone
+              ? 'mx-auto h-auto w-full max-w-[280px] bg-black'
+              : image.src.includes('/portmind-paper/')
+                ? 'h-auto w-full bg-white'
+                : 'h-auto w-full bg-paper-2'
+          }
+        />
+      </ImageViewer>
+      {image.src.includes('/dpr-v2/') ||
+      image.src.includes('/portmind-paper/') ? (
         <a
           href={image.src}
           target="_blank"
@@ -101,9 +123,14 @@ function FigureImage({ image }: { image: Extract<WorkFigure, { kind: 'image' }> 
 
 function Phones({ images }: { images: WorkImage[] }) {
   return (
-    <div className={`grid gap-6 bg-paper-2 px-4 py-8 sm:px-8 ${images.length === 2 ? 'grid-cols-1 sm:grid-cols-2' : 'grid-cols-2 sm:grid-cols-3'}`}>
+    <div
+      className={`grid gap-6 bg-paper-2 px-4 py-8 sm:px-8 ${images.length === 2 ? 'grid-cols-1 sm:grid-cols-2' : 'grid-cols-2 sm:grid-cols-3'}`}
+    >
       {images.map((image) => (
-        <FigureImage key={image.src} image={{ kind: 'image', ...image, layout: 'phone' }} />
+        <FigureImage
+          key={image.src}
+          image={{ kind: 'image', ...image, layout: 'phone' }}
+        />
       ))}
     </div>
   )
@@ -171,12 +198,26 @@ function Block({ block }: { block: WorkBlock }) {
       <p className="max-w-2xl text-[17px] leading-7 text-ink-soft">
         {block.parts.map((part, index) => {
           if (typeof part === 'string') return part
-          const className = 'underline decoration-line underline-offset-4 hover:text-ink hover:decoration-ink'
+          const className =
+            'underline decoration-line underline-offset-4 hover:text-ink hover:decoration-ink'
           return part.external ? (
-            <a key={`${part.href}-${index}`} href={part.href} className={className}
-              target="_blank" rel="noopener noreferrer">{part.label}</a>
+            <a
+              key={`${part.href}-${index}`}
+              href={part.href}
+              className={className}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {part.label}
+            </a>
           ) : (
-            <a key={`${part.href}-${index}`} href={part.href} className={className}>{part.label}</a>
+            <a
+              key={`${part.href}-${index}`}
+              href={part.href}
+              className={className}
+            >
+              {part.label}
+            </a>
           )
         })}
       </p>
@@ -188,12 +229,19 @@ function Block({ block }: { block: WorkBlock }) {
       <figure className="space-y-3">
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           {block.images.map((image) => (
-            <Image key={image.src} src={image.src} alt={image.alt}
-              {...dimensionsFor(image.src)} sizes="(max-width: 640px) 100vw, 330px"
-              className="h-auto w-full rounded-xl border border-line" />
+            <Image
+              key={image.src}
+              src={image.src}
+              alt={image.alt}
+              {...dimensionsFor(image.src)}
+              sizes="(max-width: 640px) 100vw, 330px"
+              className="h-auto w-full rounded-xl border border-line"
+            />
           ))}
         </div>
-        <figcaption className="text-[13px] leading-6 text-muted">{block.caption}</figcaption>
+        <figcaption className="text-[13px] leading-6 text-muted">
+          {block.caption}
+        </figcaption>
       </figure>
     )
   }
@@ -204,12 +252,18 @@ function Block({ block }: { block: WorkBlock }) {
 
   if (block.kind === 'p') {
     return (
-      <p className="max-w-2xl text-[17px] leading-7 text-ink-soft">{block.text}</p>
+      <p className="max-w-2xl text-[17px] leading-7 text-ink-soft">
+        {block.text}
+      </p>
     )
   }
 
   if (block.kind === 'h3') {
-    return <h3 className="max-w-2xl pt-2 text-lg font-medium text-ink">{block.text}</h3>
+    return (
+      <h3 id={sectionId(block.text)} className="max-w-2xl scroll-mt-24 pt-2 text-lg font-medium text-ink">
+        {block.text}
+      </h3>
+    )
   }
 
   if (block.kind === 'ul') {
@@ -231,7 +285,9 @@ function Block({ block }: { block: WorkBlock }) {
   }
 
   if (block.figure.kind === 'artifact') {
-    return <DesignArtifact id={block.figure.id} caption={block.figure.caption} />
+    return (
+      <DesignArtifact id={block.figure.id} caption={block.figure.caption} />
+    )
   }
 
   return <FigureImage image={block.figure} />
@@ -247,6 +303,14 @@ export default async function Page({ params }: PageProps) {
 
   return (
     <article className="case-essay">
+      <ReaderContents
+        title={item.title}
+        slug={item.slug}
+        sections={item.sections.map((s) => ({
+          id: sectionId(s.heading),
+          title: s.heading,
+        }))}
+      />
       <div className="flex flex-wrap items-center justify-between gap-3 text-sm text-muted">
         <Link
           href="/case-studies"
@@ -285,6 +349,9 @@ export default async function Page({ params }: PageProps) {
           {item.title}
         </h1>
         <p className="text-xl leading-8 text-ink-soft">{item.dek}</p>
+        {item.ownership ? (
+          <p className="max-w-3xl text-[17px] leading-7 text-ink-soft">{item.ownership}</p>
+        ) : null}
         <dl className="case-essay-meta">
           <div>
             <dt className="font-mono text-[12px] text-muted">Role</dt>
@@ -322,14 +389,14 @@ export default async function Page({ params }: PageProps) {
                 >
                   {link.label} →
                 </Link>
-              )
+              ),
             )}
           </div>
         ) : null}
         <CaseStudyDownload slug={item.slug} title={item.title} />
       </header>
 
-      {item.slug === "starthome" ? null : item.metrics?.length ? (
+      {item.slug === 'starthome' ? null : item.metrics?.length ? (
         <section className="border-y border-line py-10">
           <SectionLabel>At a glance</SectionLabel>
           <ul className="mt-8 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
@@ -338,7 +405,9 @@ export default async function Page({ params }: PageProps) {
                 <p className="font-mono text-[28px] leading-none tracking-tight text-ink sm:text-[32px]">
                   {metric.value}
                 </p>
-                <p className="max-w-xs text-[14px] leading-6 text-muted">{metric.label}</p>
+                <p className="max-w-xs text-[14px] leading-6 text-muted">
+                  {metric.label}
+                </p>
               </li>
             ))}
           </ul>
@@ -358,9 +427,12 @@ export default async function Page({ params }: PageProps) {
 
       <div className="case-essay-body">
         {item.sections.map((section) => (
-          <section key={section.heading} id={section.heading === "A little help, when you need it" ? "mobile-preview" : undefined} className="case-essay-section">
+          <section
+            key={section.heading}
+            id={sectionId(section.heading)}
+            className="case-essay-section"
+          >
             <div className="max-w-2xl space-y-2">
-
               <h2 className="text-[28px] font-medium tracking-tight text-ink sm:text-[32px]">
                 {section.heading}
               </h2>
