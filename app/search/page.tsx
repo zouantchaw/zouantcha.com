@@ -35,8 +35,13 @@ export default async function Page({
     })),
     ...experience.map((r) => ({
       title: r.company,
-      body: r.role + ' ' + r.body.join(' '),
-      href: '/work',
+      body:
+        r.role +
+        ' ' +
+        r.body.join(' ') +
+        ' ' +
+        r.sections.flatMap((s) => [s.title, ...s.body]).join(' '),
+      href: '/work/' + r.slug,
       type: 'work',
     })),
   ]

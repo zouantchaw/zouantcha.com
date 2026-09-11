@@ -96,45 +96,117 @@ export const about = {
     'I’m a father, an avid reader, and someone who spends a lot of time thinking about cities, history, business, and how technology changes what small teams can build. When I’m not working, I’m usually training, reading, traveling, or somewhere inside an archive of old Montreal photographs.',
 }
 
-export const experience = [
+export type Experience = {
+  slug: string
+  company: string
+  href?: string
+  role: string
+  period: string
+  body: string[]
+  sections: { title: string; body: string[] }[]
+}
+
+export const experience: Experience[] = [
   {
+    slug: 'oloodi',
     company: 'Oloodi Technologies',
     href: 'https://oloodi.com/',
-    role: 'Customer Engineer / Full-Stack Engineer',
-    period: '2026–present',
+    role: 'Customer Engineer / Full-Stack Engineer · Contract',
+    period: 'November 2025–present',
     body: [
-      'At Oloodi, I build KROW Workforce, which connects staffing companies, their clients, and the people working each shift. I work on both the product and the conversations around it.',
-      'A staffing order runs through a lot of hands. I work on the steps between them: onboarding, assigning shifts, checking certifications, recording time, and turning timesheets into invoices. The code spans a React and TypeScript portal, Node.js services, Firebase, PostgreSQL, and Cloud Run.',
-      'I’ve given product demos to teams at Snapchat, Google, EA Sports, and Nvidia. I prepare the walkthrough around how that team would use the product, from requesting staff to checking attendance and reviewing invoices. Those conversations are also a way to find out where a workflow is confusing or incomplete.',
-      'The engineering and customer work feed into each other. I can hear where someone gets stuck, trace it through the interface and backend, and work on the change with the team.',
+      'At Oloodi, I work on KROW Workforce, which connects staffing companies, their clients and the people working each shift. My role combines building the product with helping people understand how it fits their operation.',
+      'I work across staffing workflows and give product demos to teams including Snapchat, Google, EA Sports and Nvidia. That puts me close to both the implementation and the questions people ask when they first use it.',
+    ],
+    sections: [
+      {
+        title: 'Following the staffing order',
+        body: [
+          'A staffing request moves between the client, the staffing company and the worker. I work on the steps between them: onboarding, shift assignments, certifications, time tracking and invoicing. A change in one part of that process often has consequences somewhere else.',
+          'My engineering work spans the React and TypeScript portal and its backend services. I work with the team on the interface and the underlying records, so the workflow someone sees agrees with what the system has stored.',
+        ],
+      },
+      {
+        title: 'Showing the product in someone else’s context',
+        body: [
+          'For a demo, I prepare the walkthrough around how that team would use the product: requesting staff, checking attendance and reviewing invoices. I have presented to teams at Snapchat, Google, EA Sports and Nvidia.',
+          'Customer engineering gives me another way to examine the product. If a step is hard to explain, or someone expects it to work differently, I can take that question back into the implementation with the team.',
+        ],
+      },
     ],
   },
   {
+    slug: 'ethos',
     company: 'Ethos / HeyEthos',
     href: 'https://www.heyethos.com/',
-    role: 'Senior Full-Stack Developer',
-    period: '2022–2025',
+    role: 'Senior Full-Stack Engineer',
+    period: 'May 2022–November 2025',
     body: [
-      'I joined Ethos through blockchain work and stayed for three and a half years. My role grew into building the product around it: Shopify apps, checkout and point-of-sale flows, loyalty features, merchant dashboards, and the Luna self-serve platform.',
-      'I worked across React and Next.js interfaces, Node.js APIs, and deployment on Azure and Vercel. Much of the later work was about making the product reliable for different merchants: keeping their data separate, verifying incoming webhook requests, and making cart and checkout behavior consistent across Shopify themes.',
+      'I joined Ethos through blockchain work and stayed for three and a half years as the product grew into membership and loyalty software for merchants.',
+      'My work moved from contracts and supporting APIs into Shopify storefronts, checkout and point-of-sale integrations, and Luna, the merchant platform. I worked across the customer experience and the tools a brand used to manage it.',
+    ],
+    sections: [
+      {
+        title: 'Starting below the interface',
+        body: [
+          'My early work included contracts on Flow and Ethereum and the services connecting them to the application. I worked on issuing digital assets, managing collection metadata and making those operations available to the frontend. That also meant testing deployments and working through external contract audits.',
+          'As the product evolved, more of my work moved into the application around those capabilities. A merchant needed to configure a membership and its benefits; a customer needed to join, see their status and use the benefit in the store. The contract was one part of that experience.',
+        ],
+      },
+      {
+        title: 'Making loyalty work inside a store',
+        body: [
+          'The Shopify work covered member-only products, early access, discounts and rewards. Those features had to fit into stores with different themes and purchasing flows. I worked on the app and its extensions, alongside the request verification and webhook handling that connected store activity to Ethos.',
+          'One concrete problem was the invitation to join a loyalty program from the cart. Some merchants had a cart page; others used a cart drawer. A component that worked on one did not automatically have a place on the other. My notes from that work track theme targeting, extension placement and manual integration where the theme required it.',
+          'I also worked through the distinction between storefront, checkout, order-status and point-of-sale surfaces. They offered different integration paths. Making installation easier meant understanding those limits, not treating every store as the same page.',
+        ],
+      },
+      {
+        title: 'Giving merchants a place to manage the program',
+        body: [
+          'In Luna, I worked on the self-serve interface for configuring and managing the program. That included onboarding, membership settings, member lists and individual member views. Later work included integrations, reports and billing screens.',
+          'Product reviews helped identify where the navigation made routine work harder than it needed to be. Memberships and benefits were a recurring example: the team wanted those tasks closer to the brand context. I worked through the interface changes alongside the state and save behavior behind them.',
+          'That range is what stands out to me about Ethos. I could follow a feature from its underlying operation through the store experience and into the merchant’s admin, working with the product and engineering team as the requirements changed.',
+        ],
+      },
     ],
   },
   {
+    slug: 'independent',
     company: 'Independent work',
     role: 'Full Stack Design Engineer',
-    period: '2023–present',
+    period: 'January 2023–present',
     body: [
-      'I build software for independent products and operating businesses, including MTL Archives, PortMind, Diane Party Rentals, Ballerz Football Academy, and Starthome. This work spans data pipelines, search, AI evaluation, scheduling, quoting, inventory, payments, admin systems, and product strategy.',
+      'I work directly with founders and operating businesses, from figuring out what the product needs to do through designing and building it.',
+      'For Diane Party Rentals, that meant connecting quotes, payments and rental operations. For Starthome, it meant working with the founder on a mobile inspection workflow. My independent research projects, MTL Archives and PortMind, have their own detailed case studies.',
+    ],
+    sections: [
+      {
+        title: 'Working directly with the person using the system',
+        body: [
+          'The starting point is usually a process someone can explain better than they can specify. I ask them to walk through a booking, a delivery or an inspection, including what happens when something changes. Those conversations become the screens and records I build.',
+          'The case studies follow that work in detail, including the evidence available so far and the parts still being validated.',
+        ],
+      },
     ],
   },
   {
+    slug: 'saas-alerts',
     company: 'SaaS Alerts',
     href: 'https://saasalerts.com/',
-    role: 'Software Engineer, Integrations and Security',
-    period: '2020–2021',
+    role: 'Software Engineer · Integrations & Security',
+    period: 'October 2020–December 2021',
     body: [
-      'SaaS Alerts was my first production software role. I worked on integrations that helped managed service providers monitor security events across IT Glue, Datto, ConnectWise, Kaseya, and Microsoft Graph.',
-      'The work taught me to recreate events, inspect raw vendor data, normalize inconsistent schemas, document unsupported security signals, and distinguish between what a product wants to detect and what an external platform can truthfully expose.',
+      'SaaS Alerts was my first production software role. I worked on integrations that helped managed service providers monitor security events across IT Glue, Datto, ConnectWise, Kaseya and Microsoft Graph.',
+      'Much of the work was investigative: recreating an event, inspecting the vendor’s response and finding out whether the signal we wanted was actually available.',
+    ],
+    sections: [
+      {
+        title: 'Working with what an API actually exposes',
+        body: [
+          'Different vendors represented similar activity in different ways. I worked on connecting those sources and normalizing their events into a shared security schema, so they could be understood within the same monitoring product.',
+          'When a desired signal was missing, I had to distinguish an integration problem from a limitation of the source. Reproducing events, comparing the raw data and documenting unsupported behavior were part of the engineering work. That experience still shapes how I approach external integrations.',
+        ],
+      },
     ],
   },
 ]

@@ -17,20 +17,24 @@ export default function Page() {
           Work
         </h1>
         <p className="max-w-2xl text-[17px] leading-7 text-ink-soft">
-          Roles, companies, and the kind of problems I was hired to take on. For
-          the systems themselves, see the{' '}
-          <Link
-            href="/case-studies"
-            className="underline decoration-line underline-offset-4 hover:decoration-ink"
-          >
+          The teams I’ve worked with, what I was responsible for, and a few
+          examples of the work. The{' '}
+          <Link href="/case-studies" className="underline underline-offset-4">
             case studies
-          </Link>
-          .
+          </Link>{' '}
+          follow individual products in more detail.
         </p>
+        <a
+          className="inline-block text-sm underline underline-offset-4"
+          href="/downloads/wielfried-zouantcha-resume.pdf"
+          download
+        >
+          Download résumé · PDF ↓
+        </a>
       </header>
 
       <div>
-        {experience.map((role, index) => (
+        {experience.map((role) => (
           <section
             key={`${role.company}-${role.period}`}
             className="grid gap-4 border-t border-line py-10 md:grid-cols-[220px_minmax(0,1fr)]"
@@ -65,22 +69,11 @@ export default function Page() {
                 </p>
               ))}
               <Link
-                href={
-                  '/work/' +
-                  ['oloodi', 'ethos', 'independent', 'saas-alerts'][index]
-                }
+                href={'/work/' + role.slug}
                 className="inline-block text-sm"
               >
                 More about this work ↗
               </Link>
-              {'caseStudy' in role && role.caseStudy ? (
-                <Link
-                  href={role.caseStudy}
-                  className="inline-block text-sm underline decoration-line underline-offset-4 hover:decoration-ink"
-                >
-                  Read the case study →
-                </Link>
-              ) : null}
             </div>
           </section>
         ))}

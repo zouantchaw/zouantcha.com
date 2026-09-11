@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { notFound, redirect } from 'next/navigation'
 import { getWork, work } from 'app/lib/work'
 import { experience } from 'app/lib/site'
-const employers = ['oloodi', 'ethos', 'independent', 'saas-alerts']
+const employers = experience.map((role) => role.slug)
 export function generateStaticParams() {
   return [
     ...work.map((item) => ({ slug: item.slug })),
@@ -15,7 +15,9 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>
 }) {
   const { slug } = await params
-  return { title: experience[employers.indexOf(slug)]?.company ?? 'Work' }
+  return {
+    title: experience.find((role) => role.slug === slug)?.company ?? 'Work',
+  }
 }
 export default async function Page({
   params,
@@ -25,7 +27,7 @@ export default async function Page({
   const { slug } = await params
   const study = getWork(slug)
   if (study) redirect('/case-studies/' + study.slug)
-  const role = experience[employers.indexOf(slug)]
+  const role = experience.find((role) => role.slug === slug)
   if (!role) notFound()
   return (
     <article className="site-shell personal-page">
@@ -41,6 +43,18 @@ export default async function Page({
       <div className="max-w-3xl space-y-6 text-[19px] leading-8">
         {role.body.map((text) => (
           <p key={text}>{text}</p>
+        ))}
+      </div>
+      <div className="max-w-3xl mt-12 space-y-12">
+        {role.sections.map((section) => (
+          <section key={section.title} className="space-y-5">
+            <h2 className="text-2xl">{section.title}</h2>
+            {section.body.map((text) => (
+              <p key={text} className="text-[17px] leading-7 text-ink-soft">
+                {text}
+              </p>
+            ))}
+          </section>
         ))}
       </div>
       <nav className="mt-12 border-t border-line pt-8 flex flex-wrap gap-6">
