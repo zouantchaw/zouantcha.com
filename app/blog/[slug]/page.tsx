@@ -71,45 +71,56 @@ export default async function Blog({ params }: BlogPageProps) {
 
   return (
     <section className="site-shell reader-page">
-      <a href="/blog" className="reader-back">← Notes</a>
+      <a href="/blog" className="reader-back">
+        ← Notes
+      </a>
       <div className="max-w-3xl">
-      <script
-        type="application/ld+json"
-        suppressHydrationWarning
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'BlogPosting',
-            headline: post.metadata.title,
-            datePublished: post.metadata.publishedAt,
-            dateModified: post.metadata.publishedAt,
-            description: post.metadata.summary,
-            image: post.metadata.image
-              ? `${baseUrl}${post.metadata.image}`
-              : `${baseUrl}/og?title=${encodeURIComponent(post.metadata.title)}`,
-            url: canonicalUrl,
-            author: {
-              '@type': 'Person',
-              name: 'Wiel Zouantcha',
-            },
-          }),
-        }}
-      />
-      <h1 className="title font-mono text-[28px] leading-[1.2] tracking-[-0.03em] text-ink sm:text-[36px]">
-        {post.metadata.title}
-      </h1>
-      <div className="mt-4 mb-10 text-sm">
-        <div className="flex justify-between items-center">
-          <p className="font-mono text-xs text-muted">
-            {formatDate(post.metadata.publishedAt)}
-          </p>
+        <script
+          type="application/ld+json"
+          suppressHydrationWarning
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'BlogPosting',
+              headline: post.metadata.title,
+              datePublished: post.metadata.publishedAt,
+              dateModified: post.metadata.publishedAt,
+              description: post.metadata.summary,
+              image: post.metadata.image
+                ? `${baseUrl}${post.metadata.image}`
+                : `${baseUrl}/og?title=${encodeURIComponent(post.metadata.title)}`,
+              url: canonicalUrl,
+              author: {
+                '@type': 'Person',
+                name: 'Wiel Zouantcha',
+              },
+            }),
+          }}
+        />
+        <h1 className="title font-mono text-[28px] leading-[1.2] tracking-[-0.03em] text-ink sm:text-[36px]">
+          {post.metadata.title}
+        </h1>
+        <div className="mt-4 mb-10 text-sm">
+          <div className="flex justify-between items-center">
+            <p className="font-mono text-xs text-muted">
+              {post.metadata.writtenAt
+                ? 'Notebook · ' + formatDate(post.metadata.writtenAt)
+                : formatDate(post.metadata.publishedAt)}
+            </p>
+          </div>
         </div>
-
-      </div>
-      <article className="prose">
-        <CustomMDX source={post.content} />
-      </article>
-      <nav className="mt-16 border-t border-line pt-8"><a href="/blog">Back to the notes ↗</a></nav>
+        {post.metadata.writtenAt && (
+          <p className="mb-8 text-sm text-muted">
+            Published {formatDate(post.metadata.publishedAt)}. Lightly edited
+            from my journal.
+          </p>
+        )}
+        <article className="prose">
+          <CustomMDX source={post.content} />
+        </article>
+        <nav className="mt-16 border-t border-line pt-8">
+          <a href="/blog">Back to the notes ↗</a>
+        </nav>
       </div>
     </section>
   )

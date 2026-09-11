@@ -3,6 +3,20 @@ import Link from 'next/link'
 import { useState } from 'react'
 const entries = [
   {
+    label: 'Montréal',
+    title: 'The map already existed',
+    date: '2020-10-14',
+    href: '/blog/the-map-already-existed',
+    text: 'There’s always construction in Montréal. I wanted a map to find out what was happening. It turned out the map already existed. That search led me to the city’s open data portal.',
+  },
+  {
+    label: 'Everyday',
+    title: 'If I want to run, why can’t I just go and run?',
+    date: '2020-10-19',
+    href: '/blog/just-go-and-run',
+    text: 'I ran in the Old Port while listening to a podcast. Then I started wondering why I needed the podcast at all.',
+  },
+  {
     label: 'Reading',
     title: 'Reading needs a second pass',
     date: '2026-03-12',
@@ -72,7 +86,10 @@ export function NotebookIndex() {
         >
           <div className="notebook-date">
             <span>Notebook / {entry.date}</span>
-            <span>{String(selected + 1).padStart(2, '0')} / 04</span>
+            <span>
+              {String(selected + 1).padStart(2, '0')} /{' '}
+              {String(entries.length).padStart(2, '0')}
+            </span>
           </div>
           <h3>
             <Link href={entry.href}>{entry.title}</Link>

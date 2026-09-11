@@ -1188,6 +1188,7 @@ button:active:not(:disabled) {
 }
 .notebook-tabs {
   display: flex;
+  flex-wrap: wrap;
   gap: 0;
   border-bottom: 1px solid #d9dde5;
   padding-inline: 24px;
