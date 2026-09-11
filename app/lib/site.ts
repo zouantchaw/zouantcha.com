@@ -1,7 +1,7 @@
 export const site = {
   name: 'Wiel Zouantcha',
   formalName: 'Wielfried Zouantcha',
-  title: 'Full Stack Design Engineer',
+  title: 'Software Engineer — Product, Data & AI',
   headline: 'Software, research, and reading notes.',
   location: 'Washington, DC',
   email: 'zouantchaw74@gmail.com',
@@ -9,9 +9,9 @@ export const site = {
   x: 'https://twitter.com/love_thegame_',
   linkedin: 'https://www.linkedin.com/in/wielfried-zouantcha-6b4722136/',
   description:
-    'Wiel Zouantcha is a full stack design engineer. A personal index of software, research, reading, and the work behind it.',
+    'Wiel Zouantcha is a software engineer working across product, data and applied AI. Software, research, writings and notes.',
   socialDescription:
-    'Wiel Zouantcha: design engineering, Montréal archives, port research, and reading notes.',
+    'Wiel Zouantcha: Software Engineer — Product, Data & AI. Products, research, writings and notes.',
 }
 
 export const nav = [
@@ -23,7 +23,7 @@ export const nav = [
 ]
 
 export const intro = {
-  eyebrow: 'Full Stack Design Engineer',
+  eyebrow: 'Software Engineer — Product, Data & AI',
   title: 'What I do',
   body: [
     'I work at the intersection of design, engineering, and operations. Developing the product, shaping brand and interface, and taking ambitious projects from the first sketch to the finished thing.',
@@ -62,34 +62,56 @@ export const record = [
 
 export const about = {
   eyebrow: 'Get to know me',
-  title: 'I didn’t start in software.',
+  title:
+    'I build software for problems that don’t fit neatly into the interface.',
   body: [
-    'I’m Wiel Zouantcha, a full stack design engineer based in Washington, DC.',
-    'I did not follow a conventional computer-science path. I studied pre-nursing, stepped away, and eventually completed a full-stack software engineering program at Flatiron School. My first production role was at SaaS Alerts, where I learned that integration work is rarely about connecting two clean APIs. It is about inconsistent data, incomplete documentation, operational constraints, and making careful claims about what the system actually knows.',
-    'I later spent three and a half years at Ethos. I joined through blockchain work and grew into a senior full-stack role spanning commerce, product interfaces, internal APIs, multi-tenant systems, and production reliability.',
-    'Alongside that work, I kept building products of my own. MTL Archives began with a public dataset and became a cultural archive. Port Observatory MTL started as a live view of the Port of Montreal. That work became PortMind, an ongoing research project: a benchmark for port-operations AI on this dataset. Diane Party Rentals put me inside the operational reality of a physical business rather than outside it writing software requirements.',
-    'I don’t always start with a product in mind. Sometimes I’m just curious about a city, a photograph, or how someone runs their business. Building gives me a way to stay with that curiosity. I can follow it from a question into the data, the interface, and eventually a conversation with someone using what I made.',
+    'I’m Wiel Zouantcha, a software engineer working across product, data and applied AI, based in Washington, DC.',
+    'I’m interested in what happens when software has to represent something that isn’t clear-cut: an incomplete archive record, a truck partly hidden in a photograph, or a delivery that competes with another booking. The interface has to make sense, but so do the records and decisions behind it.',
+    'I came into software without a conventional computer-science path and learned by building. At SaaS Alerts, production integrations taught me to work with inconsistent data and incomplete documentation. I later spent three and a half years at Ethos working across commerce and merchant software. Today, I combine full-stack development and customer engineering at Oloodi.',
+    'I don’t always start with a product in mind. Browsing Montréal’s public datasets led to MTL Archives. Collecting observations of the port led to PortMind and questions about how to evaluate vision models. Working with Diane Party Rentals meant following a booking beyond checkout to the equipment, crew and customer waiting for it.',
+    'Building gives me a way to stay with a question. I can follow it into the data, make something someone can use, and find out where my understanding was incomplete.',
   ],
   principles: [
     {
       title: 'Start with the operation',
       body: 'I want to understand how the work happens before deciding what the interface should be.',
+      evidence: {
+        label: 'DPR: from booking to delivery',
+        href: '/case-studies/diane-party-rentals#getting-everything-there',
+      },
     },
     {
       title: 'Make uncertainty visible',
-      body: 'Missing data, model disagreement, and ambiguous rules should show up in the product. Do not hide them behind confident UI.',
+      body: 'Missing data, model disagreement and ambiguous rules should stay visible to the person making the decision.',
+      evidence: {
+        label: 'PortMind: checking the benchmark',
+        href: '/case-studies/portmind#check-the-benchmark-before-trusting-the-score',
+      },
     },
-    {
-      title: 'Build across boundaries',
-      body: 'I am comfortable moving between product conversations, frontend interfaces, APIs, data models, tests, and deployment.',
-    },
+
     {
       title: 'Treat reliability as product work',
-      body: 'Health checks, permissions, audit trails, and failure behavior affect whether users trust the system.',
+      body: 'Health checks, permissions, audit trails and failure behavior affect whether someone can rely on the product.',
+      evidence: {
+        label: 'Starthome: keeping the record consistent',
+        href: '/case-studies/starthome#the-record-changes-state',
+      },
     },
     {
       title: 'Use AI as leverage, not evidence',
-      body: 'Faster implementation is useful; evaluation and judgment still determine whether the result is good.',
+      body: 'A model can help me build or explore faster. Its output still needs to be checked against the task, the source material and the people using it.',
+      evidence: {
+        label: 'MTL Archives: testing a replacement model',
+        href: '/case-studies/mtl-archives#trying-a-replacement-before-changing-the-index',
+      },
+    },
+    {
+      title: 'Build across boundaries',
+      body: 'I move between product conversations, interfaces, APIs, data models, tests and deployment. A workflow often needs changes in more than one of those places.',
+      evidence: {
+        label: 'Oloodi: engineering and customer work',
+        href: '/work/oloodi',
+      },
     },
   ],
   outside:
@@ -173,7 +195,7 @@ export const experience: Experience[] = [
   {
     slug: 'independent',
     company: 'Independent work',
-    role: 'Full Stack Design Engineer',
+    role: 'Software Engineer — Product, Data & AI',
     period: 'January 2023–present',
     body: [
       'I work directly with founders and operating businesses, from figuring out what the product needs to do through designing and building it.',

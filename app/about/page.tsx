@@ -5,7 +5,7 @@ import { about, mailto, site } from 'app/lib/site'
 
 export const metadata = {
   title: 'About',
-  description: `${site.name} is a full stack design engineer based in ${site.location}.`,
+  description: `${site.name} is a software engineer working across product, data and applied AI, based in ${site.location}.`,
 }
 
 export default function Page() {
@@ -36,7 +36,15 @@ export default function Page() {
           {about.principles.map((principle) => (
             <div key={principle.title} className="space-y-2">
               <h2 className="text-lg">{principle.title}</h2>
-              <p className="text-sm leading-6 text-ink-soft">{principle.body}</p>
+              <p className="text-sm leading-6 text-ink-soft">
+                {principle.body}
+              </p>
+              <Link
+                href={principle.evidence.href}
+                className="inline-block text-sm underline underline-offset-4"
+              >
+                {principle.evidence.label} ↗
+              </Link>
             </div>
           ))}
         </div>

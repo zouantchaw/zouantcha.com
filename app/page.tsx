@@ -1,3 +1,4 @@
+import { site } from 'app/lib/site'
 import { WorkResults } from 'app/components/work-results'
 import { ContinueReading } from 'app/components/continue-reading'
 import Link from 'next/link'
@@ -7,9 +8,7 @@ export default function Page() {
     <div className="site-shell index-home">
       <header className="index-hero">
         <div>
-          <p className="eyebrow">
-            A personal index / notes, software & other interests
-          </p>
+          <p className="eyebrow">{site.title}</p>
           <h1>Hi, I’m Wiel.</h1>
           <p className="hero-intro">
             I design and build software. These days, I’m working on{' '}

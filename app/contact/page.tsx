@@ -4,7 +4,7 @@ import { contact, mailto, site } from 'app/lib/site'
 
 export const metadata = {
   title: 'Contact',
-  description: `Get in touch with ${site.name} about full stack design engineering roles or independent projects.`,
+  description: `Get in touch with ${site.name} about software engineering roles across product, data and AI or independent projects.`,
 }
 
 export default function Page() {
