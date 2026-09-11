@@ -1,7 +1,14 @@
+import type { ComponentProps } from 'react'
 import { notFound } from 'next/navigation'
 import { CustomMDX } from 'app/components/mdx'
 import { formatDate, getBlogPosts } from 'app/blog/utils'
 import { baseUrl } from 'app/sitemap'
+
+// The whitepaper contains C and literal numerical results. The JavaScript
+// highlighter can alter C operators, so preserve these source strings verbatim.
+function WhitepaperCode({ children, ...props }: ComponentProps<'code'>) {
+  return <code {...props}>{children}</code>
+}
 
 export async function generateStaticParams() {
   let posts = getBlogPosts()
@@ -107,7 +114,10 @@ export default async function Blog({ params }: BlogPageProps) {
 
       </div>
       <article className="prose">
-        <CustomMDX source={post.content} />
+        <CustomMDX
+          source={post.content}
+          components={slug === 'bitcoin-whitepaper' ? { code: WhitepaperCode } : undefined}
+        />
       </article>
       <nav className="mt-16 border-t border-line pt-8"><a href="/blog">Back to the notes ↗</a></nav>
       </div>
