@@ -42,7 +42,12 @@ export default async function Page({
       </header>
       <div className="max-w-3xl space-y-6 text-[19px] leading-8">
         {role.body.map((text) => (
-          <p key={text}>{text}</p>
+          <p key={text}>{role.slug === 'independent'
+            ? text.split(/(Diane Party Rentals|Starthome|MTL Archives|PortMind)/g).map((part, index) => {
+                const study = work.find(item => item.title === part)
+                return study ? <Link key={index} href={'/case-studies/' + study.slug} className="underline decoration-line underline-offset-4 hover:decoration-ink">{part}</Link> : part
+              })
+            : text}</p>
         ))}
       </div>
       <div className="max-w-3xl mt-12 space-y-12">

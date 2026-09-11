@@ -162,12 +162,21 @@ export type WorkItem = {
   metrics?: WorkMetric[]
   banner?: WorkImage
   images?: WorkImage[]
+  contents?: { heading: string; title: string }[]
   sections: WorkSection[]
 }
 
 export const work: WorkItem[] = [
   {
     "slug": "mtl-archives",
+    contents: [
+      { heading: 'Following an interest in the city', title: 'Build the archive' },
+      { heading: 'Captioning was a job to measure', title: 'Enrich & search' },
+      { heading: 'What the image model was noticing', title: 'Understand the model' },
+      { heading: 'Designing a way into the archive', title: 'Build the product' },
+      { heading: 'Taking the archive to the feed', title: 'Distribution experiment' },
+      { heading: 'What changed how I work', title: 'What changed' },
+    ],
     "number": "01",
     "title": "MTL Archives",
     "dek": "13,000+ historical photographs transformed into an AI-powered archive, search engine and daily game, with an automated editorial system reaching 2.66M social views.",
@@ -1252,7 +1261,7 @@ export const work: WorkItem[] = [
     "dek": "From manual quotes and disconnected payments to online bookings, with an operating platform for the work after checkout.",
     "summary": "Replacing a Wix site and manual payment tracking, then connecting rental bookings to inventory, suppliers and delivery.",
     "evidence": "$5,032.66 gross payment volume · April–September 2026",
-    "role": "Design engineer",
+    "role": "Product design & engineering",
     "period": "March 2026–present",
     "scope": "Brand · Website · Booking · Operations",
     "featured": true,

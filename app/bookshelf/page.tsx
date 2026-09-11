@@ -78,6 +78,7 @@ export default async function Page({
               {b.year}
               {b.author ? ' · ' + b.author : ''}
             </small>
+            {b.note && <small className="block text-muted">{b.note}</small>}
           </article>
         ))}
       </div>

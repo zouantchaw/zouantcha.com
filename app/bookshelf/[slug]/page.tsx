@@ -41,6 +41,7 @@ export default async function Page({
             This is part of my {b.year} reading list. The original entry keeps
             the notes and passages I chose to save together.
           </p>
+          {b.note && <p className="text-sm text-muted">{b.note}</p>}
           <Link href={'/blog/' + b.source}>Read the {b.year} notes ↗</Link>
           {b.href && (
             <p>

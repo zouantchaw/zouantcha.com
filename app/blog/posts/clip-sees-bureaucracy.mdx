@@ -1,12 +1,12 @@
 ---
 title: CLIP Sees Bureaucracy
 publishedAt: '2026-01-27'
-summary: I ran CLIP on 14,715 archival photos from Montreal. It didn't learn to see churches and bridges. It learned to see government formatting.
+summary: A projection of 14,715 archival images suggested that document formatting mattered more than I expected. Here is what I observed, and what the map cannot establish.
 ---
 
 I've been building a [search engine](https://www.mtlarchives.com/) for 14,822 historical photos from the Montreal city archives. The collection spans the 1920s to the 1990s, mostly 1940s-70s. Aerial surveys, street photography, planning documents, index cards, all of it. Of those, 14,715 images had valid URLs and got CLIP embeddings. All the numbers below refer to that subset.
 
-As part of that I generated [CLIP](https://openai.com/research/clip) embeddings (ViT-B/32, 512 dimensions) for every image I could fetch and projected them down to 2D with UMAP. I figured I'd see clusters by subject. Churches in one corner, bridges in another, parks somewhere else.
+As part of that I generated [CLIP](https://openai.com/index/clip/) embeddings, numerical representations from Contrastive Language–Image Pre-training (ViT-B/32, 512 dimensions) for every image I could fetch and projected them down to two dimensions with [UMAP](https://umap-learn.readthedocs.io/en/latest/), Uniform Manifold Approximation and Projection. I figured I'd see clusters by subject. Churches in one corner, bridges in another, parks somewhere else.
 
 Quick caveat: every distance/spread below is in **2D UMAP space (normalized 0–1)**. It’s a visualization metric, not a true CLIP-space distance. The numbers are useful for comparisons inside this projection, not absolute similarity.
 
@@ -14,16 +14,16 @@ That's not what happened.
 
 ## What actually clustered
 
-The strongest signal wasn't what's *in* the photos. It was how the photos were *formatted*.
+The most visible division in this projection lined up with how the images were formatted. That was a useful observation to investigate, rather than a measurement of which features mattered most inside CLIP.
 
-The archive split into two big groups:
+Two large regions stood out. These are subsets of the 14,715 images, not an exhaustive partition:
 
 | Cluster | Era | Count | What it looks like |
 |---------|-----|-------|--------------------|
 | Lower region (green/blue) | 1940s | 7,805 | Raw B&W aerial photos, no borders, no stamps |
 | Upper region (yellow) | 1950s-70s | 2,759 | Official survey documents with "VILLE DE MONTREAL" borders and index numbers |
 
-Separability in UMAP space is near-perfect (≈99% with a simple axis split). Almost every 1940s photo sits apart from every 1950s+ photo. Not because of the content. Because of the border around the image.
+My exploratory axis split reported roughly 99% separation for the compared groups in this layout. Era, format and subject matter overlap here, so that number does not isolate a cause. Removing the borders and comparing the original embeddings would be one way to test the formatting explanation.
 
 Here's what each side looks like:
 
@@ -38,19 +38,19 @@ Here's what each side looks like:
   </figure>
 </div>
 
-Both are aerial views of Montreal. But CLIP doesn't care about that. It sees the border, the header, the index number. That's the signal.
+Both are aerial views of Montreal. Their borders, headers and index numbers differ too. The projection suggests that these presentation differences are worth checking; it does not show that CLIP ignores the aerial subject.
 
 ## The index card wall
 
 The tightest cluster in the whole archive isn't a subject category. It's index cards.
 
-2,781 index cards from the city's planning department cluster with a spread of 0.098 in UMAP space (vs 0.204 for aerial photos and 0.228 for oblique views). Hierarchical clustering pushes that spread down to 0.010. These cards look basically identical to CLIP.
+2,781 index cards from the city's planning department cluster with a spread of 0.098 in UMAP space (vs 0.204 for aerial photos and 0.228 for oblique views). Hierarchical clustering pushes that spread down to 0.010. These are measures of compactness in this layout, not evidence that the original image representations are identical.
 
 Here's what got me: index cards from the 1950s and index cards from the 1970s are the same thing visually. The closest pair in the entire archive is two index cards 20 years apart, with a UMAP distance of **0.00004**.
 
-For context, two random photos from the same aerial flight path average 0.163 in UMAP space. These cards are ~4,000x closer than that.
+For context, two random photos from the same aerial flight path average 0.163 in UMAP space. The very small distance between the cards is striking visually, but a ratio against it would exaggerate the precision of the projection.
 
-Bureaucratic formatting doesn't change. At least not in Montreal's planning department.
+The repeated card layout was a more useful clue than the dates alone.
 
 <div className="img-compare">
   <figure>
@@ -63,11 +63,11 @@ Bureaucratic formatting doesn't change. At least not in Montreal's planning depa
   </figure>
 </div>
 
-Seven years apart. To CLIP, they're the same image.
+Seven years apart, with a similar document layout. That resemblance is visible in the examples; it is not proof that the model treats them as the same image.
 
-## It also detects flight paths
+## Comparing the map with flight records
 
-The 7,805 aerial photos from the 1940s aren't one blob. CLIP splits them into sub-clusters that line up with individual flight paths from the original survey.
+The region containing 7,805 aerial photos from the 1940s has smaller groups that overlap with flight identifiers in the archive metadata.
 
 Using k-means (k=8) on the full dataset, the aerial region splits into sub-clusters. Three of them line up cleanly with flight groups:
 
@@ -85,7 +85,7 @@ Random same-flight:  0.163  (2.75x)
 Random cross-flight: 0.368  (6.2x)
 ```
 
-CLIP was never trained on aerial survey metadata. It picked up spatial continuity from pixel patterns.
+I did not train the model on these flight identifiers. The association suggests a useful retrieval experiment, but shared terrain, scan properties and survey format could all contribute. It does not establish reliable flight identification.
 
 <div className="img-compare">
   <figure>
@@ -98,25 +98,25 @@ CLIP was never trained on aerial survey metadata. It picked up spatial continuit
   </figure>
 </div>
 
-These two look similar to us. But CLIP knows they're from different flights because the ground patterns shift.
+These examples come from different flights. To test whether embeddings can distinguish them reliably, I would need held-out flight labels and a comparison in the original embedding space.
 
 ## Photos from different decades that look the same
 
 I found 1,840 pairs of photos from different decades that land nearly on top of each other in UMAP space:
 
-| Decade pair | Twin pairs | Why |
+| Decade pair | Nearby pairs | Possible explanation |
 |-------------|------------|-----|
 | 1920s and 1940s | 855 | Similar vertical aerial techniques |
 | 1940s and 1960s | 598 | Aerial photos vs formatted versions of the same shots |
 | 1920s and 1970s | 144 | Same oblique technique 50 years apart |
 
-The 1920s-to-1970s twins are interesting. Some oblique aerial photography techniques from the 1920s show up in 1970s photos too. CLIP sees the camera angle and composition, not the decade.
+The 1920s-to-1970s twins are interesting. Some oblique aerial photography techniques from the 1920s show up in 1970s photos too. Similar camera angles and composition are possible explanations for that proximity. The map alone cannot separate those effects from format or subject matter.
 
-One 1970s photo of the Olympic stadium under construction clusters with 1920s-1940s imagery because it uses the same oblique aerial technique. Modern subject, old photography method.
+One 1970s photo of the Olympic stadium under construction appears near 1920s-1940s imagery. Its oblique view offers a possible explanation, even though its subject is more recent.
 
-## Photographer fingerprinting
+## A limit: photographer attribution
 
-I tested whether CLIP could pick out individual photographers. About 130 photos in the archive have credits.
+I explored whether the layout could help group credited photographs. About 130 photos in the archive have credits.
 
 | Photographer | Photos | Spread | Active period |
 |-------------|--------|--------|---------------|
@@ -124,21 +124,21 @@ I tested whether CLIP could pick out individual photographers. About 130 photos 
 | Armour Landry | 26 | 0.044 | 1962-1965 |
 | Louis-Philippe Meunier | 8 | 0.055 | 1964-1970 |
 
-Remillard and Landry have a centroid distance of 0.022, the smallest of any pair. Their styles are basically identical. Both shot oblique aerials in the early-mid 1960s. Probably colleagues or at least following the same institutional guidelines.
+Remillard and Landry have a centroid distance of 0.022, the smallest of any pair. Both shot oblique aerials in the early-mid 1960s. That overlap makes it hard to distinguish photographer, subject and institutional format; it tells me nothing about whether they worked together.
 
-Using a simple nearest-centroid classification I found 20 high-confidence attributions for photos that didn't have credits. All went to Remillard since he has the biggest training set.
+A nearest-centroid rule assigned 20 uncredited photographs to Remillard, the largest credited group. I would not treat those assignments as verified attributions. There was no independent attribution test or calibrated confidence, and the imbalance in credited examples is a concern.
 
 ## The outliers that aren't broken
 
-I ran a simple **embedding-space outlier score** (density + edge proximity in UMAP space). Only a handful of extreme outliers surfaced.
+I ran a simple **projection-based outlier score** (density + edge proximity in UMAP space). Only a handful of extreme outliers surfaced.
 
 I expected damaged or faded photos. Instead the extreme outliers were rural farmland on the edge of Montreal: fields, ponds, agricultural land.
 
-They're not broken. They're the only photos in the archive that show open farmland instead of city. CLIP correctly flagged them as different because farmland doesn't look like cityscapes.
+The examples I inspected showed farmland rather than damaged scans. That made them interesting to review. It does not establish that they are the only rural images in the archive or that the outlier rule is generally correct.
 
-## Style beats content
+## Format and subject are hard to disentangle
 
-I tested whether CLIP clusters by what's in the photo (semantics) or how the photo was taken (style).
+I also compared the spread of subject categories in the projection. This was a descriptive comparison, not a controlled test of content against style.
 
 | Category | Photos | Spread |
 |----------|--------|--------|
@@ -147,25 +147,23 @@ I tested whether CLIP clusters by what's in the photo (semantics) or how the pho
 | Bridges | 45 | 0.239 |
 | Water | 43 | 0.272 |
 
-The silhouette-like score for semantic clustering in UMAP space is 0.18. Barely above random. Meanwhile, formatting-based clustering (documents vs raw photos) gets near-perfect separation.
+The silhouette-like score for semantic clustering in UMAP space is 0.18. Without a defined random baseline, I should not call that barely above random. The format groups looked more separated, but the two comparisons do not establish a general ranking of the model's capabilities.
 
-CLIP doesn't primarily see "bridge" or "park." It sees "1940s aerial with no border" or "1960s planning document with institutional header."
+The practical question is whether presentation gets in the way of finding a bridge or a park. That needs a retrieval evaluation with relevant images labeled independently of the projection.
 
 ## What I took away from this
 
-**Your vision model knows things you didn't teach it.** CLIP was trained on internet image-text pairs, not archival documents. It still figured out that government formatting is a stronger visual signal than what's actually in the photo. If you're using CLIP for search or classification, check what it's actually clustering on. It might not be what you think.
+**Inspect the images behind the plot.** The map led me to document borders, repeated card layouts and survey sequences that I might otherwise have missed. Those are useful hypotheses about the collection.
 
-**Institutional consistency is powerful.** Index cards from different decades look the same to CLIP. That means you could do document-type classification with very little training data. One example of an index card basically gives you all of them.
+**Test the task you actually need.** Search quality, sequence detection and document classification each need their own labels and evaluation. A visually tidy cluster does not establish that any of those tasks works reliably.
 
-**Consecutive frame detection works out of the box.** If you have sequential imagery (surveillance, aerial survey, time-lapse), CLIP embeddings already encode spatial and temporal continuity. No fine-tuning needed. The 6.2x distance ratio between same-flight and cross-flight frames is more than enough for automated sequence detection.
+**Keep attribution separate from resemblance.** Similarity can suggest photographs worth reviewing together. It cannot supply missing photographer credits or explain the history of a document on its own.
 
-**Outliers in clean datasets usually mean something.** Don't assume outliers are errors. The outliers that didn't fit weren't damaged. They were the only rural farmland in an urban archive. The model was right to set them apart.
-
-**Photography techniques outlast the decades.** A 1970s photo can look like a 1920s photo if it uses the same camera angle and composition. This matters for any model doing temporal classification. Date metadata alone isn't reliable.
+The next useful experiment would compare full scans with border-cropped versions, evaluate neighbors in the original 512-dimensional embeddings, and repeat the projection across settings. I would then test retrieval on independently labeled queries. Those checks would help distinguish a property of the collection from an artifact of its visualization.
 
 ---
 
-**Methods note.** All distances/spreads/centroids here are computed in 2D UMAP space (normalized 0–1), not in raw CLIP embedding space. UMAP is for visualization; changing its parameters shifts absolute distances but the qualitative separations above stayed consistent in my runs.
+**Methods note.** The reported distances, spreads and centroids are exploratory measurements in one normalized two-dimensional UMAP layout, not raw CLIP similarities or validated task scores. UMAP can distort density and spacing; its [documentation cautions about clustering the projection](https://umap-learn.readthedocs.io/en/latest/faq.html#can-i-cluster-the-results-of-umap). The k-means groups above are exploratory partitions, not established categories. The figures are retained from the original analysis and have not been rerun for this revision. They describe the January collection snapshot, which differs from the later serving index documented in the [MTL Archives case study](/case-studies/mtl-archives).
 
 ---
 

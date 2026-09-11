@@ -306,9 +306,9 @@ export default async function Page({ params }: PageProps) {
       <ReaderContents
         title={item.title}
         slug={item.slug}
-        sections={item.sections.map((s) => ({
+        sections={(item.contents ?? item.sections.map(s => ({ heading: s.heading, title: s.heading }))).map((s) => ({
           id: sectionId(s.heading),
-          title: s.heading,
+          title: s.title,
         }))}
       />
       <div className="flex flex-wrap items-center justify-between gap-3 text-sm text-muted">

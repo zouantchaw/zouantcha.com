@@ -237,7 +237,7 @@ export const contact = {
   title: 'Email is the fastest way.',
   hiring: {
     title: 'Hiring?',
-    body: 'I’m interested in roles where I can work on the interface and the engineering behind it. Tell me about the team, the product, and what you need help building.',
+    body: 'I’m interested in software engineering roles where I can work across product, backend systems, data and applied AI. Tell me about the team, the product, and what you need help building.',
   },
   project: {
     title: 'Got an operations problem?',
