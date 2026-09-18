@@ -16,8 +16,9 @@ export const startCopy = {
   consent: 'By subscribing, you agree to receive Field Notes by email. Unsubscribe anytime.',
   workWithMeHeading: 'Building something difficult?',
   workWithMeBody:
-    'I work with teams and businesses on software, AI workflows, internal tools and operational systems.',
-  workWithMeCta: 'Work with me →',
+    'I work with teams and businesses on software, AI workflows, internal tools, and operational systems.',
+  workWithMeCta: 'Project / collaboration intro →',
+  projectIntroHref: 'https://cal.com/wielfried/intro',
 }
 
 export const startProof = [

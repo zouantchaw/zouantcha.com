@@ -1,7 +1,7 @@
 import { pageMetadata } from 'app/lib/metadata'
 import { ProfilePhoto } from 'app/components/profile-photo'
 import { FieldNotesForm } from 'app/components/field-notes-form'
-import { TrackLink } from 'app/components/track-link'
+import { TrackAnchor, TrackLink } from 'app/components/track-link'
 import { StartPageView } from 'app/components/start-page-view'
 import { pickAttribution, withAttribution } from 'app/lib/field-notes'
 import { site } from 'app/lib/site'
@@ -107,13 +107,19 @@ export default async function Page({
       <section className="start-section start-work-with-me" aria-labelledby="work-with-me-heading">
         <h2 id="work-with-me-heading">{startCopy.workWithMeHeading}</h2>
         <p>{startCopy.workWithMeBody}</p>
-        <TrackLink
-          href={withAttribution('/contact', attribution)}
-          event="work_with_me_click"
-          data={{ from: 'start_page' }}
+        <TrackAnchor
+          href={startCopy.projectIntroHref}
+          event="project_intro_click"
+          data={{
+            source_page: 'start',
+            destination: 'cal.com/wielfried/intro',
+          }}
+          className="start-intro-cta"
+          target="_blank"
+          rel="noopener noreferrer"
         >
           {startCopy.workWithMeCta}
-        </TrackLink>
+        </TrackAnchor>
       </section>
     </div>
   )

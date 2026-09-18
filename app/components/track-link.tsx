@@ -25,3 +25,25 @@ export function TrackLink({
     />
   )
 }
+
+export function TrackAnchor({
+  event,
+  data,
+  onClick,
+  ...props
+}: ComponentProps<'a'> & {
+  event: string
+  data?: Record<string, string>
+}) {
+  return (
+    <a
+      {...props}
+      onClick={(click) => {
+        try {
+          track(event, data)
+        } catch {}
+        onClick?.(click)
+      }}
+    />
+  )
+}

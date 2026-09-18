@@ -1445,6 +1445,12 @@ button:active:not(:disabled) {
   max-width: 640px;
   color: #616161;
 }
+.start-intro-cta {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  font-size: 16px;
+}
 .start-form {
   display: grid;
   grid-template-columns: minmax(0, 1fr) auto;

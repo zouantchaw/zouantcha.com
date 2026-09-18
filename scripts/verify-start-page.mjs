@@ -112,16 +112,17 @@ try {
     'field_notes_signup_success',
   )
 
-  const work = page.getByRole('link', { name: 'Work with me' })
-  assert.match(await work.getAttribute('href'), /utm_campaign=90day/)
-  await page.evaluate(() => {
-    document.querySelector('a[href*="/contact"]')?.addEventListener('click', (event) => event.preventDefault(), {
-      capture: true,
-    })
+  const intro = page.getByRole('link', { name: 'Project / collaboration intro' })
+  assert.equal(await intro.getAttribute('href'), 'https://cal.com/wielfried/intro')
+  assert.equal(await intro.getAttribute('target'), '_blank')
+  await intro.evaluate((el) => {
+    el.addEventListener('click', (event) => event.preventDefault(), { capture: true })
   })
-  await work.click()
-  const workEvents = await recorded('work_with_me_click')
-  assert.equal(workEvents.length > 0, true, 'work_with_me_click')
+  await intro.click()
+  const introEvents = await recorded('project_intro_click')
+  assert.equal(introEvents.length > 0, true, 'project_intro_click')
+  assert.equal(introEvents[0][1].data.source_page, 'start')
+  assert.equal(introEvents[0][1].data.destination, 'cal.com/wielfried/intro')
 
   assert.equal(errors.length, 0, errors.join('\n'))
   console.log('Start page, mobile layout, signup, duplicate, invalid email, and analytics passed')
