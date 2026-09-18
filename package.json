@@ -4,7 +4,9 @@
     "dev": "next dev",
     "build": "next build --webpack",
     "start": "next start",
-    "export:case-studies": "node scripts/export-case-studies.mjs"
+    "export:case-studies": "node scripts/export-case-studies.mjs",
+    "field-notes:export": "node scripts/export-field-notes.mjs",
+    "verify:start": "node scripts/verify-start-page.mjs"
   },
   "dependencies": {
     "@tailwindcss/postcss": "4.0.0-alpha.13",

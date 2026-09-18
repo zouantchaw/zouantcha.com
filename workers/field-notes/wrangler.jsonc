@@ -1,0 +1,18 @@
+{
+  "$schema": "https://www.unpkg.com/wrangler@4.43.0/config-schema.json",
+  "name": "zouantcha-field-notes",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-09-18",
+  "account_id": "0bb05130da965c096b12cc1f0637f763",
+  "observability": {
+    "enabled": true
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "zouantcha-field-notes",
+      "database_id": "c47d87c8-911e-4330-a59b-bd4f817a69a9",
+      "migrations_dir": "migrations"
+    }
+  ]
+}
