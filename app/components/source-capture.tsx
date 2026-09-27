@@ -9,7 +9,7 @@ function Capture() {
   const params = useSearchParams()
 
   useEffect(() => {
-    const src = params.get(SOURCE_KEY)?.trim().slice(0, 80)
+    const src = params?.get(SOURCE_KEY)?.trim().slice(0, 80)
     if (!src) return
     try {
       sessionStorage.setItem(SOURCE_KEY, src)
