@@ -1,4 +1,5 @@
 import { pageMetadata } from 'app/lib/metadata'
+import { CaseStudyView } from 'app/components/case-study-view'
 import { ImageViewer } from 'app/components/image-viewer'
 import { ReaderContents } from 'app/components/reader-contents'
 import { sectionId } from 'app/lib/section-id'
@@ -296,6 +297,7 @@ export default async function Page({ params }: PageProps) {
 
   return (
     <article className="case-essay">
+      <CaseStudyView slug={item.slug} />
       <ReaderContents
         title={item.title}
         slug={item.slug}
@@ -343,7 +345,10 @@ export default async function Page({ params }: PageProps) {
         </h1>
         <p className="text-xl leading-8 text-ink-soft">{item.dek}</p>
         {item.ownership ? (
-          <p className="max-w-3xl text-[17px] leading-7 text-ink-soft">{item.ownership}</p>
+          <div className="case-role">
+            <p className="eyebrow">My role</p>
+            <p className="max-w-3xl text-[17px] leading-7 text-ink-soft">{item.ownership}</p>
+          </div>
         ) : null}
         <dl className="case-essay-meta">
           <div>

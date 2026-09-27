@@ -1,12 +1,12 @@
 import { pageMetadata } from 'app/lib/metadata'
 import Link from 'next/link'
-import { SectionLabel } from 'app/components/section-label'
-import { experience } from 'app/lib/site'
+import { TrackLink } from 'app/components/track-link'
+import { experience, site, workIntro } from 'app/lib/site'
 
 export const metadata = pageMetadata({
   title: 'Work',
   description:
-    'Work history for Wiel Zouantcha: customer engineering, full-stack product work, integrations, and independent products.',
+    '5+ years shipping production software across SaaS, data systems and applied AI. Customer engineering, full-stack product work, integrations, and independent products.',
   path: '/work',
 })
 
@@ -14,18 +14,26 @@ export default function Page() {
   return (
     <div className="site-shell personal-page space-y-16">
       <header className="max-w-3xl space-y-5">
-        <SectionLabel>Where I’ve worked</SectionLabel>
-        <h1 className="font-mono text-[32px] leading-[1.15] tracking-[-0.03em] text-ink sm:text-[40px]">
-          Work
-        </h1>
+        <p className="eyebrow">Where I’ve worked</p>
+        <h1>{workIntro.title}</h1>
         <p className="max-w-2xl text-[17px] leading-7 text-ink-soft">
-          The teams I’ve worked with, what I was responsible for, and a few
-          examples of the work. The{' '}
+          <strong className="font-medium text-ink">{workIntro.lede}</strong>
+        </p>
+        <p className="max-w-2xl text-[17px] leading-7 text-ink-soft">
+          {workIntro.body} The{' '}
           <Link href="/case-studies" className="underline underline-offset-4">
             case studies
           </Link>{' '}
           follow individual products in more detail.
         </p>
+        <TrackLink
+          className="inline-block text-sm"
+          href={site.resumePage}
+          event="resume_click"
+          data={{ from: 'work' }}
+        >
+          Résumé
+        </TrackLink>
       </header>
 
       <div>

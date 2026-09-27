@@ -1,29 +1,33 @@
 export const site = {
   name: 'Wiel Zouantcha',
   formalName: 'Wielfried Zouantcha',
-  title: 'Software Engineer — Product, Data & AI',
-  headline: 'Software, research, and reading notes.',
+  title: 'Full-Stack Software Engineer · React / TypeScript / Node.js',
+  headline: 'I build production software from ambiguous problems.',
   location: 'Washington, DC',
   email: 'zouantchaw74@gmail.com',
   github: 'https://github.com/zouantchaw',
   x: 'https://twitter.com/love_thegame_',
   linkedin: 'https://www.linkedin.com/in/wielfried-zouantcha-6b4722136/',
+  resume: '/resume.pdf',
+  resumePage: '/resume',
+  resumeDownload: '/wielfried-zouantcha-resume.pdf',
+  resumeFilename: 'wielfried-zouantcha-resume.pdf',
   description:
-    'Wiel Zouantcha is a software engineer working across product, data and applied AI. Software, research, writings and notes.',
+    'Full-stack engineer with 5+ years shipping SaaS products, integrations, data systems, and applied AI. I work from customer and product requirements through frontend, APIs, data, deployment, and production iteration.',
   socialDescription:
-    'Wiel Zouantcha: Software Engineer — Product, Data & AI. Products, research, writings and notes.',
+    'Full-Stack Software Engineer · React / TypeScript / Node.js. 5+ years shipping production SaaS, integrations, data systems and applied AI.',
 }
 
 export const nav = [
-  { href: '/case-studies', label: 'Case studies' },
   { href: '/work', label: 'Work' },
-  { href: '/blog', label: 'Notes' },
   { href: '/about', label: 'About' },
-  { href: '/bookshelf', label: 'Bookshelf' },
+  { href: '/blog', label: 'Writing' },
+  { href: '/resume', label: 'Résumé' },
+  { href: '/contact', label: 'Contact' },
 ]
 
 export const intro = {
-  eyebrow: 'Software Engineer — Product, Data & AI',
+  eyebrow: 'Full-Stack Software Engineer · React / TypeScript / Node.js',
   title: 'What I do',
   body: [
     'I work at the intersection of design, engineering, and operations. Developing the product, shaping brand and interface, and taking ambitious projects from the first sketch to the finished thing.',
@@ -192,7 +196,7 @@ export const experience: Experience[] = [
   {
     slug: 'independent',
     company: 'Independent work',
-    role: 'Software Engineer — Product, Data & AI',
+    role: 'Software Engineer · Product, Data & AI',
     period: 'January 2023–present',
     body: [
       'I work directly with founders and operating businesses, from figuring out what the product needs to do through designing and building it.',
@@ -231,16 +235,155 @@ export const experience: Experience[] = [
 ]
 
 export const contact = {
-  title: 'Email is the fastest way.',
+  title: 'Let’s talk.',
   hiring: {
     title: 'Hiring?',
-    body: 'I’m interested in software engineering roles where I can work across product, backend systems, data and applied AI. Tell me about the team, the product, and what you need help building.',
+    body: 'I’m exploring full-time software engineering opportunities across product, full-stack, forward-deployed and applied-AI work.',
+    subject: 'Software engineering role',
   },
   project: {
-    title: 'Got an operations problem?',
-    body: 'Tell me what you’re working on, who will use it, and where you’re getting stuck. A few sentences are enough to start.',
+    title: 'Building?',
+    body: 'I take on selected consulting projects involving product engineering, internal systems, data pipelines and AI-enabled workflows.',
     subject: 'Project inquiry',
   },
+  intents: {
+    role: {
+      title: 'Let’s talk about a role.',
+      intro: 'I’m exploring full-time software engineering opportunities across product, full-stack, forward-deployed and applied-AI work.',
+      subject: 'Software engineering role',
+    },
+    project: {
+      title: 'Let’s talk about a project.',
+      intro: 'I take on selected consulting projects involving product engineering, internal systems, data pipelines and AI-enabled workflows.',
+      subject: 'Project inquiry',
+    },
+  },
+}
+
+export const homeHero = {
+  eyebrow: 'Full-Stack Software Engineer · React / TypeScript / Node.js',
+  title: 'I build production software from ambiguous problems.',
+  body: 'Full-stack engineer with 5+ years shipping SaaS products, integrations, data systems, and applied AI. I work from customer and product requirements through frontend, APIs, data, deployment, and production iteration.',
+  availability:
+    'Currently exploring full-time engineering opportunities and select consulting engagements.',
+}
+
+export const proof = [
+  { value: '5+ years', label: 'Software engineering', href: '/work' },
+  { value: '50+', label: 'Merchant accounts', href: '/work/ethos' },
+  { value: '81K+', label: 'AI observations', href: '/case-studies/portmind' },
+  { value: '0→1', label: 'Products built and operated', href: '/case-studies' },
+]
+
+export const selectedWork = [
+  {
+    slug: 'portmind',
+    title: 'PortMind',
+    problem: 'Evaluating computer-vision models against real port operations.',
+    result:
+      'Built a reproducible data and model-evaluation pipeline using 81K+ observations to test whether model outputs were actually useful operationally.',
+    stack: 'Python · Next.js · Cloudflare · Vision Models · ETL',
+    href: '/case-studies/portmind',
+    cta: 'Read case study →',
+  },
+  {
+    slug: 'ethos',
+    title: 'Ethos',
+    problem: 'Turning a single-tenant membership MVP into production merchant software.',
+    result:
+      'Shipped a multi-tenant SaaS serving 50+ merchant accounts across storefront, checkout, point-of-sale and the Luna merchant platform.',
+    stack: 'Next.js · Node.js · Azure · Shopify',
+    href: '/work/ethos',
+    cta: 'Read the work →',
+  },
+  {
+    slug: 'mtl-archives',
+    title: 'MTL Archives',
+    problem: 'Making thousands of historical Montréal photographs searchable, playable and public.',
+    result:
+      'Built ingestion, visual search, product and editorial systems around 13,499 serving records, with 2.66M social views over seven months.',
+    stack: 'Python · Next.js · Cloudflare · CLIP · ETL',
+    href: '/case-studies/mtl-archives',
+    cta: 'Read case study →',
+  },
+  {
+    slug: 'diane-party-rentals',
+    title: 'Diane Party Rentals',
+    problem: 'Turning messy rental operations into software a family business can actually run.',
+    result:
+      'Connected quotes, payments and bookings: $5,032.66 gross processed through Stripe, April–September 2026.',
+    stack: 'Next.js · Stripe · Inventory · Operations',
+    href: '/case-studies/diane-party-rentals',
+    cta: 'Read case study →',
+  },
+]
+
+export const capabilities = [
+  {
+    title: 'Product Engineering',
+    body: 'Take ambiguous product requirements through architecture, implementation and production deployment.',
+  },
+  {
+    title: 'Data & Applied AI',
+    body: 'Build ingestion pipelines, model-evaluation systems, retrieval workflows and AI features around real operational problems.',
+  },
+  {
+    title: 'Customer-Facing Engineering',
+    body: 'Work directly with founders, customers and operators to understand requirements, prototype solutions and turn feedback into shipped software.',
+  },
+]
+
+export const homeExperience = [
+  {
+    company: 'Oloodi Technologies',
+    role: 'Customer Engineer · Contract',
+    period: '2026–',
+    href: '/work/oloodi',
+  },
+  {
+    company: 'Ethos',
+    role: 'Senior Full Stack Engineer',
+    period: '2022–2025',
+    href: '/work/ethos',
+    note: 'Took a single-tenant MVP to a multi-tenant SaaS serving 50+ merchant accounts across Next.js, Node.js and Azure.',
+  },
+  {
+    company: 'Independent',
+    role: 'Engineering Consultant',
+    period: '2023–',
+    href: '/work/independent',
+    note: 'Turn operational workflows into production software for service businesses, from quoting and inventory to scheduling, payments and internal systems.',
+  },
+  {
+    company: 'SaaS Alerts',
+    role: 'Software Engineer',
+    period: '2020–2021',
+    href: '/work/saas-alerts',
+  },
+]
+
+export const availabilityCta = {
+  title: 'Let’s build something useful.',
+  body: 'I’m currently exploring full-time engineering roles where I can work across product, software and applied AI, as well as a small number of consulting engagements.',
+  role: { label: 'Discuss a role →', href: '/contact?intent=role' },
+  project: { label: 'Discuss a project →', href: '/contact?intent=project' },
+}
+
+export const connectCopy = {
+  eyebrow: 'Full-Stack Software Engineer · React / TypeScript / Node.js',
+  body: 'Building production software across full-stack systems, data and applied AI.',
+  event: 'At Exploit Summit 2026 · Montréal',
+  proof: [
+    '5+ years engineering',
+    'Production SaaS + AI/data systems',
+    'Open to engineering roles + select consulting',
+  ],
+}
+
+export const workIntro = {
+  title: 'Work',
+  lede: '5+ years shipping production software across SaaS, data systems and applied AI.',
+  body: 'I’ve worked inside product teams and directly with customers, taking projects from ambiguous requirements through architecture, implementation and production.',
 }
 
 export const featuredWriting = [

@@ -1,8 +1,14 @@
 'use client'
 
+import { storedSrc } from './source-capture'
 import { track } from '@vercel/analytics'
 import Link from 'next/link'
 import type { ComponentProps } from 'react'
+
+function payload(data?: Record<string, string>) {
+  const src = storedSrc()
+  return src ? { ...data, src } : data
+}
 
 export function TrackLink({
   event,
@@ -18,7 +24,7 @@ export function TrackLink({
       {...props}
       onClick={(click) => {
         try {
-          track(event, data)
+          track(event, payload(data))
         } catch {}
         onClick?.(click)
       }}
@@ -40,7 +46,7 @@ export function TrackAnchor({
       {...props}
       onClick={(click) => {
         try {
-          track(event, data)
+          track(event, payload(data))
         } catch {}
         onClick?.(click)
       }}

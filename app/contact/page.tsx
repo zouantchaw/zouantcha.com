@@ -1,68 +1,120 @@
 import { pageMetadata } from 'app/lib/metadata'
 import { CopyEmail } from 'app/components/copy-email'
-import { SectionLabel } from 'app/components/section-label'
+import { TrackAnchor, TrackLink } from 'app/components/track-link'
 import { contact, mailto, site } from 'app/lib/site'
 
 export const metadata = pageMetadata({
   title: 'Contact',
-  description: `Get in touch with ${site.name} about software engineering roles across product, data and AI or independent projects.`,
+  description: `Get in touch with ${site.name} about software engineering roles across product, data and applied AI, or selected consulting projects.`,
   path: '/contact',
 })
 
-export default function Page() {
+function intentFrom(value: string | string[] | undefined) {
+  const raw = Array.isArray(value) ? value[0] : value
+  if (raw === 'role' || raw === 'project') return raw
+  return undefined
+}
+
+export default async function Page({
+  searchParams,
+}: {
+  searchParams: Promise<Record<string, string | string[] | undefined>>
+}) {
+  const params = await searchParams
+  const intent = intentFrom(params.intent)
+  const heading = intent ? contact.intents[intent].title : contact.title
+  const subject = intent ? contact.intents[intent].subject : undefined
+
   return (
     <div className="site-shell personal-page space-y-16">
       <header className="max-w-3xl space-y-5">
-        <SectionLabel>Contact</SectionLabel>
-        <h1 className="font-mono text-[32px] leading-[1.15] tracking-[-0.03em] text-ink sm:text-[40px]">
-          Say hello.
-        </h1>
+        <p className="eyebrow">Contact</p>
+        <h1>{heading}</h1>
+        {intent ? (
+          <p className="max-w-2xl text-[17px] leading-7 text-ink-soft">
+            {contact.intents[intent].intro}
+          </p>
+        ) : null}
       </header>
 
-      <div className="flex items-center flex-wrap gap-4">
-        <a href={mailto()}>{site.email}</a>
-        <CopyEmail email={site.email} />
-      </div>
-      <div className="grid gap-12 border-t border-line pt-12 lg:grid-cols-2">
-        <section className="space-y-4">
-          <h2 className="text-2xl tracking-tight">{contact.hiring.title}</h2>
-          <p className="text-[17px] leading-7 text-ink-soft">
-            {contact.hiring.body}
-          </p>
-          <div className="space-y-2 pt-2 text-sm">
-            <a
-              href={mailto('Software engineering role')}
-              className="block underline decoration-line underline-offset-4 hover:decoration-ink"
-            >
-              {site.email}
-            </a>
-            <a
-              href={site.linkedin}
-              className="block underline decoration-line underline-offset-4 hover:decoration-ink"
-              rel="noopener noreferrer"
-              target="_blank"
-            >
-              LinkedIn ↗
-            </a>
-          </div>
-        </section>
+      {!intent ? (
+        <div className="contact-intents">
+          <section>
+            <h2>{contact.hiring.title}</h2>
+            <p>{contact.hiring.body}</p>
+          </section>
+          <section>
+            <h2>{contact.project.title}</h2>
+            <p>{contact.project.body}</p>
+          </section>
+        </div>
+      ) : null}
 
-        <section className="space-y-4">
-          <h2 className="text-2xl tracking-tight">{contact.project.title}</h2>
-          <p className="text-[17px] leading-7 text-ink-soft">
-            {contact.project.body}
-          </p>
-          <p className="text-sm text-muted">
-            Email subject: Project inquiry, [organization or problem]
-          </p>
-          <a
-            href={mailto(contact.project.subject)}
-            className="inline-block text-sm underline decoration-line underline-offset-4 hover:decoration-ink"
-          >
-            Tell me about the problem →
-          </a>
-        </section>
+      <div className="contact-channels">
+        <TrackAnchor
+          href={mailto(subject)}
+          event="email_click"
+          data={{ from: 'contact', intent: intent || 'open' }}
+        >
+          {site.email}
+        </TrackAnchor>
+        <CopyEmail email={site.email} />
+        <TrackAnchor
+          href={site.linkedin}
+          event="linkedin_click"
+          data={{ from: 'contact' }}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          LinkedIn ↗
+        </TrackAnchor>
+        <TrackAnchor
+          href={site.github}
+          event="github_click"
+          data={{ from: 'contact' }}
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          GitHub ↗
+        </TrackAnchor>
+        <TrackLink
+          href={site.resumePage}
+          event="resume_click"
+          data={{ from: 'contact' }}
+        >
+          Résumé
+        </TrackLink>
       </div>
+
+      {!intent ? (
+        <div className="availability-actions">
+          <TrackLink
+            href="/contact?intent=role"
+            event="contact_role_click"
+            data={{ from: 'contact' }}
+            className="hero-cta-secondary"
+          >
+            Discuss a role →
+          </TrackLink>
+          <TrackLink
+            href="/contact?intent=project"
+            event="contact_project_click"
+            data={{ from: 'contact' }}
+            className="hero-cta-secondary"
+          >
+            Discuss a project →
+          </TrackLink>
+        </div>
+      ) : (
+        <TrackAnchor
+          href={mailto(subject)}
+          event="email_click"
+          data={{ from: 'contact', intent }}
+          className="hero-cta-primary"
+        >
+          Email me →
+        </TrackAnchor>
+      )}
     </div>
   )
 }

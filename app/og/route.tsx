@@ -14,8 +14,8 @@ function excerpt(value: string, limit: number) {
 export async function GET(request: Request) {
   const params = new URL(request.url).searchParams
   const title = excerpt(params.get('title') || 'Wiel Zouantcha', 150)
-  const summary = excerpt(params.get('summary') || 'Software Engineer | Product, Data & AI', 205)
-  const tag = excerpt(params.get('tag') || 'Personal index', 48)
+  const summary = excerpt(params.get('summary') || 'Full-Stack Software Engineer · React / TypeScript / Node.js', 205)
+  const tag = excerpt(params.get('tag') || 'Full-Stack Software Engineer', 48)
   return new ImageResponse(
     <div style={{ display: 'flex', flexDirection: 'column', width: '100%', height: '100%', padding: '48px 60px', background: '#ffffff', color: '#181818', fontFamily: 'IBM Plex Sans' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingBottom: 27, borderBottom: '1px solid #d9dbe4' }}>
@@ -28,8 +28,8 @@ export async function GET(request: Request) {
         <div style={{ display: 'flex', fontSize: 25, lineHeight: 1.4, color: '#545454', marginTop: 25, maxWidth: 1000 }}>{summary}</div>
       </div>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: 22, borderTop: '1px solid #d9dbe4', color: '#626262', fontSize: 17 }}>
-        <span>Product, data & applied AI</span>
-        <span style={{ color: '#2948ff' }}>Work / research / notes</span>
+        <span>React · TypeScript · Node.js</span>
+        <span style={{ color: '#2948ff' }}>zouantcha.com</span>
       </div>
     </div>,
     {

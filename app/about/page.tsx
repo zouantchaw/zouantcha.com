@@ -61,6 +61,12 @@ export default function Page() {
         >
           View case studies →
         </Link>
+        <Link
+          href={site.resumePage}
+          className="underline decoration-line underline-offset-4 hover:decoration-ink"
+        >
+          Résumé
+        </Link>
         <a
           href={mailto()}
           className="underline decoration-line underline-offset-4 hover:decoration-ink"

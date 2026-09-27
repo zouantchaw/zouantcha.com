@@ -7,7 +7,7 @@ import { pickAttribution, withAttribution } from 'app/lib/field-notes'
 import { site } from 'app/lib/site'
 import { startCopy, startProof } from 'app/lib/start'
 
-const title = 'Wiel Zouantcha — Software, AI & Real Businesses'
+const title = 'Wiel Zouantcha · Software, AI & Real Businesses'
 const description =
   'Software engineer and operator documenting what I build, test and learn across software, AI and real businesses.'
 
