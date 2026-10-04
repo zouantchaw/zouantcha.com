@@ -94,7 +94,7 @@ try {
   await caseStudy.click()
   const caseEvents = await recorded('case_study_click')
   assert.equal(caseEvents.length > 0, true, 'case_study_click')
-  assert.equal(caseEvents[0][1].data.case_study, 'mtl-archives')
+  assert.equal(caseEvents[0][1].data.case_study, 'diane-party-rentals')
 
   await page.locator('#field-notes-email').fill(unique)
   await page.getByRole('button', { name: 'Join Field Notes' }).click()
@@ -112,7 +112,7 @@ try {
     'field_notes_signup_success',
   )
 
-  const intro = page.getByRole('link', { name: 'Project / collaboration intro' })
+  const intro = page.getByRole('link', { name: 'Discuss your workflow', exact: true })
   assert.equal(await intro.getAttribute('href'), 'https://cal.com/wielfried/intro')
   assert.equal(await intro.getAttribute('target'), '_blank')
   await intro.evaluate((el) => {
