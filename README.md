@@ -17,6 +17,13 @@ The local site runs at `http://localhost:3000`.
 pnpm build
 ```
 
+## Production
+
+GitHub's default branch and Vercel's production branch are `main`.
+After verifying a frontend change, push to `main` to build and deploy
+`www.zouantcha.com`. The `/start` page links to the Workflow Review at
+`https://cal.com/wielfried/intro`; keep this booking URL stable.
+
 ## Field Notes
 
 `/start` collects email addresses for Field Notes. Addresses are stored in Cloudflare D1 through a private Worker. The subscriber list is never exposed on the site.
