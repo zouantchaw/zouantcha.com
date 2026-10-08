@@ -1,6 +1,6 @@
 'use client'
 
-import { track } from '@vercel/analytics'
+import { track } from 'app/lib/analytics'
 
 export function CaseStudyDownload({ slug, title }: { slug: string; title: string }) {
   return (

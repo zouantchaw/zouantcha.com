@@ -1,5 +1,4 @@
-import fs from 'fs'
-import path from 'path'
+import { posts, frenchPosts } from './generated/index.mjs'
 
 type Metadata = {
   title: string
@@ -12,61 +11,10 @@ type Metadata = {
   sourceTitle?: string
 }
 
-function parseFrontmatter(fileContent: string) {
-  let frontmatterRegex = /---\s*([\s\S]*?)\s*---/
-  let match = frontmatterRegex.exec(fileContent)
-  let frontMatterBlock = match![1]
-  let content = fileContent.replace(frontmatterRegex, '').trim()
-  let frontMatterLines = frontMatterBlock.trim().split('\n')
-  let metadata: Partial<Metadata> = {}
+type Post = {metadata:Metadata;slug:string;content:string}
 
-  frontMatterLines.forEach((line) => {
-    let [key, ...valueArr] = line.split(': ')
-    let value = valueArr.join(': ').trim()
-    value = value.replace(/^['"](.*)['"]$/, '$1') // Remove quotes
-    metadata[key.trim() as keyof Metadata] = value
-  })
-
-  return { metadata: metadata as Metadata, content }
-}
-
-function getMDXFiles(dir) {
-  return fs.readdirSync(dir).filter((file) => path.extname(file) === '.mdx')
-}
-
-function readMDXFile(filePath) {
-  let rawContent = fs.readFileSync(filePath, 'utf-8')
-  return parseFrontmatter(rawContent)
-}
-
-function getMDXData(dir) {
-  if (!fs.existsSync(dir)) {
-    return []
-  }
-  let mdxFiles = getMDXFiles(dir)
-  return mdxFiles.map((file) => {
-    let { metadata, content } = readMDXFile(path.join(dir, file))
-    let slug = path.basename(file, path.extname(file))
-
-    return {
-      metadata,
-      slug,
-      content,
-    }
-  })
-}
-
-export function getBlogPosts() {
-  return getMDXData(path.join(process.cwd(), 'app', 'blog', 'posts'))
-}
-
-export function getBlogPostsByLocale(locale: 'en' | 'fr') {
-  if (locale === 'fr') {
-    return getMDXData(path.join(process.cwd(), 'app', 'blog', 'posts-fr'))
-  }
-
-  return getBlogPosts()
-}
+export function getBlogPosts():Post[]{return posts}
+export function getBlogPostsByLocale(locale:'en'|'fr'):Post[]{return locale==='fr'?frenchPosts:posts}
 
 export function formatDate(date: string, includeRelative = false) {
   let currentDate = new Date()

@@ -1,6 +1,6 @@
 'use client'
 
-import { track } from '@vercel/analytics'
+import { track } from 'app/lib/analytics'
 import { useEffect } from 'react'
 
 export function StartPageView() {

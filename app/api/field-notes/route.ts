@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { getCloudflareContext } from '@opennextjs/cloudflare'
 import {
   FIELD_NOTES_SOURCE,
   clipAttr,
@@ -73,7 +74,9 @@ export async function POST(request: NextRequest) {
   const referrer = clipAttr(payload.referrer, 500)
 
   try {
-    const response = await fetch(new URL('/subscribe', workerUrl), {
+    let worker: CloudflareEnv['FIELD_NOTES_API'] | undefined
+    try { worker=getCloudflareContext().env.FIELD_NOTES_API } catch {}
+    const response = await (worker ? worker.fetch.bind(worker) : fetch)(new URL('/subscribe', workerUrl), {
       method: 'POST',
       headers: {
         Authorization: `Bearer ${secret}`,

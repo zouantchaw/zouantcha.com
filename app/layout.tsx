@@ -26,8 +26,7 @@ const serif = Instrument_Serif({
   display: 'swap',
 })
 
-import { Analytics } from '@vercel/analytics/react'
-import { SpeedInsights } from '@vercel/speed-insights/next'
+import { SiteAnalytics } from './components/site-analytics'
 import { Nav } from './components/nav'
 import Footer from './components/footer'
 import { LocaleAttribute } from './components/locale-attribute'
@@ -111,8 +110,7 @@ export default function RootLayout({
           {children}
         </main>
         <Footer />
-        <Analytics />
-        <SpeedInsights />
+        <SiteAnalytics />
       </body>
     </html>
   )

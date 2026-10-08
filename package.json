@@ -6,24 +6,34 @@
     "start": "next start",
     "export:case-studies": "node scripts/export-case-studies.mjs",
     "field-notes:export": "node scripts/export-field-notes.mjs",
-    "verify:start": "node scripts/verify-start-page.mjs"
+    "verify:start": "node scripts/verify-start-page.mjs",
+    "content:build": "node scripts/build-blog-content.mjs",
+    "predev": "node scripts/build-blog-content.mjs",
+    "prebuild": "node scripts/build-blog-content.mjs",
+    "build:cloudflare": "opennextjs-cloudflare build",
+    "deploy:cloudflare": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
+    "deploy:cloudflare:built": "opennextjs-cloudflare deploy",
+    "deploy:field-notes": "wrangler deploy --config workers/field-notes/wrangler.jsonc",
+    "typecheck": "node scripts/build-blog-content.mjs && tsc --noEmit"
   },
   "dependencies": {
+    "@opennextjs/cloudflare": "1.20.9",
     "@tailwindcss/postcss": "4.0.0-alpha.13",
     "@types/node": "20.11.17",
     "@types/react": "19.2.17",
     "@types/react-dom": "19.2.3",
-    "@vercel/analytics": "^1.1.3",
-    "@vercel/speed-insights": "^1.0.9",
     "geist": "1.7.2",
-    "next": "16.2.10",
-    "next-mdx-remote": "^6.0.0",
+    "next": "16.3.8",
     "postcss": "^8.4.35",
     "react": "19.2.7",
     "react-dom": "19.2.7",
     "remark-gfm": "^4.0.1",
     "sugar-high": "^0.6.0",
     "tailwindcss": "4.0.0-alpha.13",
-    "typescript": "5.3.3"
+    "typescript": "5.3.3",
+    "wrangler": "4.148.0"
+  },
+  "devDependencies": {
+    "@mdx-js/mdx": "3.1.1"
   }
 }

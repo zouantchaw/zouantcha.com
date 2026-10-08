@@ -12,7 +12,7 @@ try {
   for (const slug of slugs) {
     const page = await browser.newPage({ viewport: { width: 1000, height: 900 }, reducedMotion: 'reduce' })
     // Exports should not register analytics visits.
-    await page.route(/seline|vercel-insights|_vercel\/insights/, route => route.abort())
+    await page.route('**/api/events', route => route.abort())
     await page.goto(`${base}/case-studies/${slug}`, { waitUntil: 'networkidle' })
     await page.locator('.case-essay h1').waitFor()
     // Activate lazy figures before printing their static state.

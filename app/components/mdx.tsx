@@ -1,9 +1,8 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { MDXRemote } from 'next-mdx-remote/rsc'
+import { posts, frenchPosts } from 'app/blog/generated/index.mjs'
 import { highlight } from 'sugar-high'
 import React from 'react'
-import remarkGfm from 'remark-gfm'
 
 function Table({ data }) {
   let headers = data.headers.map((header, index) => (
@@ -101,15 +100,8 @@ let components = {
 }
 
 export function CustomMDX(props) {
-  return (
-    <MDXRemote
-      {...props}
-      components={{ ...components, ...(props.components || {}) }}
-      options={{
-        mdxOptions: {
-          remarkPlugins: [remarkGfm],
-        },
-      }}
-    />
-  )
+  const post = [...posts, ...frenchPosts].find(post => post.content === props.source)
+  if (!post) throw new Error('Published MDX content was not compiled before the build')
+  const Content = post.Component
+  return <Content components={{...components,...(props.components||{})}} />
 }
