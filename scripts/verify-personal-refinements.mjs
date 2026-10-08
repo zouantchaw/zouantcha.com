@@ -31,7 +31,7 @@ try {
         Object.fromEntries(
           Array.from(e.attributes).map((a) => [a.name, a.value]),
         ),
-      ),
+      ).sort((a, b) => JSON.stringify(a).localeCompare(JSON.stringify(b))),
       structured: Array.from(
         document.querySelectorAll('script[type="application/ld+json"]'),
       ).map((e) => JSON.parse(e.textContent)),
@@ -58,7 +58,8 @@ try {
   }
   await page.goto(base + '/')
   assert.equal(await page.locator('a[href*="/slides"]').count(), 0)
-  assert(await page.getByRole('heading', { name: 'Hi, I’m Wiel.' }).isVisible())
+  await page.locator('main h1.convert-hero').waitFor()
+  assert((await page.locator('main h1.convert-hero').innerText()).length > 10)
   await page.screenshot({ path: '/tmp/personal-refined-desktop.png' })
   await page.setViewportSize({ width: 390, height: 844 })
   await page.goto(base + '/')

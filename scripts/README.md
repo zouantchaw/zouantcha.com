@@ -15,12 +15,23 @@ The export keeps article text, images, source links, and the initial state of in
 
 ## Tracking and verification
 
-`case_study_pdf_download` is a Vercel Analytics custom event with the `case_study` slug. It measures activation of the article's download link, not completed reading or saving. Direct requests to the PDF URL are not counted. It sends no personal data. The native download remains available when JavaScript or analytics is blocked.
+`case_study_pdf_download` goes to the site's `/api/events` endpoint and then its
+isolated Cloudflare Analytics Engine dataset, with the `case_study` slug. It
+measures link activation, not completed reading or saving. Direct PDF requests
+are not counted. No personal data is sent. Native downloads remain available
+when JavaScript or analytics is blocked.
 
-Run `node scripts/verify-case-study-downloads.mjs` with the local site running. This downloads all four PDFs, verifies filenames, spies on the Vercel event call without sending test events, and checks that tracking failure does not block a download.
+Run `SITE_URL=https://your-candidate-host node scripts/verify-case-study-downloads.mjs`.
+It downloads four PDFs, checks filenames, intercepts native event requests without
+sending test events, and checks that failed analytics does not block downloads.
 
-Custom events must be supported by the deployed Vercel project's plan. Check its Web Analytics Events panel after deployment; localhost verification does not establish production ingestion.
+Use the Cloudflare Analytics Engine SQL API to verify production ingestion:
 
-References:
-- https://vercel.com/docs/analytics/custom-events
-- https://vercel.com/docs/analytics/quickstart
+```sql
+SELECT blob1 AS event, count() AS rows
+FROM zouantcha_site_events GROUP BY event FORMAT JSON
+```
+
+The schema stores event, path, safe property JSON, event count and optional web-vital
+value. It excludes query strings, signup emails and visitor identifiers. See the
+[Cloudflare runbook](../docs/cloudflare-deployment.md) for deployment and acceptance.

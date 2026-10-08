@@ -1,6 +1,6 @@
 'use client'
 
-import { track } from '@vercel/analytics'
+import { track } from 'app/lib/analytics'
 import { FIELD_NOTES_SOURCE, type FieldNotesAttribution } from 'app/lib/field-notes'
 import { startCopy } from 'app/lib/start'
 import { useState, type FormEvent } from 'react'

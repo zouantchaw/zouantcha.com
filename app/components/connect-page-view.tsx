@@ -1,7 +1,7 @@
 'use client'
 
 import { storedSrc } from './source-capture'
-import { track } from '@vercel/analytics'
+import { track } from 'app/lib/analytics'
 import { useEffect } from 'react'
 
 export function ConnectPageView() {

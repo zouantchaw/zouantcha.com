@@ -2,7 +2,7 @@ import assert from 'node:assert/strict'
 import { chromium } from 'playwright'
 
 const base = process.env.SITE_URL || 'http://localhost:3000'
-const unique = `field-notes-test-${Date.now()}@example.com`
+const unique = process.env.FIELD_NOTES_TEST_EMAIL || `zouantchaw74+fieldnotes-${Date.now()}@gmail.com`
 const browser = await chromium.launch({
   headless: true,
   executablePath: process.env.CHROMIUM_PATH,
@@ -22,24 +22,12 @@ try {
   const page = await browser.newPage()
   const errors = []
   page.on('pageerror', (error) => errors.push(error.message))
-  await page.addInitScript(() => {
-    const record = (...args) => {
-      const all = JSON.parse(sessionStorage.getItem('startEvents') || '[]')
-      all.push(args)
-      sessionStorage.setItem('startEvents', JSON.stringify(all))
+  const analyticsEvents=[]
+  page.on('request', request=>{
+    if(request.url().endsWith('/api/events')&&request.method()==='POST'){
+      const event=request.postDataJSON()
+      analyticsEvents.push(['event',{name:event.event,data:event.data}])
     }
-    const wrap = () => {
-      const current = window.va
-      if (current && current.__startWrapped) return
-      const wrapped = (...args) => {
-        record(...args)
-        if (typeof current === 'function') current(...args)
-      }
-      wrapped.__startWrapped = true
-      window.va = wrapped
-    }
-    wrap()
-    setInterval(wrap, 20)
   })
 
   for (const width of [390, 768, 1440]) {
@@ -77,11 +65,7 @@ try {
   await page.goto(`${base}/start?utm_source=instagram&utm_medium=social&utm_campaign=90day`, {
     waitUntil: 'networkidle',
   })
-  const recorded = async (name) =>
-    page.evaluate((eventName) => {
-      const events = JSON.parse(sessionStorage.getItem('startEvents') || '[]')
-      return events.filter((event) => event[0] === 'event' && event[1]?.name === eventName)
-    }, name)
+  const recorded = async (name) => analyticsEvents.filter(event=>event[1].name===name)
 
   const viewEvents = await recorded('start_page_view')
   assert.equal(viewEvents.length > 0, true, 'start_page_view')
@@ -100,7 +84,7 @@ try {
   await page.getByRole('button', { name: 'Join Field Notes' }).click()
   await page.locator('.start-success').waitFor()
   assert.match(await page.locator('.start-success').textContent(), /You're in/)
-  const signupEvents = await page.evaluate(() => JSON.parse(sessionStorage.getItem('startEvents') || '[]'))
+  const signupEvents = analyticsEvents
   assert.equal(
     signupEvents.some((event) => event[1]?.name === 'field_notes_signup_attempt'),
     true,

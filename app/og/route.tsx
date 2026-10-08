@@ -1,10 +1,19 @@
 import { ImageResponse } from 'next/og'
 import { readFile } from 'node:fs/promises'
 import path from 'node:path'
+import { getCloudflareContext } from '@opennextjs/cloudflare'
 
 export const runtime = 'nodejs'
-const sans = readFile(path.join(process.cwd(), 'app/og/fonts/IBMPlexSans-Regular.ttf'))
-const serif = readFile(path.join(process.cwd(), 'app/og/fonts/InstrumentSerif-Regular.ttf'))
+async function font(name: string) {
+  let assets:CloudflareEnv['ASSETS']|undefined
+  try { assets=getCloudflareContext().env.ASSETS } catch {}
+  if(assets){
+    const response=await assets.fetch('https://www.zouantcha.com/og-fonts/'+name)
+    if(!response.ok)throw new Error('OG font asset unavailable')
+    return response.arrayBuffer()
+  }
+  return readFile(path.join(process.cwd(),'app/og/fonts',name))
+}
 
 // Bound public query parameters so unusually long shared URLs cannot overflow the card.
 function excerpt(value: string, limit: number) {
@@ -34,7 +43,7 @@ export async function GET(request: Request) {
     </div>,
     {
       width: 1200, height: 630,
-      fonts: [{ name: 'IBM Plex Sans', data: await sans, weight: 400, style: 'normal' }, { name: 'Instrument Serif', data: await serif, weight: 400, style: 'normal' }],
+      fonts: [{ name: 'IBM Plex Sans', data: await font('IBMPlexSans-Regular.ttf'), weight: 400, style: 'normal' }, { name: 'Instrument Serif', data: await font('InstrumentSerif-Regular.ttf'), weight: 400, style: 'normal' }],
       headers: { 'Cache-Control': 'public, max-age=86400, s-maxage=604800, stale-while-revalidate=86400' },
     },
   )
