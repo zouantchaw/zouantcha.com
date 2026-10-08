@@ -2,11 +2,16 @@
 
 ## Migration state
 
-As of October 8, 2026, `zouantcha-site` is a verified migration candidate at
-`https://zouantcha-site.wiel.workers.dev`. Production remains on the previous
-host until the GoDaddy nameserver change activates the prepared Cloudflare zone.
-Do not retire the previous production project or disable the Field Notes legacy
-hostname before its caller has moved.
+As of October 8, 2026, production runs on Cloudflare at `www.zouantcha.com`
+and `zouantcha.com` (308 to www). The existing Field Notes API runs at
+`api.zouantcha.com`; site-to-API calls use the existing service binding and D1.
+Both production Workers explicitly disable workers.dev and version previews.
+The scoped previous host project has been retired after production acceptance.
+
+GoDaddy now delegates DNS to `arely.ns.cloudflare.com` and
+`mark.ns.cloudflare.com`. Registrar transfer is separate: GoDaddy requests an
+additional SMS verification before transfer eligibility/code can be inspected.
+No transfer purchase or charge has been initiated.
 
 The original production source is commit `8ac3ade365999d550a4b5dea1db7b1a4c8797d4a`.
 The detailed DNS export, source references and acceptance artifacts are in the
@@ -23,11 +28,18 @@ Cloudflare account: `lovethegame`, `0bb05130da965c096b12cc1f0637f763`.
 | Field Notes | Existing `zouantcha-field-notes` | Existing D1 `c47d87c8-911e-4330-a59b-bd4f817a69a9`, existing `INGEST_SECRET` |
 | Internal signup | Site `FIELD_NOTES_API` | Service binding to the existing Worker; server `FIELD_NOTES_INGEST_SECRET` |
 
-The intended owned site hosts are `www.zouantcha.com` and `zouantcha.com`; apex
-redirects to www with path and query intact. The intended Field Notes API host
-is `api.zouantcha.com`. Configure explicit `workers_dev: false` and
-`preview_urls: false` after owned hosts work and all existing callers have moved.
-The temporary candidate hostname has only this migration purpose.
+Owned production site hosts are `www.zouantcha.com` and `zouantcha.com`; apex
+redirects to www with path and query intact. The Field Notes API host is
+`api.zouantcha.com`. Both Wrangler configurations persist `workers_dev: false`
+and `preview_urls: false`.
+
+`migration.zouantcha.com` remains temporarily attached only as a DNS transition
+bridge. The former authoritative provider has a www CNAME to that owned host and
+an apex A record to the verified Cloudflare edge. Retain these only until the
+former parent delegation TTL (172800 seconds) has expired, conservatively after
+October 10, 2026 at 18:10 UTC. Then remove those two scoped bridge records and the
+owned migration route. Do not remove unrelated former-provider records or the
+separate TCP project.
 
 Keep `pay`, `tcp` and `wiel` DNS records: they serve independent services. In
 particular, `tcp.zouantcha.com` belongs to a separate employee QA project and is
@@ -86,12 +98,11 @@ duplicate handling, invalid email, honeypot, service binding and native events.
 The controlled signup fixture is retained as acceptance evidence, with exactly
 one subscriber row. No customer email, booking, purchase or charge was triggered.
 
-After the zone becomes active, add an owned candidate hostname and repeat the
-critical acceptance there. Prepare temporary old-nameserver records if cached
-delegation still needs them. Attach the owned production site and API domains,
-update remaining development/production caller URLs, disable alternate ingress,
-and verify valid TLS, redirects, sitemap/robots/canonical, signup and analytics.
-Only then retire the scoped previous production project and merge final source.
+Production acceptance repeats the phone, exact whitepaper, PDF, signup, download,
+metadata and native analytics checks on the final www domain. Valid TLS and
+native OpenNext responses are verified on the owned hosts. Google mail, CAA,
+pay/TCP/Wiel records remain intact. The obsolete wildcard web record is removed;
+TCP's separate verification record remains.
 
 ```sh
 npm ci --prefix scripts

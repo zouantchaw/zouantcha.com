@@ -20,7 +20,8 @@ pnpm build
 ## Production
 
 Cloudflare deployment commands are explicit; pushing to `main` alone does not deploy.
-The migration candidate is verified, with the production DNS cutover still pending registrar access.
+Production runs on `www.zouantcha.com` with the Field Notes API at `api.zouantcha.com`.
+DNS is hosted on Cloudflare; both production Workers disable workers.dev and public previews.
 See [the Cloudflare runbook](docs/cloudflare-deployment.md) for resources, deployment,
 acceptance and rollback. The `/start` page links to the Workflow Review at
 `https://cal.com/wielfried/intro`; keep this booking URL stable.
