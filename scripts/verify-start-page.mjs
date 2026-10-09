@@ -96,7 +96,7 @@ try {
     'field_notes_signup_success',
   )
 
-  const intro = page.getByRole('link', { name: 'Discuss your workflow', exact: true })
+  const intro = page.getByRole('link', { name: 'Book a 20-minute review', exact: true })
   assert.equal(await intro.getAttribute('href'), 'https://cal.com/wielfried/intro')
   assert.equal(await intro.getAttribute('target'), '_blank')
   await intro.evaluate((el) => {

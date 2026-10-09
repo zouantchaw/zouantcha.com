@@ -1,8 +1,8 @@
 export const startCopy = {
-  eyebrow: 'Software Engineer · Operator',
-  headline: 'Make running your business easier with useful software and AI.',
-  body: 'I help business owners improve the workflows behind their work—from quotes and bookings to internal tools and team handoffs. See real projects, or bring one awkward task and we can discuss what would help.',
-  primaryCta: 'Discuss your workflow',
+  eyebrow: 'AI Engineer',
+  headline: "Your AI demo works. Let's make it dependable.",
+  body: 'I help founders and business owners turn AI prototypes and ideas into systems they can rely on: connected to real data, tested against real cases, with a person in the loop where it matters. See real builds, or bring the thing that keeps breaking.',
+  primaryCta: 'Book a 20-minute review',
   secondaryCta: 'See real projects',
   note: 'Start with one practical problem from your business.',
   workHeading: 'A real business workflow',
@@ -18,7 +18,7 @@ export const startCopy = {
   workWithMeHeading: 'How working together starts',
   workWithMeBody:
     'Bring one repeated task, awkward handoff, or internal tool that needs attention. In a 20-minute Workflow Review, we will look at how it works today and what a useful improvement would change. If there is a sensible software or AI project, I will follow up with a scoped paid proposal. Substantial discovery and implementation are scoped separately.',
-  workWithMeCta: 'Discuss your workflow →',
+  workWithMeCta: 'Book a 20-minute review →',
   projectIntroHref: 'https://cal.com/wielfried/intro',
 }
 
