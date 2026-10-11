@@ -6,7 +6,7 @@ import { site } from 'app/lib/site'
 
 export const metadata = pageMetadata({
   title: 'Résumé',
-  description: `Résumé for ${site.name}, ${site.title}. Download the PDF or read it here.`,
+  description: `Résumé for ${site.name}, ${site.resumeTitle}. Download the PDF or read it here.`,
   path: '/resume',
   section: 'Résumé',
 })
@@ -19,7 +19,7 @@ export default function Page() {
         <div>
           <p className="eyebrow">Résumé</p>
           <h1>{site.name}</h1>
-          <p className="resume-lede">{site.title}</p>
+          <p className="resume-lede">{site.resumeTitle}</p>
         </div>
         <div className="resume-actions">
           <ResumeDownload from="resume_page" className="hero-cta-primary">

@@ -7,7 +7,7 @@ import { withSrc } from 'app/lib/source'
 
 const title = `${site.name} · Connect`
 const description =
-  'Software engineer building production software across full-stack systems, data and applied AI. Open to engineering roles and select consulting.'
+  'Software and AI engineer building for businesses that already make money, one fixed-price phase at a time.'
 
 export const metadata = {
   ...pageMetadata({

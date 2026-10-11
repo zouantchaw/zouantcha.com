@@ -1222,7 +1222,7 @@ export const work: WorkItem[] = [
           {
             "kind": "rich-p",
             "parts": [
-              "If you are building an evaluation system, applying models to a specific domain, or hiring a software engineer who works across research and implementation, ",
+              "If you are building an evaluation system or applying models to a specific domain, ",
               {
                 "label": "I’d be happy to talk",
                 "href": "/contact"
@@ -1529,7 +1529,7 @@ export const work: WorkItem[] = [
           {
             "kind": "rich-p",
             "parts": [
-              "If you’re hiring a software engineer or have an operational problem like this, ",
+              "If you have an operational problem like this, ",
               {
                 "label": "I’d be happy to talk",
                 "href": "/contact",
@@ -1786,7 +1786,7 @@ export const work: WorkItem[] = [
           {
             "kind": "rich-p",
             "parts": [
-              "This is the kind of product work I enjoy: following a real task through the interface and the system behind it. If you are building something similar or hiring a software engineer, ",
+              "This is the kind of product work I enjoy: following a real task through the interface and the system behind it. If you are building something similar, ",
               {
                 "label": "I’d be happy to talk",
                 "href": "/contact",

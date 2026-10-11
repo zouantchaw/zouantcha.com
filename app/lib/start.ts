@@ -1,7 +1,7 @@
 export const startCopy = {
-  eyebrow: 'AI Engineer',
+  eyebrow: 'Software & AI Engineer',
   headline: "Your AI demo works. Let's make it dependable.",
-  body: 'I help founders and business owners turn AI prototypes and ideas into systems they can rely on: connected to real data, tested against real cases, with a person in the loop where it matters. See real builds, or bring the thing that keeps breaking.',
+  body: 'I build software and AI for businesses that already make money: connected to your real data, tested against real cases, with a person in the loop where it matters. See real builds, or bring the thing that keeps breaking.',
   primaryCta: 'Book a 20-minute review',
   secondaryCta: 'See real projects',
   note: 'Start with one practical problem from your business.',
@@ -17,7 +17,7 @@ export const startCopy = {
   consent: 'By subscribing, you agree to receive Field Notes by email. Unsubscribe anytime.',
   workWithMeHeading: 'How working together starts',
   workWithMeBody:
-    'Bring one repeated task, awkward handoff, or internal tool that needs attention. In a 20-minute Workflow Review, we will look at how it works today and what a useful improvement would change. If there is a sensible software or AI project, I will follow up with a scoped paid proposal. Substantial discovery and implementation are scoped separately.',
+    'Bring one workflow that costs you time, customers or money. In a free 20-minute review, we look at how it runs today. If there is a project worth doing, I send a fixed-price Phase 1: a working first piece in 2–6 weeks, built on your accounts and tested against real cases, plus a priced plan for what comes next. Phase 1 starts at $5,000.',
   workWithMeCta: 'Book a 20-minute review →',
   projectIntroHref: 'https://cal.com/wielfried/intro',
 }

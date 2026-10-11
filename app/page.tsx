@@ -9,7 +9,7 @@ import {
   site,
 } from 'app/lib/site'
 import { ContinueReading } from 'app/components/continue-reading'
-import { TrackLink } from 'app/components/track-link'
+import { TrackAnchor, TrackLink } from 'app/components/track-link'
 import Link from 'next/link'
 import Image from 'next/image'
 
@@ -18,7 +18,7 @@ const homeMetadata = pageMetadata({
   title: homeTitle,
   description: site.description,
   path: '',
-  section: 'Full-Stack Software Engineer',
+  section: 'Software & AI Engineer',
 })
 
 export const metadata = {
@@ -30,10 +30,10 @@ export const metadata = {
     description: site.title,
     images: [
       {
-        url: shareImage(site.name, site.title, 'Full-Stack Software Engineer'),
+        url: shareImage(site.name, site.title, 'Software & AI Engineer'),
         width: 1200,
         height: 630,
-        alt: `${site.name} | Full-Stack Software Engineer`,
+        alt: `${site.name} | Software & AI Engineer`,
         type: 'image/png',
       },
     ],
@@ -53,17 +53,19 @@ export default function Page() {
             <span>{homeHero.availability}</span>
           </p>
           <div className="hero-actions">
-            <a href="#selected-work" className="hero-cta-primary">
-              View my work <span aria-hidden="true">→</span>
-            </a>
-            <TrackLink
-              href={site.resumePage}
-              event="resume_click"
-              data={{ from: 'home_hero' }}
-              className="hero-cta-secondary"
+            <TrackAnchor
+              href={homeHero.reviewHref}
+              event="project_intro_click"
+              data={{ source_page: 'home', destination: 'cal.com/wielfried/intro', placement: 'hero' }}
+              className="hero-cta-primary"
+              target="_blank"
+              rel="noopener noreferrer"
             >
-              Résumé
-            </TrackLink>
+              Book a 20-minute review <span aria-hidden="true">→</span>
+            </TrackAnchor>
+            <a href="#selected-work" className="hero-cta-secondary">
+              View my work
+            </a>
             <TrackLink
               href="/contact"
               event="email_click"
@@ -91,7 +93,7 @@ export default function Page() {
             </Link>
           </div>
           <h2>Wiel Zouantcha</h2>
-          <p>Based in Washington, DC.</p>
+          <p>{site.location}</p>
         </aside>
       </header>
 
@@ -176,21 +178,23 @@ export default function Page() {
         <h2 id="availability-heading">{availabilityCta.title}</h2>
         <p>{availabilityCta.body}</p>
         <div className="availability-actions">
-          <TrackLink
-            href={availabilityCta.role.href}
-            event="contact_role_click"
-            data={{ from: 'home' }}
+          <TrackAnchor
+            href={availabilityCta.primary.href}
+            event="project_intro_click"
+            data={{ source_page: 'home', destination: 'cal.com/wielfried/intro', placement: 'closing' }}
             className="hero-cta-primary"
+            target="_blank"
+            rel="noopener noreferrer"
           >
-            {availabilityCta.role.label}
-          </TrackLink>
+            {availabilityCta.primary.label}
+          </TrackAnchor>
           <TrackLink
-            href={availabilityCta.project.href}
+            href={availabilityCta.secondary.href}
             event="contact_project_click"
-            data={{ from: 'home' }}
+            data={{ from: 'home', destination: 'start' }}
             className="hero-cta-secondary"
           >
-            {availabilityCta.project.label}
+            {availabilityCta.secondary.label}
           </TrackLink>
         </div>
       </section>

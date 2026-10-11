@@ -1,9 +1,10 @@
 export const site = {
   name: 'Wiel Zouantcha',
   formalName: 'Wielfried Zouantcha',
-  title: 'Full-Stack Software Engineer · React / TypeScript / Node.js',
-  headline: 'I build production software from ambiguous problems.',
-  location: 'Washington, DC',
+  title: 'Software & AI Engineer',
+  resumeTitle: 'Full-Stack Software Engineer · React / TypeScript / Node.js',
+  headline: 'I build software and AI for businesses that already make money.',
+  location: 'Remote · US, Canada and Europe',
   email: 'zouantchaw74@gmail.com',
   github: 'https://github.com/zouantchaw',
   x: 'https://twitter.com/love_thegame_',
@@ -13,21 +14,21 @@ export const site = {
   resumeDownload: '/wielfried-zouantcha-resume.pdf',
   resumeFilename: 'wielfried-zouantcha-resume.pdf',
   description:
-    'Full-stack engineer with 5+ years shipping SaaS products, integrations, data systems, and applied AI. I work from customer and product requirements through frontend, APIs, data, deployment, and production iteration.',
+    'Software and AI engineer with 5+ years of production experience. I build for businesses that already make money, one fixed-price phase at a time: connected to real data, tested against real cases, and running on the client’s own accounts.',
   socialDescription:
-    'Full-Stack Software Engineer · React / TypeScript / Node.js. 5+ years shipping production SaaS, integrations, data systems and applied AI.',
+    'Software & AI Engineer. I build software and AI for businesses that already make money, one fixed-price phase at a time.',
 }
 
 export const nav = [
   { href: '/work', label: 'Work' },
   { href: '/about', label: 'About' },
   { href: '/blog', label: 'Writing' },
-  { href: '/resume', label: 'Résumé' },
+  { href: '/start', label: 'Work with me' },
   { href: '/contact', label: 'Contact' },
 ]
 
 export const intro = {
-  eyebrow: 'Full-Stack Software Engineer · React / TypeScript / Node.js',
+  eyebrow: 'Software & AI Engineer',
   title: 'What I do',
   body: [
     'I work at the intersection of design, engineering, and operations. Developing the product, shaping brand and interface, and taking ambitious projects from the first sketch to the finished thing.',
@@ -67,8 +68,8 @@ export const record = [
 export const about = {
   eyebrow: 'Get to know me',
   body: [
-    'I’m Wiel Zouantcha, a software engineer working across product, data and applied AI, based in Washington, DC.',
-    'I came into software without a conventional computer-science path and learned by building. At SaaS Alerts, production integrations taught me to work with inconsistent data and incomplete documentation. I later spent three and a half years at Ethos working across commerce and merchant software. Today, I combine full-stack development and customer engineering at Oloodi.',
+    'I’m Wiel Zouantcha, a software engineer working across product, data and applied AI. I work remotely with clients in the US, Canada and Europe.',
+    'I came into software without a conventional computer-science path and learned by building. At SaaS Alerts, production integrations taught me to work with inconsistent data and incomplete documentation. I later spent three and a half years at Ethos working across commerce and merchant software. Most recently, I combined full-stack development and customer engineering at Oloodi. Now I work independently, building software and AI for businesses one fixed-price phase at a time.',
     'I don’t always start with a product in mind. Browsing Montréal’s public datasets led to MTL Archives. Collecting observations of the port led to PortMind and questions about how to evaluate vision models. Working with Diane Party Rentals meant following a booking beyond checkout to the equipment, crew and customer waiting for it.',
     'Building gives me a way to stay with a question. I can follow it into the data, make something someone can use, and find out where my understanding was incomplete.',
   ],
@@ -135,24 +136,24 @@ export const experience: Experience[] = [
     company: 'Oloodi Technologies',
     href: 'https://oloodi.com/',
     role: 'Customer Engineer / Full-Stack Engineer · Contract',
-    period: 'November 2025–present',
+    period: 'November 2025–October 2026',
     body: [
-      'At Oloodi, I work on KROW Workforce, which connects staffing companies, their clients and the people working each shift. My role combines building the product with helping people understand how it fits their operation.',
-      'I work across staffing workflows and give product demos to teams including Snapchat, Google, EA Sports and Nvidia. That puts me close to both the implementation and the questions people ask when they first use it.',
+      'At Oloodi, I worked on KROW Workforce, which connects staffing companies, their clients and the people working each shift. My role combined building the product with helping people understand how it fits their operation.',
+      'I worked across staffing workflows and gave product demos to teams including Snapchat, Google, EA Sports and Nvidia. That put me close to both the implementation and the questions people ask when they first use it.',
     ],
     sections: [
       {
         title: 'Following the staffing order',
         body: [
-          'A staffing request moves between the client, the staffing company and the worker. I work on the steps between them: onboarding, shift assignments, certifications, time tracking and invoicing. A change in one part of that process often has consequences somewhere else.',
-          'My engineering work spans the React and TypeScript portal and its backend services. I work with the team on the interface and the underlying records, so the workflow someone sees agrees with what the system has stored.',
+          'A staffing request moves between the client, the staffing company and the worker. I worked on the steps between them: onboarding, shift assignments, certifications, time tracking and invoicing. A change in one part of that process often has consequences somewhere else.',
+          'My engineering work spanned the React and TypeScript portal and its backend services. I worked with the team on the interface and the underlying records, so the workflow someone sees agrees with what the system has stored.',
         ],
       },
       {
         title: 'Showing the product in someone else’s context',
         body: [
-          'For a demo, I prepare the walkthrough around how that team would use the product: requesting staff, checking attendance and reviewing invoices. I have presented to teams at Snapchat, Google, EA Sports and Nvidia.',
-          'Customer engineering gives me another way to examine the product. If a step is hard to explain, or someone expects it to work differently, I can take that question back into the implementation with the team.',
+          'For a demo, I prepared the walkthrough around how that team would use the product: requesting staff, checking attendance and reviewing invoices. I have presented to teams at Snapchat, Google, EA Sports and Nvidia.',
+          'Customer engineering gave me another way to examine the product. If a step was hard to explain, or someone expected it to work differently, I could take that question back into the implementation with the team.',
         ],
       },
     ],
@@ -236,36 +237,32 @@ export const experience: Experience[] = [
 
 export const contact = {
   title: 'Let’s talk.',
-  hiring: {
-    title: 'Hiring?',
-    body: 'I’m exploring full-time software engineering opportunities across product, full-stack, forward-deployed and applied-AI work.',
-    subject: 'Software engineering role',
-  },
   project: {
-    title: 'Building?',
-    body: 'I take on selected consulting projects involving product engineering, internal systems, data pipelines and AI-enabled workflows.',
+    title: 'Start with a 20-minute review',
+    body: 'Bring one workflow that costs you time, customers or money. We look at how it runs today. If there is a project worth doing, I send a fixed-price Phase 1 proposal. Phase 1 starts at $5,000.',
     subject: 'Project inquiry',
   },
+  reviewHref: 'https://cal.com/wielfried/intro',
   intents: {
     role: {
       title: 'Let’s talk about a role.',
-      intro: 'I’m exploring full-time software engineering opportunities across product, full-stack, forward-deployed and applied-AI work.',
+      intro: 'Send me the role and a little about the team.',
       subject: 'Software engineering role',
     },
     project: {
       title: 'Let’s talk about a project.',
-      intro: 'I take on selected consulting projects involving product engineering, internal systems, data pipelines and AI-enabled workflows.',
+      intro: 'Bring one workflow that costs you time, customers or money. If there is a project worth doing, I send a fixed-price Phase 1 proposal. Phase 1 starts at $5,000.',
       subject: 'Project inquiry',
     },
   },
 }
 
 export const homeHero = {
-  eyebrow: 'Full-Stack Software Engineer · React / TypeScript / Node.js',
-  title: 'I build production software from ambiguous problems.',
-  body: 'Full-stack engineer with 5+ years shipping SaaS products, integrations, data systems, and applied AI. I work from customer and product requirements through frontend, APIs, data, deployment, and production iteration.',
-  availability:
-    'Currently exploring full-time engineering opportunities and select consulting engagements.',
+  eyebrow: 'Software & AI Engineer · Independent',
+  title: 'I build software and AI for businesses that already make money.',
+  body: 'One fixed-price phase at a time. Phase 1 is a working first piece in 2–6 weeks, built on your own accounts and tested against real cases, with a priced plan for what comes next. Before this, I spent 5+ years shipping SaaS products, integrations, data systems and applied AI.',
+  availability: 'Taking on a small number of new projects.',
+  reviewHref: 'https://cal.com/wielfried/intro',
 }
 
 export const proof = [
@@ -276,6 +273,16 @@ export const proof = [
 ]
 
 export const selectedWork = [
+  {
+    slug: 'diane-party-rentals',
+    title: 'Diane Party Rentals',
+    problem: 'Turning messy rental operations into software a family business can actually run.',
+    result:
+      'Connected quotes, payments and bookings: $5,032.66 gross processed through Stripe, April–September 2026.',
+    stack: 'Next.js · Stripe · Inventory · Operations',
+    href: '/case-studies/diane-party-rentals',
+    cta: 'Read case study →',
+  },
   {
     slug: 'portmind',
     title: 'PortMind',
@@ -306,16 +313,6 @@ export const selectedWork = [
     href: '/case-studies/mtl-archives',
     cta: 'Read case study →',
   },
-  {
-    slug: 'diane-party-rentals',
-    title: 'Diane Party Rentals',
-    problem: 'Turning messy rental operations into software a family business can actually run.',
-    result:
-      'Connected quotes, payments and bookings: $5,032.66 gross processed through Stripe, April–September 2026.',
-    stack: 'Next.js · Stripe · Inventory · Operations',
-    href: '/case-studies/diane-party-rentals',
-    cta: 'Read case study →',
-  },
 ]
 
 export const capabilities = [
@@ -335,9 +332,16 @@ export const capabilities = [
 
 export const homeExperience = [
   {
+    company: 'Independent',
+    role: 'Software & AI Engineer',
+    period: '2023–',
+    href: '/work/independent',
+    note: 'Turn operational workflows into production software for service businesses, from quoting and inventory to scheduling, payments and internal systems.',
+  },
+  {
     company: 'Oloodi Technologies',
     role: 'Customer Engineer · Contract',
-    period: '2026–',
+    period: '2025–2026',
     href: '/work/oloodi',
   },
   {
@@ -346,13 +350,6 @@ export const homeExperience = [
     period: '2022–2025',
     href: '/work/ethos',
     note: 'Took a single-tenant MVP to a multi-tenant SaaS serving 50+ merchant accounts across Next.js, Node.js and Azure.',
-  },
-  {
-    company: 'Independent',
-    role: 'Engineering Consultant',
-    period: '2023–',
-    href: '/work/independent',
-    note: 'Turn operational workflows into production software for service businesses, from quoting and inventory to scheduling, payments and internal systems.',
   },
   {
     company: 'SaaS Alerts',
@@ -364,19 +361,19 @@ export const homeExperience = [
 
 export const availabilityCta = {
   title: 'Let’s build something useful.',
-  body: 'I’m currently exploring full-time engineering roles where I can work across product, software and applied AI, as well as a small number of consulting engagements.',
-  role: { label: 'Discuss a role →', href: '/contact?intent=role' },
-  project: { label: 'Discuss a project →', href: '/contact?intent=project' },
+  body: 'Bring one workflow that costs you time, customers or money. In a free 20-minute review, we look at how it runs today. If there is a project worth doing, I send a fixed-price Phase 1 proposal. Phase 1 starts at $5,000.',
+  primary: { label: 'Book a 20-minute review →', href: 'https://cal.com/wielfried/intro' },
+  secondary: { label: 'How it works →', href: '/start' },
 }
 
 export const connectCopy = {
-  eyebrow: 'Full-Stack Software Engineer · React / TypeScript / Node.js',
-  body: 'Building production software across full-stack systems, data and applied AI.',
+  eyebrow: 'Software & AI Engineer',
+  body: 'Building software and AI for businesses that already make money, one fixed-price phase at a time.',
   event: 'At Exploit Summit 2026 · Montréal',
   proof: [
     '5+ years engineering',
     'Production SaaS + AI/data systems',
-    'Open to engineering roles + select consulting',
+    'Fixed-price builds for businesses',
   ],
 }
 

@@ -5,7 +5,7 @@ import { contact, mailto, site } from 'app/lib/site'
 
 export const metadata = pageMetadata({
   title: 'Contact',
-  description: `Get in touch with ${site.name} about software engineering roles across product, data and applied AI, or selected consulting projects.`,
+  description: `Get in touch with ${site.name} about a software or AI project. Start with a free 20-minute review.`,
   path: '/contact',
 })
 
@@ -40,10 +40,6 @@ export default async function Page({
       {!intent ? (
         <div className="contact-intents">
           <section>
-            <h2>{contact.hiring.title}</h2>
-            <p>{contact.hiring.body}</p>
-          </section>
-          <section>
             <h2>{contact.project.title}</h2>
             <p>{contact.project.body}</p>
           </section>
@@ -77,33 +73,20 @@ export default async function Page({
         >
           GitHub ↗
         </TrackAnchor>
-        <TrackLink
-          href={site.resumePage}
-          event="resume_click"
-          data={{ from: 'contact' }}
-        >
-          Résumé
-        </TrackLink>
       </div>
 
       {!intent ? (
         <div className="availability-actions">
-          <TrackLink
-            href="/contact?intent=role"
-            event="contact_role_click"
-            data={{ from: 'contact' }}
-            className="hero-cta-secondary"
+          <TrackAnchor
+            href={contact.reviewHref}
+            event="project_intro_click"
+            data={{ source_page: 'contact', destination: 'cal.com/wielfried/intro', placement: 'contact' }}
+            className="hero-cta-primary"
+            target="_blank"
+            rel="noopener noreferrer"
           >
-            Discuss a role →
-          </TrackLink>
-          <TrackLink
-            href="/contact?intent=project"
-            event="contact_project_click"
-            data={{ from: 'contact' }}
-            className="hero-cta-secondary"
-          >
-            Discuss a project →
-          </TrackLink>
+            Book a 20-minute review →
+          </TrackAnchor>
         </div>
       ) : (
         <TrackAnchor

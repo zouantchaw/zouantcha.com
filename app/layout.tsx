@@ -53,11 +53,11 @@ export const metadata: Metadata = {
     siteName: site.name,
     locale: 'en_US',
     type: 'website',
-    images: [{ url: shareImage(site.name, site.title, 'Full-Stack Software Engineer'), width: 1200, height: 630, alt: `${site.name} | Full-Stack Software Engineer` }],
+    images: [{ url: shareImage(site.name, site.title, 'Software & AI Engineer'), width: 1200, height: 630, alt: `${site.name} | Software & AI Engineer` }],
   },
   twitter: {
     card: 'summary_large_image',
-    images: [shareImage(site.name, site.title, 'Full-Stack Software Engineer')],
+    images: [shareImage(site.name, site.title, 'Software & AI Engineer')],
     title: defaultTitle,
     description: site.socialDescription,
   },
@@ -93,7 +93,7 @@ export default function RootLayout({
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
           '@context': 'https://schema.org',
           '@graph': [
-            { '@type': 'Person', '@id': `${baseUrl}/#person`, name: site.name, alternateName: site.formalName, url: baseUrl, jobTitle: 'Full-Stack Software Engineer', description: site.description, image: `${baseUrl}/images/wiel-avatar.jpg`, sameAs: [site.github, site.linkedin, site.x], email: `mailto:${site.email}` },
+            { '@type': 'Person', '@id': `${baseUrl}/#person`, name: site.name, alternateName: site.formalName, url: baseUrl, jobTitle: 'Software & AI Engineer', description: site.description, image: `${baseUrl}/images/wiel-avatar.jpg`, sameAs: [site.github, site.linkedin, site.x], email: `mailto:${site.email}` },
             { '@type': 'WebSite', '@id': `${baseUrl}/#website`, url: baseUrl, name: site.name, description: site.description, publisher: { '@id': `${baseUrl}/#person` } },
           ],
         }).replace(/</g, '\\u003c') }} />
