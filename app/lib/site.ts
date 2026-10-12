@@ -19,14 +19,6 @@ export const site = {
     'Software & AI Engineer. I build software and AI for businesses that already make money, one fixed-price phase at a time.',
 }
 
-export const nav = [
-  { href: '/work', label: 'Work' },
-  { href: '/about', label: 'About' },
-  { href: '/blog', label: 'Writing' },
-  { href: '/start', label: 'Work with me' },
-  { href: '/contact', label: 'Contact' },
-]
-
 export const intro = {
   eyebrow: 'Software & AI Engineer',
   title: 'What I do',
@@ -260,9 +252,9 @@ export const contact = {
 export const homeHero = {
   eyebrow: 'Software & AI Engineer · Independent',
   title: 'I build software and AI for businesses that already make money.',
-  body: 'One fixed-price phase at a time. Phase 1 is a working first piece in 2–6 weeks, built on your own accounts and tested against real cases, with a priced plan for what comes next. Before this, I spent 5+ years shipping SaaS products, integrations, data systems and applied AI.',
+  body: 'Right now I’m putting AI to work in my family’s two businesses, a party rental company and a youth soccer academy, and running two research projects of my own, MTL Archives and PortMind. Before this, I spent 5+ years shipping SaaS products, integrations, data systems and applied AI at SaaS Alerts, Ethos and Oloodi.',
   availability: 'Taking on a small number of new projects.',
-  reviewHref: 'https://cal.com/wielfried/intro',
+  workHref: '/start',
 }
 
 export const proof = [
@@ -284,6 +276,16 @@ export const selectedWork = [
     cta: 'Read case study →',
   },
   {
+    slug: 'ballerz',
+    title: 'Ballerz Football Academy',
+    problem: 'Running my brother’s youth soccer academy on its own platform: bookings, camps, payments, a parent portal and an admin.',
+    result:
+      'Moved the live platform and its data to Cloudflare on October 9, 2026, then checked payments, sign-in and every public page on the live site.',
+    stack: 'Next.js · Cloudflare Workers · D1 · Stripe',
+    href: 'https://www.ballerzfootballacademy.com',
+    cta: 'Visit the academy ↗',
+  },
+  {
     slug: 'portmind',
     title: 'PortMind',
     problem: 'Evaluating computer-vision models against real port operations.',
@@ -292,16 +294,6 @@ export const selectedWork = [
     stack: 'Python · Next.js · Cloudflare · Vision Models · ETL',
     href: '/case-studies/portmind',
     cta: 'Read case study →',
-  },
-  {
-    slug: 'ethos',
-    title: 'Ethos',
-    problem: 'Turning a single-tenant membership MVP into production merchant software.',
-    result:
-      'Shipped a multi-tenant SaaS serving 50+ merchant accounts across storefront, checkout, point-of-sale and the Luna merchant platform.',
-    stack: 'Next.js · Node.js · Azure · Shopify',
-    href: '/work/ethos',
-    cta: 'Read the work →',
   },
   {
     slug: 'mtl-archives',
@@ -361,7 +353,7 @@ export const homeExperience = [
 
 export const availabilityCta = {
   title: 'Let’s build something useful.',
-  body: 'Bring one workflow that costs you time, customers or money. In a free 20-minute review, we look at how it runs today. If there is a project worth doing, I send a fixed-price Phase 1 proposal. Phase 1 starts at $5,000.',
+  body: 'Bring one workflow that costs you time, customers or money. In a free 20-minute review, we look at how it runs today and whether there’s a project worth doing.',
   primary: { label: 'Book a 20-minute review →', href: 'https://cal.com/wielfried/intro' },
   secondary: { label: 'How it works →', href: '/start' },
 }

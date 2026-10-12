@@ -53,16 +53,14 @@ export default function Page() {
             <span>{homeHero.availability}</span>
           </p>
           <div className="hero-actions">
-            <TrackAnchor
-              href={homeHero.reviewHref}
-              event="project_intro_click"
-              data={{ source_page: 'home', destination: 'cal.com/wielfried/intro', placement: 'hero' }}
+            <TrackLink
+              href={homeHero.workHref}
+              event="contact_project_click"
+              data={{ from: 'home_hero', destination: 'start' }}
               className="hero-cta-primary"
-              target="_blank"
-              rel="noopener noreferrer"
             >
-              Book a 20-minute review <span aria-hidden="true">→</span>
-            </TrackAnchor>
+              Work with me <span aria-hidden="true">→</span>
+            </TrackLink>
             <a href="#selected-work" className="hero-cta-secondary">
               View my work
             </a>

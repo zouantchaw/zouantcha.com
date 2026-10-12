@@ -7,9 +7,9 @@ import { pickAttribution, withAttribution } from 'app/lib/field-notes'
 import { site } from 'app/lib/site'
 import { startCopy, startProof } from 'app/lib/start'
 
-const title = 'Wiel Zouantcha · From AI Demo to Dependable'
+const title = 'Wiel Zouantcha · Software and AI for Your Business'
 const description =
-  'Your AI demo works. Wiel makes it something customers can rely on. See real builds, or book a 20-minute review.'
+  'Wiel builds software and AI for businesses that already make money. See real builds, or book a free 20-minute review.'
 
 const startMetadata = pageMetadata({
   title,

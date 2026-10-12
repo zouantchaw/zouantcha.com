@@ -1,7 +1,7 @@
 export const startCopy = {
   eyebrow: 'Software & AI Engineer',
-  headline: "Your AI demo works. Let's make it dependable.",
-  body: 'I build software and AI for businesses that already make money: connected to your real data, tested against real cases, with a person in the loop where it matters. See real builds, or bring the thing that keeps breaking.',
+  headline: 'I build software and AI for businesses that already make money.',
+  body: "Connected to your real data, tested against real cases, with a person in the loop where it matters. Right now I'm doing it in my family's two businesses, a party rental company and a youth soccer academy, and showing what breaks and how I fix it.",
   primaryCta: 'Book a 20-minute review',
   secondaryCta: 'See real projects',
   note: 'Start with one practical problem from your business.',
