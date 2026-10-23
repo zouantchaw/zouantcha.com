@@ -1,6 +1,8 @@
 export interface Env {
   DB: D1Database
-  INGEST_SECRET: string
+  SITE_ENV: 'production' | 'staging'
+  INGEST_SECRET?: string
+  FIELD_NOTES_INGEST_SECRET?: string
 }
 
 const EMAIL_RE = /^[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$/i
@@ -50,7 +52,7 @@ function bearerToken(request: Request): string {
   return header.toLowerCase().startsWith('bearer ') ? header.slice(7).trim() : ''
 }
 
-export default {
+const worker = {
   async fetch(request: Request, env: Env): Promise<Response> {
     const url = new URL(request.url)
 
@@ -62,11 +64,12 @@ export default {
       return json(404, { ok: false, error: 'not_found' })
     }
 
-    if (!env.INGEST_SECRET) {
+    const secret = env.SITE_ENV === 'staging' ? env.FIELD_NOTES_INGEST_SECRET : env.INGEST_SECRET
+    if (!secret) {
       return json(503, { ok: false, error: 'unavailable' })
     }
 
-    const authorized = await secretsMatch(bearerToken(request), env.INGEST_SECRET)
+    const authorized = await secretsMatch(bearerToken(request), secret)
     if (!authorized) {
       return json(401, { ok: false, error: 'unauthorized' })
     }
@@ -148,5 +151,23 @@ export default {
       }
       return json(503, { ok: false, error: 'unavailable' })
     }
+  },
+}
+
+export default {
+  async fetch(request: Request, env: Env): Promise<Response> {
+    if (env.SITE_ENV !== 'staging') return worker.fetch(request, env)
+    const response = new URL(request.url).pathname === '/robots.txt'
+      ? new Response(request.method === 'HEAD' ? null : 'User-agent: *\nDisallow: /\n', {
+          headers: { 'Content-Type': 'text/plain; charset=utf-8' },
+        })
+      : await worker.fetch(request, env)
+    const headers = new Headers(response.headers)
+    headers.set('X-Robots-Tag', 'noindex, nofollow')
+    return new Response(response.body, {
+      status: response.status,
+      statusText: response.statusText,
+      headers,
+    })
   },
 }

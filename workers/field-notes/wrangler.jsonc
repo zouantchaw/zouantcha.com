@@ -22,5 +22,27 @@
       "pattern": "api.zouantcha.com",
       "custom_domain": true
     }
-  ]
+  ],
+  "vars": {
+    "SITE_ENV": "production"
+  },
+  "env": {
+    "staging": {
+      "name": "zouantcha-field-notes-staging",
+      "workers_dev": true,
+      "preview_urls": false,
+      "routes": [],
+      "vars": {
+        "SITE_ENV": "staging"
+      },
+      "d1_databases": [
+        {
+          "binding": "DB",
+          "database_name": "zouantcha-field-notes-staging",
+          "database_id": "539380aa-21e6-4d8e-8059-e9f3860c38de",
+          "migrations_dir": "migrations"
+        }
+      ]
+    }
+  }
 }

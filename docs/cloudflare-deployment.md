@@ -71,6 +71,39 @@ secret in an ignored `.env.local`; that lane uses ordinary authenticated fetch.
 changes. Ordinary site deployments should not redeploy or migrate that database.
 The subscriber export command remains private operator tooling and prints CSV.
 
+## Staging
+
+Deploy staging first. Production deploys require Wiel's explicit go-ahead.
+Staging uses only workers.dev URLs, with no routes or custom domains:
+
+- Site: https://zouantcha-site-staging.wiel.workers.dev
+- Field Notes: https://zouantcha-field-notes-staging.wiel.workers.dev
+
+```sh
+pnpm exec wrangler d1 migrations apply zouantcha-field-notes-staging --config workers/field-notes/wrangler.jsonc --env staging --remote
+pnpm deploy:field-notes:staging
+pnpm deploy:staging
+```
+
+Both commands select `env.staging`. The site deploy builds with OpenNext and
+populates the isolated `zouantcha-site-cache-staging` R2 cache. Its Analytics
+Engine dataset is `zouantcha_site_events_staging`, and `FIELD_NOTES_API` binds
+only to `zouantcha-field-notes-staging`. The backend's `DB` binds only to D1
+`zouantcha-field-notes-staging` (`539380aa-21e6-4d8e-8059-e9f3860c38de`).
+Assets and the Images binding belong to the staging site deployment.
+
+Both staging Workers use the same fresh `FIELD_NOTES_INGEST_SECRET`; set it with
+`wrangler secret put FIELD_NOTES_INGEST_SECRET --env staging` using each Worker's
+config. Never reuse production credentials. The production backend continues to
+read its existing `INGEST_SECRET`.
+
+`SITE_ENV=staging` adds `X-Robots-Tag: noindex, nofollow` to every Worker response
+and serves `robots.txt` with `Disallow: /`, including static assets and redirects.
+The top-level configurations use `SITE_ENV=production` and retain production
+response behavior. Verify staging pages and signup with headless agent-browser
+at 1440 and 390 pixels; compare staging and production subscriber counts before
+and after the staging-only signup.
+
 ## Runtime behavior
 
 Published MDX compiles to modules at build time because runtime dynamic evaluation
