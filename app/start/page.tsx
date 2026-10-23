@@ -29,7 +29,7 @@ export default async function Page({
 }) {
   const params = await searchParams
   const attribution = pickAttribution(params)
-  const subscribed = params.subscribed === '1' || params.subscribed === 'true'
+  const subscribed = params.signup === 'preview' || params.signup === 'pending_confirmation'
   const errorParam = Array.isArray(params.error) ? params.error[0] : params.error
   const error =
     (errorParam === 'invalid' || errorParam === 'invalid_email')
@@ -145,11 +145,11 @@ export default async function Page({
           <p key={paragraph}>{paragraph}</p>
         ))}
         <p><TrackLink href={withAttribution('/log', attribution)} event="contact_project_click" data={{ destination: 'log', placement: 'start' }}>Read about the weekly build log →</TrackLink></p>
-        <FieldNotesForm
+        <FieldNotesForm preview={process.env.SITE_ENV === 'staging'}
           returnTo="/start"
           attribution={attribution}
           initialStatus={subscribed ? 'success' : error ? 'error' : 'idle'}
-          initialMessage={subscribed ? startCopy.fieldNotesSuccess : error}
+          initialDelivery={params.signup === 'pending_confirmation' ? 'pending_confirmation' : 'preview'} initialMessage={subscribed ? startCopy.fieldNotesSuccess : error}
         />
       </section>
 

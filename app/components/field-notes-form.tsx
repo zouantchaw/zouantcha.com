@@ -2,6 +2,7 @@
 
 import { track } from 'app/lib/analytics'
 import { FIELD_NOTES_SOURCE, type FieldNotesAttribution } from 'app/lib/field-notes'
+import { BUILD_LOG_CONSENT_VERSION, BUILD_LOG_PENDING, BUILD_LOG_PREVIEW } from 'app/lib/build-log-consent'
 import { startCopy } from 'app/lib/start'
 import { browserAttribution } from 'app/lib/source'
 import { normalizeEmail } from 'app/lib/field-notes'
@@ -13,20 +14,25 @@ export function FieldNotesForm({
   attribution,
   initialStatus = 'idle',
   initialMessage,
+  initialDelivery,
+  preview = false,
   returnTo = '/start',
 }: {
   attribution: FieldNotesAttribution
   initialStatus?: Status
   returnTo?: '/start' | '/log'
   initialMessage?: string
+  initialDelivery?: 'preview' | 'pending_confirmation'
+  preview?: boolean
 }) {
   const id = useId()
+  const [delivery, setDelivery] = useState(initialDelivery)
   const [status, setStatus] = useState<Status>(initialStatus)
   const [message, setMessage] = useState(initialMessage || '')
 
   if (status === 'success') {
     return (
-      <div><p className="start-success" role="status">{startCopy.fieldNotesSuccess}</p><p className="start-consent">{startCopy.preparationNote}</p></div>
+      <p className="start-success" role="status">{delivery === 'pending_confirmation' ? BUILD_LOG_PENDING : BUILD_LOG_PREVIEW}</p>
     )
   }
 
@@ -62,18 +68,18 @@ export function FieldNotesForm({
           referrer: document.referrer || '',
           ...resolved,
           return_to: returnTo,
-          consent_version: 'build-log-preparation-2026-10-23',
+          consent_version: BUILD_LOG_CONSENT_VERSION,
           page: returnTo,
         }),
       })
       const result = (await response.json().catch(() => null)) as
-        | { ok?: boolean; error?: string }
+        | { ok?: boolean; error?: string; status?: 'preview' | 'pending_confirmation' }
         | null
-      if (response.ok && result?.ok) {
+      if (response.ok && result?.ok && ['preview','pending_confirmation'].includes(result.status || '')) {
         try {
-          track('field_notes_signup_success')
           track('build_log_signup_saved', { placement: returnTo.slice(1) })
         } catch {}
+        setDelivery(result.status)
         setStatus('success')
         return
       }
@@ -100,6 +106,8 @@ export function FieldNotesForm({
       aria-busy={status === 'submitting'}
       noValidate
     >
+      <input type="hidden" name="consent_version" value={BUILD_LOG_CONSENT_VERSION} />
+      <input type="hidden" name="page" value={returnTo} />
       <input type="hidden" name="return_to" value={returnTo} />
       <input type="hidden" name="src" value={attribution.src} />
       <input type="hidden" name="source" value={FIELD_NOTES_SOURCE} />
@@ -137,7 +145,7 @@ export function FieldNotesForm({
           {message}
         </p>
       ) : null}
-      <p id={`${id}-consent`} className="start-consent">{startCopy.consent} {startCopy.preparationNote}</p>
+      <p id={`${id}-consent`} className="start-consent">{startCopy.consent} {startCopy.preparationNote}{preview ? ' This staging preview does not send email.' : ''}</p>
     </form>
   )
 }

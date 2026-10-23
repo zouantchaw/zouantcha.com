@@ -1,3 +1,5 @@
+import { BUILD_LOG_CONSENT, BUILD_LOG_PREVIEW } from './build-log-consent'
+
 export const startCopy = {
   eyebrow: 'Software & AI Engineer',
   headline: 'Bring one workflow that costs you time.',
@@ -12,9 +14,9 @@ export const startCopy = {
     "What I built, what worked, what broke, and the numbers. Public-data products and AI in my family's businesses, once a week.",
   ],
   fieldNotesCta: 'Join the build log',
-  fieldNotesSuccess: 'Your signup is saved.',
-  consent: "By joining, you agree to receive Wiel's build log by email.",
-  preparationNote: 'The list is being prepared. This form saves your signup; email delivery and unsubscribe controls are not live yet.',
+  fieldNotesSuccess: BUILD_LOG_PREVIEW,
+  consent: BUILD_LOG_CONSENT,
+  preparationNote: 'Confirm your email to join.',
   workWithMeHeading: 'How working together starts',
   workWithMeBody:
     'We start with a 20-minute review of one workflow. If there is a useful project, I send a fixed-price setup proposal with the scope, the work you will review, and the price. Ongoing operation and support can follow when they are useful.',

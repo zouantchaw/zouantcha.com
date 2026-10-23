@@ -57,6 +57,8 @@ export async function hashIp(ip: string, secret: string): Promise<string> {
 }
 
 export function clientIp(request: Request): string {
+  const edge = request.headers.get('cf-connecting-ip')?.trim()
+  if (edge) return edge
   const forwarded = request.headers.get('x-forwarded-for')
   if (forwarded) {
     const first = forwarded.split(',')[0]?.trim()

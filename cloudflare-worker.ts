@@ -36,12 +36,14 @@ async function fetchSite(request:Request,env:CloudflareEnv,ctx:unknown){
 // Apply staging controls outside both the asset and OpenNext response paths.
 export default {
  async fetch(request:Request,env:CloudflareEnv,ctx:unknown){
-  if(env.SITE_ENV!=='staging')return fetchSite(request,env,ctx)
+  const action=/^\/(?:log|api\/build-log)\/(confirm|unsubscribe)(?:\/|$)/.test(new URL(request.url).pathname)
+  if(env.SITE_ENV!=='staging'&&!action)return fetchSite(request,env,ctx)
   const response=new URL(request.url).pathname==='/robots.txt'
    ? new Response(request.method==='HEAD'?null:'User-agent: *\nDisallow: /\n',{headers:{'Content-Type':'text/plain; charset=utf-8'}})
    : await fetchSite(request,env,ctx)
   const headers=new Headers(response.headers)
   headers.set('X-Robots-Tag','noindex, nofollow')
+  if(action){headers.set('Cache-Control','no-store');headers.set('Referrer-Policy','no-referrer')}
   return new Response(response.body,{status:response.status,statusText:response.statusText,headers})
  }
 }

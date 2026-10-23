@@ -56,7 +56,7 @@ export function resolveAttribution(
 
 // Resolve synchronously at the point of use. Effects are never the source of truth.
 export function browserAttribution(): Attribution {
-  if (typeof window === 'undefined') return resolveAttribution(new URLSearchParams())
+  if (typeof window === 'undefined' || /^\/log\/(confirm|unsubscribe)(?:\/|$)/.test(window.location.pathname)) return resolveAttribution(new URLSearchParams())
   let stored: Partial<Attribution> | undefined
   try {
     const raw = window.sessionStorage.getItem(ATTRIBUTION_KEY)

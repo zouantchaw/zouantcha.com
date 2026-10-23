@@ -8,7 +8,7 @@ export const metadata = pageMetadata({ title: 'Weekly build log', description: s
 
 export default async function Page({ searchParams }: { searchParams: Promise<Record<string, string | string[] | undefined>> }) {
   const params = await searchParams
-  const saved = params.subscribed === '1' || params.subscribed === 'true'
+  const saved = params.signup === 'preview' || params.signup === 'pending_confirmation'
   const error = ['invalid', 'invalid_email'].includes(String(params.error)) ? 'Enter a valid email address.' : params.error === 'rate_limited' ? 'Please try again in a few minutes.' : params.error ? 'Something went wrong. Please try again.' : undefined
   return (
     <div className="site-shell start-page">
@@ -19,7 +19,7 @@ export default async function Page({ searchParams }: { searchParams: Promise<Rec
         <p className="hero-intro">{startCopy.fieldNotesBody[0]}</p>
       </header>
       <section id="field-notes" className="start-section start-field-notes" aria-label="Join the build log">
-        <FieldNotesForm attribution={pickAttribution(params)} returnTo="/log" initialStatus={saved ? 'success' : error ? 'error' : 'idle'} initialMessage={error} />
+        <FieldNotesForm preview={process.env.SITE_ENV === 'staging'} attribution={pickAttribution(params)} returnTo="/log" initialStatus={saved ? 'success' : error ? 'error' : 'idle'} initialDelivery={params.signup === 'pending_confirmation' ? 'pending_confirmation' : 'preview'} initialMessage={error} />
       </section>
     </div>
   )
