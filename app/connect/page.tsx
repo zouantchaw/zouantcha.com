@@ -3,11 +3,10 @@ import { ConnectPageView } from 'app/components/connect-page-view'
 import { ProfilePhoto } from 'app/components/profile-photo'
 import { TrackAnchor, TrackLink } from 'app/components/track-link'
 import { connectCopy, mailto, site } from 'app/lib/site'
-import { withSrc } from 'app/lib/source'
+import { readSrcParam, withSrc } from 'app/lib/source'
 
 const title = `${site.name} · Connect`
-const description =
-  'Software and AI engineer building for businesses that already make money, one fixed-price phase at a time.'
+const description = site.description
 
 export const metadata = {
   ...pageMetadata({
@@ -19,18 +18,13 @@ export const metadata = {
   title: { absolute: `${site.name} · Exploit Summit 2026` },
 }
 
-function readSrc(value: string | string[] | undefined) {
-  const raw = Array.isArray(value) ? value[0] : value
-  return (raw || 'exploit').trim().slice(0, 80)
-}
-
 export default async function Page({
   searchParams,
 }: {
   searchParams: Promise<Record<string, string | string[] | undefined>>
 }) {
   const params = await searchParams
-  const src = readSrc(params.src)
+  const src = readSrcParam(new URLSearchParams(Object.entries(params).flatMap(([key, value]) => typeof value === 'string' ? [[key, value]] : [])))
 
   return (
     <div className="site-shell connect-page">

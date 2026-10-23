@@ -1,9 +1,12 @@
+import { resolveAttribution } from './source'
+
 export const FIELD_NOTES_SOURCE = 'start_page'
 
 const EMAIL_RE = /^[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$/i
 const ATTR_MAX = 200
 
 export type FieldNotesAttribution = {
+  src: string
   utm_source: string
   utm_medium: string
   utm_campaign: string
@@ -26,24 +29,20 @@ export function normalizeEmail(raw: unknown): string | null {
 export function pickAttribution(
   params: Record<string, string | string[] | undefined>,
 ): FieldNotesAttribution {
-  const read = (key: string) => {
-    const value = params[key]
-    return clipAttr(Array.isArray(value) ? value[0] : value)
+  const query = new URLSearchParams()
+  for (const [key, value] of Object.entries(params)) {
+    const first = Array.isArray(value) ? value[0] : value
+    if (first) query.set(key, first)
   }
-  return {
-    utm_source: read('utm_source'),
-    utm_medium: read('utm_medium'),
-    utm_campaign: read('utm_campaign'),
-  }
+  return resolveAttribution(query)
 }
 
 export function withAttribution(path: string, attribution: FieldNotesAttribution): string {
-  const query = new URLSearchParams()
+  const url = new URL(path, 'https://www.zouantcha.com')
   for (const [key, value] of Object.entries(attribution)) {
-    if (value) query.set(key, value)
+    if (value && !url.searchParams.has(key)) url.searchParams.set(key, value)
   }
-  const serialized = query.toString()
-  return serialized ? `${path}?${serialized}` : path
+  return `${url.pathname}${url.search}${url.hash}`
 }
 
 export async function hashIp(ip: string, secret: string): Promise<string> {

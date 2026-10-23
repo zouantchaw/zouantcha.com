@@ -9,6 +9,10 @@ export default function Footer() {
         Get in touch ↗
       </TrackLink>
       <nav aria-label="Footer">
+        <Link href="/watch">Watch</Link>
+        <Link href="/log">Build log</Link>
+        <Link href="/lab">Products</Link>
+        <Link href="/blog">Writing</Link>
         <TrackLink href={site.resumePage} event="resume_click" data={{ from: 'footer' }}>
           Résumé
         </TrackLink>

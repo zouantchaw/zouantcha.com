@@ -6,11 +6,11 @@ import { Dialog } from './dialog'
 import { TrackLink } from './track-link'
 
 const links = [
+  { href: '/log', label: 'Build log' },
   { href: '/work', label: 'Work' },
+  { href: '/lab', label: 'Products' },
   { href: '/about', label: 'About' },
-  { href: '/blog', label: 'Writing' },
   { href: '/start', label: 'Work with me' },
-  { href: '/contact', label: 'Contact' },
 ]
 
 export function Nav() {

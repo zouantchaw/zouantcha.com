@@ -8,8 +8,7 @@ import { site } from 'app/lib/site'
 import { startCopy, startProof } from 'app/lib/start'
 
 const title = 'Wiel Zouantcha · Software and AI for Your Business'
-const description =
-  'Wiel builds software and AI for businesses that already make money. See real builds, or book a free 20-minute review.'
+const description = 'Bring one workflow that costs you time. See real builds, or book a 20-minute review of where software or agents can help.'
 
 const startMetadata = pageMetadata({
   title,
@@ -33,7 +32,7 @@ export default async function Page({
   const subscribed = params.subscribed === '1' || params.subscribed === 'true'
   const errorParam = Array.isArray(params.error) ? params.error[0] : params.error
   const error =
-    errorParam === 'invalid'
+    (errorParam === 'invalid' || errorParam === 'invalid_email')
       ? 'Enter a valid email address.'
       : errorParam === 'rate_limited'
         ? 'Please try again in a few minutes.'
@@ -64,7 +63,7 @@ export default async function Page({
           >
             {startCopy.primaryCta}
           </TrackAnchor>
-          <a href="#work">{startCopy.secondaryCta}</a>
+          <TrackLink href={withAttribution('/watch', attribution)} event="contact_project_click" data={{ destination: 'watch', placement: 'start' }}>{startCopy.secondaryCta}</TrackLink>
         </div>
         <p className="start-note">{startCopy.note}</p>
       </header>
@@ -99,6 +98,8 @@ export default async function Page({
       <section className="start-section start-work-with-me" aria-labelledby="work-with-me-heading">
         <h2 id="work-with-me-heading">{startCopy.workWithMeHeading}</h2>
         <p>{startCopy.workWithMeBody}</p>
+        <p>{startCopy.pricing}</p>
+        <p>{startCopy.pricingNote}</p>
         <TrackAnchor
           href={startCopy.projectIntroHref}
           event="project_intro_click"
@@ -143,7 +144,9 @@ export default async function Page({
         {startCopy.fieldNotesBody.map((paragraph) => (
           <p key={paragraph}>{paragraph}</p>
         ))}
+        <p><TrackLink href={withAttribution('/log', attribution)} event="contact_project_click" data={{ destination: 'log', placement: 'start' }}>Read about the weekly build log →</TrackLink></p>
         <FieldNotesForm
+          returnTo="/start"
           attribution={attribution}
           initialStatus={subscribed ? 'success' : error ? 'error' : 'idle'}
           initialMessage={subscribed ? startCopy.fieldNotesSuccess : error}

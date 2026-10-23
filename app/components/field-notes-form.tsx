@@ -3,7 +3,9 @@
 import { track } from 'app/lib/analytics'
 import { FIELD_NOTES_SOURCE, type FieldNotesAttribution } from 'app/lib/field-notes'
 import { startCopy } from 'app/lib/start'
-import { useState, type FormEvent } from 'react'
+import { browserAttribution } from 'app/lib/source'
+import { normalizeEmail } from 'app/lib/field-notes'
+import { useId, useState, type FormEvent } from 'react'
 
 type Status = 'idle' | 'submitting' | 'success' | 'error'
 
@@ -11,29 +13,39 @@ export function FieldNotesForm({
   attribution,
   initialStatus = 'idle',
   initialMessage,
+  returnTo = '/start',
 }: {
   attribution: FieldNotesAttribution
   initialStatus?: Status
+  returnTo?: '/start' | '/log'
   initialMessage?: string
 }) {
+  const id = useId()
   const [status, setStatus] = useState<Status>(initialStatus)
   const [message, setMessage] = useState(initialMessage || '')
 
   if (status === 'success') {
     return (
-      <p className="start-success" role="status">
-        {startCopy.fieldNotesSuccess}
-      </p>
+      <div><p className="start-success" role="status">{startCopy.fieldNotesSuccess}</p><p className="start-consent">{startCopy.preparationNote}</p></div>
     )
   }
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
     const form = event.currentTarget
+    if (status === 'submitting') return
     const data = new FormData(form)
+    const resolved = browserAttribution()
     try {
       track('field_notes_signup_attempt')
+      track('build_log_signup_attempt', { placement: returnTo.slice(1) })
     } catch {}
+    if (!normalizeEmail(data.get('email'))) {
+      setStatus('error')
+      setMessage('Enter a valid email address.')
+      form.querySelector<HTMLInputElement>('input[type=email]')?.focus()
+      return
+    }
     setStatus('submitting')
     setMessage('')
     try {
@@ -48,7 +60,10 @@ export function FieldNotesForm({
           website: data.get('website'),
           source: FIELD_NOTES_SOURCE,
           referrer: document.referrer || '',
-          ...attribution,
+          ...resolved,
+          return_to: returnTo,
+          consent_version: 'build-log-preparation-2026-10-23',
+          page: returnTo,
         }),
       })
       const result = (await response.json().catch(() => null)) as
@@ -57,6 +72,7 @@ export function FieldNotesForm({
       if (response.ok && result?.ok) {
         try {
           track('field_notes_signup_success')
+          track('build_log_signup_saved', { placement: returnTo.slice(1) })
         } catch {}
         setStatus('success')
         return
@@ -81,8 +97,11 @@ export function FieldNotesForm({
       action="/api/field-notes"
       method="post"
       onSubmit={onSubmit}
+      aria-busy={status === 'submitting'}
       noValidate
     >
+      <input type="hidden" name="return_to" value={returnTo} />
+      <input type="hidden" name="src" value={attribution.src} />
       <input type="hidden" name="source" value={FIELD_NOTES_SOURCE} />
       <input type="hidden" name="utm_source" value={attribution.utm_source} />
       <input type="hidden" name="utm_medium" value={attribution.utm_medium} />
@@ -93,11 +112,13 @@ export function FieldNotesForm({
           <input name="website" type="text" tabIndex={-1} autoComplete="off" />
         </label>
       </div>
-      <label className="sr-only" htmlFor="field-notes-email">
+      <label className="sr-only" htmlFor={`${id}-email`}>
         Email address
       </label>
       <input
-        id="field-notes-email"
+        id={`${id}-email`}
+        aria-invalid={status === 'error' || undefined}
+        aria-describedby={`${id}-consent${status === 'error' ? ` ${id}-error` : ''}`}
         className="search-input"
         name="email"
         type="email"
@@ -112,11 +133,11 @@ export function FieldNotesForm({
         {status === 'submitting' ? 'Joining…' : startCopy.fieldNotesCta}
       </button>
       {status === 'error' && message ? (
-        <p className="start-error" role="alert">
+        <p id={`${id}-error`} className="start-error" role="alert">
           {message}
         </p>
       ) : null}
-      <p className="start-consent">{startCopy.consent}</p>
+      <p id={`${id}-consent`} className="start-consent">{startCopy.consent} {startCopy.preparationNote}</p>
     </form>
   )
 }

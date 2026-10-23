@@ -7,7 +7,7 @@ import { useEffect } from 'react'
 export function ConnectPageView() {
   useEffect(() => {
     try {
-      const src = storedSrc() || 'exploit'
+      const src = storedSrc() || ''
       track('connect_visit', { src })
     } catch {}
   }, [])

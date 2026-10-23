@@ -6,9 +6,10 @@ import {
   clientIp,
   hashIp,
   normalizeEmail,
+  pickAttribution,
 } from 'app/lib/field-notes'
 
-const START_PATH = '/start'
+const RETURN_PATHS = new Set(['/start', '/log'])
 
 function wantsJson(request: NextRequest): boolean {
   const accept = request.headers.get('accept') || ''
@@ -20,11 +21,15 @@ function reply(
   request: NextRequest,
   status: number,
   body: { ok: boolean; error?: string },
+  payload: Record<string, string> = {},
 ): NextResponse {
   if (wantsJson(request)) {
     return NextResponse.json(body, { status, headers: { 'Cache-Control': 'no-store' } })
   }
-  const url = new URL(START_PATH, request.url)
+  const url = new URL(RETURN_PATHS.has(payload.return_to) ? payload.return_to : '/start', request.url)
+  for (const [key, value] of Object.entries(pickAttribution(payload))) {
+    if (value) url.searchParams.set(key, value)
+  }
   if (body.ok) url.searchParams.set('subscribed', '1')
   else url.searchParams.set('error', body.error || 'unavailable')
   url.hash = 'field-notes'
@@ -50,10 +55,6 @@ async function readPayload(request: NextRequest): Promise<Record<string, string>
 export async function POST(request: NextRequest) {
   const workerUrl = process.env.FIELD_NOTES_WORKER_URL
   const secret = process.env.FIELD_NOTES_INGEST_SECRET
-  if (!workerUrl || !secret) {
-    return reply(request, 503, { ok: false, error: 'unavailable' })
-  }
-
   let payload: Record<string, string>
   try {
     payload = await readPayload(request)
@@ -61,17 +62,22 @@ export async function POST(request: NextRequest) {
     return reply(request, 400, { ok: false, error: 'invalid' })
   }
 
+  if (!workerUrl || !secret) {
+    return reply(request, 503, { ok: false, error: 'unavailable' }, payload)
+  }
+
   if (clipAttr(payload.website, 120)) {
-    return reply(request, 200, { ok: true })
+    return reply(request, 200, { ok: true }, payload)
   }
 
   const email = normalizeEmail(payload.email)
   if (!email) {
-    return reply(request, 400, { ok: false, error: 'invalid_email' })
+    return reply(request, 400, { ok: false, error: 'invalid_email' }, payload)
   }
 
   const ipHash = await hashIp(clientIp(request), secret)
   const referrer = clipAttr(payload.referrer, 500)
+  const attribution = pickAttribution(payload)
 
   try {
     let worker: CloudflareEnv['FIELD_NOTES_API'] | undefined
@@ -87,16 +93,16 @@ export async function POST(request: NextRequest) {
         email,
         source: FIELD_NOTES_SOURCE,
         referrer,
-        utm_source: clipAttr(payload.utm_source),
-        utm_medium: clipAttr(payload.utm_medium),
-        utm_campaign: clipAttr(payload.utm_campaign),
+        utm_source: attribution.utm_source,
+        utm_medium: attribution.utm_medium,
+        utm_campaign: attribution.utm_campaign,
         ip_hash: ipHash,
       }),
       signal: AbortSignal.timeout(8000),
     })
 
     if (response.status === 429) {
-      return reply(request, 429, { ok: false, error: 'rate_limited' })
+      return reply(request, 429, { ok: false, error: 'rate_limited' }, payload)
     }
 
     const result = (await response.json().catch(() => null)) as
@@ -105,13 +111,13 @@ export async function POST(request: NextRequest) {
 
     if (!response.ok || !result?.ok) {
       if (result?.error === 'invalid_email') {
-        return reply(request, 400, { ok: false, error: 'invalid_email' })
+        return reply(request, 400, { ok: false, error: 'invalid_email' }, payload)
       }
-      return reply(request, 503, { ok: false, error: 'unavailable' })
+      return reply(request, 503, { ok: false, error: 'unavailable' }, payload)
     }
 
-    return reply(request, 200, { ok: true })
+    return reply(request, 200, { ok: true }, payload)
   } catch {
-    return reply(request, 503, { ok: false, error: 'unavailable' })
+    return reply(request, 503, { ok: false, error: 'unavailable' }, payload)
   }
 }

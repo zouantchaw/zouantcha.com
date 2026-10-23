@@ -24,7 +24,7 @@ const results = [
     narrative: true,
     label: 'Quotes, payments and bookings connected',
     context:
-      'Diane Party Rentals · $5,032.66 gross processed through Stripe, Apr–Sep 8, 2026',
+      'Diane Party Rentals · Connected quotes, payments, bookings and operational handoffs.',
     href: '/case-studies/diane-party-rentals#from-a-quote-to-a-paid-booking',
   },
 ]
