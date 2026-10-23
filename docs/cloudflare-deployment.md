@@ -172,7 +172,8 @@ email cooldown, at most 3 attempts per email hash/15 minutes, and 8 per IP
 hash/15 minutes. Confirmation/opt-out paths allow 30 per IP hash/15 minutes.
 Expiry requires a fresh signup after cooldown; no scheduled resend exists.
 Opt-out revokes all confirmation tokens. Rejoin stays unsubscribed until a new
-explicit confirmation. Suppression revokes tokens and cannot be undone by signup.
+explicit confirmation. Suppression revokes only confirmation tokens, preserving
+explicit opt-out and its audit record, and cannot be undone by signup.
 
 Staging uses `BUILD_LOG_MAIL_MODE=preview`. Its private `build_log_outbox` stores
 HTML/text previews (including synthetic action links); inspect **only owned
@@ -183,6 +184,10 @@ A claim is made once per logical message, before transport. Outcomes are
 `preview`, `provider-accepted`, `suppressed`, `failed`, `unknown`. A crash, timeout
 or ambiguous result stays `unknown`; an operator must reconcile it privately.
 There is no automatic retry or bulk-send endpoint. Acceptance is not delivery.
+Definite failure or an ineligible dispatch revokes that request's confirmation
+token in the same outcome batch. A later explicit signup may create a new request
+after cooldown; the failed logical message is never resent. Unknown outcomes keep
+their confirmation token usable and block fresh requests pending reconciliation.
 Query-string redaction in Worker observability protects capability URLs.
 
 The native structured `EMAIL.send` adapter exists but is **disabled and unbound**.

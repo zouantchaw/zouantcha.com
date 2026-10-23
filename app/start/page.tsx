@@ -6,6 +6,7 @@ import { StartPageView } from 'app/components/start-page-view'
 import { pickAttribution, withAttribution } from 'app/lib/field-notes'
 import { site } from 'app/lib/site'
 import { startCopy, startProof } from 'app/lib/start'
+import { BUILD_LOG_UNAVAILABLE } from 'app/lib/build-log-consent'
 
 const title = 'Wiel Zouantcha · Software and AI for Your Business'
 const description = 'Bring one workflow that costs you time. See real builds, or book a 20-minute review of where software or agents can help.'
@@ -36,9 +37,11 @@ export default async function Page({
       ? 'Enter a valid email address.'
       : errorParam === 'rate_limited'
         ? 'Please try again in a few minutes.'
-        : errorParam
-          ? 'Something went wrong. Please try again.'
-          : undefined
+        : errorParam === 'unavailable'
+          ? BUILD_LOG_UNAVAILABLE
+          : errorParam
+            ? 'Something went wrong. Please try again.'
+            : undefined
 
   return (
     <div className="site-shell start-page">

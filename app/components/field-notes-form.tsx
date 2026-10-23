@@ -2,7 +2,7 @@
 
 import { track } from 'app/lib/analytics'
 import { FIELD_NOTES_SOURCE, type FieldNotesAttribution } from 'app/lib/field-notes'
-import { BUILD_LOG_CONSENT_VERSION, BUILD_LOG_PENDING, BUILD_LOG_PREVIEW } from 'app/lib/build-log-consent'
+import { BUILD_LOG_CONSENT_VERSION, BUILD_LOG_PENDING, BUILD_LOG_PREVIEW, BUILD_LOG_UNAVAILABLE } from 'app/lib/build-log-consent'
 import { startCopy } from 'app/lib/start'
 import { browserAttribution } from 'app/lib/source'
 import { normalizeEmail } from 'app/lib/field-notes'
@@ -89,7 +89,9 @@ export function FieldNotesForm({
           ? 'Enter a valid email address.'
           : result?.error === 'rate_limited' || response.status === 429
             ? 'Please try again in a few minutes.'
-            : 'Something went wrong. Please try again.',
+            : result?.error === 'unavailable'
+              ? BUILD_LOG_UNAVAILABLE
+              : 'Something went wrong. Please try again.',
       )
     } catch {
       setStatus('error')

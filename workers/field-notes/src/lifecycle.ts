@@ -16,7 +16,7 @@ export async function eligible(db: D1Database, membershipId: string): Promise<bo
 export function suppressionStatements(db: D1Database, membershipId: string, now: string) {
   return [
     db.prepare("UPDATE build_log_memberships SET status='suppressed', suppressed_at=?, current_request_id=NULL WHERE id=?").bind(now, membershipId),
-    db.prepare('UPDATE build_log_tokens SET revoked_at=? WHERE membership_id=? AND revoked_at IS NULL').bind(now, membershipId),
+    db.prepare("UPDATE build_log_tokens SET revoked_at=? WHERE membership_id=? AND action='confirm' AND revoked_at IS NULL").bind(now, membershipId),
     db.prepare("INSERT INTO build_log_events(id,membership_id,event,created_at) VALUES(?,?,'suppressed',?)").bind(crypto.randomUUID(), membershipId, now),
   ]
 }
@@ -35,6 +35,9 @@ export async function finishConfirmation(env: LifecycleEnv, key: string, members
   await env.DB.batch([
     env.DB.prepare(`UPDATE build_log_outbox SET outcome=?,updated_at=?,preview_json=?,message_id=?,error_code=? WHERE logical_key=? AND outcome='unknown'`)
       .bind(result.outcome, now, result.outcome === 'preview' ? JSON.stringify(mail) : null, 'messageId' in result ? result.messageId : null, 'code' in result ? result.code : null, key),
+    // Definite non-delivery releases this request after cooldown; unknown stays confirmable/held.
+    ...(result.outcome === 'failed' || (result.outcome === 'suppressed' && 'code' in result && result.code === 'membership_ineligible')
+      ? [env.DB.prepare("UPDATE build_log_tokens SET revoked_at=? WHERE request_id=? AND action='confirm' AND revoked_at IS NULL").bind(now, requestId)] : []),
     ...('code' in result && result.code === 'E_RECIPIENT_SUPPRESSED' ? suppressionStatements(env.DB, membershipId, now) : []),
   ])
   return result.outcome
