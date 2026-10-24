@@ -1,14 +1,8 @@
 'use client'
 
-import { storedSrc } from './source-capture'
 import { track } from 'app/lib/analytics'
 import Link from 'next/link'
 import type { ComponentProps } from 'react'
-
-function payload(data?: Record<string, string>) {
-  const src = storedSrc()
-  return src ? { ...data, src } : data
-}
 
 export function TrackLink({
   event,
@@ -24,7 +18,8 @@ export function TrackLink({
       {...props}
       onClick={(click) => {
         try {
-          track(event, payload(data))
+          track(event, data)
+          if (event === 'project_intro_click') track('review_booking_click', data)
         } catch {}
         onClick?.(click)
       }}
@@ -46,7 +41,8 @@ export function TrackAnchor({
       {...props}
       onClick={(click) => {
         try {
-          track(event, payload(data))
+          track(event, data)
+          if (event === 'project_intro_click') track('review_booking_click', data)
         } catch {}
         onClick?.(click)
       }}

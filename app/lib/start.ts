@@ -1,23 +1,27 @@
+import { BUILD_LOG_CONSENT, BUILD_LOG_PREVIEW } from './build-log-consent'
+
 export const startCopy = {
   eyebrow: 'Software & AI Engineer',
-  headline: 'I build software and AI for businesses that already make money.',
-  body: "Connected to your real data, tested against real cases, with a person in the loop where it matters. Right now I'm doing it in my family's two businesses, a party rental company and a youth soccer academy, and showing what breaks and how I fix it.",
+  headline: 'Bring one workflow that costs you time.',
+  body: 'Quotes, follow-ups, scheduling or posting. We look at how it runs today and where software or agents can help.',
   primaryCta: 'Book a 20-minute review',
-  secondaryCta: 'See real projects',
+  secondaryCta: 'See real builds',
   note: 'Start with one practical problem from your business.',
   workHeading: 'A real business workflow',
   moreWorkHeading: 'More work across software and AI',
-  fieldNotesHeading: 'Field Notes',
+  fieldNotesHeading: 'Weekly build log',
   fieldNotesBody: [
-    "What I'm building, testing and learning across software, AI and real businesses.",
-    'One useful note at a time.',
+    "What I built, what worked, what broke, and the numbers. Public-data products and AI in my family's businesses, once a week.",
   ],
-  fieldNotesCta: 'Join Field Notes',
-  fieldNotesSuccess: "You're in. I'll send something when it's worth sending.",
-  consent: 'By subscribing, you agree to receive Field Notes by email. Unsubscribe anytime.',
+  fieldNotesCta: 'Join the build log',
+  fieldNotesSuccess: BUILD_LOG_PREVIEW,
+  consent: BUILD_LOG_CONSENT,
+  preparationNote: 'Confirm your email to join.',
   workWithMeHeading: 'How working together starts',
   workWithMeBody:
-    'Bring one workflow that costs you time, customers or money. In a free 20-minute review, we look at how it runs today. If there is a project worth doing, I send a fixed-price Phase 1: a working first piece in 2–6 weeks, built on your accounts and tested against real cases, plus a priced plan for what comes next. Phase 1 starts at $5,000.',
+    'We start with a 20-minute review of one workflow. If there is a useful project, I send a fixed-price setup proposal with the scope, the work you will review, and the price. Ongoing operation and support can follow when they are useful.',
+  pricing: 'Typical setup: $3,000–$5,000. Ongoing operation and support: $1,500–$2,500 a month.',
+  pricingNote: 'Your proposal confirms the scope, price and currency before work starts.',
   workWithMeCta: 'Book a 20-minute review →',
   projectIntroHref: 'https://cal.com/wielfried/intro',
 }
@@ -27,13 +31,13 @@ export const startProof = [
     slug: 'diane-party-rentals',
     title: 'Diane Party Rentals',
     problem: 'Connecting quotes, bookings, payments and team handoffs for a real rental business.',
-    proof: '$5,032.66 gross payment volume · April–September 2026',
+    proof: 'Connected quotes, payments, bookings and operational handoffs.',
   },
   {
     slug: 'mtl-archives',
     title: 'MTL Archives',
     problem: 'Making thousands of historical Montréal records searchable and explorable.',
-    proof: '13,499 serving records · 2.66M social views, January–July 2026',
+    proof: '2.66M combined Facebook/Instagram views · Jan–Jul 2026',
   },
   {
     slug: 'portmind',

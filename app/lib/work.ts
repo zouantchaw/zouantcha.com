@@ -1254,7 +1254,7 @@ export const work: WorkItem[] = [
     "title": "Diane Party Rentals",
     "dek": "From manual quotes and disconnected payments to online bookings, with an operating platform for the work after checkout.",
     "summary": "Replacing a Wix site and manual payment tracking, then connecting rental bookings to inventory, suppliers and delivery.",
-    "evidence": "$5,032.66 gross payment volume · April–September 2026",
+    "evidence": "Connected quotes, payments, bookings and operations.",
     "role": "Product design & engineering",
     "period": "March 2026–present",
     "scope": "Brand · Website · Booking · Operations",
@@ -1286,7 +1286,7 @@ export const work: WorkItem[] = [
           },
           {
             "kind": "p",
-            "text": "By September 8, the Stripe dashboard showed $5,032.66 in gross volume and 15 new customers. The immediate change was a booking with its payment, balance and receipt in one place. The operational workflows below extend that record into delivery and sourcing; I do not yet have measured turnaround or labor savings for them."
+            "text": "The immediate change was a booking with its payment, balance and receipt in one place. The operational workflows below extend that record into delivery and sourcing; I do not yet have measured turnaround or labor savings for them."
           }
         ]
       },
@@ -1302,37 +1302,8 @@ export const work: WorkItem[] = [
             "text": "The customer reviews the equipment and dates, accepts the quote and follows the payment link. The payment then belongs to that booking, alongside its balance and receipt. The team has a record to return to when the customer calls."
           },
           {
-            "kind": "rich-p",
-            "parts": [
-              {
-                "label": "Stripe",
-                "href": "https://stripe.com/payments",
-                "external": true
-              },
-              " handles the online payment. By September 8, the dashboard records $5,032.66 in gross volume, $4,881.62 in net volume and 15 new customers across April–September 2026."
-            ]
-          },
-          {
-            "kind": "gallery",
-            "images": [
-              {
-                "src": "/images/case-studies/dpr-stripe/gross.png",
-                "alt": "Stripe gross volume: $5,032.66, April to September 2026"
-              },
-              {
-                "src": "/images/case-studies/dpr-stripe/net.png",
-                "alt": "Stripe net volume: $4,881.62, April to September 2026"
-              },
-              {
-                "src": "/images/case-studies/dpr-stripe/customers.png",
-                "alt": "Stripe new customers: 15, April to September 2026"
-              },
-              {
-                "src": "/images/case-studies/dpr-stripe/payments.png",
-                "alt": "Stripe payments overview: $5,116.93 succeeded; other displayed categories $0"
-              }
-            ],
-            "caption": "Stripe, September 8, 2026. The volume and customer charts cover April–September; September is partial. The payments overview has its own total, with no date range shown."
+            "kind": "p",
+            "text": "Stripe handles the online payment, tied to the booking, balance and receipt."
           }
         ]
       },
@@ -1548,20 +1519,6 @@ export const work: WorkItem[] = [
             "text": "The next useful measures are quote turnaround, last-minute delivery changes, missing items at handoff, and how often the team has to chase a supplier or customer. I would measure those against the old workflow before claiming time saved. Successful automation here means a confirmed delivery and the right equipment on the truck."
           }
         ]
-      }
-    ],
-    "metrics": [
-      {
-        "value": "$5,032.66",
-        "label": "Stripe gross volume · April–September 8, 2026"
-      },
-      {
-        "value": "15",
-        "label": "New Stripe customers · same reporting period"
-      },
-      {
-        "value": "$4,881.62",
-        "label": "Stripe net volume · same reporting period"
       }
     ]
   },

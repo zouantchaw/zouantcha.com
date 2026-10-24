@@ -1,6 +1,7 @@
-export interface Env {
-  DB: D1Database
-  SITE_ENV: 'production' | 'staging'
+import { act, digest, signup, type LifecycleEnv } from './lifecycle'
+import { liveReady, previewMode } from './email'
+import { normalizeSource, resolveAttribution } from '../../../app/lib/source'
+export interface Env extends LifecycleEnv {
   INGEST_SECRET?: string
   FIELD_NOTES_INGEST_SECRET?: string
 }
@@ -55,100 +56,43 @@ function bearerToken(request: Request): string {
 const worker = {
   async fetch(request: Request, env: Env): Promise<Response> {
     const url = new URL(request.url)
-
-    if (request.method === 'GET' && url.pathname === '/health') {
-      return json(200, { ok: true })
-    }
-
-    if (request.method !== 'POST' || url.pathname !== '/subscribe') {
-      return json(404, { ok: false, error: 'not_found' })
-    }
-
+    if (request.method === 'GET' && url.pathname === '/health') return json(200, { ok: true })
+    if (request.method !== 'POST' || !['/subscribe','/confirm','/unsubscribe'].includes(url.pathname)) return json(404, { ok: false, error: 'not_found' })
     const secret = env.SITE_ENV === 'staging' ? env.FIELD_NOTES_INGEST_SECRET : env.INGEST_SECRET
-    if (!secret) {
-      return json(503, { ok: false, error: 'unavailable' })
-    }
-
-    const authorized = await secretsMatch(bearerToken(request), secret)
-    if (!authorized) {
-      return json(401, { ok: false, error: 'unauthorized' })
-    }
-
-    const length = Number(request.headers.get('content-length') || '0')
-    if (length > MAX_BODY_BYTES) {
-      return json(413, { ok: false, error: 'invalid' })
-    }
-
-    let payload: Record<string, unknown>
+    if (!secret) return json(503, { ok: false, error: 'unavailable' })
+    if (!await secretsMatch(bearerToken(request), secret)) return json(401, { ok: false, error: 'unauthorized' })
+    if (Number(request.headers.get('content-length') || 0) > MAX_BODY_BYTES) return json(413, { ok: false, error: 'invalid' })
     try {
       const raw = await request.text()
-      if (raw.length > MAX_BODY_BYTES) return json(413, { ok: false, error: 'invalid' })
-      payload = JSON.parse(raw) as Record<string, unknown>
+      if (new TextEncoder().encode(raw).length > MAX_BODY_BYTES) return json(413, { ok: false, error: 'invalid' })
+      const payload = JSON.parse(raw) as Record<string, unknown>
+      if (!payload || Array.isArray(payload) || typeof payload !== 'object') return json(400, { ok: false, error: 'invalid' })
+      const ipHash = clip(payload.ip_hash, 64)
+      if (!ipHash || !/^[a-f0-9]{32,64}$/.test(ipHash)) return json(400, { ok: false, error: 'invalid' })
+      const now = new Date().toISOString(), windowStart = new Date(Date.now() - RATE_WINDOW_MS).toISOString()
+      // Conditional insert is atomic under concurrent requests; separate scopes.
+      const scope = `${url.pathname}:${ipHash}`
+      const limited = await env.DB.prepare(`INSERT INTO signup_attempts(id,ip_hash,created_at)
+        SELECT ?,?,? WHERE (SELECT COUNT(*) FROM signup_attempts WHERE ip_hash=? AND created_at>=?)<?`)
+        .bind(crypto.randomUUID(), scope, now, scope, windowStart, url.pathname === '/subscribe' ? RATE_LIMIT : 30).run()
+      if (limited.meta.changes !== 1) return json(429, { ok: false, error: 'rate_limited' })
+      if (url.pathname !== '/subscribe') {
+        const outcome = await act(env.DB, url.pathname === '/confirm' ? 'confirm' : 'unsubscribe', typeof payload.token === 'string' ? payload.token : '')
+        return json(200, { ok: true, status: outcome })
+      }
+      if (!previewMode(env) && !liveReady(env)) return json(503, { ok: false, error: 'unavailable' })
+      const email = normalizeEmail(payload.email)
+      if (!email) return json(400, { ok: false, error: 'invalid_email' })
+      const emailKey = `email:${await digest(`${secret}:${email}`)}`
+      const counted = await env.DB.prepare(`INSERT INTO signup_attempts(id,ip_hash,created_at)
+        SELECT ?,?,? WHERE (SELECT COUNT(*) FROM signup_attempts WHERE ip_hash=? AND created_at>=?)<3`)
+        .bind(crypto.randomUUID(), emailKey, now, emailKey, windowStart).run()
+      if (counted.meta.changes !== 1 && !previewMode(env)) return json(503, { ok: false, error: 'unavailable' })
+      const attribution = resolveAttribution(new URLSearchParams({src:normalizeSource(payload.src),utm_source:normalizeSource(payload.utm_source),utm_medium:clip(payload.utm_medium,100)||'',utm_campaign:clip(payload.utm_campaign,100)||''}))
+      if (counted.meta.changes === 1 && !await signup(env, { ...payload, ...attribution, page:payload.page === '/log' ? '/log' : '/start' }, email)) return json(503, { ok: false, error: 'unavailable' })
+      return json(200, { ok: true, status: previewMode(env) ? 'preview' : 'pending_confirmation' })
     } catch {
-      return json(400, { ok: false, error: 'invalid' })
-    }
-
-    const email = normalizeEmail(payload.email)
-    if (!email) {
-      return json(400, { ok: false, error: 'invalid_email' })
-    }
-
-    const source = clip(payload.source, 64) || 'start_page'
-    const referrer = clip(payload.referrer, 500)
-    const utmSource = clip(payload.utm_source)
-    const utmMedium = clip(payload.utm_medium)
-    const utmCampaign = clip(payload.utm_campaign)
-    const ipHash = clip(payload.ip_hash, 64)
-
-    const now = new Date().toISOString()
-
-    if (ipHash) {
-      const windowStart = new Date(Date.now() - RATE_WINDOW_MS).toISOString()
-      const counted = await env.DB.prepare(
-        'SELECT COUNT(*) AS n FROM signup_attempts WHERE ip_hash = ? AND created_at >= ?',
-      )
-        .bind(ipHash, windowStart)
-        .first<{ n: number }>()
-
-      if ((counted?.n ?? 0) >= RATE_LIMIT) {
-        return json(429, { ok: false, error: 'rate_limited' })
-      }
-
-      await env.DB.prepare(
-        'INSERT INTO signup_attempts (id, ip_hash, created_at) VALUES (?, ?, ?)',
-      )
-        .bind(crypto.randomUUID(), ipHash, now)
-        .run()
-    }
-
-    try {
-      const inserted = await env.DB.prepare(
-        `INSERT INTO subscribers (
-          id, email, created_at, source, referrer, utm_source, utm_medium, utm_campaign
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-        ON CONFLICT(email) DO NOTHING`,
-      )
-        .bind(
-          crypto.randomUUID(),
-          email,
-          now,
-          source,
-          referrer,
-          utmSource,
-          utmMedium,
-          utmCampaign,
-        )
-        .run()
-
-      return json(200, {
-        ok: true,
-        duplicate: (inserted.meta.changes ?? 0) === 0,
-      })
-    } catch (error) {
-      const message = error instanceof Error ? error.message : ''
-      if (message.includes('UNIQUE constraint failed')) {
-        return json(200, { ok: true, duplicate: true })
-      }
+      // No provider errors, recipients, request bodies or tokens in logs.
       return json(503, { ok: false, error: 'unavailable' })
     }
   },

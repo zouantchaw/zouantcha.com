@@ -391,7 +391,7 @@ export default async function Page({ params }: PageProps) {
             )}
           </div>
         ) : null}
-        <CaseStudyDownload slug={item.slug} title={item.title} />
+        {item.slug !== 'diane-party-rentals' ? <CaseStudyDownload slug={item.slug} title={item.title} /> : null}
       </header>
 
       {item.slug === 'starthome' ? null : item.metrics?.length ? (

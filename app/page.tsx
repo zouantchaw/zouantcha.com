@@ -54,23 +54,21 @@ export default function Page() {
           </p>
           <div className="hero-actions">
             <TrackLink
-              href={homeHero.workHref}
+              href="/log"
               event="contact_project_click"
-              data={{ from: 'home_hero', destination: 'start' }}
+              data={{ from: 'home_hero', destination: 'log' }}
               className="hero-cta-primary"
             >
-              Work with me <span aria-hidden="true">→</span>
+              Get the weekly build log <span aria-hidden="true">→</span>
             </TrackLink>
-            <a href="#selected-work" className="hero-cta-secondary">
-              View my work
-            </a>
+            <Link href="/start" className="hero-cta-secondary">Work with me</Link>
             <TrackLink
-              href="/contact"
-              event="email_click"
+              href="/watch"
+              event="contact_project_click"
               data={{ from: 'home_hero' }}
               className="hero-cta-tertiary"
             >
-              Get in touch
+              Watch the work
             </TrackLink>
           </div>
         </div>
@@ -133,6 +131,21 @@ export default function Page() {
             </li>
           ))}
         </ul>
+      </section>
+
+      <section className="selected-work" aria-labelledby="current-product-heading">
+        <div className="section-heading-row">
+          <h2 id="current-product-heading" className="eyebrow">Currently building</h2>
+          <Link href="/lab">Products and experiments ↗</Link>
+        </div>
+        <ul><li>
+          <TrackLink href="/lab#radar-evenements" event="product_interest_click" data={{ product: 'radar-evenements', placement: 'home', destination: 'lab' }} className="selected-work-card">
+            <span className="selected-work-title">Radar Événements</span>
+            <span className="selected-work-problem">Alerts from Québec's public event alcohol permits for rental companies, caterers, DJs and security firms.</span>
+            <span className="selected-work-result">In progress</span>
+            <span className="selected-work-cta">Follow the work →</span>
+          </TrackLink>
+        </li></ul>
       </section>
 
       <ContinueReading />

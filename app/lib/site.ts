@@ -3,7 +3,7 @@ export const site = {
   formalName: 'Wielfried Zouantcha',
   title: 'Software & AI Engineer',
   resumeTitle: 'Full-Stack Software Engineer · React / TypeScript / Node.js',
-  headline: 'I build software and AI for businesses that already make money.',
+  headline: 'I build agent-run businesses from public data.',
   location: 'Remote · US, Canada and Europe',
   email: 'zouantchaw74@gmail.com',
   github: 'https://github.com/zouantchaw',
@@ -14,9 +14,9 @@ export const site = {
   resumeDownload: '/wielfried-zouantcha-resume.pdf',
   resumeFilename: 'wielfried-zouantcha-resume.pdf',
   description:
-    'Software and AI engineer with 5+ years of production experience. I build for businesses that already make money, one fixed-price phase at a time: connected to real data, tested against real cases, and running on the client’s own accounts.',
+    "Public-data products, AI in my family's businesses, and the real builds behind them. Follow the build log or bring a workflow to a 20-minute review.",
   socialDescription:
-    'Software & AI Engineer. I build software and AI for businesses that already make money, one fixed-price phase at a time.',
+    "Public-data products, AI in my family's businesses, and the real builds behind them. Follow the build log or bring a workflow to a 20-minute review.",
 }
 
 export const intro = {
@@ -231,7 +231,7 @@ export const contact = {
   title: 'Let’s talk.',
   project: {
     title: 'Start with a 20-minute review',
-    body: 'Bring one workflow that costs you time, customers or money. We look at how it runs today. If there is a project worth doing, I send a fixed-price Phase 1 proposal. Phase 1 starts at $5,000.',
+    body: 'Bring one workflow that costs you time. We look at how it runs today and where software or agents can help. If there is a useful project, I send a fixed-price setup proposal with the scope, the work you will review, and the price.',
     subject: 'Project inquiry',
   },
   reviewHref: 'https://cal.com/wielfried/intro',
@@ -243,7 +243,7 @@ export const contact = {
     },
     project: {
       title: 'Let’s talk about a project.',
-      intro: 'Bring one workflow that costs you time, customers or money. If there is a project worth doing, I send a fixed-price Phase 1 proposal. Phase 1 starts at $5,000.',
+      intro: 'Bring one workflow that costs you time. If there is a useful project, I send a fixed-price setup proposal with the scope, the work you will review, and the price.',
       subject: 'Project inquiry',
     },
   },
@@ -251,17 +251,17 @@ export const contact = {
 
 export const homeHero = {
   eyebrow: 'Software & AI Engineer · Independent',
-  title: 'I build software and AI for businesses that already make money.',
-  body: 'Right now I’m putting AI to work in my family’s two businesses, a party rental company and a youth soccer academy, and running two research projects of my own, MTL Archives and PortMind. Before this, I spent 5+ years shipping SaaS products, integrations, data systems and applied AI at SaaS Alerts, Ethos and Oloodi.',
+  title: 'I build agent-run businesses from public data.',
+  body: "I also use AI in my family's businesses: a party rental company and a youth soccer academy. Here I share the builds, what breaks, and the real numbers.",
   availability: 'Taking on a small number of new projects.',
   workHref: '/start',
 }
 
 export const proof = [
+  { value: '2.66M', label: 'Social views · Jan–Jul 2026', href: '/case-studies/mtl-archives' },
   { value: '5+ years', label: 'Software engineering', href: '/work' },
   { value: '50+', label: 'Merchant accounts', href: '/work/ethos' },
   { value: '81K+', label: 'AI observations', href: '/case-studies/portmind' },
-  { value: '0→1', label: 'Products built and operated', href: '/case-studies' },
 ]
 
 export const selectedWork = [
@@ -270,7 +270,7 @@ export const selectedWork = [
     title: 'Diane Party Rentals',
     problem: 'Turning messy rental operations into software a family business can actually run.',
     result:
-      'Connected quotes, payments and bookings: $5,032.66 gross processed through Stripe, April–September 2026.',
+      'Connected quotes, payments, bookings and operational handoffs.',
     stack: 'Next.js · Stripe · Inventory · Operations',
     href: '/case-studies/diane-party-rentals',
     cta: 'Read case study →',
@@ -300,7 +300,7 @@ export const selectedWork = [
     title: 'MTL Archives',
     problem: 'Making thousands of historical Montréal photographs searchable, playable and public.',
     result:
-      'Built ingestion, visual search, product and editorial systems around 13,499 serving records, with 2.66M social views over seven months.',
+      'Built ingestion, visual search, product and editorial systems around 13,499 serving records, with 2.66M combined Facebook and Instagram views, Jan–Jul 2026.',
     stack: 'Python · Next.js · Cloudflare · CLIP · ETL',
     href: '/case-studies/mtl-archives',
     cta: 'Read case study →',
@@ -353,14 +353,14 @@ export const homeExperience = [
 
 export const availabilityCta = {
   title: 'Let’s build something useful.',
-  body: 'Bring one workflow that costs you time, customers or money. In a free 20-minute review, we look at how it runs today and whether there’s a project worth doing.',
+  body: 'Bring one workflow that costs you time. In a 20-minute review, we look at how it runs today and where software or agents can help.',
   primary: { label: 'Book a 20-minute review →', href: 'https://cal.com/wielfried/intro' },
   secondary: { label: 'How it works →', href: '/start' },
 }
 
 export const connectCopy = {
   eyebrow: 'Software & AI Engineer',
-  body: 'Building software and AI for businesses that already make money, one fixed-price phase at a time.',
+  body: "Public-data products, AI in my family's businesses, and the real builds behind them.",
   event: 'At Exploit Summit 2026 · Montréal',
   proof: [
     '5+ years engineering',
