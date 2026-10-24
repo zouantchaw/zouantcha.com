@@ -14,7 +14,9 @@
     "deploy:cloudflare": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
     "deploy:cloudflare:built": "opennextjs-cloudflare deploy",
     "deploy:field-notes": "wrangler deploy --config workers/field-notes/wrangler.jsonc",
-    "typecheck": "node scripts/build-blog-content.mjs && tsc --noEmit"
+    "typecheck": "node scripts/build-blog-content.mjs && tsc --noEmit",
+    "deploy:staging": "opennextjs-cloudflare build --env staging && opennextjs-cloudflare deploy --env staging",
+    "deploy:field-notes:staging": "wrangler deploy --config workers/field-notes/wrangler.jsonc --env staging"
   },
   "dependencies": {
     "@opennextjs/cloudflare": "1.20.9",

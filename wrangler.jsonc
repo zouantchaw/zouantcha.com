@@ -36,7 +36,8 @@
     }
   ],
   "vars": {
-    "FIELD_NOTES_WORKER_URL": "https://api.zouantcha.com"
+    "FIELD_NOTES_WORKER_URL": "https://api.zouantcha.com",
+    "SITE_ENV": "production"
   },
   "r2_buckets": [
     {
@@ -56,5 +57,43 @@
   "observability": {
     "enabled": true,
     "head_sampling_rate": 0.1
+  },
+  "env": {
+    "staging": {
+      "name": "zouantcha-site-staging",
+      "workers_dev": true,
+      "preview_urls": false,
+      "routes": [],
+      "assets": {
+        "directory": ".open-next/assets",
+        "binding": "ASSETS",
+        "run_worker_first": true
+      },
+      "services": [
+        {
+          "binding": "FIELD_NOTES_API",
+          "service": "zouantcha-field-notes-staging"
+        }
+      ],
+      "vars": {
+        "SITE_ENV": "staging",
+        "FIELD_NOTES_WORKER_URL": "https://zouantcha-field-notes-staging.wiel.workers.dev"
+      },
+      "r2_buckets": [
+        {
+          "binding": "NEXT_INC_CACHE_R2_BUCKET",
+          "bucket_name": "zouantcha-site-cache-staging"
+        }
+      ],
+      "images": {
+        "binding": "IMAGES"
+      },
+      "analytics_engine_datasets": [
+        {
+          "binding": "ANALYTICS",
+          "dataset": "zouantcha_site_events_staging"
+        }
+      ]
+    }
   }
 }
