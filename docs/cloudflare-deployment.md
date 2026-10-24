@@ -196,8 +196,12 @@ draft issues and campaigns are hard-disabled at the adapter. Staging live mode
 requires the staging public origin and the exact allowlisted owner inbox
 `zouantchaw74@gmail.com`. Its `EMAIL` binding restricts the sender to
 `wiel@notify.zouantcha.com`; the application restricts the recipient. Explicit
-preview mode never falls back to live sending. Production remains disabled until
-the approved release resumes after owner inbox/link confirmation.
+preview mode never falls back to live sending. Production enables public signup
+confirmations only, using the approved sender and fixed www origin. Wiel confirmed
+staging inbox receipt/link use on 2026-10-24; staging D1 confirmed token consumption
+and the subsequent explicit unsubscribe check passed. Issues and campaigns remain
+hard-disabled. Set `CLOUDFLARE_ACCOUNT_ID=0bb05130da965c096b12cc1f0637f763`
+when running the production scripts to avoid OpenNext account-discovery pagination.
 
 Release activation was approved by Wiel on 2026-10-24. Staging acceptance must
 finish before production backup, migration, merge or deployment. The release

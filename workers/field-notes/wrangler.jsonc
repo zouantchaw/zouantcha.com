@@ -26,7 +26,13 @@
   ],
   "vars": {
     "SITE_ENV": "production",
-    "BUILD_LOG_MAIL_MODE": "disabled"
+    "BUILD_LOG_MAIL_MODE": "live",
+    "BUILD_LOG_PUBLIC_URL": "https://www.zouantcha.com",
+    "EMAIL_SENDER_APPROVED": "yes",
+    "EMAIL_FROM": "wiel@notify.zouantcha.com",
+    "EMAIL_EXPECTED_FROM": "wiel@notify.zouantcha.com",
+    "EMAIL_REPLY_TO": "zouantchaw74@gmail.com",
+    "EMAIL_RECIPIENT_POLICY": "confirmed-public"
   },
   "env": {
     "staging": {
@@ -62,5 +68,13 @@
         }
       ]
     }
-  }
+  },
+  "send_email": [
+    {
+      "name": "EMAIL",
+      "allowed_sender_addresses": [
+        "wiel@notify.zouantcha.com"
+      ]
+    }
+  ]
 }
