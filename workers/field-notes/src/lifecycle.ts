@@ -84,8 +84,7 @@ export async function signup(env: LifecycleEnv, payload: Record<string, unknown>
     const row = await db.prepare('SELECT membership_id FROM build_log_requests WHERE id=?').bind(requestId).first<{ membership_id: string }>()
     // Public origin is fixed server configuration, never a submitted URL.
     const base = previewMode(env) ? 'https://zouantcha-site-staging.wiel.workers.dev' : env.BUILD_LOG_PUBLIC_URL!
-    const mail = renderConfirmation(`${base}/log/confirm?token=${confirmToken}`, `${base}/log/unsubscribe?token=${unsubscribeToken}`,
-      previewMode(env) ? 'DRAFT — public postal address pending approval' : env.EMAIL_PUBLIC_POSTAL_ADDRESS!)
+    const mail = renderConfirmation(`${base}/log/confirm?token=${confirmToken}`, `${base}/log/unsubscribe?token=${unsubscribeToken}`)
     const outcome = await finishConfirmation(env, requestId, row!.membership_id, requestId, email, mail)
     if (outcome !== 'preview' && outcome !== 'provider-accepted' && outcome !== 'suppressed') return false
   }

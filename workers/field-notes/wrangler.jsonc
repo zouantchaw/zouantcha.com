@@ -36,7 +36,14 @@
       "routes": [],
       "vars": {
         "SITE_ENV": "staging",
-        "BUILD_LOG_MAIL_MODE": "preview"
+        "BUILD_LOG_MAIL_MODE": "live",
+        "BUILD_LOG_PUBLIC_URL": "https://zouantcha-site-staging.wiel.workers.dev",
+        "EMAIL_SENDER_APPROVED": "yes",
+        "EMAIL_FROM": "wiel@notify.zouantcha.com",
+        "EMAIL_EXPECTED_FROM": "wiel@notify.zouantcha.com",
+        "EMAIL_REPLY_TO": "zouantchaw74@gmail.com",
+        "EMAIL_RECIPIENT_POLICY": "allowlist",
+        "EMAIL_ALLOWED_RECIPIENTS": "zouantchaw74@gmail.com"
       },
       "d1_databases": [
         {
@@ -44,6 +51,14 @@
           "database_name": "zouantcha-field-notes-staging",
           "database_id": "539380aa-21e6-4d8e-8059-e9f3860c38de",
           "migrations_dir": "migrations"
+        }
+      ],
+      "send_email": [
+        {
+          "name": "EMAIL",
+          "allowed_sender_addresses": [
+            "wiel@notify.zouantcha.com"
+          ]
         }
       ]
     }

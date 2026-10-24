@@ -155,7 +155,7 @@ restore an old subscriber dump over new rows, revoke shared credentials or cance
 shared accounts. Retain a short DNS transition bridge only while resolver caches
 may use the old delegation, with retirement recorded in the migration ledger.
 
-## Build-log lifecycle (staged, sending disabled)
+## Build-log lifecycle
 
 `0002_build_log_lifecycle.sql` is additive. It leaves the legacy `subscribers`
 table unchanged and does not infer consent or membership for any historic row.
@@ -175,11 +175,12 @@ Opt-out revokes all confirmation tokens. Rejoin stays unsubscribed until a new
 explicit confirmation. Suppression revokes only confirmation tokens, preserving
 explicit opt-out and its audit record, and cannot be undone by signup.
 
-Staging uses `BUILD_LOG_MAIL_MODE=preview`. Its private `build_log_outbox` stores
+Private preview mode is available only on staging. Its private `build_log_outbox` stores
 HTML/text previews (including synthetic action links); inspect **only owned
 fixtures** through authenticated D1 CLI tooling. There is no public outbox route.
-Do not publish outbox bodies, tokens or recipients in reports, PRs or logs. The
-postal-address placeholder is marked DRAFT and exists only in private previews.
+Do not publish outbox bodies, tokens or recipients in reports, PRs or logs.
+All email renderers use the approved `PUBLIC_POSTAL_ADDRESS` constant in
+`app/lib/public-contact.ts`. There are no legal/privacy pages in this site.
 A claim is made once per logical message, before transport. Outcomes are
 `preview`, `provider-accepted`, `suppressed`, `failed`, `unknown`. A crash, timeout
 or ambiguous result stays `unknown`; an operator must reconcile it privately.
@@ -190,11 +191,17 @@ after cooldown; the failed logical message is never resent. Unknown outcomes kee
 their confirmation token usable and block fresh requests pending reconciliation.
 Query-string redaction in Worker observability protects capability URLs.
 
-The native structured `EMAIL.send` adapter exists but is **disabled and unbound**.
-Production defaults to `BUILD_LOG_MAIL_MODE=disabled` and returns unavailable
-before capturing a new signup. Staging cannot fall back to live mail.
+The native structured `EMAIL.send` adapter sends confirmation messages only;
+draft issues and campaigns are hard-disabled at the adapter. Staging live mode
+requires the staging public origin and the exact allowlisted owner inbox
+`zouantchaw74@gmail.com`. Its `EMAIL` binding restricts the sender to
+`wiel@notify.zouantcha.com`; the application restricts the recipient. Explicit
+preview mode never falls back to live sending. Production remains disabled until
+the approved release resumes after owner inbox/link confirmation.
 
-Activation is a separate approved change, not part of deploying this candidate:
+Release activation was approved by Wiel on 2026-10-24. Staging acceptance must
+finish before production backup, migration, merge or deployment. The release
+spec and report live in PKM `.claude-work/distribution-v2/specs/`. Activation controls:
 
 1. Review the real public postal/footer address and exact From/Reply-To identity
    with Wiel. Verify current account sending eligibility, verified notify domain,
@@ -203,11 +210,12 @@ Activation is a separate approved change, not part of deploying this candidate:
    `BUILD_LOG_PUBLIC_URL=https://www.zouantcha.com`, `EMAIL_SENDER_APPROVED=yes`,
    matching approved `EMAIL_FROM` / `EMAIL_EXPECTED_FROM` (on the verified notify
    domain), optional approved `EMAIL_REPLY_TO`, and real
-   `EMAIL_PUBLIC_POSTAL_ADDRESS`. The readiness guard rejects a draft placeholder.
+   `EMAIL_PUBLIC_POSTAL_ADDRESS` if set. Templates always use the approved source
+   constant; the readiness guard rejects a conflicting runtime address.
 3. Choose `EMAIL_RECIPIENT_POLICY=allowlist` with exact comma-separated
    `EMAIL_ALLOWED_RECIPIENTS` for a controlled sending check, or explicitly approve
-   `confirmed-public` for public signup confirmation. No business identity or
-   recipient is installed in this candidate. Keep environment values isolated.
+   `confirmed-public` for public signup confirmation. Keep environment values
+   isolated; staging remains restricted to the approved test inbox.
 4. Add the native backend `send_email` binding named `EMAIL` only after approval.
    Current official docs describe `allowed_sender_addresses` for sender limits,
    and `destination_address` or `allowed_destination_addresses` for recipient

@@ -147,7 +147,7 @@ export function FieldNotesForm({
           {message}
         </p>
       ) : null}
-      <p id={`${id}-consent`} className="start-consent">{startCopy.consent} {startCopy.preparationNote}{preview ? ' This staging preview does not send email.' : ''}</p>
+      <p id={`${id}-consent`} className="start-consent">{startCopy.consent} {startCopy.preparationNote}{preview ? ' Staging confirmation email is restricted to the approved test inbox.' : ''}</p>
     </form>
   )
 }
