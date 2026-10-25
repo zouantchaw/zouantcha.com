@@ -32,7 +32,8 @@
     "EMAIL_FROM": "wiel@notify.zouantcha.com",
     "EMAIL_EXPECTED_FROM": "wiel@notify.zouantcha.com",
     "EMAIL_REPLY_TO": "zouantchaw74@gmail.com",
-    "EMAIL_RECIPIENT_POLICY": "confirmed-public"
+    "EMAIL_RECIPIENT_POLICY": "confirmed-public",
+    "ISSUE_SEND_MODE": "disabled"
   },
   "env": {
     "staging": {
@@ -49,7 +50,8 @@
         "EMAIL_EXPECTED_FROM": "wiel@notify.zouantcha.com",
         "EMAIL_REPLY_TO": "zouantchaw74@gmail.com",
         "EMAIL_RECIPIENT_POLICY": "allowlist",
-        "EMAIL_ALLOWED_RECIPIENTS": "zouantchaw74@gmail.com"
+        "EMAIL_ALLOWED_RECIPIENTS": "zouantchaw74@gmail.com",
+        "ISSUE_SEND_MODE": "disabled"
       },
       "d1_databases": [
         {
