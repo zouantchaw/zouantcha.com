@@ -253,7 +253,9 @@ confirmation sending is unchanged; no issue rollout is included. Only staging
 The dedicated collector and private CSV/Google Feed wiring are documented in
 `workers/scorecard/README.md`. It reads production Field Notes and staging Radar
 through SELECT-only queries and writes only its own isolated staging D1. The
-08:00 Toronto cron reports the previous completed Friday noon window. Unknown
+Friday 12:05 America/Toronto cron reports [previous Friday noon, this Friday
+noon). The 16:05/17:05 UTC candidates are guarded to Friday 12:05–12:59 local
+time so DST changes neither skip nor duplicate the collection. Unknown
 coverage and staging fixtures never become verified Friday business counts.
 
 Required before production issue activation: production migration review/backup,

@@ -5,14 +5,20 @@ Its own D1 stores `scorecard_weeks`; all queries against Field Notes and Radar a
 SELECT-only. No subscriber data leaves those source queries. The feed contains
 aggregate counts, source statuses and explicitly provisional staging diagnostics.
 
-Two UTC cron candidates (`12:00` and `13:00` Friday) are filtered at runtime to
-08:00 America/Toronto, including DST. Only one runs. Since the metric definitions
-use a **Friday noon** cutoff, the morning run snapshots the latest *completed*
-noon window (the previous Friday), never the coming four hours. Each boundary
-is converted separately. Duplicate cron/manual requests preserve the first row.
+The collector runs **Friday 12:05 America/Toronto**, reporting the week ending
+that day: **[previous Friday 12:00, this Friday 12:00)** Toronto. UTC cron
+candidates `5 16 * * 5` and `5 17 * * 5` cover EDT and EST; the scheduled-time
+guard accepts only Friday 12:05–12:59 Toronto, so the other candidate is a no-op.
+Each noon boundary is converted separately: a spring-transition period lasts
+167 hours and a fall-transition period 169 hours. For example, October 30, 2026
+runs at 16:05 UTC for [October 23 16:00Z, October 30 16:00Z); November 6 runs at
+17:05 UTC for [October 30 16:00Z, November 6 17:00Z).
+Duplicate cron/manual requests preserve the first row.
 `POST /collect` with `Authorization: Bearer <COLLECTOR_SECRET>` forces the same
 idempotent collector. It accepts no arbitrary SQL, database, date or historical
-backfill input. Cron failures reject the event; failed reads never create zeros.
+backfill input. Manual runs use the latest completed Friday-noon period (before
+Friday noon, that is still the preceding Friday). Cron failures reject the
+event; failed reads never create zeros.
 
 `GET /feed/<FEED_TOKEN>.csv` returns up to 52 descending weeks, no-store/noindex.
 Observability is off to avoid logging path capabilities. Both tokens live in

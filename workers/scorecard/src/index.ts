@@ -12,7 +12,7 @@ type Values = Record<string,string|number|null>
 const OWNER='zouantchaw74@gmail.com'
 const TZ='America/Toronto'
 function localParts(date: Date) {
-  const parts=new Intl.DateTimeFormat('en-CA',{timeZone:TZ,year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',hourCycle:'h23',weekday:'short'}).formatToParts(date)
+  const parts=new Intl.DateTimeFormat('en-CA',{timeZone:TZ,year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',hourCycle:'h23',weekday:'short'}).formatToParts(date)
   return Object.fromEntries(parts.map(p=>[p.type,p.value]))
 }
 function noonUTC(date: string) {
@@ -22,6 +22,8 @@ function noonUTC(date: string) {
   return new Date(guess.getTime()+(12-hour)*3600000).toISOString()
 }
 export function reportWindow(now: Date) {
+  // At Friday 12:05 Toronto this ends at today's noon, not last Friday's.
+  // Manual runs before noon still use the latest completed period.
   const p=localParts(now), day=`${p.year}-${p.month}-${p.day}`
   let cursor=new Date(`${day}T12:00:00Z`)
   const shift=(cursor.getUTCDay()+2)%7
@@ -64,9 +66,9 @@ async function same(a:string,b:string) {
 const cell=(v:unknown)=>v===null||v===undefined?'':`"${String(v).replaceAll('"','""')}"`
 export default {
   async scheduled(controller: ScheduledController,env: Env,ctx: ExecutionContext) {
-    // Two UTC candidates handle DST; only Friday 08:00 Toronto can collect.
+    // 16:05/17:05 UTC cover EDT/EST. Only Friday 12:05–12:59 Toronto runs.
     const now=new Date(controller.scheduledTime),p=localParts(now)
-    if(p.weekday==='Fri'&&p.hour==='08')ctx.waitUntil(collect(env,now))
+    if(p.weekday==='Fri'&&p.hour==='12'&&Number(p.minute)>=5)ctx.waitUntil(collect(env,now))
   },
   async fetch(request: Request,env: Env) {
     const url=new URL(request.url)

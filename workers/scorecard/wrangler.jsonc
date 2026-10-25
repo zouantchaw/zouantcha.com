@@ -8,7 +8,7 @@
   "preview_urls": false,
   "routes": [],
   "observability": {"enabled": false},
-  "triggers": {"crons": ["0 12 * * fri", "0 13 * * fri"]},
+  "triggers": {"crons": ["5 16 * * 5", "5 17 * * 5"]},
   "vars": {"RADAR_ENV": "staging", "BUILD_LOG_COVERAGE_START": "2026-10-24T14:54:19.000Z"},
   "d1_databases": [
     {"binding": "SCORECARD", "database_name": "zouantcha-scorecard-staging", "database_id": "d8ecc5e7-1c4f-4952-ae5a-31614865c92d", "migrations_dir": "migrations"},
