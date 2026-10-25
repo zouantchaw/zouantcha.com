@@ -31,7 +31,7 @@ this change.
 
 Dark mode is progressive enhancement: the inline light palette works by itself.
 The small optional style block adds dark surfaces, pale cobalt links and readable
-body/secondary text. The footer breaks address detector input with U+200D joiners
+body/secondary text. The footer breaks the street number and each address word with U+200D joiners
 and resets Apple data-detector links. Plain text removes the invisible joiners.
 Browser sandboxes cannot certify Gmail/iOS's proprietary address detectors;
 inbox receipt remains the final client check.

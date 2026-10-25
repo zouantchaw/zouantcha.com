@@ -46,8 +46,9 @@ export function Cta({ href, children }: { href: string; children: React.ReactNod
 }
 
 export function Footer({ unsubscribe, confirmation = false }: { unsubscribe: string; confirmation?: boolean }) {
-  // Joiners interrupt address detectors even when clients strip the style block.
-  const address = PUBLIC_POSTAL_ADDRESS.replace(/ /g, '\u200d ')
+  // Break the street number and every address word, not just spaces. Gmail
+  // still recognizes an address when only its word boundaries contain joiners.
+  const address = Array.from(PUBLIC_POSTAL_ADDRESS).join('\u200d')
   return <EmailSection className="rule" style={{ borderTop: `1px solid ${tokens.line}`, paddingTop: 20 }}>
     <Text className="muted" style={{ ...paragraph, fontSize: 12, lineHeight: '19px', color: tokens.muted, marginBottom: 12 }}>
       {confirmation ? "You're getting this because you asked to join" : "You're getting this because you signed up at"}{' '}
