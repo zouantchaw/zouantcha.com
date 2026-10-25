@@ -242,3 +242,20 @@ https://developers.cloudflare.com/email-service/api/send-emails/workers-api/
 and https://developers.cloudflare.com/email-service/configuration/send-bindings/.
 The explicit opt-out form is implemented. RFC 8058 List-Unsubscribe-Post headers
 and a one-click endpoint are not installed; the draft renderer emits neither.
+
+## Newsletter/scorecard staging extension (2026-10-25)
+
+See `workers/field-notes/README.md` for the disabled Resend issue adapter,
+per-issue unsubscribe migration and signed provider-event suppression. Production
+confirmation sending is unchanged; no issue rollout is included. Only staging
+`0003_build_log_issues.sql` has been applied in this implementation.
+
+The dedicated collector and private CSV/Google Feed wiring are documented in
+`workers/scorecard/README.md`. It reads production Field Notes and staging Radar
+through SELECT-only queries and writes only its own isolated staging D1. The
+08:00 Toronto cron reports the previous completed Friday noon window. Unknown
+coverage and staging fixtures never become verified Friday business counts.
+
+Required before production issue activation: production migration review/backup,
+provider policy and quotas, real recipients, broadcast queue/reconciliation,
+production URL/token policy, production keys/webhook, and Wiel's explicit go-ahead.

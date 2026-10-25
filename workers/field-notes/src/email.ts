@@ -1,6 +1,6 @@
 import { PUBLIC_POSTAL_ADDRESS } from '../../../app/lib/public-contact'
 
-export type Mail = { kind: 'confirmation' | 'draft'; subject: string; text: string; html: string }
+export type Mail = { kind: 'confirmation' | 'draft' | 'issue'; subject: string; text: string; html: string }
 export type NativeMessage = Omit<Mail, 'kind'> & { from: { email: string; name: string }; to: string; replyTo?: string; headers?: Record<string, string> }
 export interface MailEnv {
   SITE_ENV: 'production' | 'staging'
@@ -44,7 +44,7 @@ function layout(kind: Mail['kind'], subject: string, paragraphs: string[], actio
 export function renderConfirmation(confirm: string, unsubscribe: string): Mail {
   return layout('confirmation', 'Confirm your build-log signup', ["You're receiving this email because you requested Wiel's weekly build log on zouantcha.com.", "Confirm that you want Wiel's weekly build log: what I built, what worked, what broke, and the numbers.", 'This confirmation link expires in 24 hours. Opening the link does not confirm your signup; use the button on the page.', 'If you did not request this, you can ignore this message.'], { label: 'Confirm my email', url: confirm }, unsubscribe)
 }
-// Private renderer only; no campaign route, schedule or bulk-send implementation.
+// Private draft renderer; it never passes the native confirmation sender.
 export function renderBuildLogDraft(title: string, paragraphs: string[], unsubscribe: string): Mail {
   return layout('draft', `DRAFT — ${title}`, ["You're receiving this email because you confirmed your signup for Wiel's build log.", ...paragraphs], null, unsubscribe)
 }
@@ -65,4 +65,8 @@ export async function nativeSend(env: MailEnv, to: string, mail: Mail): Promise<
     if (code === 'E_RECIPIENT_SUPPRESSED') return { outcome: 'suppressed', code }
     return rejected.has(code) ? { outcome: 'failed', code } : { outcome: 'unknown', code: 'outcome_unknown' }
   }
+}
+
+export function renderBuildLogIssue(title: string, paragraphs: string[], unsubscribe: string): Mail {
+  return layout('issue', title, ["You're receiving this email because you confirmed your signup for Wiel's build log.", ...paragraphs], null, unsubscribe)
 }
