@@ -1,4 +1,8 @@
 import { PUBLIC_POSTAL_ADDRESS } from '../../../app/lib/public-contact'
+import * as React from 'react'
+import { render } from '@react-email/render'
+import { BuildLogEmail, type IssueContent } from '../../../emails/build-log'
+import { ConfirmationEmail } from '../../../emails/confirmation'
 
 export type Mail = { kind: 'confirmation' | 'draft' | 'issue'; subject: string; text: string; html: string }
 export type NativeMessage = Omit<Mail, 'kind'> & { from: { email: string; name: string }; to: string; replyTo?: string; headers?: Record<string, string> }
@@ -31,22 +35,28 @@ export function liveReady(env: MailEnv) {
     && (!staging || (env.EMAIL_RECIPIENT_POLICY === 'allowlist' && env.EMAIL_ALLOWED_RECIPIENTS?.trim().toLowerCase() === 'zouantchaw74@gmail.com'))
     && env.BUILD_LOG_PUBLIC_URL === origin
 }
-const escape = (s: string) => s.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]!))
-function layout(kind: Mail['kind'], subject: string, paragraphs: string[], action: { label: string; url: string } | null, unsubscribe: string): Mail {
-  const footer = PUBLIC_POSTAL_ADDRESS
-  return {
-    kind,
-    subject,
-    text: [subject, ...paragraphs, ...(action ? [`${action.label}: ${action.url}`] : []), `Unsubscribe: ${unsubscribe}`, footer].join('\n\n'),
-    html: `<html><body style="background:#f7f5f0;color:#24231f;font-family:Arial,sans-serif;line-height:1.6"><main style="max-width:560px;margin:40px auto;padding:24px"><p>Wiel · Build log</p><h1 style="font-family:Georgia,serif;font-weight:400">${escape(subject)}</h1>${paragraphs.map(p => `<p>${escape(p)}</p>`).join('')}${action ? `<p><a href="${escape(action.url)}">${escape(action.label)}</a></p>` : ''}<hr><p><a href="${escape(unsubscribe)}">Unsubscribe</a></p><p>${escape(footer)}</p></main></body></html>`,
+const STAGING_ASSETS = 'https://zouantcha-site-staging.wiel.workers.dev'
+const LIVE_ASSETS = 'https://www.zouantcha.com'
+async function renderMail(kind: Mail['kind'], subject: string, element: React.ReactElement): Promise<Mail> {
+  const html = await render(element)
+  const text = (await render(element, { plainText: true })).replace(/\u200d/g, '')
+  return { kind, subject, html, text }
+}
+export function renderConfirmation(confirm: string, unsubscribe: string): Promise<Mail> {
+  const assetOrigin = new URL(confirm).origin === STAGING_ASSETS ? STAGING_ASSETS : LIVE_ASSETS
+  return renderMail('confirmation', 'Confirm your build-log signup', React.createElement(ConfirmationEmail, { confirm, unsubscribe, assetOrigin }))
+}
+// Private drafts use the same base and never pass the native confirmation sender.
+export function renderBuildLogDraft(title: string, paragraphs: string[], unsubscribe: string): Promise<Mail> {
+  return renderIssue('draft', title, paragraphs, unsubscribe)
+}
+function renderIssue(kind: 'draft' | 'issue', title: string, paragraphs: string[], unsubscribe: string, issue?: IssueContent): Promise<Mail> {
+  const content: IssueContent = issue || {
+    number: 1, date: '', preheader: title, intro: paragraphs,
+    built: [], broke: [], numbers: [], closing: '',
+    cta: { label: 'Follow the build log →', url: 'https://www.zouantcha.com/log' },
   }
-}
-export function renderConfirmation(confirm: string, unsubscribe: string): Mail {
-  return layout('confirmation', 'Confirm your build-log signup', ["You're receiving this email because you requested Wiel's weekly build log on zouantcha.com.", "Confirm that you want Wiel's weekly build log: what I built, what worked, what broke, and the numbers.", 'This confirmation link expires in 24 hours. Opening the link does not confirm your signup; use the button on the page.', 'If you did not request this, you can ignore this message.'], { label: 'Confirm my email', url: confirm }, unsubscribe)
-}
-// Private draft renderer; it never passes the native confirmation sender.
-export function renderBuildLogDraft(title: string, paragraphs: string[], unsubscribe: string): Mail {
-  return layout('draft', `DRAFT — ${title}`, ["You're receiving this email because you confirmed your signup for Wiel's build log.", ...paragraphs], null, unsubscribe)
+  return renderMail(kind, title, React.createElement(BuildLogEmail, { title, issue: content, unsubscribe, assetOrigin: STAGING_ASSETS }))
 }
 const rejected = new Set(['E_VALIDATION_ERROR','E_FIELD_MISSING','E_TOO_MANY_RECIPIENTS','E_TOO_MANY_ATTACHMENTS','E_SENDER_NOT_VERIFIED','E_RECIPIENT_NOT_ALLOWED','E_ACCOUNT_SUSPENDED','E_SENDER_DOMAIN_NOT_AVAILABLE','E_CONTENT_TOO_LARGE','E_RATE_LIMIT_EXCEEDED','E_DAILY_LIMIT_EXCEEDED','E_HEADER_NOT_ALLOWED','E_HEADER_USE_API_FIELD','E_HEADER_VALUE_INVALID','E_HEADER_VALUE_TOO_LONG','E_HEADER_NAME_INVALID','E_HEADERS_TOO_LARGE','E_HEADERS_TOO_MANY'])
 export type Outcome = { outcome: 'provider-accepted' | 'failed' | 'suppressed' | 'unknown'; messageId?: string; code?: string }
@@ -67,6 +77,6 @@ export async function nativeSend(env: MailEnv, to: string, mail: Mail): Promise<
   }
 }
 
-export function renderBuildLogIssue(title: string, paragraphs: string[], unsubscribe: string): Mail {
-  return layout('issue', title, ["You're receiving this email because you confirmed your signup for Wiel's build log.", ...paragraphs], null, unsubscribe)
+export function renderBuildLogIssue(title: string, paragraphs: string[], unsubscribe: string, issue?: IssueContent): Promise<Mail> {
+  return renderIssue('issue', title, paragraphs, unsubscribe, issue)
 }

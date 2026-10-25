@@ -38,7 +38,7 @@ eligibility and suppression stay in D1; no Resend audience import is performed.
 
 `ISSUE_SEND_MODE=disabled` is the checked-in default in both environments.
 For the single approved staging test, temporarily set `allowlist`. Authenticated
-`POST /issues/test` accepts `{id,title,paragraphs}` through the separate staging
+`POST /issues/test` accepts `{id,title,paragraphs,issue?}` through the separate staging
 `ISSUE_ADMIN_SECRET` (keychain `resend-zouantcha-operator`, account `news`). It selects only the exact owner inbox from `build_log_eligible`;
 there is no caller-supplied recipient, public bulk route or scheduler. Production
 is additionally denied even if the mode is changed accidentally. A future real
@@ -46,6 +46,13 @@ broadcast activation needs a reviewed recipient policy, queue/quota handling and
 explicit production approval. The issue content hash is immutable per ID and each
 recipient/issue is atomically claimed once. Ambiguous sends stay `unknown`; no
 automatic retry or token plaintext is retained. Reconcile through Resend privately.
+
+`issue` is the validated structured content used by the redesigned React Email
+template: number, date, preheader, intro, built, broke, numbers, closing and CTA.
+The CTA currently points only to `https://www.zouantcha.com/log`. The legacy
+paragraph payload remains supported for existing private tooling. The content
+digest includes the template version and structured fields. See `emails/README.md`
+for tokens, the confirmation template, rendering and the local preview/lint gate.
 
 Each issue recipient gets a fresh 32-byte unsubscribe capability, stored only as
 a digest. HTML/text links and RFC 8058 headers point to the staging backend's

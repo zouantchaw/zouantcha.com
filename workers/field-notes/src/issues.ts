@@ -1,5 +1,6 @@
 import { digest, TOKEN_RE, type LifecycleEnv } from './lifecycle'
 import { renderBuildLogIssue } from './email'
+import { type IssueContent } from '../../../emails/build-log'
 
 export interface IssueEnv extends LifecycleEnv {
   ISSUE_ADMIN_SECRET?: string
@@ -12,14 +13,29 @@ const API = 'https://zouantcha-field-notes-staging.wiel.workers.dev'
 const json = (status: number, body: object) => Response.json(body, {status, headers:{'Cache-Control':'no-store','Referrer-Policy':'no-referrer','X-Robots-Tag':'noindex, nofollow'}})
 const randomToken = () => Array.from(crypto.getRandomValues(new Uint8Array(32)), b=>b.toString(16).padStart(2,'0')).join('')
 
+function validIssue(value: unknown): value is IssueContent {
+  if (!value || typeof value !== 'object') return false
+  const v = value as Record<string, unknown>
+  const text = (s: unknown, max = 2000): s is string => typeof s === 'string' && s.length > 0 && s.length <= max
+  const paragraphs = (p: unknown) => Array.isArray(p) && p.length > 0 && p.length <= 6 && p.every(s => text(s))
+  const cta = v.cta as Record<string, unknown> | undefined
+  return Number.isInteger(v.number) && Number(v.number) > 0 && Number(v.number) < 100000
+    && text(v.date, 60) && text(v.preheader, 200) && text(v.closing)
+    && paragraphs(v.intro) && paragraphs(v.built) && paragraphs(v.broke)
+    && Array.isArray(v.numbers) && v.numbers.length > 0 && v.numbers.length <= 10
+    && v.numbers.every(n => n && text(n.label, 100) && text(n.value, 40))
+    && !!cta && text(cta.label, 80) && cta.url === 'https://www.zouantcha.com/log'
+}
+
 // Authenticated operator route. This release has exactly one recipient, selected
 // from current D1 eligibility. It cannot accept a caller-supplied recipient list.
 export async function sendTestIssue(env: IssueEnv, input: Record<string, unknown>) {
   if (env.SITE_ENV !== 'staging' || env.ISSUE_SEND_MODE !== 'allowlist' || !env.RESEND_API_KEY || !env.RESEND_WEBHOOK_SECRET) return json(503,{error:'issue_sending_disabled'})
-  const {id,title,paragraphs} = input
+  const {id,title,paragraphs,issue} = input
   if (typeof id !== 'string' || !/^[a-z0-9-]{1,80}$/.test(id) || typeof title !== 'string' || title.length < 1 || title.length > 160 || /[\r\n]/.test(title)
     || !Array.isArray(paragraphs) || paragraphs.length < 1 || paragraphs.length > 12 || paragraphs.some(p=>typeof p !== 'string'||p.length>2000)) return json(400,{error:'invalid_issue'})
-  const contentHash = await digest(JSON.stringify([title,paragraphs]))
+  if (issue !== undefined && !validIssue(issue)) return json(400,{error:'invalid_issue'})
+  const contentHash = await digest(JSON.stringify(['react-email-v1',title,paragraphs,issue]))
   const row = await env.DB.prepare(`SELECT e.membership_id,m.current_request_id FROM build_log_eligible e
     JOIN build_log_memberships m ON m.id=e.membership_id JOIN subscribers s ON s.id=e.subscriber_id WHERE s.email=?`).bind(OWNER).first<{membership_id:string;current_request_id:string}>()
   if (!row) return json(409,{error:'no_eligible_allowlisted_member'})
@@ -38,7 +54,7 @@ export async function sendTestIssue(env: IssueEnv, input: Record<string, unknown
     return json(409,{error:'ineligible'})
   }
   const unsubscribe = `${API}/issues/unsubscribe?token=${raw}`
-  const mail = renderBuildLogIssue(title, paragraphs as string[], unsubscribe)
+  const mail = await renderBuildLogIssue(title, paragraphs as string[], unsubscribe, issue as IssueContent | undefined)
   let outcome = 'unknown', messageId: string | null = null, errorCode: string | null = null
   try {
     const response = await fetch('https://api.resend.com/emails', {
