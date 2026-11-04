@@ -24,6 +24,7 @@
       "custom_domain": true
     }
   ],
+  "triggers": { "crons": ["0 16 * * 0", "0 17 * * 0"] },
   "vars": {
     "SITE_ENV": "production",
     "BUILD_LOG_MAIL_MODE": "live",

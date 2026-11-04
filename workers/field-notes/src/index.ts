@@ -1,8 +1,9 @@
+import { scheduleRoute, runSchedule, type ScheduleEnv } from './schedule'
 import { sendTestIssue, unsubscribeIssue, resendWebhook, type IssueEnv } from './issues'
 import { act, digest, signup } from './lifecycle'
 import { liveReady, previewMode } from './email'
 import { normalizeSource, resolveAttribution } from '../../../app/lib/source'
-export interface Env extends IssueEnv {
+export interface Env extends ScheduleEnv {
   INGEST_SECRET?: string
   FIELD_NOTES_INGEST_SECRET?: string
 }
@@ -60,6 +61,18 @@ const worker = {
     if (request.method === 'GET' && url.pathname === '/health') return json(200, { ok: true })
     if (url.pathname === '/issues/unsubscribe') return unsubscribeIssue(request, env)
     if (url.pathname === '/webhooks/resend' && request.method === 'POST') return resendWebhook(request, env)
+    if (['/issues/schedule','/issues/schedule/cancel'].includes(url.pathname)) {
+      if (!env.ISSUE_ADMIN_SECRET || !await secretsMatch(bearerToken(request),env.ISSUE_ADMIN_SECRET)) return json(401,{error:'unauthorized'})
+      if (request.method === 'GET' && url.pathname === '/issues/schedule') return scheduleRoute(env,'GET',false,{})
+      if (request.method !== 'POST') return json(405,{error:'method_not_allowed'})
+      const raw = await request.text()
+      if (new TextEncoder().encode(raw).length > MAX_BODY_BYTES) return json(413,{error:'invalid'})
+      try {
+        const input = JSON.parse(raw)
+        if (!input || typeof input !== 'object' || Array.isArray(input)) return json(400,{error:'invalid'})
+        return await scheduleRoute(env,'POST',url.pathname.endsWith('/cancel'),input)
+      } catch { return json(400,{error:'invalid'}) }
+    }
     if (request.method !== 'POST' || !['/subscribe','/confirm','/unsubscribe','/issues/test','/issues/send'].includes(url.pathname)) return json(404, { ok: false, error: 'not_found' })
     const secret = ['/issues/test','/issues/send'].includes(url.pathname) ? env.ISSUE_ADMIN_SECRET
       : env.SITE_ENV === 'staging' ? env.FIELD_NOTES_INGEST_SECRET : env.INGEST_SECRET
@@ -104,6 +117,9 @@ const worker = {
 }
 
 export default {
+  async scheduled(controller: ScheduledController, env: Env, ctx: ExecutionContext) {
+    ctx.waitUntil(runSchedule(env,new Date(controller.scheduledTime)))
+  },
   async fetch(request: Request, env: Env): Promise<Response> {
     if (env.SITE_ENV !== 'staging') return worker.fetch(request, env)
     const response = new URL(request.url).pathname === '/robots.txt'
