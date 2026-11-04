@@ -1,6 +1,6 @@
 {
   "name": "Wielfried Zouantcha",
-  "headline": "Full-Stack Software Engineer | TypeScript, React, Node.js",
+  "headline": "Senior Full-Stack Engineer | Applied AI & Automation",
   "location": "Remote",
   "contact": [
     {
@@ -20,25 +20,25 @@
       "href": "https://github.com/zouantchaw"
     }
   ],
-  "summary": "Full-stack software engineer with 5+ years building SaaS products, integrations and data systems. Owns work end to end, from requirements and customer feedback through interfaces, APIs, deployment and production troubleshooting. Additional depth in applied AI, retrieval and reproducible model evaluation.",
+  "summary": "Senior full-stack engineer with 5+ years shipping SaaS products, integrations and customer-facing software. Owns delivery from requirements and data models through APIs, interfaces and cloud deployment. Builds applied-AI systems with LLM integrations, retrieval, model evaluation and recoverable automation.",
   "experience": [
-    {
-      "company": "Independent Consulting",
-      "title": "Software Engineer / Product Consultant (part-time)",
-      "dates": "Jan 2023 - Present",
-      "bullets": [
-        "Diane Party Rentals: built quoting, inventory-locking, booking and Stripe payment workflows that connect customer checkout to rental operations.",
-        "Ballerz Football Academy: built scheduling, booking and parent/admin workflows with Next.js, Cal.com and Stripe, including explicit payment and calendar recovery states."
-      ]
-    },
     {
       "company": "Oloodi Technologies / KROW Workforce",
       "title": "Full-Stack & Customer Engineer (Contract)",
       "dates": "Jan 2026 - Oct 2026",
       "bullets": [
-        "Developed React/TypeScript features and Node.js services for onboarding, shifts, timesheets and invoicing on Firebase, PostgreSQL and Cloud Run.",
+        "Developed React/TypeScript interfaces and Node.js services for onboarding, shifts, timesheets and invoicing on Firebase, PostgreSQL and Google Cloud Run.",
         "Strengthened authorization, validation and integration checks; ran critical-flow QA to troubleshoot production behavior before releases.",
         "Delivered product demonstrations to teams at Snapchat, Google, EA Sports and NVIDIA; translated customer questions and feedback into implementation priorities."
+      ]
+    },
+    {
+      "company": "Independent Consulting",
+      "title": "Software Engineer / Product Consultant (part-time)",
+      "dates": "Jan 2023 - Present",
+      "bullets": [
+        "Diane Party Rentals: scoped requirements with business owners and built quoting, inventory-locking, booking and Stripe payment workflows connecting checkout to rental operations.",
+        "Ballerz Football Academy: built scheduling, booking and parent/admin workflows with Next.js, Cal.com and Stripe, including payment and calendar recovery states."
       ]
     },
     {
@@ -46,9 +46,9 @@
       "title": "Senior Full-Stack Engineer / Product Engineer",
       "dates": "May 2022 - Nov 2025",
       "bullets": [
-        "Shipped Shopify storefront, point-of-sale, loyalty, merchant onboarding, membership and billing workflows using React, Next.js, TypeScript and Node.js.",
+        "Owned multi-tenant Shopify storefront, point-of-sale, loyalty, onboarding and billing features from Prisma data models and Node.js APIs to React/Next.js interfaces on Azure.",
         "Hardened multi-tenant security with merchant isolation, authentication and authorization fixes, webhook HMAC validation, server-side app proxy routes, and safer cart/session handling.",
-        "Designed internal REST APIs for Flow and Ethereum deployment, minting, transfers and metadata; owned features through production debugging and product iteration."
+        "Translated product requirements into merchant dashboards and internal REST APIs for Flow and Ethereum; handled production debugging and iteration with product and customer-facing teams."
       ]
     },
     {
@@ -64,13 +64,13 @@
     {
       "name": "PortMind",
       "dates": "2026 - Present",
-      "descriptor": "Computer-vision research, evaluation and annotation engineering",
+      "descriptor": "Computer-vision research, model evaluation and human-review tools",
       "href": "https://www.portmind.dev",
       "link_label": "Public research and results",
       "bullets": [
-        "Built Python CLI tooling over a dated collection of 81,202 port-camera activity snapshots from six cameras, producing versioned manifests, labeling workflows, model comparisons and audit reports.",
         "Published a six-model comparison on 96 Montreal port-camera images (v1.0, September 2026), separating truck detection, container attachment, false alarms and uncertain answers.",
-        "Developed a private React annotation app with bounding boxes at original image resolution, revision history, guided checks and reviewer approval of AI suggestions; audited label provenance."
+        "Built Python CLI tooling over 81,202 activity snapshots from six cameras, with versioned manifests, labeling and evaluation workflows, and recoverable background jobs using Cloudflare Queues and retries.",
+        "Built a React annotation app with original-pixel boxes and revision history; integrated Moondream detection and Llama Scout coaching through Workers AI and AI Gateway with explicit human approval."
       ]
     },
     {
@@ -80,9 +80,9 @@
       "href": "https://www.mtlarchives.com",
       "link_label": "Public archive and search",
       "bullets": [
-        "Built a Next.js and Cloudflare product serving 13,499 Montreal archive records with semantic search, visual retrieval, a daily game and Stripe print checkout.",
-        "Implemented BGE-M3 text and CLIP image search with Cloudflare Vectorize; built Python/TypeScript ingestion, OCR and enrichment pipelines alongside D1/R2 storage.",
-        "Shipped French/English conversational search using LLM tool calling, bounded image inspection, source citations and daily inference quotas. Built private human-review tooling with revision history and AI suggestions shown after human saves."
+        "Built a Next.js and Cloudflare product serving 13,499 Montreal archive records, with BGE-M3/CLIP embeddings and Vectorize for semantic and visual search, a daily game and Stripe checkout.",
+        "Shipped bilingual retrieval-augmented generation (RAG) search using AI SDK agents and tool calling, Mistral on Workers AI, bounded image inspection, source citations and daily inference quotas.",
+        "Built Python/TypeScript ingestion, offline OCR and captioning pipelines; automated editorial and newsletter workflows; built React review tools preserving human edits and showing AI suggestions after human saves."
       ]
     }
   ],
@@ -92,16 +92,20 @@
       "text": "TypeScript, JavaScript, React, Next.js, Node.js, Python, SQL"
     },
     {
-      "label": "Data & integrations",
-      "text": "PostgreSQL, Firebase, REST APIs, webhooks, Stripe, Shopify"
-    },
-    {
-      "label": "Cloud & delivery",
-      "text": "Cloudflare Workers, D1, R2, Vectorize; Cloud Run, Azure; Git/GitHub, Playwright, Vitest"
-    },
-    {
       "label": "Applied AI",
-      "text": "Embeddings, semantic search, LLM tool calling, model evaluation, human review"
+      "text": "LLM integrations, AI agents, tool calling, RAG, embeddings, semantic/visual search, model evaluation, human review; AI SDK"
+    },
+    {
+      "label": "Data & APIs",
+      "text": "PostgreSQL, Prisma, Firebase, REST APIs, webhooks, Stripe, Shopify, authentication/authorization"
+    },
+    {
+      "label": "Cloud & automation",
+      "text": "Cloudflare Workers, D1, R2, Vectorize, Workers AI, AI Gateway, Queues; Google Cloud Run, Azure"
+    },
+    {
+      "label": "Testing & delivery",
+      "text": "Playwright, Vitest, integration testing, Git/GitHub, production debugging"
     }
   ],
   "education": "Flatiron School | Full Stack Software Engineering Certificate"

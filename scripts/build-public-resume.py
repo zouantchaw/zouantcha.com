@@ -1,6 +1,6 @@
 """Build identical public resume aliases from public-resume.json.
 
-Run from the repo: uv run --with reportlab python scripts/build-public-resume.py
+Run from the repo: uv run --isolated --with reportlab --with pypdf python scripts/build-public-resume.py
 The content is intentionally public: no phone number or precise location.
 """
 from html import escape
@@ -60,16 +60,11 @@ def build():
         para(escape(CONTENT["location"]) + " | " + " | ".join(link(c["label"], c["href"]) for c in CONTENT["contact"]), "meta"),
         para("SUMMARY", "section"),
         para(escape(CONTENT["summary"])),
-        para("EXPERIENCE", "section"),
+        para("TECHNICAL SKILLS", "section"),
     ]
-    for job in CONTENT["experience"]:
-        story.append(KeepTogether([
-            para(escape(job["company"]), "job"),
-            para(escape(job["title"]) + " | " + escape(job["dates"]), "details"),
-            *bullets(job["bullets"]),
-            Spacer(1, 5),
-        ]))
-    story += [PageBreak(), para("SELECTED PROJECTS", "section")]
+    for group in CONTENT["skills"]:
+        story.append(para(f'<b>{escape(group["label"])}</b>: {escape(group["text"])}'))
+    story.append(para("SELECTED PROJECTS", "section"))
     for project in CONTENT["projects"]:
         story.append(KeepTogether([
             para(escape(project["name"]) + " | " + escape(project["dates"]), "job"),
@@ -78,13 +73,18 @@ def build():
             *bullets(project["bullets"]),
             Spacer(1, 7),
         ]))
-    story.append(para("TECHNICAL SKILLS", "section"))
-    for group in CONTENT["skills"]:
-        story.append(para(f'<b>{escape(group["label"])}</b>: {escape(group["text"])}'))
+    story += [PageBreak(), para("EXPERIENCE", "section")]
+    for job in CONTENT["experience"]:
+        story.append(KeepTogether([
+            para(escape(job["company"]), "job"),
+            para(escape(job["title"]) + " | " + escape(job["dates"]), "details"),
+            *bullets(job["bullets"]),
+            Spacer(1, 5),
+        ]))
     story += [para("EDUCATION", "section"), para(escape(CONTENT["education"]))]
     SimpleDocTemplate(
         str(OUT), pagesize=letter, rightMargin=48, leftMargin=48,
-        topMargin=36, bottomMargin=44, title="Wielfried Zouantcha | Full-Stack Software Engineer",
+        topMargin=36, bottomMargin=44, title=f'{CONTENT["name"]} | {CONTENT["headline"]}',
         author=CONTENT["name"], subject=CONTENT["headline"], invariant=1,
     ).build(story, onFirstPage=footer, onLaterPages=footer)
     copyfile(OUT, ALIAS)
