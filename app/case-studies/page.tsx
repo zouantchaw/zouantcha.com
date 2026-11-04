@@ -6,7 +6,7 @@ import { work } from 'app/lib/work'
 export const metadata = pageMetadata({
   title: 'Case studies',
   description:
-    'Selected products and systems: MTL Archives, PortMind, Diane Party Rentals, and Starthome.',
+    'Selected products and systems: PortMind, MTL Archives, Diane Party Rentals, Ballerz Football Academy, and Starthome.',
   path: '/case-studies',
 })
 

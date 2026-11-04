@@ -70,7 +70,7 @@ export default async function Page({
           </a>
         )}
         <Link href="/case-studies">Explore the case studies ↗</Link>
-        <Link href="/contact">Talk about working together ↗</Link>
+        <Link href="/start">Talk about working together ↗</Link>
       </nav>
     </article>
   )

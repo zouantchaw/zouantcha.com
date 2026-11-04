@@ -2,7 +2,7 @@ export const site = {
   name: 'Wiel Zouantcha',
   formalName: 'Wielfried Zouantcha',
   title: 'Software & AI Engineer',
-  resumeTitle: 'Full-Stack Software Engineer · React / TypeScript / Node.js',
+  resumeTitle: 'Full-Stack Software Engineer | TypeScript, React, Node.js',
   headline: 'I use AI agents to build and run real businesses.',
   location: 'Remote · US, Canada and Europe',
   email: 'zouantchaw74@gmail.com',
@@ -227,28 +227,6 @@ export const experience: Experience[] = [
   },
 ]
 
-export const contact = {
-  title: 'Let’s talk.',
-  project: {
-    title: 'Start with a 20-minute review',
-    body: 'Bring one workflow that costs you time. We look at how it runs today and where software or agents can help. If there is a useful project, I send a fixed-price setup proposal with the scope, the work you will review, and the price.',
-    subject: 'Project inquiry',
-  },
-  reviewHref: 'https://cal.com/wielfried/intro',
-  intents: {
-    role: {
-      title: 'Let’s talk about a role.',
-      intro: 'Send me the role and a little about the team.',
-      subject: 'Software engineering role',
-    },
-    project: {
-      title: 'Let’s talk about a project.',
-      intro: 'Bring one workflow that costs you time. If there is a useful project, I send a fixed-price setup proposal with the scope, the work you will review, and the price.',
-      subject: 'Project inquiry',
-    },
-  },
-}
-
 export const homeHero = {
   eyebrow: 'Software & AI Engineer · Independent',
   title: 'I use AI agents to build and run real businesses.',
@@ -265,26 +243,6 @@ export const proof = [
 ]
 
 export const selectedWork = [
-  {
-    slug: 'diane-party-rentals',
-    title: 'Diane Party Rentals',
-    problem: 'Turning messy rental operations into software a family business can actually run.',
-    result:
-      'Connected quotes, payments, bookings and operational handoffs.',
-    stack: 'Next.js · Stripe · Inventory · Operations',
-    href: '/case-studies/diane-party-rentals',
-    cta: 'Read case study →',
-  },
-  {
-    slug: 'ballerz',
-    title: 'Ballerz Football Academy',
-    problem: 'Running my brother’s youth soccer academy on its own platform: bookings, camps, payments, a parent portal and an admin.',
-    result:
-      'Moved the live platform and its data to Cloudflare on October 9, 2026, then checked payments, sign-in and every public page on the live site.',
-    stack: 'Next.js · Cloudflare Workers · D1 · Stripe',
-    href: 'https://www.ballerzfootballacademy.com',
-    cta: 'Visit the academy ↗',
-  },
   {
     slug: 'portmind',
     title: 'PortMind',

@@ -30,12 +30,6 @@ const homeHero = {
     { text: ', training, or spending time with family and friends.' },
   ] as { text: string; href?: string }[],
 }
-const availabilityCta = {
-  title: 'Get in touch',
-  body: 'Have an engineering role or a project in mind? I’d like to hear about it.',
-  primary: { label: 'Engineering roles →', href: '/contact?intent=role' },
-  secondary: { label: 'Project work →', href: '/contact?intent=project' },
-}
 
 const homeTitle = `${site.name} · ${homeRole}`
 const homeMetadata = pageMetadata({
@@ -82,9 +76,9 @@ export default function Page() {
             ) : part.text)}
           </p>
           <div className="hero-actions">
-            <a href="#selected-work" className="hero-cta-primary">
-              View my work <span aria-hidden="true">→</span>
-            </a>
+            <Link href="/case-studies" className="hero-cta-primary">
+              Case studies <span aria-hidden="true">→</span>
+            </Link>
             <TrackLink
               href={site.resumePage}
               event="resume_click"
@@ -92,14 +86,6 @@ export default function Page() {
               className="hero-cta-secondary"
             >
               Résumé
-            </TrackLink>
-            <TrackLink
-              href="/contact"
-              event="email_click"
-              data={{ from: 'home_hero' }}
-              className="hero-cta-tertiary"
-            >
-              Get in touch
             </TrackLink>
           </div>
         </div>
@@ -186,29 +172,6 @@ export default function Page() {
             </li>
           ))}
         </ul>
-      </section>
-
-      <section className="availability-block" aria-labelledby="availability-heading">
-        <h2 id="availability-heading">{availabilityCta.title}</h2>
-        <p>{availabilityCta.body}</p>
-        <div className="availability-actions">
-          <TrackLink
-            href={availabilityCta.primary.href}
-            event="contact_role_click"
-            data={{ from: 'home', intent: 'role' }}
-            className="hero-cta-primary"
-          >
-            {availabilityCta.primary.label}
-          </TrackLink>
-          <TrackLink
-            href={availabilityCta.secondary.href}
-            event="contact_project_click"
-            data={{ from: 'home', intent: 'project' }}
-            className="hero-cta-secondary"
-          >
-            {availabilityCta.secondary.label}
-          </TrackLink>
-        </div>
       </section>
 
       <section id="interests" className="interest-index">

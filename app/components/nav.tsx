@@ -8,7 +8,7 @@ import { TrackLink } from './track-link'
 const links = [
   { href: '/log', label: 'Build log' },
   { href: '/work', label: 'Work' },
-  { href: '/lab', label: 'Products' },
+  { href: '/case-studies', label: 'Case studies' },
   { href: '/about', label: 'About' },
   { href: '/start', label: 'Work with me' },
 ]
