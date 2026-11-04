@@ -4,12 +4,11 @@ import {
   capabilities,
   homeExperience,
   homeHero,
-  proof,
   selectedWork,
   site,
 } from 'app/lib/site'
 import { ContinueReading } from 'app/components/continue-reading'
-import { TrackAnchor, TrackLink } from 'app/components/track-link'
+import { TrackLink } from 'app/components/track-link'
 import Link from 'next/link'
 import Image from 'next/image'
 
@@ -18,7 +17,7 @@ const homeMetadata = pageMetadata({
   title: homeTitle,
   description: site.description,
   path: '',
-  section: 'Software & AI Engineer',
+  section: site.title,
 })
 
 export const metadata = {
@@ -30,10 +29,10 @@ export const metadata = {
     description: site.title,
     images: [
       {
-        url: shareImage(site.name, site.title, 'Software & AI Engineer'),
+        url: shareImage(site.name, site.title, site.title),
         width: 1200,
         height: 630,
-        alt: `${site.name} | Software & AI Engineer`,
+        alt: `${site.name} | ${site.title}`,
         type: 'image/png',
       },
     ],
@@ -46,29 +45,36 @@ export default function Page() {
       <header className="index-hero">
         <div>
           <p className="eyebrow">{homeHero.eyebrow}</p>
-          <h1 className="convert-hero">{homeHero.title}</h1>
-          <p className="hero-intro">{homeHero.body}</p>
-          <p className="hero-availability">
-            <span className="availability-dot" aria-hidden="true" />
-            <span>{homeHero.availability}</span>
+          <h1>{homeHero.title}</h1>
+          <p className="hero-intro">
+            {homeHero.body.map((part, index) => part.href ? (
+              <Link key={index} href={part.href}>{part.text}</Link>
+            ) : part.text)}
+          </p>
+          <p className="hero-intro hero-personal">
+            {homeHero.personal.map((part, index) => part.href ? (
+              <Link key={index} href={part.href}>{part.text}</Link>
+            ) : part.text)}
           </p>
           <div className="hero-actions">
+            <a href="#selected-work" className="hero-cta-primary">
+              View my work <span aria-hidden="true">→</span>
+            </a>
             <TrackLink
-              href="/log"
-              event="contact_project_click"
-              data={{ from: 'home_hero', destination: 'log' }}
-              className="hero-cta-primary"
+              href={site.resumePage}
+              event="resume_click"
+              data={{ from: 'home_hero' }}
+              className="hero-cta-secondary"
             >
-              Get the weekly build log <span aria-hidden="true">→</span>
+              Résumé
             </TrackLink>
-            <Link href="/start" className="hero-cta-secondary">Work with me</Link>
             <TrackLink
-              href="/watch"
-              event="contact_project_click"
+              href="/contact"
+              event="email_click"
               data={{ from: 'home_hero' }}
               className="hero-cta-tertiary"
             >
-              Watch the work
+              Get in touch
             </TrackLink>
           </div>
         </div>
@@ -92,19 +98,6 @@ export default function Page() {
           <p>{site.location}</p>
         </aside>
       </header>
-
-      <section className="work-results" aria-label="Proof points">
-        <ul>
-          {proof.map((item) => (
-            <li key={item.label}>
-              <Link href={item.href}>
-                <span className="work-result-value">{item.value}</span>
-                <span className="work-result-label">{item.label}</span>
-              </Link>
-            </li>
-          ))}
-        </ul>
-      </section>
 
       <section id="selected-work" className="selected-work" aria-labelledby="selected-work-heading">
         <div className="section-heading-row">
@@ -131,21 +124,6 @@ export default function Page() {
             </li>
           ))}
         </ul>
-      </section>
-
-      <section className="selected-work" aria-labelledby="current-product-heading">
-        <div className="section-heading-row">
-          <h2 id="current-product-heading" className="eyebrow">Currently building</h2>
-          <Link href="/lab">Products and experiments ↗</Link>
-        </div>
-        <ul><li>
-          <TrackLink href="/lab#radar-evenements" event="product_interest_click" data={{ product: 'radar-evenements', placement: 'home', destination: 'lab' }} className="selected-work-card">
-            <span className="selected-work-title">Avantvu</span>
-            <span className="selected-work-problem">Alerts from Québec's public event alcohol permits for rental companies, caterers, DJs and security firms.</span>
-            <span className="selected-work-result">In progress</span>
-            <span className="selected-work-cta">Follow the work →</span>
-          </TrackLink>
-        </li></ul>
       </section>
 
       <ContinueReading />
@@ -189,20 +167,18 @@ export default function Page() {
         <h2 id="availability-heading">{availabilityCta.title}</h2>
         <p>{availabilityCta.body}</p>
         <div className="availability-actions">
-          <TrackAnchor
+          <TrackLink
             href={availabilityCta.primary.href}
-            event="project_intro_click"
-            data={{ source_page: 'home', destination: 'cal.com/wielfried/intro', placement: 'closing' }}
+            event="contact_role_click"
+            data={{ from: 'home', intent: 'role' }}
             className="hero-cta-primary"
-            target="_blank"
-            rel="noopener noreferrer"
           >
             {availabilityCta.primary.label}
-          </TrackAnchor>
+          </TrackLink>
           <TrackLink
             href={availabilityCta.secondary.href}
             event="contact_project_click"
-            data={{ from: 'home', destination: 'start' }}
+            data={{ from: 'home', intent: 'project' }}
             className="hero-cta-secondary"
           >
             {availabilityCta.secondary.label}
@@ -240,7 +216,8 @@ export default function Page() {
           </h3>
           <p>A little more on how I got here, and how I like to work.</p>
           <div>
-            <Link href="/about">The longer story ↗</Link>
+            <Link href="/about">The longer story ↗</Link> ·{' '}
+            <Link href="/start">Follow what I’m building →</Link>
           </div>
         </article>
       </section>
