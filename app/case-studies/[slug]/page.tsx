@@ -391,7 +391,7 @@ export default async function Page({ params }: PageProps) {
             )}
           </div>
         ) : null}
-        {item.slug !== 'diane-party-rentals' ? <CaseStudyDownload slug={item.slug} title={item.title} /> : null}
+        {item.slug !== 'diane-party-rentals' && item.pdfDownload !== false ? <CaseStudyDownload slug={item.slug} title={item.title} /> : null}
       </header>
 
       {item.slug === 'starthome' ? null : item.metrics?.length ? (

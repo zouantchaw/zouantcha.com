@@ -71,7 +71,7 @@ export default function Page() {
           href={mailto()}
           className="underline decoration-line underline-offset-4 hover:decoration-ink"
         >
-          Get in touch ↗
+          Email me ↗
         </a>
       </div>
     </div>

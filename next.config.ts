@@ -3,6 +3,12 @@ import type { NextConfig } from 'next'
 const resumeFilename = 'wielfried-zouantcha-resume.pdf'
 
 const config: NextConfig = {
+  async redirects() {
+    return [
+      { source: '/lab', destination: '/case-studies', permanent: true },
+      { source: '/contact', destination: '/start', permanent: true },
+    ]
+  },
   async headers() {
     return [
       {
