@@ -5,14 +5,11 @@ import { TrackAnchor, TrackLink } from 'app/components/track-link'
 import { StartPageView } from 'app/components/start-page-view'
 import { pickAttribution, withAttribution } from 'app/lib/field-notes'
 import { site } from 'app/lib/site'
-import { startCopy } from 'app/lib/start'
-import { products, watchItems } from 'app/lib/distribution'
+import { startCopy, startProof } from 'app/lib/start'
 import { BUILD_LOG_UNAVAILABLE } from 'app/lib/build-log-consent'
 
-const title = 'Start here · Wiel Zouantcha'
-const description = 'Software engineer, building with AI. Sharing what I make and learn. Watch the work, join the Sunday build log, or work with me.'
-const currentBuild = products.find((product) => product.id === 'radar-evenements')!
-const featuredWatchItems = watchItems.filter((item) => ['rental-text', 'mtl-archives', 'portmind'].includes(item.id))
+const title = 'Wiel Zouantcha · Software and AI for Your Business'
+const description = 'Bring one workflow that costs you time. See real builds, or book a 20-minute review of where software or agents can help.'
 
 const startMetadata = pageMetadata({
   title,
@@ -60,62 +57,84 @@ export default async function Page({
         <h1>{startCopy.headline}</h1>
         <p className="hero-intro">{startCopy.body}</p>
         <div className="hero-links">
-          <TrackLink
-            href={withAttribution('/watch', attribution)}
-            event="contact_project_click"
-            data={{ destination: 'watch', placement: 'start' }}
+          <TrackAnchor
+            href={startCopy.projectIntroHref}
+            event="project_intro_click"
+            data={{ source_page: 'start', destination: 'cal.com/wielfried/intro', placement: 'hero' }}
+            target="_blank"
+            rel="noopener noreferrer"
           >
             {startCopy.primaryCta}
-          </TrackLink>
-          <TrackLink href="#field-notes" event="contact_project_click" data={{ destination: 'log', placement: 'start' }}>{startCopy.secondaryCta}</TrackLink>
-          <TrackLink href="#work-with-me" event="contact_project_click" data={{ destination: 'review', placement: 'start' }}>{startCopy.workCta}</TrackLink>
+          </TrackAnchor>
+          <TrackLink href={withAttribution('/watch', attribution)} event="contact_project_click" data={{ destination: 'watch', placement: 'start' }}>{startCopy.secondaryCta}</TrackLink>
         </div>
+        <p className="start-note">{startCopy.note}</p>
       </header>
-
-      <section className="start-section start-work-with-me" aria-labelledby="current-build-heading">
-        <h2 id="current-build-heading">{startCopy.currentBuildHeading}</h2>
-        <p>{currentBuild.description}</p>
-        <TrackLink
-          href={withAttribution(`/lab#${currentBuild.id}`, attribution)}
-          event="product_interest_click"
-          data={{ product: currentBuild.id, placement: 'start', destination: 'lab' }}
-          className="start-intro-cta"
-        >
-          {startCopy.currentBuildCta}
-        </TrackLink>
-      </section>
 
       <section id="work" className="start-section" aria-labelledby="work-heading">
         <h2 id="work-heading" className="eyebrow">
           {startCopy.workHeading}
         </h2>
         <ul className="start-proof">
-          {featuredWatchItems.map((item) => {
-            const external = item.href.startsWith('https:')
-            const props = {
-              href: external ? item.href : withAttribution(item.href, attribution),
-              event: 'watch_item_click',
-              data: { content: item.id, destination: item.id, placement: 'start' },
-              className: 'start-proof-card',
-            }
-            const content = (
-              <>
+          {startProof.slice(0, 1).map((item) => (
+            <li key={item.slug}>
+              <TrackLink
+                href={withAttribution(`/case-studies/${item.slug}`, attribution)}
+                event="case_study_click"
+                data={{ case_study: item.slug, from: 'start_page' }}
+                className="start-proof-card"
+              >
                 <span className="start-proof-copy">
-                  <span className="eyebrow">{item.category} / {item.type}</span>
                   <span className="start-proof-title">{item.title}</span>
-                  <span className="start-proof-problem">{item.description}</span>
+                  <span className="start-proof-problem">{item.problem}</span>
+                  <span className="start-proof-metric">{item.proof}</span>
                 </span>
                 <span className="start-proof-cta">
-                  {external ? 'Watch short video ↗' : 'Read case study →'}
+                  View case study <span aria-hidden="true">→</span>
                 </span>
-              </>
-            )
-            return (
-              <li key={item.id}>
-                {external ? <TrackAnchor {...props}>{content}</TrackAnchor> : <TrackLink {...props}>{content}</TrackLink>}
-              </li>
-            )
-          })}
+              </TrackLink>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section className="start-section start-work-with-me" aria-labelledby="work-with-me-heading">
+        <h2 id="work-with-me-heading">{startCopy.workWithMeHeading}</h2>
+        <p>{startCopy.workWithMeBody}</p>
+        <p>{startCopy.pricing}</p>
+        <p>{startCopy.pricingNote}</p>
+        <TrackAnchor
+          href={startCopy.projectIntroHref}
+          event="project_intro_click"
+          data={{ source_page: 'start', destination: 'cal.com/wielfried/intro', placement: 'review' }}
+          className="start-intro-cta"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {startCopy.workWithMeCta}
+        </TrackAnchor>
+      </section>
+
+      <section className="start-section" aria-labelledby="more-work-heading">
+        <h2 id="more-work-heading" className="eyebrow">{startCopy.moreWorkHeading}</h2>
+        <ul className="start-proof">
+          {startProof.slice(1).map((item) => (
+            <li key={item.slug}>
+              <TrackLink
+                href={withAttribution(`/case-studies/${item.slug}`, attribution)}
+                event="case_study_click"
+                data={{ case_study: item.slug, from: 'start_page' }}
+                className="start-proof-card"
+              >
+                <span className="start-proof-copy">
+                  <span className="start-proof-title">{item.title}</span>
+                  <span className="start-proof-problem">{item.problem}</span>
+                  <span className="start-proof-metric">{item.proof}</span>
+                </span>
+                <span className="start-proof-cta">View case study <span aria-hidden="true">→</span></span>
+              </TrackLink>
+            </li>
+          ))}
         </ul>
       </section>
 
@@ -135,23 +154,6 @@ export default async function Page({
           initialStatus={subscribed ? 'success' : error ? 'error' : 'idle'}
           initialDelivery={params.signup === 'pending_confirmation' ? 'pending_confirmation' : 'preview'} initialMessage={subscribed ? startCopy.fieldNotesSuccess : error}
         />
-      </section>
-
-      <section id="work-with-me" className="start-section start-work-with-me" aria-labelledby="work-with-me-heading">
-        <h2 id="work-with-me-heading">{startCopy.workWithMeHeading}</h2>
-        <p>{startCopy.workWithMeBody}</p>
-        <p>{startCopy.pricing}</p>
-        <p>{startCopy.pricingNote}</p>
-        <TrackAnchor
-          href={startCopy.projectIntroHref}
-          event="project_intro_click"
-          data={{ source_page: 'start', destination: 'cal.com/wielfried/intro', placement: 'review' }}
-          className="start-intro-cta"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {startCopy.workWithMeCta}
-        </TrackAnchor>
       </section>
 
     </div>

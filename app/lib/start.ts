@@ -1,15 +1,14 @@
 import { BUILD_LOG_CONSENT, BUILD_LOG_PREVIEW } from './build-log-consent'
 
 export const startCopy = {
-  eyebrow: 'Software engineer, building with AI.',
-  headline: 'Sharing what I make and learn.',
-  body: 'I share the software I build and the things I figure out along the way, from my family’s businesses to my own projects.',
-  primaryCta: 'Watch the work',
-  secondaryCta: 'Join the build log',
-  workCta: 'Work with me',
-  currentBuildHeading: 'Now building: Avantvu.',
-  currentBuildCta: 'Follow the build →',
-  workHeading: 'Watch the work',
+  eyebrow: 'Software & AI Engineer',
+  headline: 'Bring one workflow that costs you time.',
+  body: 'Quotes, follow-ups, scheduling or posting. We look at how it runs today and where software or agents can help.',
+  primaryCta: 'Book a 20-minute review',
+  secondaryCta: 'See real builds',
+  note: 'Start with one practical problem from your business.',
+  workHeading: 'A real business workflow',
+  moreWorkHeading: 'More work across software and AI',
   fieldNotesHeading: 'Weekly build log',
   fieldNotesBody: [
     "A short email every Sunday at noon New York time: what I built with AI agents, what broke, and the numbers. From my family's businesses to the products I'm building.",
