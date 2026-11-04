@@ -113,3 +113,30 @@ Worker strict gate (generate runtime declarations outside the checkout):
 pnpm exec wrangler types /tmp/build-log-worker-types.d.ts --config workers/field-notes/wrangler.jsonc --env staging
 pnpm exec tsc --noEmit --strict --target ES2022 --module ESNext --moduleResolution bundler --lib ES2022,DOM --skipLibCheck --esModuleInterop --jsx react-jsx /tmp/build-log-worker-types.d.ts workers/field-notes/src/index.ts workers/scorecard/src/index.ts
 ```
+
+## Sunday approved-issue queue
+
+Migration `0004_build_log_schedule.sql` adds the approved queue. Bearer-authenticated
+`POST /issues/schedule` accepts the same private payload as `/issues/send`; posting
+is operator approval. Reposting changed content returns 409. `GET /issues/schedule`
+returns metadata only; `POST /issues/schedule/cancel` accepts `{id}` before sending.
+Use the keychain-backed Python command above with `/issues/schedule` instead of
+`/issues/send` (staging uses account `news` and the staging API origin).
+
+The 16:00 and 17:00 UTC Sunday candidates run only at Sunday noon America/New_York.
+The oldest approved issue runs in batches of 50; interrupted sending resumes first.
+Recipient claims are never retried. An empty queue does nothing. The daily unique
+slot prevents another issue starting on the same Sunday. Production requires
+confirmed-public; staging requires allowlist and selects only the owner inbox.
+
+Staging proof command: `pnpm exec wrangler dev --config workers/field-notes/wrangler.jsonc --env staging --remote --test-scheduled --var ISSUE_SEND_MODE:allowlist --var SCHEDULE_FORCE:1`.
+Invoke the local scheduled testing endpoint once, inspect only counts in staging D1,
+then invoke again to confirm skipped. SCHEDULE_FORCE is honored only on staging.
+Restore staging disabled mode and redeploy after the proof. Never set force in production.
+
+After production approval, apply migration then deploy:
+```sh
+pnpm exec wrangler d1 migrations apply zouantcha-field-notes --config workers/field-notes/wrangler.jsonc --remote
+pnpm deploy:field-notes
+```
+Do not queue an issue until its content is approved.

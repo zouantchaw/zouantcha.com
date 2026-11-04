@@ -27,15 +27,21 @@ function validIssue(value: unknown): value is IssueContent {
     && !!cta && text(cta.label, 80) && cta.url === 'https://www.zouantcha.com/log'
 }
 
+export function validPayload(input: Record<string, unknown>) {
+  const {id,title,paragraphs,issue} = input
+  if (typeof id !== 'string' || !/^[a-z0-9-]{1,80}$/.test(id) || typeof title !== 'string' || title.length < 1 || title.length > 160 || /[\r\n]/.test(title)
+    || !Array.isArray(paragraphs) || paragraphs.length < 1 || paragraphs.length > 12 || paragraphs.some(p=>typeof p !== 'string'||p.length>2000)) return false
+  if (issue !== undefined && !validIssue(issue)) return false
+  return true
+}
+
 // Authenticated operator routes select recipients only from current D1 eligibility.
-export async function sendTestIssue(env: IssueEnv, input: Record<string, unknown>, publicSend = false) {
+export async function sendTestIssue(env: IssueEnv, input: Record<string, unknown>, publicSend = false, scheduled = false) {
   const publicMode = publicSend && env.SITE_ENV === 'production' && env.ISSUE_SEND_MODE === 'confirmed-public'
   const stagingMode = !publicSend && env.SITE_ENV === 'staging' && env.ISSUE_SEND_MODE === 'allowlist'
   if ((!publicMode && !stagingMode) || !env.ISSUE_ADMIN_SECRET || !env.RESEND_API_KEY || !env.RESEND_WEBHOOK_SECRET) return json(503,{error:'issue_sending_disabled'})
+  if (!validPayload(input)) return json(400,{error:'invalid_issue'})
   const {id,title,paragraphs,issue} = input
-  if (typeof id !== 'string' || !/^[a-z0-9-]{1,80}$/.test(id) || typeof title !== 'string' || title.length < 1 || title.length > 160 || /[\r\n]/.test(title)
-    || !Array.isArray(paragraphs) || paragraphs.length < 1 || paragraphs.length > 12 || paragraphs.some(p=>typeof p !== 'string'||p.length>2000)) return json(400,{error:'invalid_issue'})
-  if (issue !== undefined && !validIssue(issue)) return json(400,{error:'invalid_issue'})
   const contentHash = await digest(JSON.stringify(['react-email-v1',title,paragraphs,issue]))
   const existing = await env.DB.prepare('SELECT content_digest FROM build_log_issues WHERE id=?').bind(id).first<{content_digest:string}>()
   if (existing && existing.content_digest !== contentHash) return json(409,{error:'content_changed'})
@@ -43,7 +49,7 @@ export async function sendTestIssue(env: IssueEnv, input: Record<string, unknown
     JOIN build_log_memberships m ON m.id=e.membership_id JOIN subscribers s ON s.id=e.subscriber_id
     WHERE (? = 1 OR s.email=?) AND NOT EXISTS(SELECT 1 FROM build_log_issue_recipients r WHERE r.issue_id=? AND r.membership_id=e.membership_id)
     ORDER BY e.membership_id LIMIT 50`).bind(publicMode ? 1 : 0,OWNER,id).all<{membership_id:string;current_request_id:string;email:string}>()
-  if (!publicMode && !rows.results.length) return json(409,{error:'no_eligible_unclaimed_allowlisted_member'})
+  if (!scheduled && !publicMode && !rows.results.length) return json(409,{error:'no_eligible_unclaimed_allowlisted_member'})
   let accepted=0, held=0, skipped=0
   for (const row of rows.results) {
   const raw = randomToken(), hash = await digest(raw), now = new Date().toISOString()
@@ -61,7 +67,7 @@ export async function sendTestIssue(env: IssueEnv, input: Record<string, unknown
     skipped++; continue
   }
   const unsubscribe = `${publicMode ? 'https://api.zouantcha.com' : API}/issues/unsubscribe?token=${raw}`
-  const mail = await renderBuildLogIssue(title, paragraphs as string[], unsubscribe, issue as IssueContent | undefined)
+  const mail = await renderBuildLogIssue(title as string, paragraphs as string[], unsubscribe, issue as IssueContent | undefined)
   let outcome = 'unknown', messageId: string | null = null, errorCode: string | null = null
   try {
     const response = await fetch('https://api.resend.com/emails', {
