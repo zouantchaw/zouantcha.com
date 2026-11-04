@@ -40,10 +40,7 @@ eligibility and suppression stay in D1; no Resend audience import is performed.
 For the single approved staging test, temporarily set `allowlist`. Authenticated
 `POST /issues/test` accepts `{id,title,paragraphs,issue?}` through the separate staging
 `ISSUE_ADMIN_SECRET` (keychain `resend-zouantcha-operator`, account `news`). It selects only the exact owner inbox from `build_log_eligible`;
-there is no caller-supplied recipient, public bulk route or scheduler. Production
-is additionally denied even if the mode is changed accidentally. A future real
-broadcast activation needs a reviewed recipient policy, queue/quota handling and
-explicit production approval. The issue content hash is immutable per ID and each
+there is no caller-supplied recipient, public bulk route or scheduler. Production sending requires the separately gated confirmed-public mode and explicit approval. The issue content hash is immutable per ID and each
 recipient/issue is atomically claimed once. Ambiguous sends stay `unknown`; no
 automatic retry or token plaintext is retained. Reconcile through Resend privately.
 
@@ -76,3 +73,43 @@ Secrets: keychain account `news`, service `resend-zouantcha`, plus staging secre
 `RESEND_WEBHOOK_SECRET`. The API key is sending-only, scoped to news.zouantcha.com.
 Never print keys, email bodies or capability URLs. Restore send mode to disabled
 after the one test. Apply/deploy only staging without a new production approval.
+
+## Production issue activation (pending Wiel's go)
+
+Production remains `ISSUE_SEND_MODE=disabled`. After review, provision production
+`ISSUE_ADMIN_SECRET`, `RESEND_API_KEY`, and `RESEND_WEBHOOK_SECRET` through Wrangler
+secret input without logging their values. Store the operator and webhook secrets
+under their existing keychain services with account `news-production`. Create the
+Resend webhook at `https://api.zouantcha.com/webhooks/resend` for delivered, bounced,
+and complained events. No production secret or webhook is provisioned by this PR.
+Only with Wiel's explicit go, set production mode to `confirmed-public` and deploy.
+The authenticated production endpoint is `POST /issues/send`; staging retains
+`POST /issues/test` and `allowlist`. Neither accepts recipient selection.
+
+Save the reviewed `{id,title,paragraphs,issue?}` payload in a private `issue.json`.
+Run this exact command with shell tracing disabled (the response contains counts):
+
+```sh
+python3 - <<'PY_SEND'
+import json, subprocess, urllib.request
+secret = subprocess.check_output(['security','find-generic-password','-s','resend-zouantcha-operator','-a','news-production','-w'], text=True).strip()
+request = urllib.request.Request('https://api.zouantcha.com/issues/send', data=open('issue.json','rb').read(), headers={'Authorization':'Bearer '+secret,'Content-Type':'application/json'}, method='POST')
+with urllib.request.urlopen(request, timeout=600) as response:
+    print(response.read().decode())
+PY_SEND
+```
+
+Each invocation selects at most 50 unclaimed eligible members and pauses 600 ms
+between transport attempts. If `resume` is true, pause briefly and rerun the exact
+same command and payload until false. Already claimed recipients are skipped,
+including failed and unknown outcomes. Reconcile unknown outcomes privately;
+never retry them automatically. Content is immutable for an issue ID. Each
+recipient has an independent 32-byte unsubscribe capability and RFC 8058 headers;
+production links use the production API. Restore disabled mode after sending.
+
+Worker strict gate (generate runtime declarations outside the checkout):
+
+```sh
+pnpm exec wrangler types /tmp/build-log-worker-types.d.ts --config workers/field-notes/wrangler.jsonc --env staging
+pnpm exec tsc --noEmit --strict --target ES2022 --module ESNext --moduleResolution bundler --lib ES2022,DOM --skipLibCheck --esModuleInterop --jsx react-jsx /tmp/build-log-worker-types.d.ts workers/field-notes/src/index.ts workers/scorecard/src/index.ts
+```
