@@ -2,7 +2,7 @@ export const site = {
   name: 'Wiel Zouantcha',
   formalName: 'Wielfried Zouantcha',
   title: 'Software & AI Engineer',
-  resumeTitle: 'Full-Stack Software Engineer | TypeScript, React, Node.js',
+  resumeTitle: 'Senior Full-Stack Engineer | Applied AI & Automation',
   headline: 'I use AI agents to build and run real businesses.',
   location: 'Remote · US, Canada and Europe',
   email: 'zouantchaw74@gmail.com',
