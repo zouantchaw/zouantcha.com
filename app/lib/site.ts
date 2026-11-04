@@ -1,9 +1,9 @@
 export const site = {
   name: 'Wiel Zouantcha',
   formalName: 'Wielfried Zouantcha',
-  title: 'Software & AI Engineer',
+  title: 'Software Engineer',
   resumeTitle: 'Full-Stack Software Engineer · React / TypeScript / Node.js',
-  headline: 'I use AI agents to build and run real businesses.',
+  headline: 'Software Engineer',
   location: 'Remote · US, Canada and Europe',
   email: 'zouantchaw74@gmail.com',
   github: 'https://github.com/zouantchaw',
@@ -14,9 +14,9 @@ export const site = {
   resumeDownload: '/wielfried-zouantcha-resume.pdf',
   resumeFilename: 'wielfried-zouantcha-resume.pdf',
   description:
-    'I use AI agents to build and run real businesses. The workflows, what breaks, and the numbers.',
+    'Wiel Zouantcha is a software engineer working across product, data and applied AI. Explore his work, experience, reading and personal projects.',
   socialDescription:
-    'I use AI agents to build and run real businesses. The workflows, what breaks, and the numbers.',
+    'Wiel Zouantcha is a software engineer working across product, data and applied AI. Explore his work, experience, reading and personal projects.',
 }
 
 export const intro = {
@@ -60,7 +60,7 @@ export const record = [
 export const about = {
   eyebrow: 'Get to know me',
   body: [
-    'I’m Wiel Zouantcha, a software engineer. I use AI agents to build and run real businesses. I work remotely with clients in the US, Canada and Europe.',
+    'I’m Wiel Zouantcha, a software engineer working across product, data and applied AI. I work remotely with clients in the US, Canada and Europe.',
     'I came into software without a conventional computer-science path and learned by building. At SaaS Alerts, production integrations taught me to work with inconsistent data and incomplete documentation. I later spent three and a half years at Ethos working across commerce and merchant software. Most recently, I combined full-stack development and customer engineering at Oloodi. Now I work independently, building software and AI for businesses one fixed-price phase at a time.',
     'I don’t always start with a product in mind. Browsing Montréal’s public datasets led to MTL Archives. Collecting observations of the port led to PortMind and questions about how to evaluate vision models. Working with Diane Party Rentals meant following a booking beyond checkout to the equipment, crew and customer waiting for it.',
     'Building gives me a way to stay with a question. I can follow it into the data, make something someone can use, and find out where my understanding was incomplete.',
@@ -250,11 +250,22 @@ export const contact = {
 }
 
 export const homeHero = {
-  eyebrow: 'Software & AI Engineer · Independent',
-  title: 'I use AI agents to build and run real businesses.',
-  body: "The workflows, what breaks, and the numbers. I work on my family's party rental business and youth soccer academy, alongside my own products.",
-  availability: 'Taking on a small number of new projects.',
-  workHref: '/start',
+  eyebrow: 'Software Engineer',
+  title: 'Hi, I’m Wiel.',
+  body: [
+    { text: 'I’m a software engineer with experience across SaaS products, integrations and data systems. I’ve worked at ' },
+    { text: 'SaaS Alerts', href: '/work/saas-alerts' },
+    { text: ', ' },
+    { text: 'Ethos', href: '/work/ethos' },
+    { text: ' and ' },
+    { text: 'Oloodi', href: '/work/oloodi' },
+    { text: ', and I now build software independently.' },
+  ] as { text: string; href?: string }[],
+  personal: [
+    { text: 'When I’m not coding, I’m usually ' },
+    { text: 'reading', href: '/bookshelf' },
+    { text: ', training, or spending time with family and friends.' },
+  ] as { text: string; href?: string }[],
 }
 
 export const proof = [
@@ -352,15 +363,15 @@ export const homeExperience = [
 ]
 
 export const availabilityCta = {
-  title: 'Let’s build something useful.',
-  body: 'Bring one workflow that costs you time. In a 20-minute review, we look at how it runs today and where software or agents can help.',
-  primary: { label: 'Book a 20-minute review →', href: 'https://cal.com/wielfried/intro' },
-  secondary: { label: 'How it works →', href: '/start' },
+  title: 'Get in touch',
+  body: 'Have an engineering role or a project in mind? I’d like to hear about it.',
+  primary: { label: 'Engineering roles →', href: '/contact?intent=role' },
+  secondary: { label: 'Project work →', href: '/contact?intent=project' },
 }
 
 export const connectCopy = {
-  eyebrow: 'Software & AI Engineer',
-  body: 'I use AI agents to build and run real businesses. The workflows, what breaks, and the numbers.',
+  eyebrow: 'Software engineer, building with AI.',
+  body: 'Sharing what I make and learn. Now building: Avantvu.',
   event: 'At Exploit Summit 2026 · Montréal',
   proof: [
     '5+ years engineering',
