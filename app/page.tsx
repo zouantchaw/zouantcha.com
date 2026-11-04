@@ -1,9 +1,7 @@
 import { pageMetadata, shareImage } from 'app/lib/metadata'
 import {
-  availabilityCta,
   capabilities,
   homeExperience,
-  homeHero,
   selectedWork,
   site,
 } from 'app/lib/site'
@@ -12,12 +10,39 @@ import { TrackLink } from 'app/components/track-link'
 import Link from 'next/link'
 import Image from 'next/image'
 
-const homeTitle = `${site.name} · ${site.title}`
+const homeRole = 'Software Engineer'
+const homeDescription = 'Wiel Zouantcha is a software engineer working across product, data and applied AI. Explore his work, experience, reading and personal projects.'
+const homeHero = {
+  eyebrow: homeRole,
+  title: 'Hi, I’m Wiel.',
+  body: [
+    { text: 'I’m a software engineer with experience across SaaS products, integrations and data systems. I’ve worked at ' },
+    { text: 'SaaS Alerts', href: '/work/saas-alerts' },
+    { text: ', ' },
+    { text: 'Ethos', href: '/work/ethos' },
+    { text: ' and ' },
+    { text: 'Oloodi', href: '/work/oloodi' },
+    { text: ', and I now build software independently.' },
+  ] as { text: string; href?: string }[],
+  personal: [
+    { text: 'When I’m not coding, I’m usually ' },
+    { text: 'reading', href: '/bookshelf' },
+    { text: ', training, or spending time with family and friends.' },
+  ] as { text: string; href?: string }[],
+}
+const availabilityCta = {
+  title: 'Get in touch',
+  body: 'Have an engineering role or a project in mind? I’d like to hear about it.',
+  primary: { label: 'Engineering roles →', href: '/contact?intent=role' },
+  secondary: { label: 'Project work →', href: '/contact?intent=project' },
+}
+
+const homeTitle = `${site.name} · ${homeRole}`
 const homeMetadata = pageMetadata({
   title: homeTitle,
-  description: site.description,
+  description: homeDescription,
   path: '',
-  section: site.title,
+  section: homeRole,
 })
 
 export const metadata = {
@@ -26,13 +51,13 @@ export const metadata = {
   openGraph: {
     ...homeMetadata.openGraph,
     title: site.name,
-    description: site.title,
+    description: homeRole,
     images: [
       {
-        url: shareImage(site.name, site.title, site.title),
+        url: shareImage(site.name, homeRole, homeRole),
         width: 1200,
         height: 630,
-        alt: `${site.name} | ${site.title}`,
+        alt: `${site.name} | ${homeRole}`,
         type: 'image/png',
       },
     ],
