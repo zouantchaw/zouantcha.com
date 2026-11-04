@@ -3,7 +3,7 @@ export const site = {
   formalName: 'Wielfried Zouantcha',
   title: 'Software & AI Engineer',
   resumeTitle: 'Full-Stack Software Engineer · React / TypeScript / Node.js',
-  headline: 'I build agent-run businesses from public data.',
+  headline: 'I use AI agents to build and run real businesses.',
   location: 'Remote · US, Canada and Europe',
   email: 'zouantchaw74@gmail.com',
   github: 'https://github.com/zouantchaw',
@@ -14,9 +14,9 @@ export const site = {
   resumeDownload: '/wielfried-zouantcha-resume.pdf',
   resumeFilename: 'wielfried-zouantcha-resume.pdf',
   description:
-    "Public-data products, AI in my family's businesses, and the real builds behind them. Follow the build log or bring a workflow to a 20-minute review.",
+    'I use AI agents to build and run real businesses. The workflows, what breaks, and the numbers.',
   socialDescription:
-    "Public-data products, AI in my family's businesses, and the real builds behind them. Follow the build log or bring a workflow to a 20-minute review.",
+    'I use AI agents to build and run real businesses. The workflows, what breaks, and the numbers.',
 }
 
 export const intro = {
@@ -60,7 +60,7 @@ export const record = [
 export const about = {
   eyebrow: 'Get to know me',
   body: [
-    'I’m Wiel Zouantcha, a software engineer working across product, data and applied AI. I work remotely with clients in the US, Canada and Europe.',
+    'I’m Wiel Zouantcha, a software engineer. I use AI agents to build and run real businesses. I work remotely with clients in the US, Canada and Europe.',
     'I came into software without a conventional computer-science path and learned by building. At SaaS Alerts, production integrations taught me to work with inconsistent data and incomplete documentation. I later spent three and a half years at Ethos working across commerce and merchant software. Most recently, I combined full-stack development and customer engineering at Oloodi. Now I work independently, building software and AI for businesses one fixed-price phase at a time.',
     'I don’t always start with a product in mind. Browsing Montréal’s public datasets led to MTL Archives. Collecting observations of the port led to PortMind and questions about how to evaluate vision models. Working with Diane Party Rentals meant following a booking beyond checkout to the equipment, crew and customer waiting for it.',
     'Building gives me a way to stay with a question. I can follow it into the data, make something someone can use, and find out where my understanding was incomplete.',
@@ -251,8 +251,8 @@ export const contact = {
 
 export const homeHero = {
   eyebrow: 'Software & AI Engineer · Independent',
-  title: 'I build agent-run businesses from public data.',
-  body: "I also use AI in my family's businesses: a party rental company and a youth soccer academy. Here I share the builds, what breaks, and the real numbers.",
+  title: 'I use AI agents to build and run real businesses.',
+  body: "The workflows, what breaks, and the numbers. I work on my family's party rental business and youth soccer academy, alongside my own products.",
   availability: 'Taking on a small number of new projects.',
   workHref: '/start',
 }
@@ -360,7 +360,7 @@ export const availabilityCta = {
 
 export const connectCopy = {
   eyebrow: 'Software & AI Engineer',
-  body: "Public-data products, AI in my family's businesses, and the real builds behind them.",
+  body: 'I use AI agents to build and run real businesses. The workflows, what breaks, and the numbers.',
   event: 'At Exploit Summit 2026 · Montréal',
   proof: [
     '5+ years engineering',
