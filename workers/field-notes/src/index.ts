@@ -60,8 +60,8 @@ const worker = {
     if (request.method === 'GET' && url.pathname === '/health') return json(200, { ok: true })
     if (url.pathname === '/issues/unsubscribe') return unsubscribeIssue(request, env)
     if (url.pathname === '/webhooks/resend' && request.method === 'POST') return resendWebhook(request, env)
-    if (request.method !== 'POST' || !['/subscribe','/confirm','/unsubscribe','/issues/test'].includes(url.pathname)) return json(404, { ok: false, error: 'not_found' })
-    const secret = url.pathname === '/issues/test' ? env.ISSUE_ADMIN_SECRET
+    if (request.method !== 'POST' || !['/subscribe','/confirm','/unsubscribe','/issues/test','/issues/send'].includes(url.pathname)) return json(404, { ok: false, error: 'not_found' })
+    const secret = ['/issues/test','/issues/send'].includes(url.pathname) ? env.ISSUE_ADMIN_SECRET
       : env.SITE_ENV === 'staging' ? env.FIELD_NOTES_INGEST_SECRET : env.INGEST_SECRET
     if (!secret) return json(503, { ok: false, error: 'unavailable' })
     if (!await secretsMatch(bearerToken(request), secret)) return json(401, { ok: false, error: 'unauthorized' })
@@ -71,7 +71,7 @@ const worker = {
       if (new TextEncoder().encode(raw).length > MAX_BODY_BYTES) return json(413, { ok: false, error: 'invalid' })
       const payload = JSON.parse(raw) as Record<string, unknown>
       if (!payload || Array.isArray(payload) || typeof payload !== 'object') return json(400, { ok: false, error: 'invalid' })
-      if (url.pathname === '/issues/test') return sendTestIssue(env, payload)
+      if (['/issues/test','/issues/send'].includes(url.pathname)) return sendTestIssue(env, payload, url.pathname === '/issues/send')
       const ipHash = clip(payload.ip_hash, 64)
       if (!ipHash || !/^[a-f0-9]{32,64}$/.test(ipHash)) return json(400, { ok: false, error: 'invalid' })
       const now = new Date().toISOString(), windowStart = new Date(Date.now() - RATE_WINDOW_MS).toISOString()

@@ -4,7 +4,7 @@ import { type IssueContent } from '../../../emails/build-log'
 
 export interface IssueEnv extends LifecycleEnv {
   ISSUE_ADMIN_SECRET?: string
-  ISSUE_SEND_MODE?: 'disabled' | 'allowlist'
+  ISSUE_SEND_MODE?: 'disabled' | 'allowlist' | 'confirmed-public'
   RESEND_API_KEY?: string
   RESEND_WEBHOOK_SECRET?: string
 }
@@ -27,18 +27,25 @@ function validIssue(value: unknown): value is IssueContent {
     && !!cta && text(cta.label, 80) && cta.url === 'https://www.zouantcha.com/log'
 }
 
-// Authenticated operator route. This release has exactly one recipient, selected
-// from current D1 eligibility. It cannot accept a caller-supplied recipient list.
-export async function sendTestIssue(env: IssueEnv, input: Record<string, unknown>) {
-  if (env.SITE_ENV !== 'staging' || env.ISSUE_SEND_MODE !== 'allowlist' || !env.RESEND_API_KEY || !env.RESEND_WEBHOOK_SECRET) return json(503,{error:'issue_sending_disabled'})
+// Authenticated operator routes select recipients only from current D1 eligibility.
+export async function sendTestIssue(env: IssueEnv, input: Record<string, unknown>, publicSend = false) {
+  const publicMode = publicSend && env.SITE_ENV === 'production' && env.ISSUE_SEND_MODE === 'confirmed-public'
+  const stagingMode = !publicSend && env.SITE_ENV === 'staging' && env.ISSUE_SEND_MODE === 'allowlist'
+  if ((!publicMode && !stagingMode) || !env.ISSUE_ADMIN_SECRET || !env.RESEND_API_KEY || !env.RESEND_WEBHOOK_SECRET) return json(503,{error:'issue_sending_disabled'})
   const {id,title,paragraphs,issue} = input
   if (typeof id !== 'string' || !/^[a-z0-9-]{1,80}$/.test(id) || typeof title !== 'string' || title.length < 1 || title.length > 160 || /[\r\n]/.test(title)
     || !Array.isArray(paragraphs) || paragraphs.length < 1 || paragraphs.length > 12 || paragraphs.some(p=>typeof p !== 'string'||p.length>2000)) return json(400,{error:'invalid_issue'})
   if (issue !== undefined && !validIssue(issue)) return json(400,{error:'invalid_issue'})
   const contentHash = await digest(JSON.stringify(['react-email-v1',title,paragraphs,issue]))
-  const row = await env.DB.prepare(`SELECT e.membership_id,m.current_request_id FROM build_log_eligible e
-    JOIN build_log_memberships m ON m.id=e.membership_id JOIN subscribers s ON s.id=e.subscriber_id WHERE s.email=?`).bind(OWNER).first<{membership_id:string;current_request_id:string}>()
-  if (!row) return json(409,{error:'no_eligible_allowlisted_member'})
+  const existing = await env.DB.prepare('SELECT content_digest FROM build_log_issues WHERE id=?').bind(id).first<{content_digest:string}>()
+  if (existing && existing.content_digest !== contentHash) return json(409,{error:'content_changed'})
+  const rows = await env.DB.prepare(`SELECT e.membership_id,m.current_request_id,s.email FROM build_log_eligible e
+    JOIN build_log_memberships m ON m.id=e.membership_id JOIN subscribers s ON s.id=e.subscriber_id
+    WHERE (? = 1 OR s.email=?) AND NOT EXISTS(SELECT 1 FROM build_log_issue_recipients r WHERE r.issue_id=? AND r.membership_id=e.membership_id)
+    ORDER BY e.membership_id LIMIT 50`).bind(publicMode ? 1 : 0,OWNER,id).all<{membership_id:string;current_request_id:string;email:string}>()
+  if (!publicMode && !rows.results.length) return json(409,{error:'no_eligible_unclaimed_allowlisted_member'})
+  let accepted=0, held=0, skipped=0
+  for (const row of rows.results) {
   const raw = randomToken(), hash = await digest(raw), now = new Date().toISOString()
   const result = await env.DB.batch([
     env.DB.prepare('INSERT INTO build_log_issues VALUES(?,?,?) ON CONFLICT DO NOTHING').bind(id,contentHash,now),
@@ -47,19 +54,19 @@ export async function sendTestIssue(env: IssueEnv, input: Record<string, unknown
       AND EXISTS(SELECT 1 FROM build_log_eligible WHERE membership_id=?) ON CONFLICT DO NOTHING`)
       .bind(id,row.membership_id,row.current_request_id,hash,now,id,contentHash,row.membership_id),
   ])
-  if (result[1].meta.changes !== 1) return json(409,{error:'already_claimed_or_content_changed'})
+  if (result[1].meta.changes !== 1) { skipped++; continue }
   // Claims are never retried automatically, including timeout/crash ambiguity.
   if (!await env.DB.prepare('SELECT 1 FROM build_log_eligible WHERE membership_id=?').bind(row.membership_id).first()) {
     await env.DB.prepare("UPDATE build_log_issue_recipients SET outcome='suppressed',error_code='ineligible' WHERE token_digest=?").bind(hash).run()
-    return json(409,{error:'ineligible'})
+    skipped++; continue
   }
-  const unsubscribe = `${API}/issues/unsubscribe?token=${raw}`
+  const unsubscribe = `${publicMode ? 'https://api.zouantcha.com' : API}/issues/unsubscribe?token=${raw}`
   const mail = await renderBuildLogIssue(title, paragraphs as string[], unsubscribe, issue as IssueContent | undefined)
   let outcome = 'unknown', messageId: string | null = null, errorCode: string | null = null
   try {
     const response = await fetch('https://api.resend.com/emails', {
       method:'POST',headers:{Authorization:`Bearer ${env.RESEND_API_KEY}`,'Content-Type':'application/json','Idempotency-Key':`build-log/${id}/${row.membership_id}`},
-      body:JSON.stringify({from:'Wiel <wiel@news.zouantcha.com>',to:[OWNER],reply_to:OWNER,subject:mail.subject,text:mail.text,html:mail.html,
+      body:JSON.stringify({from:'Wiel <wiel@news.zouantcha.com>',to:[row.email],reply_to:OWNER,subject:mail.subject,text:mail.text,html:mail.html,
         headers:{'List-Unsubscribe':`<${unsubscribe}>`,'List-Unsubscribe-Post':'List-Unsubscribe=One-Click'}}),signal:AbortSignal.timeout(10000),
     })
     if (response.ok) {
@@ -68,7 +75,11 @@ export async function sendTestIssue(env: IssueEnv, input: Record<string, unknown
     } else if (response.status >= 400 && response.status < 500 && response.status !== 408) {outcome='failed';errorCode=`resend_http_${response.status}`}
   } catch {errorCode='outcome_unknown'}
   await env.DB.prepare('UPDATE build_log_issue_recipients SET outcome=?,message_id=?,error_code=? WHERE token_digest=?').bind(outcome,messageId,errorCode,hash).run()
-  return json(outcome==='provider-accepted'?200:503,{outcome,messageId})
+  if (outcome==='provider-accepted') accepted++; else held++
+  // Pace individual requests as well as limiting each resumable invocation to 50.
+  await new Promise(resolve => setTimeout(resolve, 600))
+  }
+  return json(200,{accepted,held,skipped,batchLimit:50,resume:publicMode && rows.results.length===50})
 }
 
 function unsubscribePage(done: boolean) {

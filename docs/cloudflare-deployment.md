@@ -261,3 +261,43 @@ coverage and staging fixtures never become verified Friday business counts.
 Required before production issue activation: production migration review/backup,
 provider policy and quotas, real recipients, broadcast queue/reconciliation,
 production URL/token policy, production keys/webhook, and Wiel's explicit go-ahead.
+
+## Production issue activation (pending Wiel's go)
+
+Production remains `ISSUE_SEND_MODE=disabled`. After review, provision production
+`ISSUE_ADMIN_SECRET`, `RESEND_API_KEY`, and `RESEND_WEBHOOK_SECRET` through Wrangler
+secret input without logging their values. Store the operator and webhook secrets
+under their existing keychain services with account `news-production`. Create the
+Resend webhook at `https://api.zouantcha.com/webhooks/resend` for delivered, bounced,
+and complained events. No production secret or webhook is provisioned by this PR.
+Only with Wiel's explicit go, set production mode to `confirmed-public` and deploy.
+The authenticated production endpoint is `POST /issues/send`; staging retains
+`POST /issues/test` and `allowlist`. Neither accepts recipient selection.
+
+Save the reviewed `{id,title,paragraphs,issue?}` payload in a private `issue.json`.
+Run this exact command with shell tracing disabled (the response contains counts):
+
+```sh
+python3 - <<'PY_SEND'
+import json, subprocess, urllib.request
+secret = subprocess.check_output(['security','find-generic-password','-s','resend-zouantcha-operator','-a','news-production','-w'], text=True).strip()
+request = urllib.request.Request('https://api.zouantcha.com/issues/send', data=open('issue.json','rb').read(), headers={'Authorization':'Bearer '+secret,'Content-Type':'application/json'}, method='POST')
+with urllib.request.urlopen(request, timeout=600) as response:
+    print(response.read().decode())
+PY_SEND
+```
+
+Each invocation selects at most 50 unclaimed eligible members and pauses 600 ms
+between transport attempts. If `resume` is true, pause briefly and rerun the exact
+same command and payload until false. Already claimed recipients are skipped,
+including failed and unknown outcomes. Reconcile unknown outcomes privately;
+never retry them automatically. Content is immutable for an issue ID. Each
+recipient has an independent 32-byte unsubscribe capability and RFC 8058 headers;
+production links use the production API. Restore disabled mode after sending.
+
+Worker strict gate (generate runtime declarations outside the checkout):
+
+```sh
+pnpm exec wrangler types /tmp/build-log-worker-types.d.ts --config workers/field-notes/wrangler.jsonc --env staging
+pnpm exec tsc --noEmit --strict --target ES2022 --module ESNext --moduleResolution bundler --lib ES2022,DOM --skipLibCheck --esModuleInterop --jsx react-jsx /tmp/build-log-worker-types.d.ts workers/field-notes/src/index.ts workers/scorecard/src/index.ts
+```
