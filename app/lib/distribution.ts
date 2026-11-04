@@ -14,7 +14,7 @@ export const labCopy = {
   intro: "Public data turned into something a business can use. These are the products I'm working on.",
 }
 export const products = [
-  { id: 'radar-evenements', name: 'Radar Événements', status: 'In progress', description: "Alerts from Québec's public event alcohol permits for rental companies, caterers, DJs and security firms. French first, with English alongside it." },
+  { id: 'radar-evenements', name: 'Avantvu', status: 'In progress', description: "Alerts from Québec's public event alcohol permits for rental companies, caterers, DJs and security firms. French first, with English alongside it." },
   { id: 'opening-soon', name: 'Opening Soon', status: 'Planned', description: 'New bar and restaurant licence records, organised for the vendors who supply them. Starting with Austin.' },
   { id: 'permitpost', name: 'PermitPost', status: 'Test', description: 'Residential permit signals for one local trade in Montgomery County, Maryland, with a postcard workflow to test.' },
 ] as const

@@ -11,7 +11,7 @@ export const startCopy = {
   moreWorkHeading: 'More work across software and AI',
   fieldNotesHeading: 'Weekly build log',
   fieldNotesBody: [
-    "What I built, what worked, what broke, and the numbers. Public-data products and AI in my family's businesses, once a week.",
+    "A short email every Sunday at noon New York time: what I built with AI agents, what broke, and the numbers. From my family's businesses to the products I'm building.",
   ],
   fieldNotesCta: 'Join the build log',
   fieldNotesSuccess: BUILD_LOG_PREVIEW,

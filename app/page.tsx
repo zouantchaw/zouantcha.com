@@ -140,7 +140,7 @@ export default function Page() {
         </div>
         <ul><li>
           <TrackLink href="/lab#radar-evenements" event="product_interest_click" data={{ product: 'radar-evenements', placement: 'home', destination: 'lab' }} className="selected-work-card">
-            <span className="selected-work-title">Radar Événements</span>
+            <span className="selected-work-title">Avantvu</span>
             <span className="selected-work-problem">Alerts from Québec's public event alcohol permits for rental companies, caterers, DJs and security firms.</span>
             <span className="selected-work-result">In progress</span>
             <span className="selected-work-cta">Follow the work →</span>
