@@ -50,4 +50,5 @@ next-env.d.ts
 .open-next/
 .wrangler/
 .dev.vars
+.email-preview/
 app/blog/generated/

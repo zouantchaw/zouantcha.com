@@ -1,7 +1,8 @@
-import { act, digest, signup, type LifecycleEnv } from './lifecycle'
+import { sendTestIssue, unsubscribeIssue, resendWebhook, type IssueEnv } from './issues'
+import { act, digest, signup } from './lifecycle'
 import { liveReady, previewMode } from './email'
 import { normalizeSource, resolveAttribution } from '../../../app/lib/source'
-export interface Env extends LifecycleEnv {
+export interface Env extends IssueEnv {
   INGEST_SECRET?: string
   FIELD_NOTES_INGEST_SECRET?: string
 }
@@ -57,8 +58,11 @@ const worker = {
   async fetch(request: Request, env: Env): Promise<Response> {
     const url = new URL(request.url)
     if (request.method === 'GET' && url.pathname === '/health') return json(200, { ok: true })
-    if (request.method !== 'POST' || !['/subscribe','/confirm','/unsubscribe'].includes(url.pathname)) return json(404, { ok: false, error: 'not_found' })
-    const secret = env.SITE_ENV === 'staging' ? env.FIELD_NOTES_INGEST_SECRET : env.INGEST_SECRET
+    if (url.pathname === '/issues/unsubscribe') return unsubscribeIssue(request, env)
+    if (url.pathname === '/webhooks/resend' && request.method === 'POST') return resendWebhook(request, env)
+    if (request.method !== 'POST' || !['/subscribe','/confirm','/unsubscribe','/issues/test'].includes(url.pathname)) return json(404, { ok: false, error: 'not_found' })
+    const secret = url.pathname === '/issues/test' ? env.ISSUE_ADMIN_SECRET
+      : env.SITE_ENV === 'staging' ? env.FIELD_NOTES_INGEST_SECRET : env.INGEST_SECRET
     if (!secret) return json(503, { ok: false, error: 'unavailable' })
     if (!await secretsMatch(bearerToken(request), secret)) return json(401, { ok: false, error: 'unauthorized' })
     if (Number(request.headers.get('content-length') || 0) > MAX_BODY_BYTES) return json(413, { ok: false, error: 'invalid' })
@@ -67,6 +71,7 @@ const worker = {
       if (new TextEncoder().encode(raw).length > MAX_BODY_BYTES) return json(413, { ok: false, error: 'invalid' })
       const payload = JSON.parse(raw) as Record<string, unknown>
       if (!payload || Array.isArray(payload) || typeof payload !== 'object') return json(400, { ok: false, error: 'invalid' })
+      if (url.pathname === '/issues/test') return sendTestIssue(env, payload)
       const ipHash = clip(payload.ip_hash, 64)
       if (!ipHash || !/^[a-f0-9]{32,64}$/.test(ipHash)) return json(400, { ok: false, error: 'invalid' })
       const now = new Date().toISOString(), windowStart = new Date(Date.now() - RATE_WINDOW_MS).toISOString()

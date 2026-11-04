@@ -1,0 +1,18 @@
+{
+  "$schema": "../../node_modules/wrangler/config-schema.json",
+  "name": "zouantcha-scorecard-staging",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-09-18",
+  "account_id": "0bb05130da965c096b12cc1f0637f763",
+  "workers_dev": true,
+  "preview_urls": false,
+  "routes": [],
+  "observability": {"enabled": false},
+  "triggers": {"crons": ["5 16 * * 5", "5 17 * * 5"]},
+  "vars": {"RADAR_ENV": "staging", "BUILD_LOG_COVERAGE_START": "2026-10-24T14:54:19.000Z"},
+  "d1_databases": [
+    {"binding": "SCORECARD", "database_name": "zouantcha-scorecard-staging", "database_id": "d8ecc5e7-1c4f-4952-ae5a-31614865c92d", "migrations_dir": "migrations"},
+    {"binding": "FIELD_NOTES", "database_name": "zouantcha-field-notes", "database_id": "c47d87c8-911e-4330-a59b-bd4f817a69a9"},
+    {"binding": "RADAR", "database_name": "radar-staging", "database_id": "5995f951-d9a4-4903-996b-ef92d66c09b7"}
+  ]
+}
