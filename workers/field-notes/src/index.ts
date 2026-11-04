@@ -61,8 +61,14 @@ const worker = {
     if (request.method === 'GET' && url.pathname === '/health') return json(200, { ok: true })
     if (url.pathname === '/issues/unsubscribe') return unsubscribeIssue(request, env)
     if (url.pathname === '/webhooks/resend' && request.method === 'POST') return resendWebhook(request, env)
-    if (['/issues/schedule','/issues/schedule/cancel'].includes(url.pathname)) {
+    if (['/issues/schedule','/issues/schedule/cancel','/issues/schedule/run'].includes(url.pathname)) {
       if (!env.ISSUE_ADMIN_SECRET || !await secretsMatch(bearerToken(request),env.ISSUE_ADMIN_SECRET)) return json(401,{error:'unauthorized'})
+      // Staging-only test hook: a deployed cron cannot be invoked over HTTP, so this runs the handler once under SCHEDULE_FORCE.
+      if (url.pathname === '/issues/schedule/run') {
+        if (request.method !== 'POST') return json(405,{error:'method_not_allowed'})
+        if (env.SITE_ENV !== 'staging' || env.SCHEDULE_FORCE !== '1') return json(404,{ok:false,error:'not_found'})
+        return json(200, await runSchedule(env,new Date()))
+      }
       if (request.method === 'GET' && url.pathname === '/issues/schedule') return scheduleRoute(env,'GET',false,{})
       if (request.method !== 'POST') return json(405,{error:'method_not_allowed'})
       const raw = await request.text()
