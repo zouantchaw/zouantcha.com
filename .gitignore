@@ -52,3 +52,6 @@ next-env.d.ts
 .dev.vars
 .email-preview/
 app/blog/generated/
+
+# Agent working files
+.claude-work/
