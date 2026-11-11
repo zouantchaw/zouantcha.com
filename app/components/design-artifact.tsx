@@ -5,8 +5,6 @@ const figtree = localFont({ src: [{ path: '../fonts/design-artifacts/figtree-400
 const plex = localFont({ src: [{ path: '../fonts/design-artifacts/plex-400.woff2', weight: '400', style: 'normal' }, { path: '../fonts/design-artifacts/plex-500.woff2', weight: '500', style: 'normal' }], variable: '--font-mtl-mono', display: 'swap' })
 const fraunces = localFont({ src: [{ path: '../fonts/design-artifacts/fraunces-700.woff2', weight: '700', style: 'normal' }, { path: '../fonts/design-artifacts/fraunces-900.woff2', weight: '900', style: 'normal' }], variable: '--font-dpr-display', display: 'swap' })
 const dmSans = localFont({ src: [{ path: '../fonts/design-artifacts/dmSans-400.woff2', weight: '400', style: 'normal' }, { path: '../fonts/design-artifacts/dmSans-500.woff2', weight: '500', style: 'normal' }], variable: '--font-dpr-sans', display: 'swap' })
-const montserrat = localFont({ src: [{ path: '../fonts/design-artifacts/montserrat-600.woff2', weight: '600', style: 'normal' }, { path: '../fonts/design-artifacts/montserrat-700.woff2', weight: '700', style: 'normal' }], variable: '--font-sh-display', display: 'swap' })
-const manrope = localFont({ src: [{ path: '../fonts/design-artifacts/manrope-400.woff2', weight: '400', style: 'normal' }, { path: '../fonts/design-artifacts/manrope-500.woff2', weight: '500', style: 'normal' }, { path: '../fonts/design-artifacts/manrope-600.woff2', weight: '600', style: 'normal' }, { path: '../fonts/design-artifacts/manrope-700.woff2', weight: '700', style: 'normal' }], variable: '--font-sh-sans', display: 'swap' })
 
 const fontVars = [
   spectral.variable,
@@ -14,8 +12,6 @@ const fontVars = [
   plex.variable,
   fraunces.variable,
   dmSans.variable,
-  montserrat.variable,
-  manrope.variable,
 ].join(' ')
 
 export function DesignArtifact({
@@ -32,7 +28,6 @@ export function DesignArtifact({
       {id === 'portmind-marks' ? <PortmindMarks /> : null}
       {id === 'dpr-system' ? <DprSystem /> : null}
       {id === 'dpr-social' ? <DprSocial /> : null}
-      {id === 'starthome-system' ? <StarthomeSystem /> : null}
       {caption ? (
         <figcaption className="max-w-2xl text-[15px] italic leading-6 text-muted">
           {caption}
@@ -657,98 +652,6 @@ function DprSocial() {
           <p className="text-[9px] font-medium uppercase tracking-[0.16em] text-[#FAFAF780]">
             Party Rentals
           </p>
-        </div>
-      </div>
-    </div>
-  )
-}
-
-const shSans = { fontFamily: 'var(--font-sh-sans), system-ui, sans-serif' }
-
-const starthomeRoof =
-  'M6960 10024 c-151 -119 -465 -364 -697 -546 l-423 -330 0 -534 0 -534 180 0 180 0 0 448 0 448 286 224 c158 124 391 307 518 407 127 101 233 183 236 183 9 0 315 -241 314 -248 0 -4 -110 -93 -245 -198 l-244 -190 -3 -537 -2 -537 180 0 180 0 0 449 0 449 247 194 c136 106 368 289 517 406 149 116 273 212 276 212 5 0 338 -259 837 -652 139 -109 259 -201 266 -204 17 -6 233 264 221 275 -5 4 -72 57 -149 116 -163 127 -481 375 -575 450 -353 281 -595 465 -605 461 -7 -2 -140 -104 -296 -227 -156 -122 -290 -226 -296 -232 -9 -6 -100 60 -312 227 -165 130 -304 236 -308 236 -4 0 -132 -97 -283 -216z'
-
-const starthomeWordmark =
-  'M6139 7576 c-136 -29 -211 -136 -180 -254 23 -85 83 -125 261 -178 81 -24 110 -42 125 -76 53 -128 -166 -161 -328 -49 -25 17 -48 31 -51 31 -3 0 -17 -23 -31 -51 -25 -49 -26 -52 -9 -70 30 -33 155 -89 225 -101 128 -21 251 17 313 95 26 32 31 49 34 107 4 61 1 75 -22 114 -22 38 -39 51 -99 80 -40 19 -105 44 -146 56 -119 35 -162 97 -105 151 23 21 35 24 102 24 66 0 87 -5 145 -32 l67 -32 26 51 c14 27 23 57 20 65 -8 21 -106 61 -178 73 -77 12 -97 12 -169 -4z M6650 7520 l0 -60 120 0 120 0 0 -315 0 -315 65 0 65 0 0 315 0 315 120 0 120 0 0 60 0 60 -305 0 -305 0 0 -60z M7538 7223 c-87 -197 -160 -366 -164 -375 -5 -16 1 -18 62 -18 l69 0 34 80 33 80 188 0 189 0 32 -80 33 -80 72 0 73 0 -71 163 c-40 89 -113 257 -163 372 l-91 210 -70 3 -69 3 -157 -358z m290 49 c34 -81 62 -151 62 -155 0 -9 -260 -9 -260 1 -1 12 124 302 130 302 3 0 33 -67 68 -148z M8350 7206 l0 -376 65 0 65 0 0 110 0 110 104 0 104 0 67 -110 67 -110 74 0 c41 0 74 2 74 5 0 3 -36 58 -81 123 -72 106 -79 118 -62 127 47 26 110 103 121 148 37 145 -12 265 -130 318 -49 22 -67 24 -260 27 l-208 3 0 -375z m410 232 c53 -27 70 -56 70 -121 0 -109 -47 -140 -227 -145 l-123 -4 0 146 0 146 118 0 c102 0 124 -3 162 -22z M9130 7520 l0 -60 120 0 120 0 0 -315 0 -315 65 0 65 0 0 315 0 315 120 0 120 0 0 60 0 60 -305 0 -305 0 0 -60z M7000 6160 l0 -150 30 0 30 0 0 60 0 60 75 0 75 0 0 -60 0 -60 30 0 30 0 0 150 0 150 -30 0 -30 0 0 -65 0 -65 -75 0 -75 0 0 65 0 65 -30 0 -30 0 0 -150z M7502 6290 c-71 -44 -95 -143 -49 -210 88 -131 297 -75 297 79 0 91 -64 151 -160 151 -37 0 -66 -6 -88 -20z m159 -59 c23 -23 29 -38 29 -71 0 -33 -6 -48 -29 -71 -23 -23 -38 -29 -71 -29 -102 0 -141 136 -52 184 45 25 90 20 123 -13z M7910 6160 l0 -150 30 0 30 0 1 98 1 97 39 -82 c55 -114 70 -113 126 5 l41 87 1 -102 c1 -103 1 -103 26 -103 l25 0 0 150 0 150 -34 0 c-32 0 -34 -2 -76 -96 l-44 -96 -48 96 c-47 94 -49 96 -83 96 l-35 0 0 -150z M8420 6160 l0 -150 110 0 110 0 0 25 c0 25 -1 25 -80 25 l-80 0 0 35 0 35 70 0 70 0 0 30 0 30 -70 0 -70 0 0 35 0 35 80 0 c79 0 80 0 80 25 l0 25 -110 0 -110 0 0 -150z'
-
-function StarthomeRoof({ fill, className }: { fill: string; className?: string }) {
-  return (
-    <svg viewBox="583 538 397 218" className={className} aria-hidden>
-      <g transform="translate(0,1563) scale(0.1,-0.1)">
-        <path d={starthomeRoof} fill={fill} />
-      </g>
-    </svg>
-  )
-}
-
-function StarthomeLockup({
-  roof,
-  wordmark,
-}: {
-  roof: string
-  wordmark: string
-}) {
-  return (
-    <svg viewBox="583 538 397 426" className="h-[120px] w-[112px]" aria-hidden>
-      <g transform="translate(0,1563) scale(0.1,-0.1)">
-        <path d={starthomeRoof} fill={roof} />
-      </g>
-      <g transform="translate(0,1563) scale(0.1,-0.1)">
-        <path d={starthomeWordmark} fill={wordmark} />
-      </g>
-    </svg>
-  )
-}
-
-function StarthomeWordmark({ fill }: { fill: string }) {
-  return (
-    <svg viewBox="590 803 385 161" className="h-12 w-[140px]" aria-hidden>
-      <g transform="translate(0,1563) scale(0.1,-0.1)">
-        <path d={starthomeWordmark} fill={fill} />
-      </g>
-    </svg>
-  )
-}
-
-function StarthomeSystem() {
-  const label = { ...shSans, fontSize: 11, fontWeight: 600, letterSpacing: '0.06em' }
-
-  return (
-    <div className="overflow-hidden border border-line bg-white p-6 sm:p-10">
-      <div className="grid gap-4 sm:grid-cols-2">
-        <div className="flex flex-col items-center justify-center gap-3 rounded-2xl bg-[#F5F5F5] px-8 py-12">
-          <StarthomeLockup roof="#EEC66C" wordmark="#000000" />
-        </div>
-        <div className="flex flex-col items-center justify-center gap-3 rounded-2xl bg-black px-8 py-12">
-          <StarthomeLockup roof="#FFFFFF" wordmark="#FFFFFF" />
-        </div>
-      </div>
-      <div className="mt-4 grid grid-cols-3 gap-4">
-        <div className="flex flex-col items-center justify-center gap-3 rounded-2xl bg-[#F5F5F5] px-4 py-8">
-          <StarthomeRoof fill="#EEC66C" className="h-10 w-[72px]" />
-          <p className="uppercase text-[#94A3B8]" style={label}>
-            Gold
-          </p>
-        </div>
-        <div className="flex flex-col items-center justify-center gap-3 rounded-2xl bg-[#F5F5F5] px-4 py-8">
-          <StarthomeRoof fill="#000000" className="h-10 w-[72px]" />
-          <p className="uppercase text-[#94A3B8]" style={label}>
-            Black
-          </p>
-        </div>
-        <div className="flex flex-col items-center justify-center gap-3 rounded-2xl bg-black px-4 py-8">
-          <StarthomeRoof fill="#FFFFFF" className="h-10 w-[72px]" />
-          <p className="uppercase text-[#64748B]" style={label}>
-            White
-          </p>
-        </div>
-      </div>
-      <div className="mt-4 grid gap-4 sm:grid-cols-2">
-        <div className="flex flex-col items-center justify-center gap-3 rounded-2xl bg-[#F5F5F5] px-6 py-8">
-          <StarthomeWordmark fill="#000000" />
-        </div>
-        <div className="flex flex-col items-center justify-center gap-3 rounded-2xl bg-black px-6 py-8">
-          <StarthomeWordmark fill="#FFFFFF" />
         </div>
       </div>
     </div>

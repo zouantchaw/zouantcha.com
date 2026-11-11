@@ -5,7 +5,7 @@ export type ReadingPosition = {
   section: string
   heading: string
 }
-const slugs = ['mtl-archives', 'portmind', 'diane-party-rentals', 'starthome']
+const slugs = ['mtl-archives', 'portmind', 'diane-party-rentals']
 export function readPosition(): ReadingPosition | null {
   try {
     const value = JSON.parse(localStorage.getItem(readingKey) ?? 'null')

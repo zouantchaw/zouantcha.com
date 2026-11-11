@@ -11,7 +11,6 @@ export default function NotFound() {
       </header>
       <div className="flex gap-8 flex-wrap">
         <Link href="/">Back to the index ↗</Link>
-        <Link href="/search">Find something ↗</Link>
         <Link href="/case-studies">Case studies ↗</Link>
       </div>
     </section>

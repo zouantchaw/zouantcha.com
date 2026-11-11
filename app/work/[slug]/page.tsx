@@ -44,7 +44,7 @@ export default async function Page({
       <div className="max-w-3xl space-y-6 text-[19px] leading-8">
         {role.body.map((text) => (
           <p key={text}>{role.slug === 'independent'
-            ? text.split(/(Diane Party Rentals|Starthome|MTL Archives|PortMind)/g).map((part, index) => {
+            ? text.split(/(Diane Party Rentals|MTL Archives|PortMind)/g).map((part, index) => {
                 const study = work.find(item => item.title === part)
                 return study ? <Link key={index} href={'/case-studies/' + study.slug} className="underline decoration-line underline-offset-4 hover:decoration-ink">{part}</Link> : part
               })

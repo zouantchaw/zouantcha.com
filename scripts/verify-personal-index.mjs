@@ -24,7 +24,6 @@ const routes = [
   '/case-studies/mtl-archives',
   '/case-studies/portmind',
   '/case-studies/diane-party-rentals',
-  '/case-studies/starthome',
 ]
 try {
   for (const width of [390, 1440]) {

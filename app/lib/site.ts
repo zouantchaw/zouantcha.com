@@ -17,9 +17,9 @@ export const site = {
   resumeDownload: '/wielfried-zouantcha-resume.pdf',
   resumeFilename: 'wielfried-zouantcha-resume.pdf',
   description:
-    'I use AI agents to build and run real businesses. The workflows, what breaks, and the numbers.',
+    'Software engineer, building with AI. Sharing what I make and learn.',
   socialDescription:
-    'I use AI agents to build and run real businesses. The workflows, what breaks, and the numbers.',
+    'Software engineer, building with AI. Sharing what I make and learn.',
 }
 
 export const intro = {
@@ -82,24 +82,16 @@ export const about = {
       body: 'Missing data, model disagreement and ambiguous rules should stay visible to the person making the decision.',
       evidence: {
         label: 'PortMind: checking the benchmark',
-        href: '/case-studies/portmind#check-the-benchmark-before-trusting-the-score',
+        href: '/case-studies/portmind',
       },
     },
 
-    {
-      title: 'Treat reliability as product work',
-      body: 'Health checks, permissions, audit trails and failure behavior affect whether someone can rely on the product.',
-      evidence: {
-        label: 'Starthome: keeping the record consistent',
-        href: '/case-studies/starthome#the-record-changes-state',
-      },
-    },
     {
       title: 'Use AI as leverage, not evidence',
       body: 'A model can help me build or explore faster. Its output still needs to be checked against the task, the source material and the people using it.',
       evidence: {
         label: 'MTL Archives: testing a replacement model',
-        href: '/case-studies/mtl-archives#trying-a-replacement-before-changing-the-index',
+        href: '/case-studies/mtl-archives',
       },
     },
     {
@@ -196,7 +188,7 @@ export const experience: Experience[] = [
     period: 'January 2023–present',
     body: [
       'I work directly with founders and operating businesses, from figuring out what the product needs to do through designing and building it.',
-      'For Diane Party Rentals, that meant connecting quotes, payments and rental operations. For Starthome, it meant working with the founder on a mobile inspection workflow. My independent research projects, MTL Archives and PortMind, have their own detailed case studies.',
+      'For Diane Party Rentals, that meant connecting quotes, payments and rental operations. My independent research projects, MTL Archives and PortMind, have their own detailed case studies.',
     ],
     sections: [
       {
@@ -254,7 +246,7 @@ export const availabilityCta = {
 
 export const connectCopy = {
   eyebrow: 'Software & AI Engineer',
-  body: 'I use AI agents to build and run real businesses. The workflows, what breaks, and the numbers.',
+  body: 'Software engineer, building with AI. Sharing what I make and learn.',
   event: 'At Exploit Summit 2026 · Montréal',
   proof: [
     '5+ years engineering',
@@ -286,6 +278,7 @@ export function mailto(subject?: string) {
 export const siteNavigation = [
   { href: '/case-studies', label: 'Case studies', primary: false },
   { href: '/about', label: 'About', primary: false },
+  { href: '/blog', label: 'Writing', primary: false },
   { href: '/log', label: 'Build log', primary: false },
   { href: '/start', label: 'Work with me', primary: true },
 ]
