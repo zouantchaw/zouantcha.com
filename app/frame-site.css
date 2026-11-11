@@ -317,3 +317,7 @@ body:has(.v2-page) .site-main,body:has(.v2-case) .site-main { padding-top:0; }
 .v2-signup .search-submit { background:var(--color-ink); color:var(--color-paper); border:0; }
 .v2-signup .search-submit:hover { background:var(--color-slate); }
 .v2-signup .search-input { border:1.5px solid var(--color-slate); }
+/* Booking CTAs and phone spacing from boards 14 / 14m. */
+.v2-booking [data-slot=button],.v2-start .v2-final-call [data-slot=button] { background:var(--color-lens); color:var(--color-paper); border:0; min-height:52px; padding:16px 20px; border-radius:12px; font-size:16px; line-height:20px; }
+.v2-booking [data-slot=button]:hover,.v2-start .v2-final-call [data-slot=button]:hover { background:var(--color-ink); }
+@media(max-width:700px) { .v2-start-hero { gap:18px; } .v2-page .v2-booking { gap:14px; } }

@@ -29,6 +29,8 @@ function Table({ data }) {
 function CustomLink(props) {
   let href = props.href
 
+  if (href.includes('.ipfs.nftstorage.link/')) return <span>{props.children}</span>
+
   if (href.startsWith('/')) {
     return (
       <Link href={href} {...props}>
