@@ -327,7 +327,7 @@ body:has(.v2-page) .site-main,body:has(.v2-case) .site-main { padding-top:0; }
  .v2-cases .v2-feature [data-slot=card-title] { font-size:34px; line-height:42px; }
  .v2-cases .v2-feature strong { font-size:32px; line-height:40px; }
  .v2-cases .v2-case-row h3 { font-size:28px; line-height:34px; }
- .v2-about .v2-section-intro h2 { font-size:26px; line-height:32px; }
+ .v2-about .v2-split h2 { font-size:26px; line-height:32px; }
  .v2-case-heading h1 { font-size:52px; line-height:52px; }
  .v2-case .case-essay-section h2 { font-size:26px; line-height:30px; }
  .v2-case .v2-facts strong { font-size:28px; line-height:34px; }
@@ -336,4 +336,62 @@ body:has(.v2-page) .site-main,body:has(.v2-case) .site-main { padding-top:0; }
  .v2-bookshelf .v2-book-row { font-size:24px; line-height:30px; }
  .v2-bookshelf .v2-final-call h2 { font-size:24px; line-height:26px; }
  .v2-log .v2-video-intro h2 { font-size:28px; line-height:30px; }
+}
+/* Compact index copy and row layout drawn on board 15m. Links stay on titles. */
+.v2-feature-mobile-copy { display:none; }
+@media(max-width:700px) {
+ .v2-cases .v2-heading > p:last-child,.v2-log .v2-heading > p:last-child { display:none; }
+ .v2-cases .v2-feature-desktop-copy { display:none; }
+ .v2-cases .v2-feature-mobile-copy { display:inline; }
+ .v2-cases .v2-feature { padding:20px; border-radius:18px; gap:8px; }
+ .v2-cases .v2-feature [data-slot=card-header] { display:contents; }
+ .v2-cases .v2-feature [data-slot=card-header] > .v2-label { order:0; font-size:10px; line-height:12px; }
+ .v2-cases .v2-feature [data-slot=card-title] { order:1; }
+ .v2-cases .v2-feature [data-slot=card-description] { order:3; font-size:15px; line-height:23px; }
+ .v2-cases .v2-feature [data-slot=card-content] { order:2; flex-direction:row; align-items:baseline; flex-wrap:wrap; gap:8px; text-align:left; }
+ .v2-cases .v2-feature [data-slot=card-content] a,.v2-cases .v2-feature:nth-child(2) [data-slot=card-content] { display:none; }
+ .v2-cases .v2-case-row { padding:12px 0; }
+ .v2-cases .v2-case-row p,.v2-cases .v2-case-row > span,.v2-cases > .v2-hiring { display:none; }
+ .v2-cases .v2-case-row h3::after { content:' ↗'; }
+}
+
+/* Remaining layout and typography values from boards15,17,18 and their phone columns. */
+.v2-about-intro { grid-template-columns:360px 700px; align-items:start; }
+.v2-about-intro .v2-portrait { order:-1; }
+.v2-about-copy { gap:22px; }
+.v2-about-copy h1 { font-size:64px; line-height:66px; }
+.v2-about .v2-split { padding-bottom:80px; }
+.v2-cases .v2-heading > p:last-child,.v2-bookshelf .v2-heading > p:last-child,.v2-log .v2-heading > p:last-child { font-size:19px; line-height:30px; }
+.v2-heading > .v2-label,.v2-case-heading > .v2-label,.v2-about-copy > .v2-label,.v2-start-copy > .v2-label { font-size:13px; line-height:16px; }
+.v2-year { grid-template-columns:200px minmax(0,1fr); }
+.v2-year h2 { font-family:var(--font-display); font-weight:700; letter-spacing:-.02em; }
+.v2-year > [data-slot=collapsible] { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:12px 40px; min-width:0; max-width:920px; }
+.v2-year [data-slot=collapsible-content][data-state=open] { display:contents; }
+.v2-book-row { display:block; border:0; padding:0; font:400 28px/34px var(--font-serif); }
+.v2-book-row > span { display:none; }
+.v2-year .v2-show-books { grid-column:1/-1; justify-self:start; margin:0; color:var(--color-slate)!important; }
+.v2-bookshelf .v2-final-call h2 { line-height:42px; }
+.v2-video-intro > a { font-size:15px; line-height:18px; }
+.v2-contents-desktop > .v2-label { font-size:11px; line-height:14px; }
+@media(min-width:701px) {
+ .v2-cases .v2-case-row h3 { font-size:36px; line-height:40px; }
+ .v2-start .v2-proof > h2 { line-height:48px; }
+ .v2-start .v2-booking [data-slot=button],.v2-start .v2-final-call [data-slot=button] { font-size:17px; line-height:22px; }
+ .v2-next > a { font-size:40px; line-height:48px; }
+}
+@media(max-width:1300px) and (min-width:701px) { .v2-about-intro { grid-template-columns:32% minmax(0,1fr); gap:48px; } .v2-about-intro .v2-portrait { height:auto; aspect-ratio:360/319; } }
+@media(max-width:700px) {
+ .v2-cases .v2-heading,.v2-log .v2-heading { padding-block:16px; }
+ .v2-heading > .v2-label,.v2-case-heading > .v2-label,.v2-start-copy > .v2-label { font-size:11px; line-height:14px; }
+ .v2-about-intro { padding-top:16px; gap:16px; }
+ .v2-about-copy { gap:16px; }
+ .v2-about-copy > .v2-label,.v2-bookshelf .v2-heading > p:last-child { display:none; }
+ .v2-about-copy h1 { font-size:42px; line-height:44px; }
+ .v2-about-copy > p:not(.v2-label) { font-size:16px; line-height:26px; }
+ .v2-about .v2-split { padding-bottom:40px; }
+ .v2-year { grid-template-columns:1fr; gap:8px; border-top-width:4px; padding-top:14px; }
+ .v2-year > [data-slot=collapsible] { grid-template-columns:1fr; gap:8px; }
+ .v2-bookshelf .v2-year h2 { font-family:var(--font-display); }
+ .v2-bookshelf .v2-book-row { font:400 24px/30px var(--font-serif); }
+ .v2-bookshelf .v2-final-call h2 { line-height:26px; }
 }
