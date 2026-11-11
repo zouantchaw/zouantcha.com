@@ -321,3 +321,19 @@ body:has(.v2-page) .site-main,body:has(.v2-case) .site-main { padding-top:0; }
 .v2-booking [data-slot=button],.v2-start .v2-final-call [data-slot=button] { background:var(--color-lens); color:var(--color-paper); border:0; min-height:52px; padding:16px 20px; border-radius:12px; font-size:16px; line-height:20px; }
 .v2-booking [data-slot=button]:hover,.v2-start .v2-final-call [data-slot=button]:hover { background:var(--color-ink); }
 @media(max-width:700px) { .v2-start-hero { gap:18px; } .v2-page .v2-booking { gap:14px; } }
+/* Per-page 390 type values from the five-column Paper sheet. */
+@media(max-width:700px) {
+ .v2-cases h1,.v2-about-copy h1,.v2-log h1 { font-size:42px; line-height:44px; }
+ .v2-cases .v2-feature [data-slot=card-title] { font-size:34px; line-height:42px; }
+ .v2-cases .v2-feature strong { font-size:32px; line-height:40px; }
+ .v2-cases .v2-case-row h3 { font-size:28px; line-height:34px; }
+ .v2-about .v2-section-intro h2 { font-size:26px; line-height:32px; }
+ .v2-case-heading h1 { font-size:52px; line-height:52px; }
+ .v2-case .case-essay-section h2 { font-size:26px; line-height:30px; }
+ .v2-case .v2-facts strong { font-size:28px; line-height:34px; }
+ .v2-case .v2-hiring h2 { font-size:24px; line-height:30px; }
+ .v2-bookshelf .v2-year h2 { font-size:36px; line-height:44px; }
+ .v2-bookshelf .v2-book-row { font-size:24px; line-height:30px; }
+ .v2-bookshelf .v2-final-call h2 { font-size:24px; line-height:26px; }
+ .v2-log .v2-video-intro h2 { font-size:28px; line-height:30px; }
+}
