@@ -444,3 +444,10 @@ body:has(.v2-page) .site-main,body:has(.v2-case) .site-main { padding-top:0; }
  .v2-cases .v2-case-row { padding-inline:34px; gap:40px; align-items:center; }
  .v2-cases .v2-case-rows > div:not([data-slot=separator]) + div:not([data-slot=separator]) { margin-top:20px; }
 }
+
+.v2-proof-card [data-slot=card-title] a { font:inherit; letter-spacing:inherit; color:inherit!important; }
+@media(max-width:700px) {
+ .v2-proof-card [data-slot=card-footer] { display:none; }
+ .v2-home .v2-number [data-slot=card-header] { gap:8px; }
+ .v2-start .v2-how { gap:14px; }
+}
