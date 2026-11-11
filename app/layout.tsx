@@ -3,10 +3,13 @@ import './global.css'
 import type { Metadata } from 'next'
 import {
   IBM_Plex_Sans,
+  IBM_Plex_Sans_Condensed,
   IBM_Plex_Mono,
   Instrument_Serif,
 } from 'next/font/google'
 import './personal-index.css'
+import './frame-site.css'
+const display = IBM_Plex_Sans_Condensed({ subsets: ['latin'], weight: '700', variable: '--font-frame-display', display: 'swap' })
 const sans = IBM_Plex_Sans({
   subsets: ['latin'],
   weight: ['400', '500', '600'],
@@ -85,7 +88,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={cx(sans.variable, mono.variable, serif.variable)}
+      className={cx(sans.variable, mono.variable, serif.variable, display.variable)}
     >
       <body
         className={`${sans.className} min-h-screen bg-paper font-sans text-ink antialiased`}

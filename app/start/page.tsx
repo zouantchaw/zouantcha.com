@@ -1,69 +1,15 @@
 import { redirect } from 'next/navigation'
 import { pageMetadata } from 'app/lib/metadata'
-import { ProfilePhoto } from 'app/components/profile-photo'
-import { TrackAnchor } from 'app/components/track-link'
+import { Button } from 'app/components/ui/button'
+import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from 'app/components/ui/card'
 import { StartPageView } from 'app/components/start-page-view'
 import { pickAttribution, withAttribution } from 'app/lib/field-notes'
-import { site } from 'app/lib/site'
 import { startCopy } from 'app/lib/start'
-
-const title = 'Let’s talk. · Wiel Zouantcha'
-const startMetadata = pageMetadata({
-  title,
-  description: startCopy.body,
-  path: '/start',
-  section: 'Work with me',
-})
-
-export const metadata = {
-  ...startMetadata,
-  title: { absolute: title },
-}
-
-export default async function Page({
-  searchParams,
-}: {
-  searchParams: Promise<Record<string, string | string[] | undefined>>
-}) {
-  const params = await searchParams
-  const first = (value: string | string[] | undefined) => Array.isArray(value) ? value[0] : value
-  const signup = first(params.signup)
-  const error = first(params.error)
-  const status = new URLSearchParams()
-  if (signup === 'preview' || signup === 'pending_confirmation') status.set('signup', signup)
-  if (error && ['invalid', 'invalid_email', 'rate_limited', 'unavailable'].includes(error)) status.set('error', error)
-  // Old non-JavaScript signup returns still reach their feedback on the build log.
-  // Only recognized status values and the existing bounded attribution survive.
-  if (status.size) {
-    redirect(withAttribution(`/log?${status.toString()}#field-notes`, pickAttribution(params)))
-  }
-
-  return (
-    <div className="site-shell start-page">
-      <StartPageView />
-      <header className="start-hero">
-        <div className="start-identity">
-          <ProfilePhoto size={56} priority />
-          <div>
-            <p className="start-name">{site.name}</p>
-            <p className="eyebrow">{startCopy.eyebrow}</p>
-          </div>
-        </div>
-        <h1>{startCopy.headline}</h1>
-        <p className="hero-intro">{startCopy.body}</p>
-        <div className="hero-links">
-          <TrackAnchor
-            href={startCopy.projectIntroHref}
-            event="project_intro_click"
-            data={{ source_page: 'start', destination: 'cal.com/wielfried/intro', placement: 'hero' }}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {startCopy.primaryCta}
-          </TrackAnchor>
-        </div>
-        <p className="start-note">{startCopy.note}</p>
-      </header>
-    </div>
-  )
+import { frameProof, frameSteps } from 'app/lib/frame-site'
+export const metadata = pageMetadata({ title: 'Work with me', description: 'Software and AI that take work off your plate.', path:'/start' })
+export default async function Page({searchParams}:{searchParams:Promise<Record<string,string|string[]|undefined>>}) {
+ const params=await searchParams; const status=new URLSearchParams(); for(const key of ['signup','error']) { const v=params[key];if(typeof v==='string' && ['preview','pending_confirmation','invalid','invalid_email','rate_limited','unavailable'].includes(v))status.set(key,v) } if(status.size)redirect(withAttribution(`/log?${status.toString()}#field-notes`,pickAttribution(params)))
+ return <div className="frame-shell v2-page v2-start"><StartPageView /><header className="v2-start-hero"><div className="v2-start-copy"><p className="v2-label">WORK WITH ME · FOR BUSINESS OWNERS</p><h1>Software and AI that take work off your plate.</h1><p className="v2-lead">I build websites, booking and payment systems, and AI agents for small businesses, starting with my own family’s. You get a fixed price for each phase before any work starts.</p></div><Card className="v2-booking"><CardHeader><img className="v2-booking-avatar" src="/images/wiel-avatar.jpg" width="64" height="64" alt="Wiel Zouantcha" /><div><CardTitle>20 minutes with Wiel</CardTitle><CardDescription>Video call · pick any open time</CardDescription></div></CardHeader><CardContent><p>Tell me where your week goes. If software can take some of it, I’ll say what I’d build first and what it would cost.</p></CardContent><CardFooter><Button asChild><a href={startCopy.projectIntroHref}>Book a 20-minute call</a></Button></CardFooter></Card></header>
+ <section className="v2-proof"><h2>What it did for businesses I know well</h2><div className="v2-proof-grid">{frameProof.map(p=><Card className="v2-proof-card" key={p.label}><CardHeader><p className="v2-label"><span className="v2-proof-desktop-copy">{p.label}</span><span className="v2-proof-mobile-copy">{p.mobileLabel}</span></p><CardTitle className={p.blue?'v2-blue':''}><span className="v2-proof-desktop-copy">{p.value}</span><a className="v2-proof-mobile-copy" href={p.href}>{p.value}</a></CardTitle><CardDescription><span className="v2-proof-desktop-copy">{p.body}</span><span className="v2-proof-mobile-copy">{p.mobileBody}</span></CardDescription></CardHeader><CardFooter><a href={p.href}>{p.cta}</a></CardFooter></Card>)}</div></section>
+ <section className="v2-split v2-how"><h2>How it works</h2><div className="v2-steps">{frameSteps.map(s=><div key={s.title}><p className="v2-label">{s.title}</p><p>{s.body}</p></div>)}</div></section><Card className="v2-final-call"><CardContent><h2>The first call costs nothing but 20 minutes.</h2><Button asChild><a href={startCopy.projectIntroHref}>Book a 20-minute call</a></Button></CardContent></Card></div>
 }

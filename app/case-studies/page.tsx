@@ -1,51 +1,10 @@
+import Link from 'next/link'
 import { pageMetadata } from 'app/lib/metadata'
-import { SectionLabel } from 'app/components/section-label'
-import { WorkRow } from 'app/components/work-row'
-import { work } from 'app/lib/work'
-
-export const metadata = pageMetadata({
-  title: 'Case studies',
-  description:
-    'Selected products and systems: PortMind, MTL Archives, Diane Party Rentals, Ballerz Football Academy, and Starthome.',
-  path: '/case-studies',
-})
-
-export default function Page() {
-  return (
-    <div className="site-shell personal-page space-y-12">
-      <header className="max-w-3xl space-y-5">
-        <SectionLabel>Case studies</SectionLabel>
-        <h1 className="font-mono text-[32px] leading-[1.15] tracking-[-0.03em] text-ink sm:text-[40px]">
-          Case studies
-        </h1>
-        <p className="max-w-2xl text-[17px] leading-7 text-ink-soft">
-          Research into images and evidence, followed by the systems I build for
-          businesses. Each case study follows a different problem through to the
-          result and what still needs work.
-        </p>
-      </header>
-
-      <section aria-labelledby="research-heading">
-        <h2 id="research-heading" className="eyebrow mb-6">
-          Research / data, experiments & evaluation
-        </h2>
-        {work
-          .filter((item) => item.research)
-          .map((item) => (
-            <WorkRow key={item.slug} item={item} index={work.indexOf(item)} />
-          ))}
-      </section>
-      <section aria-labelledby="client-heading">
-        <h2 id="client-heading" className="eyebrow mb-6">
-          Client work / operations & mobile workflows
-        </h2>
-        {work
-          .filter((item) => !item.research)
-          .map((item) => (
-            <WorkRow key={item.slug} item={item} index={work.indexOf(item)} />
-          ))}
-        <div className="border-t border-line" />
-      </section>
-    </div>
-  )
-}
+import { Card,CardHeader,CardTitle,CardDescription,CardContent } from 'app/components/ui/card'
+import { CaseRows,HiringBlock } from 'app/components/frame-sections'
+export const metadata=pageMetadata({title:'Case studies',description:'Five pieces of work, with the evidence left in.',path:'/case-studies'})
+const features=[
+ {slug:'mtl-archives',label:'MY OWN PRODUCT · 2025–PRESENT · RESEARCHER, DESIGNER & ENGINEER',title:'MTL Archives',mobileLabel:'MY OWN PRODUCT · 2025–PRESENT',mobileBody:'From public records to visual search and a daily game.',body:'From public records to visual search and a daily game, with 2.66 million social views and a much smaller website audience.',value:'2.66M',source:'SOCIAL VIEWS · JAN–JUL 2026'},
+ {slug:'ballerz',label:'MY BROTHER’S SOCCER ACADEMY · WEBSITE AND AGENTS',title:'Ballerz',mobileLabel:'MY BROTHER’S SOCCER ACADEMY',mobileBody:'A website parents find on Google, and agents behind it.',body:'A website parents find on Google, and agents that help run the academy behind it.',value:'#1',source:'GOOGLE · GAITHERSBURG SOCCER TRAINING · NOV 2026'},
+]
+export default function Page(){return <div className="frame-shell v2-page v2-cases"><header className="v2-heading"><p className="v2-label">CASE STUDIES</p><h1>Five pieces of work, with the evidence left in.</h1><p>Each one starts with the problem, shows what I changed, and keeps what didn’t work.</p></header><section className="v2-feature-list" aria-label="Selected case studies">{features.map(f=><Card className="v2-feature" key={f.slug}><CardHeader><p className="v2-label"><span className="v2-feature-desktop-copy">{f.label}</span><span className="v2-feature-mobile-copy">{f.mobileLabel}</span></p><CardTitle><Link href={'/case-studies/'+f.slug}>{f.title}</Link></CardTitle><CardDescription><span className="v2-feature-desktop-copy">{f.body}</span><span className="v2-feature-mobile-copy">{f.mobileBody}</span></CardDescription></CardHeader><CardContent><strong>{f.value}</strong><p className="v2-label">{f.source}</p><Link href={'/case-studies/'+f.slug}>Read the case study ↗</Link></CardContent></Card>)}<CaseRows skipFeatures /></section><HiringBlock /></div>}

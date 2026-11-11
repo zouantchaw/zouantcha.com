@@ -3,6 +3,8 @@ import { readFile } from 'node:fs/promises'
 import path from 'node:path'
 import { getCloudflareContext } from '@opennextjs/cloudflare'
 
+import { frameColors } from 'app/lib/brand'
+
 export const runtime = 'nodejs'
 async function font(name: string) {
   let assets:CloudflareEnv['ASSETS']|undefined
@@ -26,19 +28,19 @@ export async function GET(request: Request) {
   const summary = excerpt(params.get('summary') || 'Software & AI Engineer', 205)
   const tag = excerpt(params.get('tag') || 'Software & AI Engineer', 48)
   return new ImageResponse(
-    <div style={{ display: 'flex', flexDirection: 'column', width: '100%', height: '100%', padding: '48px 60px', background: '#ffffff', color: '#181818', fontFamily: 'IBM Plex Sans' }}>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingBottom: 27, borderBottom: '1px solid #d9dbe4' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', width: '100%', height: '100%', padding: '48px 60px', background: frameColors.paper, color: frameColors.ink, fontFamily: 'IBM Plex Sans' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingBottom: 27, borderBottom: `1px solid ${frameColors.line}` }}>
         <span style={{ fontSize: 25, fontWeight: 700 }}>wiel zouantcha</span>
-        <span style={{ fontSize: 23, color: '#2948ff' }}>zouantcha.com</span>
+        <span style={{ fontSize: 23, color: frameColors.lens }}>zouantcha.com</span>
       </div>
       <div style={{ display: 'flex', flexDirection: 'column', flexGrow: 1, justifyContent: 'center' }}>
-        <div style={{ display: 'flex', color: '#2948ff', fontSize: 17, letterSpacing: '2px', textTransform: 'uppercase', marginBottom: 22 }}>{tag}</div>
+        <div style={{ display: 'flex', color: frameColors.lens, fontSize: 17, letterSpacing: '2px', textTransform: 'uppercase', marginBottom: 22 }}>{tag}</div>
         <div style={{ display: 'flex', fontFamily: 'Instrument Serif', fontSize: title.length > 95 ? 58 : title.length > 55 ? 72 : 88, lineHeight: 1.02, letterSpacing: '-1.5px' }}>{title}</div>
-        <div style={{ display: 'flex', fontSize: 25, lineHeight: 1.4, color: '#545454', marginTop: 25, maxWidth: 1000 }}>{summary}</div>
+        <div style={{ display: 'flex', fontSize: 25, lineHeight: 1.4, color: frameColors.slate, marginTop: 25, maxWidth: 1000 }}>{summary}</div>
       </div>
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: 22, borderTop: '1px solid #d9dbe4', color: '#626262', fontSize: 17 }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingTop: 22, borderTop: `1px solid ${frameColors.line}`, color: frameColors.slate, fontSize: 17 }}>
         <span>React · TypeScript · Node.js</span>
-        <span style={{ color: '#2948ff' }}>zouantcha.com</span>
+        <span style={{ color: frameColors.lens }}>zouantcha.com</span>
       </div>
     </div>,
     {

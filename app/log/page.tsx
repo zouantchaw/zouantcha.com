@@ -1,27 +1,9 @@
 import { pageMetadata } from 'app/lib/metadata'
-import { startCopy } from 'app/lib/start'
 import { pickAttribution } from 'app/lib/field-notes'
 import { FieldNotesForm } from 'app/components/field-notes-form'
 import { BuildLogView } from 'app/components/build-log-view'
 import { BUILD_LOG_UNAVAILABLE } from 'app/lib/build-log-consent'
-
-export const metadata = pageMetadata({ title: 'Weekly build log', description: startCopy.fieldNotesBody[0], path: '/log', section: 'Build log' })
-
-export default async function Page({ searchParams }: { searchParams: Promise<Record<string, string | string[] | undefined>> }) {
-  const params = await searchParams
-  const saved = params.signup === 'preview' || params.signup === 'pending_confirmation'
-  const error = ['invalid', 'invalid_email'].includes(String(params.error)) ? 'Enter a valid email address.' : params.error === 'rate_limited' ? 'Please try again in a few minutes.' : params.error === 'unavailable' ? BUILD_LOG_UNAVAILABLE : params.error ? 'Something went wrong. Please try again.' : undefined
-  return (
-    <div className="site-shell start-page">
-      <BuildLogView />
-      <header className="start-hero">
-        <p className="eyebrow">Build log</p>
-        <h1>{startCopy.fieldNotesHeading}</h1>
-        <p className="hero-intro">{startCopy.fieldNotesBody[0]}</p>
-      </header>
-      <section id="field-notes" className="start-section start-field-notes" aria-label="Join the build log">
-        <FieldNotesForm preview={process.env.SITE_ENV === 'staging'} attribution={pickAttribution(params)} returnTo="/log" initialStatus={saved ? 'success' : error ? 'error' : 'idle'} initialDelivery={params.signup === 'pending_confirmation' ? 'pending_confirmation' : 'preview'} initialMessage={error} />
-      </section>
-    </div>
-  )
-}
+import { frameVideos } from 'app/lib/frame-site'
+import { site } from 'app/lib/site'
+export const metadata=pageMetadata({title:'The build log',description:'What I build with AI, what breaks, and the numbers.',path:'/log'})
+export default async function Page({searchParams}:{searchParams:Promise<Record<string,string|string[]|undefined>>}){const params=await searchParams;const saved=params.signup==='preview'||params.signup==='pending_confirmation';const error=['invalid','invalid_email'].includes(String(params.error))?'Enter a valid email address.':params.error==='rate_limited'?'Please try again in a few minutes.':params.error==='unavailable'?BUILD_LOG_UNAVAILABLE:params.error?'Something went wrong. Please try again.':undefined;return <div className="frame-shell v2-page v2-log"><BuildLogView /><header className="v2-heading"><p className="v2-label">THE BUILD LOG</p><h1>What I build with AI, what breaks, and the numbers.</h1><p>Short videos when there’s something to show, and one email on Sundays at noon, New York time.</p></header><section id="field-notes" className="v2-signup" aria-labelledby="signup-heading"><div className="v2-signup-copy"><p className="v2-label">THE BUILD LOG · SUNDAYS AT NOON (NEW YORK)</p><h2 id="signup-heading">One email a week: what I built, what broke, what it cost.</h2></div><FieldNotesForm preview={process.env.SITE_ENV==='staging'} attribution={pickAttribution(params)} returnTo="/log" buttonLabel="Get it on Sundays" placeholder="you@business.com" initialStatus={saved?'success':error?'error':'idle'} initialDelivery={params.signup==='pending_confirmation'?'pending_confirmation':'preview'} initialMessage={error} /></section><section className="v2-videos" aria-labelledby="videos-heading"><div className="v2-video-intro"><h2 id="videos-heading">Short videos, with the proof on screen</h2><p>About a minute each. One real result, what I did, and what you can check in your own business.</p><a href={site.instagram}>All videos on Instagram ↗</a></div><div className="v2-video-grid">{frameVideos.map(v=><a className="v2-video" key={v.href} href={v.href}><img src={v.image} alt={v.alt} width="440" height="782" loading="lazy" /><span>{v.title}</span><span className="v2-label">{v.date}</span></a>)}</div></section></div>}

@@ -1,7 +1,8 @@
 'use client'
 import { useEffect, useState, useRef } from 'react'
 import { savePosition } from 'app/lib/reading-position'
-import { Dialog } from './dialog'
+import { Collapsible, CollapsibleTrigger, CollapsibleContent } from './ui/collapsible'
+import { Button } from './ui/button'
 export function ReaderContents({
   sections,
   title,
@@ -52,27 +53,8 @@ export function ReaderContents({
       ))}
     </ol>
   )
-  return (
-    <>
-      <aside className="reader-contents">
-        <p className="eyebrow">In this case study</p>
-        <nav aria-label="Chapters">{list}</nav>
-      </aside>
-      <button
-        className="contents-toggle"
-        onClick={() => setOpen(true)}
-        aria-haspopup="dialog"
-      >
-        Contents <span aria-hidden="true">＋</span>
-      </button>
-      <Dialog
-        open={open}
-        onClose={() => setOpen(false)}
-        title="In this case study"
-        className="contents-dialog"
-      >
-        <nav aria-label="Chapters">{list}</nav>
-      </Dialog>
-    </>
-  )
+  return <div className="v2-contents">
+    <aside className="v2-contents-desktop"><p className="v2-label">On this page</p><nav aria-label="On this page">{list}</nav></aside>
+    <Collapsible className="v2-contents-mobile" open={open} onOpenChange={setOpen}><CollapsibleTrigger asChild><Button variant="outline">On this page <span aria-hidden="true">▾</span></Button></CollapsibleTrigger><CollapsibleContent><nav aria-label="On this page">{list}</nav></CollapsibleContent></Collapsible>
+  </div>
 }
