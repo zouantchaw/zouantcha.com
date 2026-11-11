@@ -1,33 +1,14 @@
 import { shareImage } from './lib/metadata'
 import './global.css'
 import type { Metadata } from 'next'
-import {
-  IBM_Plex_Sans,
-  IBM_Plex_Sans_Condensed,
-  IBM_Plex_Mono,
-  Instrument_Serif,
-} from 'next/font/google'
+import localFont from 'next/font/local'
 import './personal-index.css'
 import './frame-site.css'
-const display = IBM_Plex_Sans_Condensed({ subsets: ['latin'], weight: '700', variable: '--font-frame-display', display: 'swap' })
-const sans = IBM_Plex_Sans({
-  subsets: ['latin'],
-  weight: ['400', '500', '600'],
-  variable: '--font-index-sans',
-  display: 'swap',
-})
-const mono = IBM_Plex_Mono({
-  subsets: ['latin'],
-  weight: ['400'],
-  variable: '--font-index-mono',
-  display: 'swap',
-})
-const serif = Instrument_Serif({
-  subsets: ['latin'],
-  weight: ['400'],
-  variable: '--font-index-serif',
-  display: 'swap',
-})
+
+const display = localFont({ src: './fonts/frame/display-700.woff2', weight: '700', variable: '--font-frame-display', display: 'swap' })
+const sans = localFont({ src: './fonts/frame/sans-400.woff2', weight: '400 600', variable: '--font-index-sans', display: 'swap' })
+const mono = localFont({ src: './fonts/frame/mono-400.woff2', weight: '400', variable: '--font-index-mono', display: 'swap' })
+const serif = localFont({ src: './fonts/frame/serif-400.woff2', weight: '400', variable: '--font-index-serif', display: 'swap' })
 
 import { SiteAnalytics } from './components/site-analytics'
 import { Nav } from './components/nav'

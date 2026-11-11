@@ -27,7 +27,7 @@ export function Nav() {
           <Button variant="ghost" className="frame-menu-toggle" aria-label="Open menu"><span aria-hidden="true"><i /><i /></span></Button>
         </SheetTrigger>
         <SheetContent className="frame-menu">
-          <SheetHeader><SheetTitle>Look around</SheetTitle><SheetDescription>Explore Wiel’s work and build log.</SheetDescription></SheetHeader>
+          <SheetHeader><SheetTitle>Menu</SheetTitle><SheetDescription>Pages on this site.</SheetDescription></SheetHeader>
           <nav aria-label="Mobile navigation">
             {siteNavigation.map(({ href, label }) => <SheetClose asChild key={href}><Link href={href} aria-current={pathname === href || pathname.startsWith(href + '/') || (href === '/blog' && pathname.startsWith('/fr/blog')) ? 'page' : undefined} onClick={() => setOpen(false)}>{label}</Link></SheetClose>)}
           </nav>

@@ -17,9 +17,9 @@ export const site = {
   resumeDownload: '/wielfried-zouantcha-resume.pdf',
   resumeFilename: 'wielfried-zouantcha-resume.pdf',
   description:
-    'I use AI agents to build and run real businesses. The workflows, what breaks, and the numbers.',
+    'Software engineer, building with AI. Sharing what I make and learn.',
   socialDescription:
-    'I use AI agents to build and run real businesses. The workflows, what breaks, and the numbers.',
+    'Software engineer, building with AI. Sharing what I make and learn.',
 }
 
 export const intro = {
@@ -82,7 +82,7 @@ export const about = {
       body: 'Missing data, model disagreement and ambiguous rules should stay visible to the person making the decision.',
       evidence: {
         label: 'PortMind: checking the benchmark',
-        href: '/case-studies/portmind#check-the-benchmark-before-trusting-the-score',
+        href: '/case-studies/portmind',
       },
     },
 
@@ -91,7 +91,7 @@ export const about = {
       body: 'A model can help me build or explore faster. Its output still needs to be checked against the task, the source material and the people using it.',
       evidence: {
         label: 'MTL Archives: testing a replacement model',
-        href: '/case-studies/mtl-archives#trying-a-replacement-before-changing-the-index',
+        href: '/case-studies/mtl-archives',
       },
     },
     {
@@ -246,7 +246,7 @@ export const availabilityCta = {
 
 export const connectCopy = {
   eyebrow: 'Software & AI Engineer',
-  body: 'I use AI agents to build and run real businesses. The workflows, what breaks, and the numbers.',
+  body: 'Software engineer, building with AI. Sharing what I make and learn.',
   event: 'At Exploit Summit 2026 · Montréal',
   proof: [
     '5+ years engineering',

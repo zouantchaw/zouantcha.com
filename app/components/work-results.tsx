@@ -11,13 +11,13 @@ const results = [
     value: '2.66M',
     label: 'Facebook + Instagram views',
     context: 'MTL Archives · Jan–Jul 2026',
-    href: '/case-studies/mtl-archives#the-reach-was-real-it-did-not-stay-there',
+    href: '/case-studies/mtl-archives',
   },
   {
     value: '81,202',
     label: 'Port activity snapshots collected',
     context: 'PortMind · Jan 28–Jul 9, 2026; includes cached observations',
-    href: '/case-studies/portmind#build-a-record-of-the-port',
+    href: '/case-studies/portmind',
   },
   {
     value: 'Manual → online',

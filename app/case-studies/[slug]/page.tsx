@@ -8,17 +8,10 @@ import {
   MtlArchiveExample,
   MtlPipeline,
   MtlLiveSearch,
-  MtlTechnology,
   MtlAudience,
   MtlBrand,
 } from 'app/components/mtl-research'
-import { PortImageExplorer } from 'app/components/portmind-explorer'
-import {
-  PortmindResults,
-  PortmindInspection,
-} from 'app/components/portmind-research-examples'
 import Link from 'next/link'
-import { PortmindPipeline } from 'app/components/portmind-pipeline'
 import { InteractionFilm } from 'app/components/interaction-film'
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
@@ -109,7 +102,7 @@ function FigureImage({
         >
           {image.caption}
         </figcaption>
-      ) : <figcaption>Source: case-study asset · {image.src.split('/').pop()}</figcaption>}
+      ) : null}
     </figure>
   )
 }
@@ -177,14 +170,9 @@ function Block({ block }: { block: WorkBlock }) {
   if (block.kind === 'mtl-archive') return <MtlArchiveExample />
   if (block.kind === 'mtl-pipeline') return <MtlPipeline />
   if (block.kind === 'mtl-shape') return <MtlExplorerShape />
-  if (block.kind === 'mtl-technology') return <MtlTechnology />
   if (block.kind === 'mtl-search') return <MtlLiveSearch />
   if (block.kind === 'mtl-audience') return <MtlAudience />
   if (block.kind === 'mtl-brand') return <MtlBrand />
-  if (block.kind === 'portmind-explorer') return <PortImageExplorer />
-  if (block.kind === 'portmind-results') return <PortmindResults />
-  if (block.kind === 'portmind-inspection') return <PortmindInspection />
-  if (block.kind === 'portmind-pipeline') return <PortmindPipeline />
 
   if (block.kind === 'rich-p') {
     return (
@@ -298,8 +286,8 @@ export default async function Page({ params }: PageProps) {
   const contents = (item.contents ?? item.sections.map(s => ({ heading:s.heading,title:s.heading }))).map(s => ({id:sectionId(s.heading),title:s.title}))
   return <article className="frame-shell v2-page v2-case">
     <CaseStudyView slug={item.slug} />
-    <header className="v2-case-heading"><Link href="/case-studies" className="v2-label">← CASE STUDIES · {item.slug === 'mtl-archives' ? 'MY OWN PRODUCT · 2025–PRESENT' : item.period}</Link><h1>{item.title}</h1><p>{item.slug === 'mtl-archives' ? '13,000+ historical photographs turned into a searchable archive and a daily game, with an automated editorial system that reached 2.66M social views.' : item.dek}</p></header>
-    <Card className="v2-facts"><CardContent><div><p className="v2-label">ROLE</p><p>{item.role}</p></div>{metrics.map(metric=><div key={metric.label}><p className="v2-label">{metric.value === '13,499' ? 'SERVING RECORDS' : metric.value === '2.66M' ? 'SOCIAL VIEWS · JAN–JUL 2026' : metric.label}</p><strong className={metric.value === '2.66M' ? 'v2-blue' : undefined}>{metric.value}</strong></div>)}</CardContent></Card>
+    <header className="v2-case-heading"><Link href="/case-studies" className="v2-label">← CASE STUDIES · {item.slug === 'mtl-archives' ? 'MY OWN PRODUCT · 2025–PRESENT' : item.period}</Link><h1>{item.title}</h1><p>{item.dek}</p></header>
+    <Card className="v2-facts"><CardContent><div><p className="v2-label">ROLE</p><p>{item.role}</p></div>{metrics.map(metric=><div key={metric.label}><p className="v2-label">{metric.value === '13,499' ? 'PHOTOS IN THE ARCHIVE · JUNE 2026' : metric.value === '2.66M' ? 'SOCIAL VIEWS · JAN–JUL 2026' : metric.label}</p><strong className={metric.value === '2.66M' ? 'v2-blue' : undefined}>{metric.value}</strong></div>)}</CardContent></Card>
     <div className="v2-case-grid"><ReaderContents title={item.title} slug={item.slug} sections={contents} /><div className="case-essay-body">
       {item.sections.map(section=><section key={section.heading} id={sectionId(section.heading)} className="case-essay-section"><h2>{section.heading}</h2><div className="v2-case-blocks">{section.blocks.map((block,i)=><Block key={section.heading+'-'+i} block={block} />)}</div></section>)}
     </div></div>
