@@ -440,3 +440,7 @@ body:has(.v2-page) .site-main,body:has(.v2-case) .site-main { padding-top:0; }
  .v2-case-heading { padding-block:16px; }
  .v2-case-heading > p { line-height:27px; }
 }
+@media(min-width:701px) {
+ .v2-cases .v2-case-row { padding-inline:34px; gap:40px; align-items:center; }
+ .v2-cases .v2-case-rows > div:not([data-slot=separator]) + div:not([data-slot=separator]) { margin-top:20px; }
+}
