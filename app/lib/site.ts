@@ -245,73 +245,6 @@ export const proof = [
   { value: '81K+', label: 'AI observations', href: '/case-studies/portmind' },
 ]
 
-export const selectedWork = [
-  {
-    slug: 'portmind',
-    title: 'PortMind',
-    problem: 'Evaluating computer-vision models against real port operations.',
-    result:
-      'Built a reproducible data and model-evaluation pipeline using 81K+ observations to test whether model outputs were actually useful operationally.',
-    stack: 'Python · Next.js · Cloudflare · Vision Models · ETL',
-    href: '/case-studies/portmind',
-    cta: 'Read case study →',
-  },
-  {
-    slug: 'mtl-archives',
-    title: 'MTL Archives',
-    problem: 'Making thousands of historical Montréal photographs searchable, playable and public.',
-    result:
-      'Built ingestion, visual search, product and editorial systems around 13,499 serving records, with 2.66M combined Facebook and Instagram views, Jan–Jul 2026.',
-    stack: 'Python · Next.js · Cloudflare · CLIP · ETL',
-    href: '/case-studies/mtl-archives',
-    cta: 'Read case study →',
-  },
-]
-
-export const capabilities = [
-  {
-    title: 'Product Engineering',
-    body: 'Take ambiguous product requirements through architecture, implementation and production deployment.',
-  },
-  {
-    title: 'Data & Applied AI',
-    body: 'Build ingestion pipelines, model-evaluation systems, retrieval workflows and AI features around real operational problems.',
-  },
-  {
-    title: 'Customer-Facing Engineering',
-    body: 'Work directly with founders, customers and operators to understand requirements, prototype solutions and turn feedback into shipped software.',
-  },
-]
-
-export const homeExperience = [
-  {
-    company: 'Independent',
-    role: 'Software & AI Engineer',
-    period: '2023–',
-    href: '/work/independent',
-    note: 'Turn operational workflows into production software for service businesses, from quoting and inventory to scheduling, payments and internal systems.',
-  },
-  {
-    company: 'Oloodi Technologies',
-    role: 'Customer Engineer · Contract',
-    period: '2025–2026',
-    href: '/work/oloodi',
-  },
-  {
-    company: 'Ethos',
-    role: 'Senior Full Stack Engineer',
-    period: '2022–2025',
-    href: '/work/ethos',
-    note: 'Took a single-tenant MVP to a multi-tenant SaaS serving 50+ merchant accounts across Next.js, Node.js and Azure.',
-  },
-  {
-    company: 'SaaS Alerts',
-    role: 'Software Engineer',
-    period: '2020–2021',
-    href: '/work/saas-alerts',
-  },
-]
-
 export const availabilityCta = {
   title: 'Let’s build something useful.',
   body: 'Bring one workflow that costs you time. In a 20-minute review, we look at how it runs today and where software or agents can help.',
@@ -352,8 +285,8 @@ export function mailto(subject?: string) {
 
 export const siteNavigation = [
   { href: '/case-studies', label: 'Case studies', primary: false },
-  { href: '/log', label: 'Build log', primary: false },
   { href: '/about', label: 'About', primary: false },
+  { href: '/log', label: 'Build log', primary: false },
   { href: '/start', label: 'Work with me', primary: true },
 ]
 
@@ -364,4 +297,6 @@ export const siteFooterNavigation = [
   { href: site.linkedin, label: 'LinkedIn' },
   { href: site.github, label: 'GitHub' },
   { href: site.resumePage, label: 'Résumé' },
+  { href: '/bookshelf', label: 'Bookshelf' },
+  { href: '/blog', label: 'Writing' },
 ]

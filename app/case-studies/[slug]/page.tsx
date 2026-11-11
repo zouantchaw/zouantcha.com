@@ -3,7 +3,6 @@ import { CaseStudyView } from 'app/components/case-study-view'
 import { ImageViewer } from 'app/components/image-viewer'
 import { ReaderContents } from 'app/components/reader-contents'
 import { sectionId } from 'app/lib/section-id'
-import { CaseStudyDownload } from 'app/components/case-study-download'
 import { MtlExplorerShape } from 'app/components/mtl-research/explorer-shape'
 import {
   MtlArchiveExample,
@@ -24,9 +23,7 @@ import { InteractionFilm } from 'app/components/interaction-film'
 import Image from 'next/image'
 import { notFound } from 'next/navigation'
 import { DesignArtifact } from 'app/components/design-artifact'
-import { SectionLabel } from 'app/components/section-label'
 import {
-  adjacentWork,
   getWork,
   work,
   workImageDimensions,
@@ -35,7 +32,9 @@ import {
   type WorkImage,
   type WorkTable,
 } from 'app/lib/work'
-import { baseUrl } from 'app/sitemap'
+import { HiringBlock } from 'app/components/frame-sections'
+import { Card, CardContent } from 'app/components/ui/card'
+import { frameCases } from 'app/lib/frame-site'
 
 type PageProps = {
   params: Promise<{ slug: string }>
@@ -110,7 +109,7 @@ function FigureImage({
         >
           {image.caption}
         </figcaption>
-      ) : null}
+      ) : <figcaption>Source: case-study asset · {image.src.split('/').pop()}</figcaption>}
     </figure>
   )
 }
@@ -293,184 +292,17 @@ export default async function Page({ params }: PageProps) {
 
   if (!item) notFound()
 
-  const { prev, next } = adjacentWork(item.slug)
-
-  return (
-    <article className="case-essay">
-      <CaseStudyView slug={item.slug} />
-      <ReaderContents
-        title={item.title}
-        slug={item.slug}
-        sections={(item.contents ?? item.sections.map(s => ({ heading: s.heading, title: s.heading }))).map((s) => ({
-          id: sectionId(s.heading),
-          title: s.title,
-        }))}
-      />
-      <div className="flex flex-wrap items-center justify-between gap-3 text-sm text-muted">
-        <Link
-          href="/case-studies"
-          className="underline decoration-line underline-offset-4 hover:text-ink hover:decoration-ink"
-        >
-          ← Index
-        </Link>
-
-        {next ? (
-          <Link
-            href={`/case-studies/${next.slug}`}
-            className="underline decoration-line underline-offset-4 hover:text-ink hover:decoration-ink"
-          >
-            Next →
-          </Link>
-        ) : (
-          <span />
-        )}
-      </div>
-
-      {item.banner ? (
-        <figure>
-          <Image
-            src={item.banner.src}
-            alt={item.banner.alt}
-            {...dimensionsFor(item.banner.src)}
-            priority
-            sizes="(max-width: 1080px) 100vw, 1080px"
-            className="h-auto w-full bg-paper-2"
-          />
-        </figure>
-      ) : null}
-
-      <header className="case-essay-header">
-        <h1 className="text-[40px] font-medium leading-[1.08] tracking-[-0.035em] text-ink sm:text-[56px]">
-          {item.title}
-        </h1>
-        <p className="text-xl leading-8 text-ink-soft">{item.dek}</p>
-        {item.ownership ? (
-          <div className="case-role">
-            <p className="eyebrow">My role</p>
-            <p className="max-w-3xl text-[17px] leading-7 text-ink-soft">{item.ownership}</p>
-          </div>
-        ) : null}
-        <dl className="case-essay-meta">
-          <div>
-            <dt className="font-mono text-[12px] text-muted">Role</dt>
-            <dd className="mt-1 text-ink-soft">{item.role}</dd>
-          </div>
-          <div>
-            <dt className="font-mono text-[12px] text-muted">Scope</dt>
-            <dd className="mt-1 text-ink-soft">{item.scope}</dd>
-          </div>
-          <div>
-            <dt className="font-mono text-[12px] text-muted">
-              {item.tools ? 'Tools' : 'Period'}
-            </dt>
-            <dd className="mt-1 text-ink-soft">{item.tools ?? item.period}</dd>
-          </div>
-        </dl>
-        {item.links?.length ? (
-          <div className="flex flex-wrap gap-x-5 gap-y-2 text-sm">
-            {item.links.map((link) =>
-              link.external ? (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  className="underline decoration-line underline-offset-4 hover:decoration-ink"
-                  rel="noopener noreferrer"
-                  target="_blank"
-                >
-                  {link.label} ↗
-                </a>
-              ) : (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="underline decoration-line underline-offset-4 hover:decoration-ink"
-                >
-                  {link.label} →
-                </Link>
-              ),
-            )}
-          </div>
-        ) : null}
-        {item.slug !== 'diane-party-rentals' && item.pdfDownload !== false ? <CaseStudyDownload slug={item.slug} title={item.title} /> : null}
-      </header>
-
-      {item.slug === 'starthome' ? null : item.metrics?.length ? (
-        <section className="border-y border-line py-10">
-          <SectionLabel>At a glance</SectionLabel>
-          <ul className="mt-8 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-            {item.metrics.map((metric) => (
-              <li key={metric.label} className="space-y-2">
-                <p className="font-mono text-[28px] leading-none tracking-tight text-ink sm:text-[32px]">
-                  {metric.value}
-                </p>
-                <p className="max-w-xs text-[14px] leading-6 text-muted">
-                  {metric.label}
-                </p>
-              </li>
-            ))}
-          </ul>
-        </section>
-      ) : item.glance?.length ? (
-        <section className="border-y border-line py-8">
-          <SectionLabel>At a glance</SectionLabel>
-          <ul className="mt-5 grid gap-3 sm:grid-cols-2">
-            {item.glance.map((point) => (
-              <li key={point} className="text-[15px] leading-6 text-ink-soft">
-                {point}
-              </li>
-            ))}
-          </ul>
-        </section>
-      ) : null}
-
-      <div className="case-essay-body">
-        {item.sections.map((section) => (
-          <section
-            key={section.heading}
-            id={sectionId(section.heading)}
-            className="case-essay-section"
-          >
-            <div className="max-w-2xl space-y-2">
-              <h2 className="text-[28px] font-medium tracking-tight text-ink sm:text-[32px]">
-                {section.heading}
-              </h2>
-            </div>
-            <div className="space-y-6">
-              {section.blocks.map((block, blockIndex) => (
-                <Block key={`${section.heading}-${blockIndex}`} block={block} />
-              ))}
-            </div>
-          </section>
-        ))}
-      </div>
-
-      <nav className="flex flex-wrap items-center justify-between gap-3 border-t border-line pt-8 text-sm">
-        {prev ? (
-          <Link
-            href={`/case-studies/${prev.slug}`}
-            className="underline decoration-line underline-offset-4 hover:decoration-ink"
-          >
-            ← {prev.title}
-          </Link>
-        ) : (
-          <Link
-            href="/case-studies"
-            className="underline decoration-line underline-offset-4 hover:decoration-ink"
-          >
-            ← All case studies
-          </Link>
-        )}
-        {next ? (
-          <Link
-            href={`/case-studies/${next.slug}`}
-            className="underline decoration-line underline-offset-4 hover:decoration-ink"
-          >
-            {next.title} →
-          </Link>
-        ) : (
-          <span />
-        )}
-      </nav>
-    </article>
-  )
+  const index = frameCases.findIndex(candidate => candidate.slug === item.slug)
+  const next = frameCases[(index + 1) % frameCases.length]
+  const metrics = item.slug === 'mtl-archives' ? (item.metrics || []).filter(m => ['13,499','2.66M'].includes(m.value)) : (item.metrics || []).slice(0,2)
+  const contents = (item.contents ?? item.sections.map(s => ({ heading:s.heading,title:s.heading }))).map(s => ({id:sectionId(s.heading),title:s.title}))
+  return <article className="frame-shell v2-page v2-case">
+    <CaseStudyView slug={item.slug} />
+    <header className="v2-case-heading"><Link href="/case-studies" className="v2-label">← CASE STUDIES · {item.slug === 'mtl-archives' ? 'MY OWN PRODUCT · 2025–PRESENT' : item.period}</Link><h1>{item.title}</h1><p>{item.slug === 'mtl-archives' ? '13,000+ historical photographs turned into a searchable archive and a daily game, with an automated editorial system that reached 2.66M social views.' : item.dek}</p></header>
+    <Card className="v2-facts"><CardContent><div><p className="v2-label">ROLE</p><p>{item.role}</p></div>{metrics.map(metric=><div key={metric.label}><p className="v2-label">{metric.value === '13,499' ? 'SERVING RECORDS' : metric.value === '2.66M' ? 'SOCIAL VIEWS · JAN–JUL 2026' : metric.label}</p><strong className={metric.value === '2.66M' ? 'v2-blue' : undefined}>{metric.value}</strong></div>)}</CardContent></Card>
+    <div className="v2-case-grid"><ReaderContents title={item.title} slug={item.slug} sections={contents} /><div className="case-essay-body">
+      {item.sections.map(section=><section key={section.heading} id={sectionId(section.heading)} className="case-essay-section"><h2>{section.heading}</h2><div className="v2-case-blocks">{section.blocks.map((block,i)=><Block key={section.heading+'-'+i} block={block} />)}</div></section>)}
+    </div></div>
+    <nav className="v2-next"><span className="v2-label">NEXT CASE STUDY</span><Link href={'/case-studies/'+next.slug}>{next.title} →</Link></nav><HiringBlock />
+  </article>
 }

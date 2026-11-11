@@ -8,6 +8,7 @@ import {
   Instrument_Serif,
 } from 'next/font/google'
 import './personal-index.css'
+import './frame-site.css'
 const display = IBM_Plex_Sans_Condensed({ subsets: ['latin'], weight: '700', variable: '--font-frame-display', display: 'swap' })
 const sans = IBM_Plex_Sans({
   subsets: ['latin'],

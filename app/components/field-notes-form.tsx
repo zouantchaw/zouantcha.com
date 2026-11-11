@@ -1,5 +1,7 @@
 'use client'
 
+import { Button } from './ui/button'
+import { Input } from './ui/input'
 import { track } from 'app/lib/analytics'
 import { FIELD_NOTES_SOURCE, type FieldNotesAttribution } from 'app/lib/field-notes'
 import { BUILD_LOG_CONSENT_VERSION, BUILD_LOG_PENDING, BUILD_LOG_PREVIEW, BUILD_LOG_UNAVAILABLE } from 'app/lib/build-log-consent'
@@ -17,7 +19,11 @@ export function FieldNotesForm({
   initialDelivery,
   preview = false,
   returnTo = '/start',
+  buttonLabel,
+  placeholder = 'you@company.com',
 }: {
+  buttonLabel?: string
+  placeholder?: string
   attribution: FieldNotesAttribution
   initialStatus?: Status
   returnTo?: '/start' | '/log'
@@ -125,7 +131,7 @@ export function FieldNotesForm({
       <label className="sr-only" htmlFor={`${id}-email`}>
         Email address
       </label>
-      <input
+      <Input
         id={`${id}-email`}
         aria-invalid={status === 'error' || undefined}
         aria-describedby={`${id}-consent${status === 'error' ? ` ${id}-error` : ''}`}
@@ -136,12 +142,12 @@ export function FieldNotesForm({
         autoComplete="email"
         required
         maxLength={254}
-        placeholder="you@company.com"
+        placeholder={placeholder}
         disabled={status === 'submitting'}
       />
-      <button className="search-submit" type="submit" disabled={status === 'submitting'}>
-        {status === 'submitting' ? 'Joining…' : startCopy.fieldNotesCta}
-      </button>
+      <Button className="search-submit" type="submit" disabled={status === 'submitting'}>
+        {status === 'submitting' ? 'Joining…' : (buttonLabel || startCopy.fieldNotesCta)}
+      </Button>
       {status === 'error' && message ? (
         <p id={`${id}-error`} className="start-error" role="alert">
           {message}

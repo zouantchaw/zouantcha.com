@@ -48,6 +48,15 @@ function RoundedImage(props) {
   return <Image alt={props.alt} className="rounded-lg" {...props} />
 }
 
+// The original 2022 cover host no longer serves its files. Keep the article
+// and its book links readable instead of rendering broken remote images.
+function ArticleImage(props: React.ImgHTMLAttributes<HTMLImageElement>) {
+  if (typeof props.src === 'string' && props.src.includes('.ipfs.nftstorage.link/')) {
+    return 'Original book cover unavailable.'
+  }
+  return <img {...props} alt={props.alt ?? ''} loading={props.loading ?? 'lazy'} />
+}
+
 function Code({ children, ...props }) {
   let codeHTML = highlight(children)
   return <code dangerouslySetInnerHTML={{ __html: codeHTML }} {...props} />
@@ -94,6 +103,7 @@ let components = {
   h5: createHeading(5),
   h6: createHeading(6),
   Image: RoundedImage,
+  img: ArticleImage,
   a: CustomLink,
   code: Code,
   Table,

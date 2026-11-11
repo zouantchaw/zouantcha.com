@@ -1,62 +1,12 @@
-import {
-  DM_Sans,
-  Figtree,
-  Fraunces,
-  IBM_Plex_Mono,
-  Manrope,
-  Montserrat,
-  Spectral,
-} from 'next/font/google'
+import localFont from 'next/font/local'
 import type { DesignArtifactId } from 'app/lib/work'
-
-const spectral = Spectral({
-  subsets: ['latin', 'latin-ext'],
-  weight: ['600', '700'],
-  variable: '--font-mtl-display',
-  display: 'swap',
-})
-
-const figtree = Figtree({
-  subsets: ['latin', 'latin-ext'],
-  weight: ['400', '500', '600'],
-  variable: '--font-mtl-sans',
-  display: 'swap',
-})
-
-const plex = IBM_Plex_Mono({
-  subsets: ['latin', 'latin-ext'],
-  weight: ['400', '500'],
-  variable: '--font-mtl-mono',
-  display: 'swap',
-})
-
-const fraunces = Fraunces({
-  subsets: ['latin'],
-  weight: ['700', '900'],
-  variable: '--font-dpr-display',
-  display: 'swap',
-})
-
-const dmSans = DM_Sans({
-  subsets: ['latin'],
-  weight: ['400', '500'],
-  variable: '--font-dpr-sans',
-  display: 'swap',
-})
-
-const montserrat = Montserrat({
-  subsets: ['latin', 'latin-ext'],
-  weight: ['600', '700'],
-  variable: '--font-sh-display',
-  display: 'swap',
-})
-
-const manrope = Manrope({
-  subsets: ['latin', 'latin-ext'],
-  weight: ['400', '500', '600', '700'],
-  variable: '--font-sh-sans',
-  display: 'swap',
-})
+const spectral = localFont({ src: [{ path: '../fonts/design-artifacts/spectral-600.woff2', weight: '600', style: 'normal' }, { path: '../fonts/design-artifacts/spectral-700.woff2', weight: '700', style: 'normal' }], variable: '--font-mtl-display', display: 'swap' })
+const figtree = localFont({ src: [{ path: '../fonts/design-artifacts/figtree-400.woff2', weight: '400', style: 'normal' }, { path: '../fonts/design-artifacts/figtree-500.woff2', weight: '500', style: 'normal' }, { path: '../fonts/design-artifacts/figtree-600.woff2', weight: '600', style: 'normal' }], variable: '--font-mtl-sans', display: 'swap' })
+const plex = localFont({ src: [{ path: '../fonts/design-artifacts/plex-400.woff2', weight: '400', style: 'normal' }, { path: '../fonts/design-artifacts/plex-500.woff2', weight: '500', style: 'normal' }], variable: '--font-mtl-mono', display: 'swap' })
+const fraunces = localFont({ src: [{ path: '../fonts/design-artifacts/fraunces-700.woff2', weight: '700', style: 'normal' }, { path: '../fonts/design-artifacts/fraunces-900.woff2', weight: '900', style: 'normal' }], variable: '--font-dpr-display', display: 'swap' })
+const dmSans = localFont({ src: [{ path: '../fonts/design-artifacts/dmSans-400.woff2', weight: '400', style: 'normal' }, { path: '../fonts/design-artifacts/dmSans-500.woff2', weight: '500', style: 'normal' }], variable: '--font-dpr-sans', display: 'swap' })
+const montserrat = localFont({ src: [{ path: '../fonts/design-artifacts/montserrat-600.woff2', weight: '600', style: 'normal' }, { path: '../fonts/design-artifacts/montserrat-700.woff2', weight: '700', style: 'normal' }], variable: '--font-sh-display', display: 'swap' })
+const manrope = localFont({ src: [{ path: '../fonts/design-artifacts/manrope-400.woff2', weight: '400', style: 'normal' }, { path: '../fonts/design-artifacts/manrope-500.woff2', weight: '500', style: 'normal' }, { path: '../fonts/design-artifacts/manrope-600.woff2', weight: '600', style: 'normal' }, { path: '../fonts/design-artifacts/manrope-700.woff2', weight: '700', style: 'normal' }], variable: '--font-sh-sans', display: 'swap' })
 
 const fontVars = [
   spectral.variable,
