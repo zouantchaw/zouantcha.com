@@ -395,3 +395,48 @@ body:has(.v2-page) .site-main,body:has(.v2-case) .site-main { padding-top:0; }
  .v2-bookshelf .v2-book-row { font:400 24px/30px var(--font-serif); }
  .v2-bookshelf .v2-final-call h2 { line-height:26px; }
 }
+/* Serif page titles use normal tracking; the home hero keeps its explicit -0.01em. */
+.v2-heading h1,.v2-about-copy h1,.v2-case-heading h1 { letter-spacing:0; }
+.v2-experience,.v2-about .v2-split > div:has(.v2-principle) { border-bottom:1px solid var(--color-line); }
+.v2-contents-desktop li a { line-height:18px; }
+
+/* Compact home and booking copy/type exactly as12m/14m; full copy remains at1440. */
+.v2-number-mobile-copy,.v2-proof-mobile-copy { display:none; }
+@media(max-width:700px) {
+ .v2-number-desktop-copy,.v2-proof-desktop-copy { display:none; }
+ .v2-number-mobile-copy,.v2-proof-mobile-copy { display:inline; }
+ .v2-home .v2-number [data-slot=card-footer] { display:none; }
+ .v2-home .v2-hero .v2-label { line-height:14px; }
+ .v2-home .v2-section-intro h2 { font-size:32px; line-height:40px; }
+ .v2-home .v2-section-intro > p,.v2-home .v2-work-section .v2-section-intro > a { display:none; }
+ .v2-home .v2-case-row { padding:16px 0; gap:6px; }
+ .v2-home .v2-case-row h3 { font-size:30px; line-height:36px; }
+ .v2-home .v2-case-row h3::after { content:' ↗'; }
+ .v2-home .v2-case-row p { font-size:15px; line-height:22px; color:var(--color-slate); }
+ .v2-home .v2-case-row > span { display:none; }
+ .v2-experience-row { display:block; padding:12px 0; }
+ .v2-experience-row h3 { margin-bottom:2px; font-size:16px; line-height:20px; }
+ .v2-experience-row p,.v2-experience-row > span { display:inline; font:400 14px/18px var(--font-sans); text-transform:none; color:var(--color-slate); }
+ .v2-experience-row > span::before { content:' · '; }
+ .v2-hiring h2 { font-size:26px; line-height:28px; }
+ .v2-hiring p { display:none; }
+ .v2-hiring .v2-actions { gap:12px; }
+ .v2-hiring .v2-actions > :last-child { order:-1; }
+ .v2-case .v2-hiring { padding:20px; border-radius:18px; }
+ .v2-case .v2-hiring h2 { font-size:24px; line-height:30px; }
+ .v2-case .v2-hiring .v2-actions > :first-child { display:none; }
+ .v2-start-copy h1 { font-size:46px; line-height:46px; }
+ .v2-start .v2-booking [data-slot=button],.v2-start .v2-final-call [data-slot=button] { font-size:17px; line-height:22px; }
+ .v2-page .v2-proof-card,.v2-proof-card [data-slot=card-header] { gap:8px; }
+ .v2-proof-card [data-slot=card-title] { line-height:38px; }
+ .v2-start .v2-how > h2 { line-height:36px; }
+ .v2-start .v2-steps > div { border-top-width:4px; gap:6px; }
+ .v2-start .v2-steps p:not(.v2-label) { font-size:15px; line-height:23px; }
+ .v2-start .v2-final-call h2 { font-size:28px; line-height:30px; }
+ .v2-cases .v2-case-rows > div:not([data-slot=separator]) + div:not([data-slot=separator]) { margin-top:16px; }
+ .v2-bookshelf .v2-heading { padding-block:16px; }
+ .v2-year { padding-bottom:16px; }
+ .v2-bookshelf .v2-final-call { border-width:4px; border-radius:18px; padding:20px; margin-top:0; }
+ .v2-case-heading { padding-block:16px; }
+ .v2-case-heading > p { line-height:27px; }
+}
