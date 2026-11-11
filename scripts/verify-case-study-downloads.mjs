@@ -10,7 +10,7 @@ try {
     if (payload?.event === 'case_study_pdf_download') events.push(payload)
     await route.fulfill({ status: 204 })
   })
-  for (const slug of ['mtl-archives', 'portmind', 'diane-party-rentals', 'starthome']) {
+  for (const slug of ['mtl-archives', 'portmind', 'diane-party-rentals']) {
     const hydrated = page.waitForRequest(request => request.url().endsWith('/api/events') && request.postDataJSON()?.event === 'case_study_view')
     await page.goto(`${base}/case-studies/${slug}`, { waitUntil: 'load' })
     await hydrated

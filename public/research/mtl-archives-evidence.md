@@ -15,7 +15,6 @@ May reports record structured captioning, cleanup and embedding comparisons.
 Commit dates establish recorded implementation dates, not a precise date of
 personal inspiration. The case study does not invent an earlier founding event.
 
-Repository: https://github.com/zouantchaw/mtl-archives-search
 
 ## Collection and pipeline
 

@@ -21,6 +21,7 @@ export default async function sitemap() {
     '/case-studies',
     '/work',
     '/about',
+    '/blog',
     '/bookshelf',
     '/work/oloodi',
     '/work/ethos',

@@ -9,7 +9,8 @@ const config: NextConfig = {
       { source: '/watch', destination: '/case-studies', permanent: true },
       { source: '/search', destination: '/case-studies', permanent: true },
       { source: '/topics/montreal', destination: '/case-studies/mtl-archives', permanent: true },
-      { source: '/blog', destination: '/bookshelf', permanent: true },
+      { source: '/case-studies/starthome', destination: '/case-studies', permanent: true },
+      { source: '/work/starthome', destination: '/case-studies', permanent: true },
       { source: '/lab', destination: '/case-studies', permanent: true },
       { source: '/contact', destination: '/start', permanent: true },
     ]

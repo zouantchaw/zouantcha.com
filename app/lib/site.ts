@@ -87,14 +87,6 @@ export const about = {
     },
 
     {
-      title: 'Treat reliability as product work',
-      body: 'Health checks, permissions, audit trails and failure behavior affect whether someone can rely on the product.',
-      evidence: {
-        label: 'Starthome: keeping the record consistent',
-        href: '/case-studies/starthome#the-record-changes-state',
-      },
-    },
-    {
       title: 'Use AI as leverage, not evidence',
       body: 'A model can help me build or explore faster. Its output still needs to be checked against the task, the source material and the people using it.',
       evidence: {
@@ -196,7 +188,7 @@ export const experience: Experience[] = [
     period: 'January 2023–present',
     body: [
       'I work directly with founders and operating businesses, from figuring out what the product needs to do through designing and building it.',
-      'For Diane Party Rentals, that meant connecting quotes, payments and rental operations. For Starthome, it meant working with the founder on a mobile inspection workflow. My independent research projects, MTL Archives and PortMind, have their own detailed case studies.',
+      'For Diane Party Rentals, that meant connecting quotes, payments and rental operations. My independent research projects, MTL Archives and PortMind, have their own detailed case studies.',
     ],
     sections: [
       {
@@ -286,6 +278,7 @@ export function mailto(subject?: string) {
 export const siteNavigation = [
   { href: '/case-studies', label: 'Case studies', primary: false },
   { href: '/about', label: 'About', primary: false },
+  { href: '/blog', label: 'Writing', primary: false },
   { href: '/log', label: 'Build log', primary: false },
   { href: '/start', label: 'Work with me', primary: true },
 ]

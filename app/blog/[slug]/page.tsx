@@ -89,7 +89,7 @@ export default async function Blog({ params }: BlogPageProps) {
           components={slug === 'bitcoin-whitepaper' ? { code: WhitepaperCode } : undefined}
         />
       </article>
-      <nav className="mt-16 border-t border-line pt-8"><a href="/blog">Back to the notes ↗</a></nav>
+      <nav className="mt-16 flex justify-between border-t border-line pt-8"><a href="/blog">Back to the notes ↗</a><a href="#top">Back to top ↑</a></nav>
       </div>
     </section>
   )

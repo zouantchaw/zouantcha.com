@@ -20,8 +20,5 @@ try {
  assert.equal(await page.locator('.result-row').count(),6)
  await page.goto('http://localhost:3000/case-studies/portmind')
  assert.equal(await page.locator('.case-essay-section').count(),4)
- await page.goto('http://localhost:3000/case-studies/starthome')
- assert.match(await page.locator('.case-essay-body').innerText(),/do not yet have verified inspection-volume/)
- assert.match(await page.locator('table').innerText(),/Signed record/)
- console.log('Six original notes retained; dated metrics and destination anchors pass; four-act PortMind and Starthome states render.')
+ console.log('Six original notes retained; dated metrics and destination anchors pass; four-act PortMind states render.')
 } finally {await browser.close()}

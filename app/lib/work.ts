@@ -10,7 +10,6 @@ export type DesignArtifactId =
   | 'portmind-marks'
   | 'dpr-system'
   | 'dpr-social'
-  | 'starthome-system'
 
 export type WorkImage = {
   src: string
@@ -28,12 +27,6 @@ export const workImageDimensions: Record<string, { width: number; height: number
   '/images/case-studies/portmind-paper/site.png': { width: 996, height: 2000 },
   '/images/case-studies/portmind-paper/review.png': { width: 1440, height: 1000 },
   '/images/case-studies/portmind-paper/workspace.png': { width: 1440, height: 900 },
-  '/images/case-studies/starthome-paper/home.png': { width: 780, height: 1688 },
-  '/images/case-studies/starthome-paper/room.png': { width: 780, height: 1688 },
-  '/images/case-studies/starthome-paper/observation.png': { width: 780, height: 1688 },
-  '/images/case-studies/starthome-paper/review.png': { width: 780, height: 1688 },
-  '/images/case-studies/starthome-paper/participation.png': { width: 780, height: 1688 },
-  '/images/case-studies/starthome-paper/report.png': { width: 780, height: 1688 },
 
   '/images/case-studies/dpr-story/brand-marks.png': { width: 2000, height: 1966 },
   '/images/case-studies/dpr-story/social.png': { width: 2000, height: 2000 },
@@ -62,16 +55,6 @@ export const workImageDimensions: Record<string, { width: number; height: number
   '/images/case-studies/diane-craft/home.jpg': { width: 1440, height: 1000 },
   '/images/case-studies/diane-craft/catalog.jpg': { width: 1440, height: 1000 },
   '/images/case-studies/diane-craft/review.jpg': { width: 390, height: 844 },
-  "/images/case-studies/starthome-craft/home.jpg": {width:368,height:800},
-  "/images/case-studies/starthome-craft/welcome.jpg": {width:368,height:800},
-  '/images/case-studies/starthome-craft/review.jpg': { width: 368, height: 800 },
-  '/images/case-studies/starthome-craft/suggestion.jpg': { width: 368, height: 800 },
-  '/images/case-studies/starthome-redesign/final-page-2.png': { width: 850, height: 1100 },
-  '/images/case-studies/starthome-redesign/final-page-1.png': { width: 850, height: 1100 },
-  '/images/case-studies/starthome-redesign/comparison.jpg': { width: 368, height: 800 },
-  '/images/case-studies/starthome-redesign/finding.jpg': { width: 368, height: 800 },
-  '/images/case-studies/starthome-redesign/home.jpg': { width: 368, height: 800 },
-  '/images/case-studies/starthome-redesign/welcome.jpg': { width: 368, height: 800 },
   '/images/case-studies/bfa-admin-command-center.png': { width: 1440, height: 1180 },
   '/images/case-studies/bfa-admin-payroll-exceptions.png': { width: 1280, height: 577 },
   '/images/case-studies/bfa-admin-payroll.png': { width: 1280, height: 577 },
@@ -88,17 +71,6 @@ export const workImageDimensions: Record<string, { width: number; height: number
   '/images/case-studies/mtl-social-instagram-views.svg': { width: 980, height: 460 },
   '/images/case-studies/portmind-reviewer-grid.png': { width: 1280, height: 720 },
   '/images/case-studies/portmind-reviewer-task.png': { width: 1280, height: 720 },
-  '/images/case-studies/starthome-comparison-hashes.png': { width: 1360, height: 1760 },
-  '/images/case-studies/starthome-comparison-kitchen.png': { width: 1360, height: 1760 },
-  '/images/case-studies/starthome-comparison-photos.png': { width: 1360, height: 1760 },
-  '/images/case-studies/starthome-comparison.png': { width: 1360, height: 1760 },
-  '/images/case-studies/starthome-mobile-detail.png': { width: 893, height: 1778 },
-  '/images/case-studies/starthome-mobile-home.png': { width: 893, height: 1778 },
-  '/images/case-studies/starthome-mobile-inspections.png': { width: 893, height: 1778 },
-  '/images/case-studies/starthome-mobile-language.png': { width: 893, height: 1778 },
-  '/images/case-studies/starthome-mobile-splash.png': { width: 893, height: 1778 },
-  '/images/case-studies/starthome-report-photos.png': { width: 1360, height: 1760 },
-  '/images/case-studies/starthome-report.png': { width: 1360, height: 1760 },
 }
 
 export type WorkFigure =
@@ -169,8 +141,567 @@ export type WorkItem = {
 
 export const work: WorkItem[] = [
   {
-    "slug": "portmind",
+    "slug": "mtl-archives",
+    contents: [
+      { heading: 'Following an interest in the city', title: 'Build the archive' },
+      { heading: 'Captioning was a job to measure', title: 'Enrich & search' },
+      { heading: 'What the image model was noticing', title: 'Understand the model' },
+      { heading: 'Designing a way into the archive', title: 'Build the product' },
+      { heading: 'Taking the archive to the feed', title: 'Distribution experiment' },
+      { heading: 'What changed how I work', title: 'What changed' },
+    ],
     "number": "01",
+    "title": "MTL Archives",
+    "dek": "13,000+ historical photographs transformed into an AI-powered archive, search engine and daily game, with an automated editorial system reaching 2.66M social views.",
+    "ownership": "I designed and built the data pipelines, image enrichment, visual search, model evaluations, website, payments and editorial automation. The reach was measurable; whether it brought people back to the archive became the next question.",
+    "summary": "From public records to visual search and a daily game, with 2.66 million social views and a much smaller website audience.",
+    "evidence": "13,499 serving records · 2.66M social views, January–July 2026",
+    "role": "Independent researcher, designer & engineer",
+    "period": "2025–present",
+    "scope": "Data pipelines · Search research · Brand · Product · Distribution",
+    "featured": true,
+    "research": true,
+    "links": [
+      {
+        "label": "Explore the archive",
+        "href": "https://www.mtlarchives.com/",
+        "external": true
+      },
+      {
+        "label": "Research notes",
+        "href": "/research/mtl-archives-evidence.md",
+        "external": true
+      }
+    ],
+    "sections": [
+      {
+        "heading": "Following an interest in the city",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "The archive was public, but finding a photograph still depended on knowing what to ask for. I built the ingestion, enrichment, search, website and distribution pipeline to make that collection easier to use. The social accounts reached about 2.66 million views in seven months; the website recorded 13,783 page views over that period. Learning why those numbers were so far apart became part of the project."
+          },
+          {
+            "kind": "p",
+            "text": "I don't remember exactly what led me to Montréal’s open data portal. I was interested in the city and followed that curiosity. I started browsing the datasets without a particular project in mind."
+          },
+          {
+            "kind": "rich-p",
+            "parts": [
+              "Among them, I came across the ",
+              {
+                "label": "open photographic archive",
+                "href": "https://donnees.montreal.ca/ville-de-montreal/phototheque-archives",
+                "external": true
+              },
+              " and ",
+              {
+                "label": "aerial photothèque",
+                "href": "https://donnees.montreal.ca/dataset/phototheque",
+                "external": true
+              },
+              ". There were photographs of streets, aerial views and records of the city at different points in its history. That was the collection I wanted to spend more time with. As I explored it, I started wondering how someone could find a photograph without already knowing its title or catalogue reference."
+            ]
+          },
+          {
+            "kind": "p",
+            "text": "I started building MTL Archives in October 2025 as a way to explore that collection. It became a search engine, then a daily location game and a print-order flow. Along the way, it became a research project about the data itself: what a model notices in an old photograph, what makes a search useful, and whether attention on social media leads people back to the archive."
+          },
+          {
+            "kind": "p",
+            "text": "My work spans the ingestion scripts, model experiments, website, visual identity and daily editorial pipeline. The public product now presents 13,000+ records. The larger research datasets include earlier versions and duplicates, so I keep their counts separate."
+          },
+          {
+            "kind": "mtl-archive"
+          }
+        ]
+      },
+      {
+        "heading": "The first problem was the description",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "An early audit found that about 97% of the working records had synthetic descriptions. That needs a distinction: my cleaning pipeline had filled missing text with a title, date and archive reference. Those fallback sentences made the rows look complete without adding much meaning. They were not rich descriptions supplied by the city."
+          },
+          {
+            "kind": "p",
+            "text": "That matters for semantic search, which looks for meaning rather than an exact word match. If thousands of records say little more than “photograph, reference, date,” a better search model still has very little to work with. I needed to improve the evidence behind each result before improving its presentation."
+          }
+        ]
+      },
+      {
+        "heading": "Building the collection in layers",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "The extract, transform and load (ETL) pipeline downloads the city catalogues in batches, normalizes their fields, links records to image files and produces a manifest: a structured inventory of the collection. The source archive reference, or cote, stays attached to the record. Missing files, duplicate records and uncertain locations are data problems to track, not details to hide in the interface."
+          },
+          {
+            "kind": "rich-p",
+            "parts": [
+              "Some useful words are printed inside the image. I used ",
+              {
+                "label": "Tesseract",
+                "href": "https://tesseract-ocr.github.io/",
+                "external": true
+              },
+              ", an optical character recognition (OCR) engine, with French and English support to extract them. A vision-language model, which can interpret an image and produce text, supplies a separate description. Original metadata, extracted text and generated descriptions remain distinct."
+            ]
+          },
+          {
+            "kind": "mtl-pipeline"
+          },
+          {
+            "kind": "rich-p",
+            "parts": [
+              "The preparation jobs use Python and TypeScript. ",
+              {
+                "label": "Cloudflare R2",
+                "href": "https://developers.cloudflare.com/r2/",
+                "external": true
+              },
+              " stores images; ",
+              {
+                "label": "D1",
+                "href": "https://developers.cloudflare.com/d1/",
+                "external": true
+              },
+              " stores records; ",
+              {
+                "label": "Vectorize",
+                "href": "https://developers.cloudflare.com/vectorize/",
+                "external": true
+              },
+              " stores the numerical representations used for similarity search. The public ",
+              {
+                "label": "Worker",
+                "href": "https://developers.cloudflare.com/workers/",
+                "external": true
+              },
+              " answers requests, while the ",
+              {
+                "label": "Next.js",
+                "href": "https://nextjs.org/docs",
+                "external": true
+              },
+              " website presents the results."
+            ]
+          },
+          {
+            "kind": "p",
+            "text": "The ingestion code streams records in batches and writes checkpoints so an interruption does not require starting over. Failures have their own logs. The serving database is also distinct from the research corpus: a June audit recorded 13,499 deduplicated production records and 14,822 development records. A larger file or vector count does not mean the website has that many distinct photographs."
+          }
+        ]
+      },
+      {
+        "heading": "Captioning was a job to measure",
+        "blocks": [
+          {
+            "kind": "rich-p",
+            "parts": [
+              "The first recorded large captioning run used ",
+              {
+                "label": "LLaVA, the Large Language and Vision Assistant",
+                "href": "https://llava-vl.github.io/",
+                "external": true
+              },
+              " 1.5 7B on a rented graphics processing unit (GPU). In December, the run report recorded 12,304 captioned images, 23 errors, 10.86 hours and $14 in compute. It was a partial run, with roughly 2,500 images still remaining."
+            ]
+          },
+          {
+            "kind": "p",
+            "text": "By May, I had moved to structured outputs: descriptions, visual categories and fields that later tools could use. The full-run report contains 14,822 output rows, including 14,706 captions, 79 captions that failed the required structure and 116 image or model errors. A valid structure tells me the program can read an answer; it does not prove the description is historically correct."
+          },
+          {
+            "kind": "p",
+            "text": "That run also had to recover from interrupted work. The first 12,100 rows were reconstructed from saved chunks, then the remaining 2,722 were resumed. The report estimates 24.47 GPU hours, but the recovered portion does not have the same complete timing record as the tail. I keep it as an estimate rather than presenting it as a measured invoice."
+          }
+        ]
+      },
+      {
+        "heading": "What the image model was noticing",
+        "blocks": [
+          {
+            "kind": "rich-p",
+            "parts": [
+              "For visual search I used ",
+              {
+                "label": "CLIP, Contrastive Language–Image Pre-training",
+                "href": "https://openai.com/research/clip",
+                "external": true
+              },
+              ", which represents images and text as numerical vectors. Similar vectors can help match a phrase to a picture. I also built an explorer to inspect the collection rather than judge the system only through a few search queries."
+            ]
+          },
+          {
+            "kind": "p",
+            "text": "In January, the projection of 14,715 image embeddings showed a striking split: many plain aerial photographs grouped separately from survey documents with municipal headers and borders. Index cards formed their own tight group. The formatting was part of the signal, even when the underlying subject was similar."
+          },
+          {
+            "kind": "rich-p",
+            "parts": [
+              "The projection used ",
+              {
+                "label": "UMAP, Uniform Manifold Approximation and Projection",
+                "href": "https://umap-learn.readthedocs.io/en/latest/",
+                "external": true
+              },
+              ", to turn high-dimensional vectors into a view I could inspect. It suggested what to investigate; distances on that map were not proof of semantic similarity or a controlled explanation of the model."
+            ]
+          },
+          {
+            "kind": "mtl-technology"
+          },
+          {
+            "kind": "p",
+            "text": "That led to a practical question: should borders and document framing be removed before indexing? A later experiment tried deterministic cropping and tone adjustment on 12 flagged images. Two changed their predicted category. That was enough to justify reviewing individual cases, not enough to justify automatically cropping the archive. Borders can contain evidence worth preserving."
+          }
+        ]
+      },
+      {
+        "heading": "Stepping back to see the whole collection",
+        "blocks": [
+          {
+            "kind": "rich-p",
+            "parts": [
+              "A search result shows what the system found. I built the ",
+              {
+                "label": "MTL Archives Explorer",
+                "href": "https://explorer.mtlarchives.com/",
+                "external": true
+              },
+              " to ask a different question: how had it organized the collection? Each of its 14,715 points represents one photograph. I could move through the projection, open a record and compare a group of images instead of guessing from a handful of thumbnails."
+            ]
+          },
+          {
+            "kind": "mtl-shape"
+          },
+          {
+            "kind": "p",
+            "text": "The flat view uses the saved UMAP coordinates. The 3D view keeps that layout and adds depth from the recorded date, with a little spacing to avoid stacked points. Its shape is a way to navigate the evidence, not the geography of Montréal or a third dimension discovered by UMAP. Colour views offer other ways to inspect it, including dates, photographer labels and annotated visual groups."
+          },
+          {
+            "kind": "p",
+            "text": "That made the split between aerial photographs, framed survey documents and index cards easier to investigate. I could move from an unusual group back to the images that formed it. Labels and anomaly highlights were prompts for review, not new archival facts. The useful outcome was a more specific question about the influence of document formatting, which led to the small cropping experiment."
+          },
+          {
+            "kind": "rich-p",
+            "parts": [
+              "The explorer is built with ",
+              {
+                "label": "Three.js",
+                "href": "https://threejs.org/",
+                "external": true
+              },
+              ", a browser graphics library. It loads the saved positions and record identifiers first, then fetches the larger vector file when needed. Similar-image lookup compares the original CLIP vectors, not distances on the flattened map. Selected records can be collected and exported for follow-up. I kept this research workspace separate from the main site's simpler search, game and print flows."
+            ]
+          }
+        ]
+      },
+      {
+        "heading": "Trying a replacement before changing the index",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "Should I replace CLIP, the image-and-text model behind search? On a diagnostic test of 500 images and 13 queries, CLIP’s mean reciprocal rank was 0.8269, compared with 0.4484 for SigLIP. I kept the existing index. A new model was not an improvement just because it was newer."
+          },
+          {
+            "kind": "table",
+            "table": {
+              "columns": [
+                "Recorded measure",
+                "CLIP ViT-B/32",
+                "SigLIP base"
+              ],
+              "rows": [
+                [
+                  "Mean reciprocal rank",
+                  "0.8269",
+                  "0.4484"
+                ],
+                [
+                  "Queries with a rule match in top 5",
+                  "13 / 13",
+                  "8 / 13"
+                ]
+              ],
+              "footnote": "May 26, 2026 · 500 images, 13 queries. Expected matches came from generated category/theme rules, not independent human relevance judgments."
+            }
+          },
+          {
+            "kind": "mtl-search"
+          },
+          {
+            "kind": "p",
+            "text": "Mean reciprocal rank measures how early the first expected match appears. The report’s “P@5” field actually measures whether any expected match appears in the first five results, not precision. Expected matches came from category rules rather than independent human judgments, so this test supported a local decision, not a general model ranking."
+          },
+          {
+            "kind": "p",
+            "text": "Broad ranking boosts from generated categories also underperformed the existing search on the recorded query set. I kept those signals available for inspection rather than letting them change scores. Better relevance labels were the next useful investment."
+          }
+        ]
+      },
+      {
+        "heading": "Designing a way into the archive",
+        "blocks": [
+          {
+            "kind": "rich-p",
+            "parts": [
+              "I worked through the identity and product states in ",
+              {
+                "label": "Paper",
+                "href": "https://app.paper.design/file/01KJT1EB3Z2N2FYHB3VDDBF496/01KJT1EB3ZN11EN8P6G678B9DZ",
+                "external": true
+              },
+              ". The board covers the logo, typography, search, photo detail, game, print ordering, empty states and emails. That let me consider the same photograph as a search result, an archival record and a daily invitation to explore."
+            ]
+          },
+          {
+            "kind": "mtl-brand"
+          },
+          {
+            "kind": "p",
+            "text": "The mark draws on Montréal’s civic emblem. I tested it at icon size and kept the rest of the interface quiet so photographs and source references could carry the page."
+          },
+          {
+            "kind": "p",
+            "text": "The interface is bilingual, with familiar places and subjects as entry points. A person arriving from a phone should be able to browse before learning how the catalogue works. On the record, the source reference and location confidence remain available. The design needs to make discovery easier without making uncertain metadata look authoritative."
+          }
+        ]
+      },
+      {
+        "heading": "A reason to return, and a way to collect",
+        "blocks": [
+          {
+            "kind": "rich-p",
+            "parts": [
+              "The ",
+              {
+                "label": "daily location game",
+                "href": "https://www.mtlarchives.com/game",
+                "external": true
+              },
+              " asks people to place a photograph on a map. It reuses the archive rather than requiring a separate content library. The code keeps challenges and guesses in the backend, while the map and photo controls belong to the interface. A daily game makes a different invitation from search: you can start with curiosity instead of a query."
+            ]
+          },
+          {
+            "kind": "rich-p",
+            "parts": [
+              "Print ordering uses ",
+              {
+                "label": "Stripe Checkout",
+                "href": "https://docs.stripe.com/payments/checkout",
+                "external": true
+              },
+              ". The app validates the shipping details and quote, then a signed payment notification triggers confirmation and fulfilment emails. The print work itself remains manual. A successful browser redirect is not treated as proof of payment."
+            ]
+          },
+          {
+            "kind": "p",
+            "text": "The newsletter is another return path. Signing up is explicit; playing the game does not subscribe someone automatically. Subscription state and delivery history live in the database. The daily scheduler checks Montréal’s local time, including daylight saving changes, rather than assuming the same server hour means morning all year."
+          },
+          {
+            "kind": "p",
+            "text": "These are working product surfaces, but their existence is not evidence of strong conversion. The saved business notes describe revenue as weak relative to attention. That is the next product problem, not a result I can claim to have solved."
+          }
+        ]
+      },
+      {
+        "heading": "Taking the archive to the feed",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "A searchable website still needs people to find it. I began using Instagram and Facebook as editorial experiments: exact places and dates, street transformations, lost landmarks and questions about what used to be there. Each post had to be worth looking at even if the viewer never ordered a print."
+          },
+          {
+            "kind": "p",
+            "text": "The daily pipeline selects an archive record, assembles its source material, drafts bilingual copy and produces a carousel or reel package. An image interpretation or a web search can suggest context, but unsupported exact locations should not quietly become facts. The code tracks location confidence and can reject copy that reintroduces a place name the evidence does not support."
+          },
+          {
+            "kind": "p",
+            "text": "Generating a package and publishing it are separate events. The pipeline records attempts, successful post identifiers and permalinks, which helps prevent duplicate delivery and makes later analysis possible. The home server holds operational state; an optional Obsidian mirror holds the editorial notes. A local fallback can prepare a package when the server is unavailable."
+          }
+        ]
+      },
+      {
+        "heading": "One archive, two editorial experiments",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "I tested two editorial directions: dramatic openings about lost or transformed places, and a more documentary voice built around a place, date and visible detail. The January pipeline assembled researched context and captions; later revisions separated reels from carousels and filtered generic mystery language."
+          },
+          {
+            "kind": "p",
+            "text": "The March 31 snapshot covered 135 first-quarter posts. Facebook reels with loss or erasure language averaged 100,260 views, against 35,974 without it. On Instagram, place-and-date openings averaged 4,866 views, against 2,315 without them. These were observational comparisons: subjects, formats and publication dates changed together."
+          },
+          {
+            "kind": "p",
+            "text": "February made the difference clear. Its 18 Facebook reels averaged 62,519 views in the saved cohort. Instagram’s five carousels averaged 9,468, compared with 1,533 for its 17 reels. One platform’s strongest format was not a recipe for the other."
+          },
+          {
+            "kind": "p",
+            "text": "I moved toward the documentary voice and made that choice repeatable in the caption pipeline. In March, Instagram shifted to 12 carousels and eight reels; monthly account views rose from 48,996 to 68,263. Facebook reel averages fell. That does not isolate the effect of a caption change, but it changed what I wanted to keep testing: specific local context and repeat archive use, not just the largest feed number."
+          },
+          {
+            "kind": "figure",
+            "figure": {
+              "kind": "image",
+              "src": "/images/case-studies/meta/miron-reel-september-9.png",
+              "alt": "Miron quarry reel insights showing 204.0K rounded views with 200,234 from Facebook and 3,739 from Instagram, beside the reel preview.",
+              "caption": "The Miron quarry reel, published January 26. Captured September 9: 200,234 Facebook views and 3,739 Instagram views. These are cumulative post results, not February-only views. The same reel travelled very differently on the two platforms."
+            }
+          }
+        ]
+      },
+      {
+        "heading": "The reach was real. It did not stay there.",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "The saved January–July reports total about 2.66 million Facebook and Instagram account-level views. February was the peak: 1,363,500 Facebook views and 48,996 Instagram views. By July, Facebook was down to 6,560 while Instagram recorded 25,787. Showing only the peak would miss most of what the experiment taught me."
+          },
+          {
+            "kind": "mtl-audience"
+          },
+          {
+            "kind": "figure",
+            "figure": {
+              "kind": "image",
+              "src": "/images/case-studies/meta/facebook-february-2026.png",
+              "alt": "Facebook February 1–28 results: 1.4M views and 447.1K viewers.",
+              "caption": "Facebook, February 1–28, 2026, captured September 9. Meta rounds the views total to 1.4M and reports 447.1K viewers. The saved report supplies the more precise 1,363,500 views used above."
+            }
+          },
+          {
+            "kind": "figure",
+            "figure": {
+              "kind": "image",
+              "src": "/images/case-studies/meta/instagram-february-2026.png",
+              "alt": "Instagram February report showing 197.6K combined views, split into 148,600 Facebook views and 48,996 Instagram views, plus 10.5K reach.",
+              "caption": "Instagram, February 1–28, 2026, captured September 9. The headline 197.6K includes 148,600 Facebook views and 48,996 Instagram views. I use the Instagram breakdown, not the combined headline, in the monthly chart."
+            }
+          },
+          {
+            "kind": "p",
+            "text": "By September 9, Meta Business Suite showed approximately 8.7K Facebook followers and 3.7K Instagram followers. Those are account totals at the time of review, rather than followers gained during the February experiment."
+          },
+          {
+            "kind": "rich-p",
+            "parts": [
+              "The saved March 19 account export recorded 3,340 followers and 425 posts on ",
+              {
+                "label": "Instagram (@mtlarchives)",
+                "href": "https://www.instagram.com/mtlarchives/",
+                "external": true
+              },
+              ". That is a dated account snapshot, separate from the view totals above. You can also explore the published work on ",
+              {
+                "label": "Facebook",
+                "href": "https://www.facebook.com/100799958627875",
+                "external": true
+              },
+              "."
+            ]
+          },
+          {
+            "kind": "p",
+            "text": "A small number of reels accounted for much of the observed Facebook attention. In the saved August post snapshot, the top five unique January reels represented 82.4% of that month’s reel cohort’s cumulative views. These are lifetime post counts, not views accrued during January, so I do not add them to the monthly account totals."
+          },
+          {
+            "kind": "rich-p",
+            "parts": [
+              "Concrete places and a reason to be curious appeared repeatedly among the stronger posts. On Instagram, examples included ",
+              {
+                "label": "Parc Marquette, 1969",
+                "href": "https://www.instagram.com/p/DWKRqfNjcBT/",
+                "external": true
+              },
+              " and ",
+              {
+                "label": "Avenue du Mont-Royal at Saint-Denis, 1928",
+                "href": "https://www.instagram.com/p/DXfqpzSG88k/",
+                "external": true
+              },
+              ". The saved analysis found different patterns for documentary carousels and curiosity-led reels. These were observational comparisons; timing, format and platform distribution changed together, so they do not establish a causal recipe."
+            ]
+          },
+          {
+            "kind": "p",
+            "text": "The data needed its own cleanup. Facebook’s published-post export contained 196 reel rows for 98 unique reels. Counting the rows as separate pieces of content would double the denominator. Some monthly reports also lacked preserved daily exports. Those limitations remain in the supporting notes instead of being smoothed into an uninterrupted growth story."
+          }
+        ]
+      },
+      {
+        "heading": "What happened on the website",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "February brought 875 reported website visitors and 4,747 page views. March had fewer visitors, 714, but more page views, 5,296. The seven-month reports contain 13,783 page views in total. I do not sum monthly visitor counts and call that a unique audience: the same person can return in several months."
+          },
+          {
+            "kind": "p",
+            "text": "The gap between feed attention and website activity is the important result. The available exports do not reliably connect an individual post to a visit, game session or order. I can describe when activity rose and fell, but I cannot turn the social totals into an attributed conversion rate."
+          },
+          {
+            "kind": "p",
+            "text": "The later website captures show the smaller scale clearly: July recorded 130 visitors and 442 page views; August 1–10 recorded 33 and 122. The partial August period is kept out of the full-month chart. Better campaign links, preserved month-end exports and product events are needed to tell which forms of discovery lead to repeat archive use."
+          }
+        ]
+      },
+      {
+        "heading": "What changed how I work",
+        "blocks": [
+          {
+            "kind": "p",
+            "text": "The first mistake was making missing descriptions look complete. I now keep source metadata, extracted text and generated captions separate, and preserve the reference that lets someone check each one."
+          },
+          {
+            "kind": "p",
+            "text": "The experiments stopped me from rebuilding an index without evidence. Next time, I would create a small set of independently reviewed search tasks earlier. A category match is not the same as a useful answer. The explorer made a related point: a compelling cluster may reflect a document border rather than its subject."
+          },
+          {
+            "kind": "p",
+            "text": "Distribution taught me to measure what happens after attention. I would add campaign links and product events from the start, preserve month-end exports, and review the actual published captions. A successful pipeline run says nothing about whether someone returned, played, or ordered a print."
+          },
+          {
+            "kind": "rich-p",
+            "parts": [
+              "The ",
+              {
+                "label": "source notes for this case study",
+                "href": "/research/mtl-archives-evidence.md",
+                "external": true
+              },
+              " show the implementation and limits behind the story. If you are opening up a difficult collection, evaluating search, or building a product around specialist data, ",
+              {
+                "label": "I’d be happy to talk",
+                "href": "/start",
+                "external": true
+              },
+              "."
+            ]
+          }
+        ]
+      }
+    ],
+    "metrics": [
+      {
+        "value": "13,499",
+        "label": "Deduplicated serving records · June 2026 audit"
+      },
+      {
+        "value": "14,715",
+        "label": "Image embeddings in the January research projection"
+      },
+      {
+        "value": "2.66M",
+        "label": "Facebook + Instagram views · January–July 2026"
+      }
+    ]
+  },
+  {
+    "slug": "portmind",
+    "number": "02",
     "title": "PortMind",
     "dek": "A six-camera port observatory and vision-model evaluation system, built from 81,202 activity snapshots.",
     "ownership": "I built the collector, datasets, experiment tooling and review interfaces. Auditing 1,744 benchmark labels revealed that apparently human-reviewed answers came from an agent workflow, so I changed how the system records and verifies its reference answers.",
@@ -680,578 +1211,98 @@ export const work: WorkItem[] = [
     ]
   },
   {
-    "slug": "mtl-archives",
-    contents: [
-      { heading: 'Following an interest in the city', title: 'Build the archive' },
-      { heading: 'Captioning was a job to measure', title: 'Enrich & search' },
-      { heading: 'What the image model was noticing', title: 'Understand the model' },
-      { heading: 'Designing a way into the archive', title: 'Build the product' },
-      { heading: 'Taking the archive to the feed', title: 'Distribution experiment' },
-      { heading: 'What changed how I work', title: 'What changed' },
-    ],
-    "number": "02",
-    "title": "MTL Archives",
-    "dek": "13,000+ historical photographs transformed into an AI-powered archive, search engine and daily game, with an automated editorial system reaching 2.66M social views.",
-    "ownership": "I designed and built the data pipelines, image enrichment, visual search, model evaluations, website, payments and editorial automation. The reach was measurable; whether it brought people back to the archive became the next question.",
-    "summary": "From public records to visual search and a daily game, with 2.66 million social views and a much smaller website audience.",
-    "evidence": "13,499 serving records · 2.66M social views, January–July 2026",
-    "role": "Independent researcher, designer & engineer",
-    "period": "2025–present",
-    "scope": "Data pipelines · Search research · Brand · Product · Distribution",
+    "slug": "ballerz",
+    "number": "03",
+    "title": "Ballerz Football Academy",
+    "dek": "Following a training session from the public schedule through booking, payment and the work the academy does afterward.",
+    "summary": "Website, scheduling and booking connected to parent and admin tools, with explicit recovery when payment and calendar state disagree.",
+    "evidence": "Cal.com scheduling · Stripe payments · Parent and admin workflows",
+    "role": "Engineer & designer",
+    "period": "2026",
+    "scope": "Website · Scheduling & booking · Operations",
+    "ownership": "I design and build across the academy website, booking and payment flows, and the parent and admin interfaces.",
+    "pdfDownload": false,
     "featured": true,
-    "research": true,
     "links": [
       {
-        "label": "Explore the archive",
-        "href": "https://www.mtlarchives.com/",
-        "external": true
-      },
-      {
-        "label": "Code",
-        "href": "https://github.com/zouantchaw/mtl-archives-search",
-        "external": true
-      },
-      {
-        "label": "Research notes",
-        "href": "/research/mtl-archives-evidence.md",
+        "label": "Academy website",
+        "href": "https://www.ballerzfootballacademy.com",
         "external": true
       }
     ],
     "sections": [
       {
-        "heading": "Following an interest in the city",
+        "heading": "A session crosses several systems",
         "blocks": [
           {
             "kind": "p",
-            "text": "The archive was public, but finding a photograph still depended on knowing what to ask for. I built the ingestion, enrichment, search, website and distribution pipeline to make that collection easier to use. The social accounts reached about 2.66 million views in seven months; the website recorded 13,783 page views over that period. Learning why those numbers were so far apart became part of the project."
+            "text": "A youth football academy needs more than a calendar of available times. A parent chooses a session for a player, a coach has to be available, and the academy needs to know whether the place is reserved, paid for and eventually attended. Group sessions, private training and prepaid credits make those states different. A payment receipt alone cannot answer all of those questions."
           },
           {
             "kind": "p",
-            "text": "I don't remember exactly what led me to Montréal’s open data portal. I was interested in the city and followed that curiosity. I started browsing the datasets without a particular project in mind."
+            "text": "I worked across the website and its operational tools so the public schedule could connect to a record the academy could follow. The parent interface brings players and their sessions together; the admin interface follows bookings, payments and exceptions. The design problem was keeping the next action understandable while the underlying work crossed several services."
           },
           {
-            "kind": "rich-p",
-            "parts": [
-              "Among them, I came across the ",
+            "kind": "phones",
+            "images": [
               {
-                "label": "open photographic archive",
-                "href": "https://donnees.montreal.ca/ville-de-montreal/phototheque-archives",
-                "external": true
+                "src": "/images/case-studies/ballerz-craft/schedule.jpg",
+                "alt": "Public Ballerz training schedule on a phone",
+                "caption": "Dated interface example: the public training schedule."
               },
-              " and ",
               {
-                "label": "aerial photothèque",
-                "href": "https://donnees.montreal.ca/dataset/phototheque",
-                "external": true
-              },
-              ". There were photographs of streets, aerial views and records of the city at different points in its history. That was the collection I wanted to spend more time with. As I explored it, I started wondering how someone could find a photograph without already knowing its title or catalogue reference."
-            ]
-          },
-          {
-            "kind": "p",
-            "text": "I started building MTL Archives in October 2025 as a way to explore that collection. It became a search engine, then a daily location game and a print-order flow. Along the way, it became a research project about the data itself: what a model notices in an old photograph, what makes a search useful, and whether attention on social media leads people back to the archive."
-          },
-          {
-            "kind": "p",
-            "text": "My work spans the ingestion scripts, model experiments, website, visual identity and daily editorial pipeline. The public product now presents 13,000+ records. The larger research datasets include earlier versions and duplicates, so I keep their counts separate."
-          },
-          {
-            "kind": "mtl-archive"
-          }
-        ]
-      },
-      {
-        "heading": "The first problem was the description",
-        "blocks": [
-          {
-            "kind": "p",
-            "text": "An early audit found that about 97% of the working records had synthetic descriptions. That needs a distinction: my cleaning pipeline had filled missing text with a title, date and archive reference. Those fallback sentences made the rows look complete without adding much meaning. They were not rich descriptions supplied by the city."
-          },
-          {
-            "kind": "p",
-            "text": "That matters for semantic search, which looks for meaning rather than an exact word match. If thousands of records say little more than “photograph, reference, date,” a better search model still has very little to work with. I needed to improve the evidence behind each result before improving its presentation."
-          }
-        ]
-      },
-      {
-        "heading": "Building the collection in layers",
-        "blocks": [
-          {
-            "kind": "p",
-            "text": "The extract, transform and load (ETL) pipeline downloads the city catalogues in batches, normalizes their fields, links records to image files and produces a manifest: a structured inventory of the collection. The source archive reference, or cote, stays attached to the record. Missing files, duplicate records and uncertain locations are data problems to track, not details to hide in the interface."
-          },
-          {
-            "kind": "rich-p",
-            "parts": [
-              "Some useful words are printed inside the image. I used ",
-              {
-                "label": "Tesseract",
-                "href": "https://tesseract-ocr.github.io/",
-                "external": true
-              },
-              ", an optical character recognition (OCR) engine, with French and English support to extract them. A vision-language model, which can interpret an image and produce text, supplies a separate description. Original metadata, extracted text and generated descriptions remain distinct."
-            ]
-          },
-          {
-            "kind": "mtl-pipeline"
-          },
-          {
-            "kind": "rich-p",
-            "parts": [
-              "The preparation jobs use Python and TypeScript. ",
-              {
-                "label": "Cloudflare R2",
-                "href": "https://developers.cloudflare.com/r2/",
-                "external": true
-              },
-              " stores images; ",
-              {
-                "label": "D1",
-                "href": "https://developers.cloudflare.com/d1/",
-                "external": true
-              },
-              " stores records; ",
-              {
-                "label": "Vectorize",
-                "href": "https://developers.cloudflare.com/vectorize/",
-                "external": true
-              },
-              " stores the numerical representations used for similarity search. The public ",
-              {
-                "label": "Worker",
-                "href": "https://developers.cloudflare.com/workers/",
-                "external": true
-              },
-              " answers requests, while the ",
-              {
-                "label": "Next.js",
-                "href": "https://nextjs.org/docs",
-                "external": true
-              },
-              " website presents the results."
-            ]
-          },
-          {
-            "kind": "p",
-            "text": "The ingestion code streams records in batches and writes checkpoints so an interruption does not require starting over. Failures have their own logs. The serving database is also distinct from the research corpus: a June audit recorded 13,499 deduplicated production records and 14,822 development records. A larger file or vector count does not mean the website has that many distinct photographs."
-          }
-        ]
-      },
-      {
-        "heading": "Captioning was a job to measure",
-        "blocks": [
-          {
-            "kind": "rich-p",
-            "parts": [
-              "The first recorded large captioning run used ",
-              {
-                "label": "LLaVA, the Large Language and Vision Assistant",
-                "href": "https://llava-vl.github.io/",
-                "external": true
-              },
-              " 1.5 7B on a rented graphics processing unit (GPU). In December, the run report recorded 12,304 captioned images, 23 errors, 10.86 hours and $14 in compute. It was a partial run, with roughly 2,500 images still remaining."
-            ]
-          },
-          {
-            "kind": "p",
-            "text": "By May, I had moved to structured outputs: descriptions, visual categories and fields that later tools could use. The full-run report contains 14,822 output rows, including 14,706 captions, 79 captions that failed the required structure and 116 image or model errors. A valid structure tells me the program can read an answer; it does not prove the description is historically correct."
-          },
-          {
-            "kind": "p",
-            "text": "That run also had to recover from interrupted work. The first 12,100 rows were reconstructed from saved chunks, then the remaining 2,722 were resumed. The report estimates 24.47 GPU hours, but the recovered portion does not have the same complete timing record as the tail. I keep it as an estimate rather than presenting it as a measured invoice."
-          }
-        ]
-      },
-      {
-        "heading": "What the image model was noticing",
-        "blocks": [
-          {
-            "kind": "rich-p",
-            "parts": [
-              "For visual search I used ",
-              {
-                "label": "CLIP, Contrastive Language–Image Pre-training",
-                "href": "https://openai.com/research/clip",
-                "external": true
-              },
-              ", which represents images and text as numerical vectors. Similar vectors can help match a phrase to a picture. I also built an explorer to inspect the collection rather than judge the system only through a few search queries."
-            ]
-          },
-          {
-            "kind": "p",
-            "text": "In January, the projection of 14,715 image embeddings showed a striking split: many plain aerial photographs grouped separately from survey documents with municipal headers and borders. Index cards formed their own tight group. The formatting was part of the signal, even when the underlying subject was similar."
-          },
-          {
-            "kind": "rich-p",
-            "parts": [
-              "The projection used ",
-              {
-                "label": "UMAP, Uniform Manifold Approximation and Projection",
-                "href": "https://umap-learn.readthedocs.io/en/latest/",
-                "external": true
-              },
-              ", to turn high-dimensional vectors into a view I could inspect. It suggested what to investigate; distances on that map were not proof of semantic similarity or a controlled explanation of the model."
-            ]
-          },
-          {
-            "kind": "mtl-technology"
-          },
-          {
-            "kind": "p",
-            "text": "That led to a practical question: should borders and document framing be removed before indexing? A later experiment tried deterministic cropping and tone adjustment on 12 flagged images. Two changed their predicted category. That was enough to justify reviewing individual cases, not enough to justify automatically cropping the archive. Borders can contain evidence worth preserving."
-          }
-        ]
-      },
-      {
-        "heading": "Stepping back to see the whole collection",
-        "blocks": [
-          {
-            "kind": "rich-p",
-            "parts": [
-              "A search result shows what the system found. I built the ",
-              {
-                "label": "MTL Archives Explorer",
-                "href": "https://explorer.mtlarchives.com/",
-                "external": true
-              },
-              " to ask a different question: how had it organized the collection? Each of its 14,715 points represents one photograph. I could move through the projection, open a record and compare a group of images instead of guessing from a handful of thumbnails."
-            ]
-          },
-          {
-            "kind": "mtl-shape"
-          },
-          {
-            "kind": "p",
-            "text": "The flat view uses the saved UMAP coordinates. The 3D view keeps that layout and adds depth from the recorded date, with a little spacing to avoid stacked points. Its shape is a way to navigate the evidence, not the geography of Montréal or a third dimension discovered by UMAP. Colour views offer other ways to inspect it, including dates, photographer labels and annotated visual groups."
-          },
-          {
-            "kind": "p",
-            "text": "That made the split between aerial photographs, framed survey documents and index cards easier to investigate. I could move from an unusual group back to the images that formed it. Labels and anomaly highlights were prompts for review, not new archival facts. The useful outcome was a more specific question about the influence of document formatting, which led to the small cropping experiment."
-          },
-          {
-            "kind": "rich-p",
-            "parts": [
-              "The explorer is built with ",
-              {
-                "label": "Three.js",
-                "href": "https://threejs.org/",
-                "external": true
-              },
-              ", a browser graphics library. It loads the saved positions and record identifiers first, then fetches the larger vector file when needed. Similar-image lookup compares the original CLIP vectors, not distances on the flattened map. Selected records can be collected and exported for follow-up. I kept this research workspace separate from the main site's simpler search, game and print flows."
+                "src": "/images/case-studies/ballerz-craft/session.jpg",
+                "alt": "Public Ballerz session details on a phone",
+                "caption": "Dated interface example: session details before booking."
+              }
             ]
           }
         ]
       },
       {
-        "heading": "Trying a replacement before changing the index",
+        "heading": "Follow the booking beyond checkout",
         "blocks": [
           {
             "kind": "p",
-            "text": "Should I replace CLIP, the image-and-text model behind search? On a diagnostic test of 500 images and 13 queries, CLIP’s mean reciprocal rank was 0.8269, compared with 0.4484 for SigLIP. I kept the existing index. A new model was not an improvement just because it was newer."
-          },
-          {
-            "kind": "table",
-            "table": {
-              "columns": [
-                "Recorded measure",
-                "CLIP ViT-B/32",
-                "SigLIP base"
-              ],
-              "rows": [
-                [
-                  "Mean reciprocal rank",
-                  "0.8269",
-                  "0.4484"
-                ],
-                [
-                  "Queries with a rule match in top 5",
-                  "13 / 13",
-                  "8 / 13"
-                ]
-              ],
-              "footnote": "May 26, 2026 · 500 images, 13 queries. Expected matches came from generated category/theme rules, not independent human relevance judgments."
-            }
-          },
-          {
-            "kind": "mtl-search"
+            "text": "The booking service separates a temporary seat hold, payment evidence and the calendar booking. Cal.com supplies scheduling through a provider adapter; Stripe handles card checkout, while prepaid credits have their own reservation and return rules. Persisted operation identifiers let retries recover the same action instead of creating a second booking or spending a credit twice."
           },
           {
             "kind": "p",
-            "text": "Mean reciprocal rank measures how early the first expected match appears. The report’s “P@5” field actually measures whether any expected match appears in the first five results, not precision. Expected matches came from category rules rather than independent human judgments, so this test supported a local decision, not a general model ranking."
-          },
-          {
-            "kind": "p",
-            "text": "Broad ranking boosts from generated categories also underperformed the existing search on the recorded query set. I kept those signals available for inspection rather than letting them change scores. Better relevance labels were the next useful investment."
+            "text": "A successful payment can still arrive after a seat expires or while a calendar request is unresolved. I implemented explicit pending and review states for those cases, with recovery that checks the stored operation and current provider evidence. Attendance belongs to a separate session-delivery workflow: a calendar event is evidence of scheduling, not proof that a player trained."
           }
         ]
       },
       {
-        "heading": "Designing a way into the archive",
+        "heading": "Make exceptions usable by people",
         "blocks": [
           {
-            "kind": "rich-p",
-            "parts": [
-              "I worked through the identity and product states in ",
-              {
-                "label": "Paper",
-                "href": "https://app.paper.design/file/01KJT1EB3Z2N2FYHB3VDDBF496/01KJT1EB3ZN11EN8P6G678B9DZ",
-                "external": true
-              },
-              ". The board covers the logo, typography, search, photo detail, game, print ordering, empty states and emails. That let me consider the same photograph as a search result, an archival record and a daily invitation to explore."
-            ]
-          },
-          {
-            "kind": "mtl-brand"
+            "kind": "p",
+            "text": "Parents need a clear status before they try another payment or time. The account and booking sheet expose recovery messages, cancellation and rescheduling paths, rather than treating every delay as a fresh booking. Admin tools retain the booking, payment and credit context so an unresolved case can be reviewed without guessing which system is right."
           },
           {
             "kind": "p",
-            "text": "The mark draws on Montréal’s civic emblem. I tested it at icon size and kept the rest of the interface quiet so photographs and source references could carry the page."
-          },
-          {
-            "kind": "p",
-            "text": "The interface is bilingual, with familiar places and subjects as entry points. A person arriving from a phone should be able to browse before learning how the catalogue works. On the record, the source reference and location confidence remain available. The design needs to make discovery easier without making uncertain metadata look authoritative."
+            "text": "The operational assistant follows the same boundary. The current Desk implementation uses the Cloudflare Agents SDK and bounded, authenticated reads. It links back to the underlying records; consequential actions stay in approval workflows. Owner membership, source freshness and durable execution checks remain separate from what a model suggests."
           }
         ]
       },
       {
-        "heading": "A reason to return, and a way to collect",
-        "blocks": [
-          {
-            "kind": "rich-p",
-            "parts": [
-              "The ",
-              {
-                "label": "daily location game",
-                "href": "https://www.mtlarchives.com/game",
-                "external": true
-              },
-              " asks people to place a photograph on a map. It reuses the archive rather than requiring a separate content library. The code keeps challenges and guesses in the backend, while the map and photo controls belong to the interface. A daily game makes a different invitation from search: you can start with curiosity instead of a query."
-            ]
-          },
-          {
-            "kind": "rich-p",
-            "parts": [
-              "Print ordering uses ",
-              {
-                "label": "Stripe Checkout",
-                "href": "https://docs.stripe.com/payments/checkout",
-                "external": true
-              },
-              ". The app validates the shipping details and quote, then a signed payment notification triggers confirmation and fulfilment emails. The print work itself remains manual. A successful browser redirect is not treated as proof of payment."
-            ]
-          },
-          {
-            "kind": "p",
-            "text": "The newsletter is another return path. Signing up is explicit; playing the game does not subscribe someone automatically. Subscription state and delivery history live in the database. The daily scheduler checks Montréal’s local time, including daylight saving changes, rather than assuming the same server hour means morning all year."
-          },
-          {
-            "kind": "p",
-            "text": "These are working product surfaces, but their existence is not evidence of strong conversion. The saved business notes describe revenue as weak relative to attention. That is the next product problem, not a result I can claim to have solved."
-          }
-        ]
-      },
-      {
-        "heading": "Taking the archive to the feed",
+        "heading": "Validate the failure paths",
         "blocks": [
           {
             "kind": "p",
-            "text": "A searchable website still needs people to find it. I began using Instagram and Facebook as editorial experiments: exact places and dates, street transformations, lost landmarks and questions about what used to be there. Each post had to be worth looking at even if the viewer never ordered a print."
+            "text": "The integration checks cover last-seat contention, replayed payments, interrupted operations and credit compensation. A completed booking needs the payment, calendar reservation and parent-facing status to agree, with a clear recovery path when one step fails."
           },
           {
             "kind": "p",
-            "text": "The daily pipeline selects an archive record, assembles its source material, drafts bilingual copy and produces a carousel or reel package. An image interpretation or a web search can suggest context, but unsupported exact locations should not quietly become facts. The code tracks location confidence and can reject copy that reintroduces a place name the evidence does not support."
-          },
-          {
-            "kind": "p",
-            "text": "Generating a package and publishing it are separate events. The pipeline records attempts, successful post identifiers and permalinks, which helps prevent duplicate delivery and makes later analysis possible. The home server holds operational state; an optional Obsidian mirror holds the editorial notes. A local fallback can prepare a package when the server is unavailable."
+            "text": "The newer Cal.com integration is being released in stages: mapped one-to-one sessions first, then group sessions after their seat handling is checked live."
           }
         ]
-      },
-      {
-        "heading": "One archive, two editorial experiments",
-        "blocks": [
-          {
-            "kind": "p",
-            "text": "I tested two editorial directions: dramatic openings about lost or transformed places, and a more documentary voice built around a place, date and visible detail. The January pipeline assembled researched context and captions; later revisions separated reels from carousels and filtered generic mystery language."
-          },
-          {
-            "kind": "p",
-            "text": "The March 31 snapshot covered 135 first-quarter posts. Facebook reels with loss or erasure language averaged 100,260 views, against 35,974 without it. On Instagram, place-and-date openings averaged 4,866 views, against 2,315 without them. These were observational comparisons: subjects, formats and publication dates changed together."
-          },
-          {
-            "kind": "p",
-            "text": "February made the difference clear. Its 18 Facebook reels averaged 62,519 views in the saved cohort. Instagram’s five carousels averaged 9,468, compared with 1,533 for its 17 reels. One platform’s strongest format was not a recipe for the other."
-          },
-          {
-            "kind": "p",
-            "text": "I moved toward the documentary voice and made that choice repeatable in the caption pipeline. In March, Instagram shifted to 12 carousels and eight reels; monthly account views rose from 48,996 to 68,263. Facebook reel averages fell. That does not isolate the effect of a caption change, but it changed what I wanted to keep testing: specific local context and repeat archive use, not just the largest feed number."
-          },
-          {
-            "kind": "figure",
-            "figure": {
-              "kind": "image",
-              "src": "/images/case-studies/meta/miron-reel-september-9.png",
-              "alt": "Miron quarry reel insights showing 204.0K rounded views with 200,234 from Facebook and 3,739 from Instagram, beside the reel preview.",
-              "caption": "The Miron quarry reel, published January 26. Captured September 9: 200,234 Facebook views and 3,739 Instagram views. These are cumulative post results, not February-only views. The same reel travelled very differently on the two platforms."
-            }
-          }
-        ]
-      },
-      {
-        "heading": "The reach was real. It did not stay there.",
-        "blocks": [
-          {
-            "kind": "p",
-            "text": "The saved January–July reports total about 2.66 million Facebook and Instagram account-level views. February was the peak: 1,363,500 Facebook views and 48,996 Instagram views. By July, Facebook was down to 6,560 while Instagram recorded 25,787. Showing only the peak would miss most of what the experiment taught me."
-          },
-          {
-            "kind": "mtl-audience"
-          },
-          {
-            "kind": "figure",
-            "figure": {
-              "kind": "image",
-              "src": "/images/case-studies/meta/facebook-february-2026.png",
-              "alt": "Facebook February 1–28 results: 1.4M views and 447.1K viewers.",
-              "caption": "Facebook, February 1–28, 2026, captured September 9. Meta rounds the views total to 1.4M and reports 447.1K viewers. The saved report supplies the more precise 1,363,500 views used above."
-            }
-          },
-          {
-            "kind": "figure",
-            "figure": {
-              "kind": "image",
-              "src": "/images/case-studies/meta/instagram-february-2026.png",
-              "alt": "Instagram February report showing 197.6K combined views, split into 148,600 Facebook views and 48,996 Instagram views, plus 10.5K reach.",
-              "caption": "Instagram, February 1–28, 2026, captured September 9. The headline 197.6K includes 148,600 Facebook views and 48,996 Instagram views. I use the Instagram breakdown, not the combined headline, in the monthly chart."
-            }
-          },
-          {
-            "kind": "p",
-            "text": "By September 9, Meta Business Suite showed approximately 8.7K Facebook followers and 3.7K Instagram followers. Those are account totals at the time of review, rather than followers gained during the February experiment."
-          },
-          {
-            "kind": "rich-p",
-            "parts": [
-              "The saved March 19 account export recorded 3,340 followers and 425 posts on ",
-              {
-                "label": "Instagram (@mtlarchives)",
-                "href": "https://www.instagram.com/mtlarchives/",
-                "external": true
-              },
-              ". That is a dated account snapshot, separate from the view totals above. You can also explore the published work on ",
-              {
-                "label": "Facebook",
-                "href": "https://www.facebook.com/100799958627875",
-                "external": true
-              },
-              "."
-            ]
-          },
-          {
-            "kind": "p",
-            "text": "A small number of reels accounted for much of the observed Facebook attention. In the saved August post snapshot, the top five unique January reels represented 82.4% of that month’s reel cohort’s cumulative views. These are lifetime post counts, not views accrued during January, so I do not add them to the monthly account totals."
-          },
-          {
-            "kind": "rich-p",
-            "parts": [
-              "Concrete places and a reason to be curious appeared repeatedly among the stronger posts. On Instagram, examples included ",
-              {
-                "label": "Parc Marquette, 1969",
-                "href": "https://www.instagram.com/p/DWKRqfNjcBT/",
-                "external": true
-              },
-              " and ",
-              {
-                "label": "Avenue du Mont-Royal at Saint-Denis, 1928",
-                "href": "https://www.instagram.com/p/DXfqpzSG88k/",
-                "external": true
-              },
-              ". The saved analysis found different patterns for documentary carousels and curiosity-led reels. These were observational comparisons; timing, format and platform distribution changed together, so they do not establish a causal recipe."
-            ]
-          },
-          {
-            "kind": "p",
-            "text": "The data needed its own cleanup. Facebook’s published-post export contained 196 reel rows for 98 unique reels. Counting the rows as separate pieces of content would double the denominator. Some monthly reports also lacked preserved daily exports. Those limitations remain in the supporting notes instead of being smoothed into an uninterrupted growth story."
-          }
-        ]
-      },
-      {
-        "heading": "What happened on the website",
-        "blocks": [
-          {
-            "kind": "p",
-            "text": "February brought 875 reported website visitors and 4,747 page views. March had fewer visitors, 714, but more page views, 5,296. The seven-month reports contain 13,783 page views in total. I do not sum monthly visitor counts and call that a unique audience: the same person can return in several months."
-          },
-          {
-            "kind": "p",
-            "text": "The gap between feed attention and website activity is the important result. The available exports do not reliably connect an individual post to a visit, game session or order. I can describe when activity rose and fell, but I cannot turn the social totals into an attributed conversion rate."
-          },
-          {
-            "kind": "p",
-            "text": "The later website captures show the smaller scale clearly: July recorded 130 visitors and 442 page views; August 1–10 recorded 33 and 122. The partial August period is kept out of the full-month chart. Better campaign links, preserved month-end exports and product events are needed to tell which forms of discovery lead to repeat archive use."
-          }
-        ]
-      },
-      {
-        "heading": "What changed how I work",
-        "blocks": [
-          {
-            "kind": "p",
-            "text": "The first mistake was making missing descriptions look complete. I now keep source metadata, extracted text and generated captions separate, and preserve the reference that lets someone check each one."
-          },
-          {
-            "kind": "p",
-            "text": "The experiments stopped me from rebuilding an index without evidence. Next time, I would create a small set of independently reviewed search tasks earlier. A category match is not the same as a useful answer. The explorer made a related point: a compelling cluster may reflect a document border rather than its subject."
-          },
-          {
-            "kind": "p",
-            "text": "Distribution taught me to measure what happens after attention. I would add campaign links and product events from the start, preserve month-end exports, and review the actual published captions. A successful pipeline run says nothing about whether someone returned, played, or ordered a print."
-          },
-          {
-            "kind": "rich-p",
-            "parts": [
-              "The ",
-              {
-                "label": "code",
-                "href": "https://github.com/zouantchaw/mtl-archives-search",
-                "external": true
-              },
-              " and ",
-              {
-                "label": "source notes for this case study",
-                "href": "/research/mtl-archives-evidence.md",
-                "external": true
-              },
-              " show the implementation and limits behind the story. If you are opening up a difficult collection, evaluating search, or building a product around specialist data, ",
-              {
-                "label": "I’d be happy to talk",
-                "href": "/start",
-                "external": true
-              },
-              "."
-            ]
-          }
-        ]
-      }
-    ],
-    "metrics": [
-      {
-        "value": "13,499",
-        "label": "Deduplicated serving records · June 2026 audit"
-      },
-      {
-        "value": "14,715",
-        "label": "Image embeddings in the January research projection"
-      },
-      {
-        "value": "2.66M",
-        "label": "Facebook + Instagram views · January–July 2026"
       }
     ]
   },
   {
     "slug": "diane-party-rentals",
-    "number": "03",
+    "number": "04",
     "title": "Diane Party Rentals",
     "dek": "From manual quotes and disconnected payments to online bookings, with an operating platform for the work after checkout.",
     "summary": "Replacing a Wix site and manual payment tracking, then connecting rental bookings to inventory, suppliers and delivery.",
@@ -1259,7 +1310,7 @@ export const work: WorkItem[] = [
     "role": "Product design & engineering",
     "period": "March 2026–present",
     "scope": "Brand · Website · Booking · Operations",
-    "featured": true,
+    "featured": false,
     "links": [
       {
         "href": "https://www.dianepartyrentals.com/",
@@ -1518,333 +1569,6 @@ export const work: WorkItem[] = [
           {
             "kind": "p",
             "text": "The next useful measures are quote turnaround, last-minute delivery changes, missing items at handoff, and how often the team has to chase a supplier or customer. I would measure those against the old workflow before claiming time saved. Successful automation here means a confirmed delivery and the right equipment on the truck."
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "slug": "ballerz",
-    "number": "04",
-    "title": "Ballerz Football Academy",
-    "dek": "Following a training session from the public schedule through booking, payment and the work the academy does afterward.",
-    "summary": "Website, scheduling and booking connected to parent and admin tools, with explicit recovery when payment and calendar state disagree.",
-    "evidence": "Cal.com scheduling · Stripe payments · Parent and admin workflows",
-    "role": "Engineer & designer",
-    "period": "2026",
-    "scope": "Website · Scheduling & booking · Operations",
-    "ownership": "I design and build across the academy website, booking and payment flows, and the parent and admin interfaces.",
-    "pdfDownload": false,
-    "links": [
-      {
-        "label": "Academy website",
-        "href": "https://www.ballerzfootballacademy.com",
-        "external": true
-      }
-    ],
-    "sections": [
-      {
-        "heading": "A session crosses several systems",
-        "blocks": [
-          {
-            "kind": "p",
-            "text": "A youth football academy needs more than a calendar of available times. A parent chooses a session for a player, a coach has to be available, and the academy needs to know whether the place is reserved, paid for and eventually attended. Group sessions, private training and prepaid credits make those states different. A payment receipt alone cannot answer all of those questions."
-          },
-          {
-            "kind": "p",
-            "text": "I worked across the website and its operational tools so the public schedule could connect to a record the academy could follow. The parent interface brings players and their sessions together; the admin interface follows bookings, payments and exceptions. The design problem was keeping the next action understandable while the underlying work crossed several services."
-          },
-          {
-            "kind": "phones",
-            "images": [
-              {
-                "src": "/images/case-studies/ballerz-craft/schedule.jpg",
-                "alt": "Public Ballerz training schedule on a phone",
-                "caption": "Dated interface example: the public training schedule."
-              },
-              {
-                "src": "/images/case-studies/ballerz-craft/session.jpg",
-                "alt": "Public Ballerz session details on a phone",
-                "caption": "Dated interface example: session details before booking."
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "heading": "Follow the booking beyond checkout",
-        "blocks": [
-          {
-            "kind": "p",
-            "text": "The booking service separates a temporary seat hold, payment evidence and the calendar booking. Cal.com supplies scheduling through a provider adapter; Stripe handles card checkout, while prepaid credits have their own reservation and return rules. Persisted operation identifiers let retries recover the same action instead of creating a second booking or spending a credit twice."
-          },
-          {
-            "kind": "p",
-            "text": "A successful payment can still arrive after a seat expires or while a calendar request is unresolved. I implemented explicit pending and review states for those cases, with recovery that checks the stored operation and current provider evidence. Attendance belongs to a separate session-delivery workflow: a calendar event is evidence of scheduling, not proof that a player trained."
-          }
-        ]
-      },
-      {
-        "heading": "Make exceptions usable by people",
-        "blocks": [
-          {
-            "kind": "p",
-            "text": "Parents need a clear status before they try another payment or time. The account and booking sheet expose recovery messages, cancellation and rescheduling paths, rather than treating every delay as a fresh booking. Admin tools retain the booking, payment and credit context so an unresolved case can be reviewed without guessing which system is right."
-          },
-          {
-            "kind": "p",
-            "text": "The operational assistant follows the same boundary. The current Desk implementation uses the Cloudflare Agents SDK and bounded, authenticated reads. It links back to the underlying records; consequential actions stay in approval workflows. Owner membership, source freshness and durable execution checks remain separate from what a model suggests."
-          }
-        ]
-      },
-      {
-        "heading": "Validate the failure paths",
-        "blocks": [
-          {
-            "kind": "p",
-            "text": "The integration checks cover last-seat contention, replayed payments, interrupted operations and credit compensation. A completed booking needs the payment, calendar reservation and parent-facing status to agree, with a clear recovery path when one step fails."
-          },
-          {
-            "kind": "p",
-            "text": "The newer Cal.com integration is being released in stages: mapped one-to-one sessions first, then group sessions after their seat handling is checked live."
-          }
-        ]
-      }
-    ]
-  },
-  {
-    "slug": "starthome",
-    "number": "05",
-    "title": "Starthome",
-    "dek": "A mobile rental inspection workflow that keeps captured photos, suggested observations and signed records separate.",
-    "summary": "An Expo inspection app for Québec, connecting offline capture, human review, tenant participation and reports.",
-    "evidence": "Mobile workflow engineering · No verified adoption metrics reported",
-    "role": "Product design & engineering",
-    "period": "February 2026–present",
-    "scope": "Mobile app · Web admin · Inspection records",
-    "featured": true,
-    "links": [],
-    "glance": [],
-    "images": [
-      {
-        "src": "/images/case-studies/starthome-paper/home.png",
-        "alt": "Starthome mobile home with an inspection ready to resume",
-        "layout": "phone"
-      }
-    ],
-    "sections": [
-      {
-        "heading": "A record of the apartment",
-        "blocks": [
-          {
-            "kind": "p",
-            "text": "Starthome helps property owners and managers in Québec document a rental’s condition. You walk through the apartment, take photographs and record what you see. When it is time to inspect it again, the earlier visit gives you a reference."
-          },
-          {
-            "kind": "p",
-            "text": "I started working on Starthome in February 2026. The founder came with the logo and an initial design already in place. My work spans product design and engineering: shaping the mobile inspection, building the application around it, and connecting the photographs, observations and signatures to the final report."
-          },
-          {
-            "kind": "p",
-            "text": "This case study covers product and engineering work. I do not yet have verified inspection-volume, adoption or time-saving figures to report. The evidence here is how the workflow handles incomplete, reviewed and signed information."
-          }
-        ]
-      },
-      {
-        "heading": "Starting with Québec",
-        "blocks": [
-          {
-            "kind": "rich-p",
-            "parts": [
-              "The local rental context matters. ",
-              {
-                "label": "Article 1890 of Québec’s Civil Code",
-                "href": "https://www.legisquebec.gouv.qc.ca/fr/version/lc/ccq-1991?code=se%3A1890",
-                "external": true
-              },
-              " recognizes descriptions and photographs as ways to record a property’s condition. It also distinguishes ordinary wear from changes a tenant may need to answer for. That makes the detail of the record important: what was there at the beginning, what is visible now, and what someone actually checked."
-            ]
-          },
-          {
-            "kind": "p",
-            "text": "I built the flow around entry and exit inspections, with the earlier inspection available as a reference. The French interface uses the language of the visit: logement, pièces, état des lieux. A photograph belongs to a room and an observation, so it can be understood later without the person who took it having to explain it."
-          }
-        ]
-      },
-      {
-        "heading": "The record changes state",
-        "blocks": [
-          {
-            "kind": "p",
-            "text": "The important boundary is between something captured, something suggested and something a person has confirmed. Each transition has a different requirement."
-          },
-          {
-            "kind": "table",
-            "table": {
-              "columns": [
-                "State",
-                "What must happen next"
-              ],
-              "rows": [
-                [
-                  "Photo captured",
-                  "Keep the room and local file reference. A dropped connection must not imply upload succeeded."
-                ],
-                [
-                  "Analysis pending",
-                  "Continue the visit or add a manual observation while processing waits."
-                ],
-                [
-                  "Suggestion available",
-                  "Show the photographs and editable wording. The inspector can change or discard it."
-                ],
-                [
-                  "Observation confirmed",
-                  "Include only reviewed information in the inspection review."
-                ],
-                [
-                  "Inspection reviewed",
-                  "Record tenant participation and collect the applicable signatures."
-                ],
-                [
-                  "Signed record",
-                  "A later change requires another signature; a sent invitation is not a signature."
-                ]
-              ]
-            }
-          },
-          {
-            "kind": "p",
-            "text": "I used those distinctions across the mobile UI, API and report. The difficult part is keeping them consistent when analysis finishes later, the tenant is absent, or someone changes an observation after review."
-          }
-        ]
-      },
-      {
-        "heading": "Keeping the visit moving",
-        "blocks": [
-          {
-            "kind": "p",
-            "text": "The home screen brings the unfinished visit back into view: the address, rooms checked and observations still needing attention. Inside a room, adding photographs is the primary action. Analysis can run while the person continues the visit, and entering an observation manually stays within reach."
-          },
-          {
-            "kind": "phones",
-            "images": [
-              {
-                "src": "/images/case-studies/starthome-paper/home.png",
-                "alt": "The unfinished visit stays in view, including what still needs checking.",
-                "caption": "The unfinished visit stays in view, including what still needs checking.",
-                "layout": "phone"
-              },
-              {
-                "src": "/images/case-studies/starthome-paper/room.png",
-                "alt": "Capture comes first. Photo analysis can continue in the background.",
-                "caption": "Capture comes first. Photo analysis can continue in the background.",
-                "layout": "phone"
-              }
-            ]
-          },
-          {
-            "kind": "p",
-            "text": "I also worked through the less convenient moments: a camera permission that has not been granted, a room that needs another photograph, a connection that drops. The offline flow separates photos saved on the device from work waiting for a connection. It gives someone a way to continue taking notes without implying that a report is already ready."
-          }
-        ]
-      },
-      {
-        "heading": "Look, then confirm",
-        "blocks": [
-          {
-            "kind": "p",
-            "text": "Photo assistance is useful when it gives someone less to write and something specific to check. A proposed observation opens beside the entry and exit photographs. The person can enlarge them, change the condition, edit the wording or discard the suggestion."
-          },
-          {
-            "kind": "p",
-            "text": "I kept confirmation explicit. Marks on a floor may be ordinary wear; a photograph alone does not settle responsibility. The app asks the person on site to make the observation their own before it enters the reviewed record. If the evidence is insufficient, taking another photograph or writing a note remains part of the same flow."
-          },
-          {
-            "kind": "phones",
-            "images": [
-              {
-                "src": "/images/case-studies/starthome-paper/observation.png",
-                "alt": "The photographs, condition and editable observation stay together.",
-                "caption": "The photographs, condition and editable observation stay together.",
-                "layout": "phone"
-              },
-              {
-                "src": "/images/case-studies/starthome-paper/review.png",
-                "alt": "A final review brings the observations back into one readable list.",
-                "caption": "A final review brings the observations back into one readable list.",
-                "layout": "phone"
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "heading": "Finishing the handoff",
-        "blocks": [
-          {
-            "kind": "p",
-            "text": "The tenant will not always be standing beside the property manager. I designed separate paths for signing on the device, receiving an email invitation, being absent and declining to sign. Each leaves a clear status in the record."
-          },
-          {
-            "kind": "phones",
-            "images": [
-              {
-                "src": "/images/case-studies/starthome-paper/participation.png",
-                "alt": "Tenant participation has its own paths, including absence and refusal.",
-                "caption": "Tenant participation has its own paths, including absence and refusal.",
-                "layout": "phone"
-              },
-              {
-                "src": "/images/case-studies/starthome-paper/report.png",
-                "alt": "The report shows what is ready and which participation is still pending.",
-                "caption": "The report shows what is ready and which participation is still pending.",
-                "layout": "phone"
-              }
-            ]
-          },
-          {
-            "kind": "p",
-            "text": "Those distinctions continue through the report. An invitation sent is different from a signature received. Generating the PDF is different from sharing it. The interface keeps those states visible, with the report available to open before sending a copy through the phone’s share sheet."
-          }
-        ]
-      },
-      {
-        "heading": "Connecting the product",
-        "blocks": [
-          {
-            "kind": "rich-p",
-            "parts": [
-              "I build the mobile app with ",
-              {
-                "label": "Expo",
-                "href": "https://docs.expo.dev/",
-                "external": true
-              },
-              ", alongside a web admin for organizations, teams and inspection oversight. ",
-              {
-                "label": "Cloudflare Workers",
-                "href": "https://developers.cloudflare.com/workers/",
-                "external": true
-              },
-              " runs the API, with D1 for records and R2 for photographs and documents. The report brings the room observations, photos and signatures together."
-            ]
-          },
-          {
-            "kind": "rich-p",
-            "parts": [
-              "This is the kind of product work I enjoy: following a real task through the interface and the system behind it. If you are building something similar, ",
-              {
-                "label": "I’d be happy to talk",
-                "href": "/start",
-                "external": false
-              },
-              "."
-            ]
-          },
-          {
-            "kind": "p",
-            "text": "The next validation should measure completed inspections, successful recovery after a connection drop, report generation, and how often people edit or reject suggestions. Those measures would tell me whether the state model helps someone finish a real visit."
           }
         ]
       }

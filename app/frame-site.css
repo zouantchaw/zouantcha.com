@@ -451,3 +451,22 @@ body:has(.v2-page) .site-main,body:has(.v2-case) .site-main { padding-top:0; }
  .v2-home .v2-number [data-slot=card-header] { gap:8px; }
  .v2-start .v2-how { gap:14px; }
 }
+
+/* Writing index: Paper board 21; mobile follows the case-study row pattern. */
+.v2-writing .v2-heading { gap:18px; padding-bottom:48px; }
+.v2-writing .v2-heading > p:last-child { font-size:19px; line-height:30px; }
+.v2-writing .v2-case-rows { padding-bottom:80px; }
+.v2-writing .v2-case-row { grid-template-columns:520px minmax(0,1fr) 110px; gap:40px; }
+.v2-writing .v2-case-row h2 { font-family:var(--font-serif); font-size:36px; line-height:40px; font-weight:400; letter-spacing:0; color:var(--color-ink); }
+.v2-writing .v2-case-row p { color:var(--color-slate); }
+.v2-writing .v2-case-row time { text-align:right; font-size:12px; line-height:16px; }
+@media (max-width:1100px) and (min-width:701px) { .v2-writing .v2-case-row { grid-template-columns:1fr 1fr 80px; gap:24px; } }
+@media (max-width:700px) {
+ .v2-writing .v2-heading { gap:16px; padding:24px 0 32px; }
+ .v2-writing .v2-case-row { gap:8px; }
+ .v2-writing .v2-case-row h2 { font-size:30px; line-height:34px; }
+ .v2-writing .v2-case-row time { text-align:left; }
+}
+.frame-desktop-nav a[aria-current="page"] { font-weight:500; text-decoration:underline; text-underline-offset:6px; }
+/* Keep the mobile Sheet above its sibling overlay during portal mounting. */
+.frame-menu[data-slot=sheet-content] { z-index:51; }

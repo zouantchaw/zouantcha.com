@@ -2,14 +2,13 @@ import resume from '../../scripts/public-resume.json'
 import { work } from './work'
 
 export const frameExperience = resume.experience
-export const frameCaseOrder = ['mtl-archives', 'ballerz', 'diane-party-rentals', 'portmind', 'starthome']
+export const frameCaseOrder = ['mtl-archives', 'portmind', 'ballerz', 'diane-party-rentals']
 export const frameCases = frameCaseOrder.map(slug => work.find(item => item.slug === slug)).filter((item): item is typeof work[number] => !!item)
 export const caseDescriptions: Record<string, string> = {
   'mtl-archives': 'Public photo records turned into visual search, a daily game and an editorial pipeline.',
   'ballerz': 'A website parents find on Google, and agents behind it.',
   'diane-party-rentals': 'My parents’ rental business, followed from booking to the delivery truck.',
   portmind: 'Checking whether vision models can be trusted on a real port camera.',
-  starthome: 'An inspection record that stays consistent as it changes hands.',
 }
 export const frameNumbers = [
   { value: '3.5 years', mobileBody: 'Senior Full-Stack Engineer at Ethos', body: 'as Senior Full-Stack Engineer at Ethos, owning storefront, point-of-sale and billing features.', source: 'MAY 2022 – NOV 2025 · RÉSUMÉ', href: '/resume.pdf', blue: false },
