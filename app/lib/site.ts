@@ -7,6 +7,9 @@ export const site = {
   location: 'Remote · US, Canada and Europe',
   email: 'zouantchaw74@gmail.com',
   github: 'https://github.com/zouantchaw',
+  instagram: 'https://www.instagram.com/wielzouantcha/',
+  tiktok: 'https://www.tiktok.com/@wielzouantcha',
+  youtube: 'https://www.youtube.com/@wielzouantcha',
   x: 'https://twitter.com/love_thegame_',
   linkedin: 'https://www.linkedin.com/in/wielfried-zouantcha-6b4722136/',
   resume: '/resume.pdf',
@@ -346,3 +349,19 @@ export function mailto(subject?: string) {
   const params = subject ? `?subject=${encodeURIComponent(subject)}` : ''
   return `mailto:${site.email}${params}`
 }
+
+export const siteNavigation = [
+  { href: '/case-studies', label: 'Case studies', primary: false },
+  { href: '/log', label: 'Build log', primary: false },
+  { href: '/about', label: 'About', primary: false },
+  { href: '/start', label: 'Work with me', primary: true },
+]
+
+export const siteFooterNavigation = [
+  { href: site.instagram, label: 'Instagram' },
+  { href: site.tiktok, label: 'TikTok' },
+  { href: site.youtube, label: 'YouTube' },
+  { href: site.linkedin, label: 'LinkedIn' },
+  { href: site.github, label: 'GitHub' },
+  { href: site.resumePage, label: 'Résumé' },
+]
